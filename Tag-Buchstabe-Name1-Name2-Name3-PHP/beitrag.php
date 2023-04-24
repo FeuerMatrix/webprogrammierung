@@ -11,27 +11,34 @@
         <h4>Author</h4>
         <h4>Datum</h4>
         <p>ORT</p>
-        <p>TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT </p>
+        <p>Beispieltext </p>
         <img src="images/guestbook.png" alt="Gästebuch">
         <input type="submit" value="Bearbeiten">
        
 
-        
         <h3>Kommentare</h3>
+        <input type="text" placeholder="Neues Kommentar">
+        <input type="submit" value="Erstellen">
+        <fieldset>
         <p>Name</p>
         <p>Kommentar</p>
         <input type="submit" value="Bearbeiten">
+        </fieldset>
+        <fieldset>
         <p>Name</p>
         <p>Kommentar</p>
         <input type="submit" value="Bearbeiten">
+        </fieldset>
+        <fieldset>
         <p>Name</p>
         <p>Kommentar</p>
         <input type="submit" value="Bearbeiten">
+        </fieldset>
+        <fieldset>
         <p>Name</p>
         <p>Kommentar</p>
         <input type="submit" value="Bearbeiten">
-
-
+        </fieldset>
 
 
     </main>
