@@ -6,16 +6,17 @@
 
     <main>
 
-        <h1>Anmeldung</h1>
+        <h1>Anmelden</h1>
 
-        <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
+        <form>
+            <fieldset>
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name=pw placeholder="Passwort">
+            </fieldset>
+            <input type="submit" name="cancel" value="Abbrechem">
+            <input type="submit" name="login" value="Anmelden">
+            
+        </form>
 
     </main>
 
