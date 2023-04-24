@@ -6,16 +6,19 @@
 
     <main>
 
-        <h1>Registrierung</h1>
+        <h1>Registrieren</h1>
 
-        <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
+        <form>
+        <input type="text" name="user" placeholder="Nutzername">
+        <input type="email" name="email" placeholder="Email">
+        <input type="email" name="email2" placeholder="Email bestätigen">
+        <input type="password" name="passw" placeholder="Passwort">
+        <input type="password" name="passw2" placeholder="Passwort bestätigen">
+        <input type="submit" value="Submit">
+        <input type="submit" value="Abbrechen">
+        </form>
+
+
 
     </main>
 
