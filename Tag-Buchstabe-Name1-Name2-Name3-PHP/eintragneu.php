@@ -12,7 +12,8 @@
             <fieldset>
                 <input type="titel" id="fname" name="fname" placeholder="Titel"><br>
                 <textarea name="" id="" cols="30" rows="10"></textarea><br>
-                <textarea name="" id="" cols="30" rows="10" placeholder="Drag and Drop"></textarea>
+                <label for="file">Bilder auswählen</label>
+                <input type="file" id="files" name="files" accept="image/png, image/jpeg">
             </fieldset>
             <fieldset>
                 <label for="anonym">Anonym</label>
