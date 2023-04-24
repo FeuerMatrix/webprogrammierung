@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html lang="de">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="description" content="Gästebuch Beispiel">
-    <meta name="author" content="Dietrich Boles">
-    <link rel="stylesheet" href="css/main.css" />
-    <title>Gästebuch</title>
-</head>
+<?php include_once "php/head.php" ?>
 
 <body>
 
-    <nav>
-        <div>
-            <a href="index.html">Homepage</a>
-        </div>
-        <div>
-            <a href="anmeldung.html">Anmelden/Abmelden</a>
-        </div>
-        <div>
-            <a href="registrierung.html">Registrieren</a>
-        </div>
-    </nav>
+    <?php include_once "php/nav.php" ?>
 
     <main>
 
@@ -38,11 +19,7 @@
 
     </main>
 
-    <footer>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>
-    </footer>
+    <?php include_once "php/footer.php" ?>
 </body>
 
 </html>
