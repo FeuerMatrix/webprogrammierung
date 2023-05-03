@@ -11,11 +11,11 @@
         <form>
             <fieldset>
             <label for="email">Email</label> <br>
-            <input type="email" id="email" name="email" placeholder="Email"> <br>
+            <input type="email" id="email" name="email" placeholder="Email" required autofocus> <br>
             <label for="pw">Passwort</label> <br>
-            <input type="password" id="pw" name=pw placeholder="Passwort">
+            <input type="password" id="pw" name=pw placeholder="Passwort" required>
             </fieldset>
-            <input type="submit" name="cancel" value="Abbrechem">
+            <input type="button" name="cancel" value="Abbrechem">
             <input type="submit" name="login" value="Anmelden">
         </form>
 
