@@ -10,7 +10,9 @@
 
         <form>
             <fieldset>
+                <label for="fname">Titel</label> <br>
                 <input type="text" id="fname" name="fname" placeholder="Titel"><br>
+                <label for="text_main">Text</label> <br>
                 <textarea name="textinput" id="text_main" cols="30" rows="10"></textarea><br>
                 <label for="files">Bilder auswählen</label>
                 <input type="file" id="files" name="files" accept="image/png, image/jpeg">

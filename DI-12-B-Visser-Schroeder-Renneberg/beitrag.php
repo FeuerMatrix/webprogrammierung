@@ -17,7 +17,8 @@
        
 
         <h3>Kommentare</h3>
-        <input type="text" placeholder="Neues Kommentar">
+        <label for="neuerKomentar">Neuer Kommentar:</label> <br>
+        <input type="text" id="neuerKommentar" placeholder="Neues Kommentar">
         <input type="submit" value="Erstellen">
         <fieldset>
         <p>Name</p>
