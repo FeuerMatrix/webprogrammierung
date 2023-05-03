@@ -7,8 +7,11 @@
     <main>
 
         <h1>Beiträge</h1>
-        <label for="suche">Suchen</label>
-        <input type="search" id="suche">
+        <form>
+            <label for="suche">Suche</label>
+            <input type="search" id="suche" required>
+            <input type="submit" value="suchen">
+        </form>
         <table>
             <tr>
                 <th>
