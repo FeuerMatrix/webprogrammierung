@@ -10,12 +10,13 @@
 
         <form>
             <fieldset>
-            <input type="email" name="email" placeholder="Email">
-            <input type="password" name=pw placeholder="Passwort">
+            <label for="email">Email</label> <br>
+            <input type="email" id="email" name="email" placeholder="Email"> <br>
+            <label for="pw">Passwort</label> <br>
+            <input type="password" id="pw" name=pw placeholder="Passwort">
             </fieldset>
             <input type="submit" name="cancel" value="Abbrechem">
             <input type="submit" name="login" value="Anmelden">
-            
         </form>
 
     </main>

@@ -7,7 +7,8 @@
     <main>
 
         <h1>Beiträge</h1>
-        <input type="search">
+        <label for="suche">Suchen</label>
+        <input type="search" id="suche">
         <table>
             <tr>
                 <th>
@@ -15,7 +16,6 @@
                         <a href="beitrag.php">Testbeitrag 1</a>
                         <img src="images/guestbook.png" alt="Beispielbild">
                         <span>Datum</span>
-                        
                     </fieldset>
                 </th>
             </tr>
