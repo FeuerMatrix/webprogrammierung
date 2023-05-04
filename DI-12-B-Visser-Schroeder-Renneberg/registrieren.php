@@ -9,11 +9,12 @@
 
     <main>
 
-        <h1 class="center">Registrieren</h1>
-        <p class="center">Fülle alle daten aus um dich zu Registrieren</p>
+
 
         <form>
             <div class="reg">
+                <h1>Registrieren</h1>
+                <p>Fülle alle daten aus um dich zu Registrieren</p>
                 <label for="user">Nutzername</label><br>
                 <input type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
                 <label for="">Email</label><br>

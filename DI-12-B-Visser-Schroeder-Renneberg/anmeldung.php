@@ -8,10 +8,11 @@
 
     <main>
 
-        <h1 class="center">Anmelden</h1>
+        
 
         <form>
         <div class="reg">
+        <h1>Anmelden</h1>
             <label for="email">Email</label> <br>
             <input type="email" id="email" name="email" placeholder="Email" required autofocus> <br>
             <label for="pw">Passwort</label> <br>

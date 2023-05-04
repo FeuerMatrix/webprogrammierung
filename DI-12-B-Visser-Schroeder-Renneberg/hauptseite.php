@@ -5,32 +5,40 @@
     <?php include_once "php/nav.php" ?>
 
     <style>
-
-
         .flex-container {
             display: flex;
-            flex-wrap: nowrap;
-            background-color: rgb(235, 235, 235);
             flex-direction: column;
             align-items: center
         }
+
+        input[type="search"] {
+            padding: 16px;
+            max-width: 400px;
+        }
+
+        .top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(90, 90, 90);
+            border-radius: 25px;
+            padding-bottom: 20px;
+        }
     </style>
 
-
-
     <main>>
-        <h1 class="center">Beiträge</h1>
-        <div>
+        <div class="top">
+            <h1>Beiträge</h1>
             <label for="suche">Suche</label>
-            <input  type="search" placeholder="Hier suche Eingeben" id="suche" required>
-           <!-- <input type="submit" class="search" value="Suchen">-->
+            <input type="search" placeholder="Hier suche Eingeben" id="suche" required>
+            <!-- <input type="submit" class="search" value="Suchen">-->
         </div>
 
 
         <div class="flex-container">
-            <div> <?php include "php/beitrag.php" ?></div>
-            <div> <?php include "php/beitrag.php" ?></div>
-            <div><?php include "php/beitrag.php" ?></div>
+            <?php include "php/beitrag.php" ?>
+            <?php include "php/beitrag.php" ?>
+            <?php include "php/beitrag.php" ?>
         </div>
     </main>
     <?php include_once "php/footer.php" ?>

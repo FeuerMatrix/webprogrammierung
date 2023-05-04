@@ -5,7 +5,7 @@
     <?php include_once "php/nav.php" ?>
 
     <main>
-
+        <div class="post">
         <h1>Eintrag</h1>
         <h2>Titel</h2>
         <h4>Author</h4>
@@ -14,6 +14,7 @@
         <p>Beispieltext </p>
         <img src="images/guestbook.png" alt="Gästebuch">
         <input type="submit" value="Bearbeiten">
+        </div>
 
 
         <h3>Kommentare</h3>

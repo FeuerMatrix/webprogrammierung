@@ -10,10 +10,11 @@
 
     <main>
 
-        <h1 class="center">Neuer Eintrag</h1>
+
 
         <form>
             <div class="reg">
+                <h1>Neuer Eintrag</h1>
                 <label for="fname">Titel</label> <br>
                 <input type="text" id="fname" name="fname" placeholder="Titel" required autofocus><br>
                 <label for="text_main">Text</label> <br>
