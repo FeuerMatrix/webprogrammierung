@@ -3,13 +3,22 @@
 <body>
 
     <?php include_once "php/nav.php" ?>
+    <style>
+
+    .reg {
+        padding: 16px;
+    }
+
+
+</style>
 
     <main>
 
         <h1>Registrieren</h1>
+        <p>Fülle alle daten aus um dich zu Registrieren</p>
 
         <form>
-            <fieldset>
+            <div class="reg">
                 <label for="user">Nutzername</label><br>
                 <input type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
                 <label for="">Email</label><br>
@@ -20,13 +29,10 @@
                 <input type="password" id="passw" name="passw" placeholder="Passwort" required><br>
                 <label for="passw2">Passwort bestätigen</label><br>
                 <input type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
-                <input type="submit" name="register" value="Erstellen">
-                <input type="button" name="cancel" value="Abbrechen"><br>
-            </fieldset>
+                <input type="submit" class="create" value="Erstellen">
+                <input type="button" class="cancel" value="Abbrechen"><br>
+            </div>
         </form>
-
-
-
     </main>
 
     <?php include_once "php/footer.php" ?>

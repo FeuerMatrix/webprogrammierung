@@ -1,8 +1,8 @@
-<nav>
-        <a href="index.php">Homepage</a>
-        <a href="hauptseite.php">Beiträge</a>
-        <a href="eintragneu.php">Neuer Beitrag</a>
-        <a href="anmeldung.php">Anmelden</a>
-        <a href="index.php">Abmelden</a>
-        <a href="registrieren.php">Registrieren</a>
-</nav>
+<ul>
+  <li> <a href="index.php">Homepage</a>
+  <li>  <a href="hauptseite.php">Beiträge</a>
+  <li>  <a href="eintragneu.php">Neuer Beitrag</a>
+  <li style="float:right">  <a href="anmeldung.php">Anmelden</a>
+  <li style="float:right">  <a href="index.php">Abmelden</a>
+  <li style="float:right">  <a href="registrieren.php">Registrieren</a>
+</ul>

@@ -4,13 +4,12 @@
 
     <?php include_once "php/nav.php" ?>
 
-    <main>
-
-        <h1>Beiträge</h1>
+    <main>>
+        <h1 >Beiträge</h1>
         <form>
             <label for="suche">Suche</label>
             <input type="search" id="suche" required>
-            <input type="submit" value="suchen">
+            <input type="submit" value="Suchen">
         </form>
         <table>
             <tr>
@@ -41,7 +40,6 @@
                 </th>
             </tr>
         </table>
-
     </main>
     <?php include_once "php/footer.php" ?>
 </body>

@@ -1,3 +1,97 @@
 body {
-  background-color: rgb(79, 79, 79);
+  background-color: rgb(189, 182, 182);
+  font-family: "Arial";
+
+}
+p {
+  padding: 20px
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+
+footer {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+main h1 {
+  padding:20px;
+  margin-top:30px;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.create {
+  background-color: #04AA6D;
+  opacity: 0.8;
+}
+.cancel {
+  background-color: rgb(200,20,20);
+  opacity: 0.8;
+}
+
+.create:hover{
+    opacity: 1;
+}
+
+.cancel:hover{
+    opacity: 1;
+}
+
+textarea{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+textarea:focus {
+  background-color: #ddd;
+  outline: none;
 }
