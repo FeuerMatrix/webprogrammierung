@@ -5,17 +5,12 @@
     <?php include_once "php/nav.php" ?>
     <style>
 
-    .reg {
-        padding: 16px;
-    }
-
-
-</style>
+    </style>
 
     <main>
 
-        <h1>Registrieren</h1>
-        <p>Fülle alle daten aus um dich zu Registrieren</p>
+        <h1 class="center">Registrieren</h1>
+        <p class="center">Fülle alle daten aus um dich zu Registrieren</p>
 
         <form>
             <div class="reg">

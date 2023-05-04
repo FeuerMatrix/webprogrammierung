@@ -4,28 +4,22 @@
 
     <?php include_once "php/nav.php" ?>
 
-    <style>
-         .anm {
-        padding: 16px;
-    }
 
-    </style>
 
     <main>
 
-        <h1>Anmelden</h1>
+        <h1 class="center">Anmelden</h1>
 
         <form>
-            <div class="anm">
+        <div class="reg">
             <label for="email">Email</label> <br>
             <input type="email" id="email" name="email" placeholder="Email" required autofocus> <br>
             <label for="pw">Passwort</label> <br>
             <input type="password" id="pw" name=pw placeholder="Passwort" required>
             <input type="submit" class="create" value="Anmelden">
             <input type="button" class="cancel" value="Abbrechem">
-            </div>
+        </div>
         </form>
-
     </main>
 
     <?php include_once "php/footer.php" ?>

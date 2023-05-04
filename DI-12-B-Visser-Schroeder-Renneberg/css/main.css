@@ -1,22 +1,12 @@
 body {
   background-color: rgb(189, 182, 182);
   font-family: "Arial";
-
 }
 p {
-  padding: 20px
+  padding: 20px;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
+
 
 li {
   float: left;
@@ -34,21 +24,11 @@ li a:hover {
   background-color: #111;
 }
 
-.active {
-  background-color: #04AA6D;
-}
 
-footer {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
 
 main h1 {
-  padding:20px;
-  margin-top:30px;
+  padding: 20px;
+  margin-top: 30px;
 }
 
 input {
@@ -58,31 +38,35 @@ input {
   display: inline-block;
   border: none;
   background: #f1f1f1;
+  max-width: 150px;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus{
   background-color: #ddd;
   outline: none;
 }
 
 .create {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   opacity: 0.8;
 }
+
 .cancel {
-  background-color: rgb(200,20,20);
+  background-color: rgb(200, 20, 20);
   opacity: 0.8;
 }
 
-.create:hover{
-    opacity: 1;
+.create:hover {
+  opacity: 1;
 }
 
-.cancel:hover{
-    opacity: 1;
+.cancel:hover {
+  opacity: 1;
 }
 
-textarea{
+textarea {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -94,4 +78,32 @@ textarea{
 textarea:focus {
   background-color: #ddd;
   outline: none;
+}
+
+.center,
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::placeholder {
+  text-align: center;
+}
+
+.reg {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  background-color: rgb(235, 235, 235);
+  flex-direction: column;
+  max-width: 400px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

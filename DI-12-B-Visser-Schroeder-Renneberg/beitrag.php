@@ -14,7 +14,7 @@
         <p>Beispieltext </p>
         <img src="images/guestbook.png" alt="Gästebuch">
         <input type="submit" value="Bearbeiten">
-       
+
 
         <h3>Kommentare</h3>
         <label for="neuerKomentar">Neuer Kommentar:</label> <br>
@@ -23,24 +23,24 @@
             <input type="submit" value="Erstellen">
         </form>
         <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten">
         </fieldset>
         <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten">
         </fieldset>
         <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten">
         </fieldset>
         <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten">
         </fieldset>
 
 
