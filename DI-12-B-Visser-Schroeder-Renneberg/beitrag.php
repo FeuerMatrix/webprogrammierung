@@ -16,21 +16,21 @@
         .commentbox {
             border-radius: 25px;
             background-color: rgb(235, 235, 235);
-            margin: 10px;
-            width: 95%;
+            padding: auto;
+            margin-top: 10px;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
         .post .post-text {
             display: flex;
             flex-direction: column;
             width: 70%;
         }
-        .post .post-text .left {
+        .left {
             align-items: flex-start;
         }
-        .post .post-text .center {
+        .center {
             align-items: flex-start;
         }
         .post .post-pic {
@@ -59,7 +59,7 @@
                     <h2>Author</h4>
                     <h2>Datum</h4>
                 </div>
-                <p class = center>ORT</p>
+                <p class = center>Ort (OpenStreetMap API)</p>
                 <p class = center>Beispieltext </p>
                 <input type="submit" value="Bearbeiten" class = edit>
             </div class = post-pic>
@@ -69,10 +69,9 @@
         </div>
 
         <h3>Kommentare</h3>
-        <label for="neuerKomentar">Neuer Kommentar:</label> <br>
+        <label for="neuerKomentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
         <form>
             <input type="text" id="neuerKommentar" placeholder="Neues Kommentar" required>
-            <input type="submit" value="Erstellen">
         </form>
         <div class = commentbox>
             <p>Name</p>
