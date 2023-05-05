@@ -5,18 +5,16 @@
     <?php include_once "php/nav.php" ?>
 
     <style>
-        .new{
-            padding: 16px;
-        }
 
     </style>
 
     <main>
 
-        <h1>Neuer Eintrag</h1>
+
 
         <form>
-            <div class="new">
+            <div class="reg">
+                <h1>Neuer Eintrag</h1>
                 <label for="fname">Titel</label> <br>
                 <input type="text" id="fname" name="fname" placeholder="Titel" required autofocus><br>
                 <label for="text_main">Text</label> <br>

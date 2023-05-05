@@ -5,20 +5,16 @@
     <?php include_once "php/nav.php" ?>
     <style>
 
-    .reg {
-        padding: 16px;
-    }
-
-
-</style>
+    </style>
 
     <main>
 
-        <h1>Registrieren</h1>
-        <p>Fülle alle daten aus um dich zu Registrieren</p>
+
 
         <form>
             <div class="reg">
+                <h1>Registrieren</h1>
+                <p>Fülle alle daten aus um dich zu Registrieren</p>
                 <label for="user">Nutzername</label><br>
                 <input type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
                 <label for="">Email</label><br>
