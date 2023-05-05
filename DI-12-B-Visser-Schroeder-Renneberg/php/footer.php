@@ -1,13 +1,16 @@
 <style>
   footer {
-    list-style-type: none;
+    list-style-type:none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+  }
+  footer li {
+      width: 33%;
   }
 </style>
 
