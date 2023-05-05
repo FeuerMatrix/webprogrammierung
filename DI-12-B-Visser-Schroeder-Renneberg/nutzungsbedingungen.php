@@ -3,6 +3,11 @@
 <body>
 
     <?php include_once "php/nav.php" ?>
+    <style>
+        h2 {
+            padding-left: 16px;
+        }
+    </style>
 
     <main>
 
@@ -10,9 +15,10 @@
 
 
         <h2>Hinweise für die Nutzung des Beschwerdeforums</h2>
-        
-            <li> Beachten Sie bitte im Vorfeld die vorhandenen Beiträge. Vielleicht wurde der von Ihnen beschriebene Beschwerde bereits von anderen beschrieben. </li><br>
-            <li> Das System dient dem Austausch des Umganges mit Fehlverhaltens und Handlungsalternativen und ist nicht für das öffentliche Anzeigen von Mitbürgern vorgesehen. Daher werden Meldungen die persönliche Daten beinhalten, nicht veröffentlicht. </li><br>
+        <p>
+            Beachten Sie bitte im Vorfeld die vorhandenen Beiträge. Vielleicht wurde der von Ihnen beschriebene Beschwerde bereits von anderen beschrieben.<br>
+            Das System dient dem Austausch des Umganges mit Fehlverhaltens und Handlungsalternativen und ist nicht für das öffentliche Anzeigen von Mitbürgern vorgesehen. Daher werden Meldungen die persönliche Daten beinhalten, nicht veröffentlicht.<br>
+        </p>
 
 
         <h2>Allgemeine Hinweise für die Nutzung dieses Online-Angebots</h2>

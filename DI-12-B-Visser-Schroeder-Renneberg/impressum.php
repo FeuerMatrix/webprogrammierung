@@ -3,6 +3,11 @@
 <body>
 
     <?php include_once "php/nav.php" ?>
+    <style>
+        h2{
+            padding-left:20px;
+        }
+    </style>
 
     <main>
 
@@ -10,7 +15,7 @@
 
 
 
-        <h2 style="padding:20px;"> Herausgeber </h2>
+        <h2> Herausgeber </h2>
         <p>
             Carl von Ossietzky Universität Oldenburg <br>
             Ammerländer Heerstr. 114-118 <br>
