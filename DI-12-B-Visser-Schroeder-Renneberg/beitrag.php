@@ -5,14 +5,7 @@
     <?php include_once "php/nav.php" ?>
 
     <style>
-        .post {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            width: 100%;
-            background-color: rgb(255, 255, 255);
-            border-radius: 25px;
-        }
+        
         .commentbox {
             border-radius: 25px;
             background-color: rgb(235, 235, 235);
@@ -22,26 +15,41 @@
             display: flex;
             flex-direction: column;
         }
-        .post .post-text {
-            display: flex;
-            flex-direction: column;
-            width: 70%;
-        }
         .left {
             align-items: flex-start;
         }
         .center {
             align-items: flex-start;
         }
-        .post .post-pic {
-            width: 30%;
-        }
-        .titlebox {
+        .post {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+            background-color: rgb(255, 255, 255);
+            border-radius: 25px;
+            align-items: flex-start;
         }
-        .titlebox h2 {
-            width: 33%;
+        @media screen and (min-width: 1500px) {
+            .post {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                width: 100%;
+            }
+                .post .post-text {
+                display: flex;
+                flex-direction: column;
+                width: 70%;
+            }
+            .post .post-pic {
+                width: 30%;
+            }
+            .titlebox {
+                display: flex;
+                flex-direction: row;
+            }
+            .titlebox h2 {
+                width: 33%;
+            }
         }
         .edit {
             border-radius: 10px;
@@ -61,7 +69,7 @@
                 </div>
                 <p class = center>Ort (OpenStreetMap API)</p>
                 <p class = center>Beispieltext </p>
-                <input type="submit" value="Bearbeiten" class = edit>
+                <input type="submit" value="Bearbeiten" class = "edit center">
             </div class = post-pic>
             <div>
                 <img src="images/guestbook.png" alt="Gästebuch">
