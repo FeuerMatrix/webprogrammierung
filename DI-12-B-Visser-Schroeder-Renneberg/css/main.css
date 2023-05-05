@@ -105,7 +105,7 @@ label {
   flex-wrap: nowrap;
   background-color: rgb(204, 204, 204);
   flex-direction: column;
-  min-width: 400px;
+  min-width: 00px;
   border-radius: 25px;
   width: 80%;
 }
@@ -121,7 +121,7 @@ label {
     flex-wrap: nowrap;
     background-color: rgb(204, 204, 204);
     flex-direction: column;
-    min-width: 400px;
+    min-width: 600px;
     border-radius: 25px;
     width: auto;
   }
