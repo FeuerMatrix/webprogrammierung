@@ -3,8 +3,7 @@
             border-radius: 25px;
             background-color: rgb(235, 235, 235);
             margin: 10px;
-            padding-left: 100px;
-            padding-right: 100px;
+            width=150%;
         }
 </style>
 
