@@ -8,7 +8,7 @@
         .flex-container {
             display: flex;
             flex-direction: column;
-            align-items: center
+            align-items: center;
         }
 
         input[type="search"] {
