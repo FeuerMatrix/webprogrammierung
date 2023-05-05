@@ -31,10 +31,6 @@ ul {
         justify-content: space-between;
     }
 
-    .nav-mobil li {
-
-    }
-
     #nav-links-mobil {
         display: flex;
         box-sizing: content-box;
