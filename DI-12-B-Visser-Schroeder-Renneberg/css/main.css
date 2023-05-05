@@ -1,11 +1,17 @@
 body {
   background-color: rgb(189, 182, 182);
   font-family: "Arial";
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 p {
   padding: 20px;
 }
 
+main {
+  flex: 1 0 auto;
+}
 li {
   float: left;
 }
