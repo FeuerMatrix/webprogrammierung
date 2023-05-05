@@ -9,13 +9,14 @@
         <h1>Nutzungsbedingungen</h1>
 
 
-        <h2>Hinweise für die Nutzung des Beschwerdeforums</h2>
-        
-            <li> Beachten Sie bitte im Vorfeld die vorhandenen Beiträge. Vielleicht wurde der von Ihnen beschriebene Beschwerde bereits von anderen beschrieben. </li><br>
-            <li> Das System dient dem Austausch des Umganges mit Fehlverhaltens und Handlungsalternativen und ist nicht für das öffentliche Anzeigen von Mitbürgern vorgesehen. Daher werden Meldungen die persönliche Daten beinhalten, nicht veröffentlicht. </li><br>
+        <h2 style="padding-left: 16px;">Hinweise für die Nutzung des Beschwerdeforums</h2>
+        <p>
+            Beachten Sie bitte im Vorfeld die vorhandenen Beiträge. Vielleicht wurde der von Ihnen beschriebene Beschwerde bereits von anderen beschrieben.<br>
+            Das System dient dem Austausch des Umganges mit Fehlverhaltens und Handlungsalternativen und ist nicht für das öffentliche Anzeigen von Mitbürgern vorgesehen. Daher werden Meldungen die persönliche Daten beinhalten, nicht veröffentlicht.<br>
+        </p>
 
 
-        <h2>Allgemeine Hinweise für die Nutzung dieses Online-Angebots</h2>
+        <h2 style="padding-left: 16px;">Allgemeine Hinweise für die Nutzung dieses Online-Angebots</h2>
 
         <p>
             Sie müssen mindestens 16 Jahre alt sein, um sich auf dieser Plattform zu registrieren. <br>

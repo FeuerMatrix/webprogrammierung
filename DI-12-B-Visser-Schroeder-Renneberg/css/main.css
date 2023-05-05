@@ -95,8 +95,8 @@ label {
 }
 
 .reg {
-  padding: 16px ;
-  margin: 20px ;
+  padding: 16px;
+  margin: 20px;
   margin-top: 60px;
   display: flex;
   justify-content: center;
@@ -106,6 +106,24 @@ label {
   flex-direction: column;
   min-width: 400px;
   border-radius: 25px;
+  width: 80%;
+}
+
+@media screen and (min-width: 800px) {
+  .reg {
+    padding: 16px;
+    margin: 20px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    background-color: rgb(204, 204, 204);
+    flex-direction: column;
+    min-width: 400px;
+    border-radius: 25px;
+    width: auto;
+  }
 }
 
 form {
