@@ -4,13 +4,7 @@
 
     <?php include_once "php/nav.php" ?>
 
-    <style>
-
-    </style>
-
     <main>
-
-
 
         <form>
             <div class="reg">
@@ -27,8 +21,7 @@
                 <input type="submit" class="cancel" value="Abbrechen">
             </div>
         </form>
-
-
+        
     </main>
 
     <?php include_once "php/footer.php" ?>

@@ -9,7 +9,6 @@
         .commentbox {
             border-radius: 25px;
             background-color: rgb(235, 235, 235);
-            padding: auto;
             margin-top: 10px;
             width: 100%;
             display: flex;
@@ -59,6 +58,7 @@
     </style>
 
     <main>
+        
         <div class = post>
             <div class="post-text">
                 <h1 class = left>Eintrag</h1>

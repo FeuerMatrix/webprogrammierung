@@ -14,7 +14,6 @@
         <h1>Impressum</h1>
 
 
-
         <h2> Herausgeber </h2>
         <p>
             Carl von Ossietzky Universität Oldenburg <br>
@@ -51,6 +50,7 @@
         </p>
 
     </main>
+    
     <?php include_once "php/footer.php" ?>
 </body>
 

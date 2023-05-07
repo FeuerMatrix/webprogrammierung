@@ -20,7 +20,7 @@
             Das System dient dem Austausch des Umganges mit Fehlverhaltens und Handlungsalternativen und ist nicht für das öffentliche Anzeigen von Mitbürgern vorgesehen. Daher werden Meldungen die persönliche Daten beinhalten, nicht veröffentlicht.<br>
         </p>
 
-
+        
         <h2>Allgemeine Hinweise für die Nutzung dieses Online-Angebots</h2>
 
         <p>

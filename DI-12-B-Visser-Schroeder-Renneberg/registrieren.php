@@ -3,13 +3,8 @@
 <body>
 
     <?php include_once "php/nav.php" ?>
-    <style>
-
-    </style>
 
     <main>
-
-
 
         <form>
             <div class="reg">
@@ -29,6 +24,7 @@
                 <input type="button" class="cancel" value="Abbrechen"><br>
             </div>
         </form>
+        
     </main>
 
     <?php include_once "php/footer.php" ?>
