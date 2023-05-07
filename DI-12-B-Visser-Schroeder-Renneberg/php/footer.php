@@ -9,8 +9,14 @@
     justify-content: space-around;
     align-items: center;
   }
-  footer li {
-      width: 33%;
+  footer li{
+      width: 100%;
+  }
+
+  @media (max-width:500px){ 
+    footer{
+      flex-direction: column;
+    }
   }
 </style>
 
