@@ -4,13 +4,9 @@
 
     <?php include_once "php/nav.php" ?>
 
-
-
     <main>
 
-        
-
-        <form>
+    <form>
         <div class="reg">
         <h1>Anmelden</h1>
             <label for="email">Email</label> <br>
