@@ -30,6 +30,10 @@ li a:hover {
   background-color: #111;
 }
 
+img {
+  max-width: 100%;
+}
+
 main h1 {
   padding: 20px;
   margin-top: 30px;
