@@ -18,10 +18,8 @@ ul {
     display: none;
 }
 
-
 @media (max-width:48.000em){
 
-    
     .nav-links, .nav-rechts {
         display: none;
     }
@@ -43,7 +41,6 @@ ul {
         width: 50%;
     }
     
-
     .open { 
     display: block;
     position: absolute;
@@ -73,26 +70,4 @@ ul {
         border-bottom: 1px solid #ccc;         
     }
 
-    
-    
 }
-
-
-
-	
-
-/*
-
-
-background-color: #F4F4F4;
-box-shadow: 2px 2px 3px #444444;
-display: block;
-list-style: none outside none;
-margin: 0;
-padding: 0;
-position: absolute;
-right: 5px;
-top: 100%;
-width: 70%;
-z-index: 500;
-*/
