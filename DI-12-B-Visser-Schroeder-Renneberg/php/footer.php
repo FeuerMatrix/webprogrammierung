@@ -1,27 +1,9 @@
-<style>
-  footer {
-    list-style-type:none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  footer li{
-      width: 100%;
-  }
-
-  @media (max-width:500px){ 
-    footer{
-      flex-direction: column;
-    }
-  }
-</style>
+<link rel="stylesheet" href="css/footer.css" >
 
 <footer>
-  <li> <a href="impressum.php">Impressum</a>
-  <li> <a href="datenschutz.php">Datenschutz</a>
-  <li> <a href="nutzungsbedingungen.php">Nutzungsbedingungen</a>
+  <ul>
+    <li> <a href="impressum.php">Impressum</a>
+    <li> <a href="datenschutz.php">Datenschutz</a>
+    <li> <a href="nutzungsbedingungen.php">Nutzungsbedingungen</a>
+  </ul>
 </footer>

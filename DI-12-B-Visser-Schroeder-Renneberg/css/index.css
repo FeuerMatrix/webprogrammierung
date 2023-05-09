@@ -1,0 +1,11 @@
+.pad {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+@media screen and (min-width: 800px) {
+    .pad {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+}

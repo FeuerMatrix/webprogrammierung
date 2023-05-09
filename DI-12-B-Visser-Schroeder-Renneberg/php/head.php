@@ -7,4 +7,3 @@
     <meta name="author" content="Robin Visser\ Tim Schröder\ Nils Renneberg">
     <link rel="stylesheet" href="css/main.css" />
     <title>Beschwerdeforum</title>
-</head>

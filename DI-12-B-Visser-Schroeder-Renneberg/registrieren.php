@@ -1,4 +1,5 @@
 <?php include_once "php/head.php" ?>
+</head>
 
 <body>
 
@@ -12,7 +13,7 @@
                 <p>Fülle alle daten aus um dich zu Registrieren</p>
                 <label for="user">Nutzername</label><br>
                 <input type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
-                <label for="">Email</label><br>
+                <label for="email">Email</label><br>
                 <input type="email" id="email" name="email" placeholder="Email" required><br>
                 <label for="email2">Email bestätigen</label><br>
                 <input type="email" id="email2" name="email2" placeholder="Email bestätigen" required><br>

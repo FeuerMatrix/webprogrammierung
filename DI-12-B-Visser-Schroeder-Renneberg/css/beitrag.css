@@ -1,0 +1,49 @@
+.commentbox {
+    border-radius: 25px;
+    background-color: rgb(235, 235, 235);
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.left {
+    align-items: flex-start;
+}
+.center {
+    align-items: flex-start;
+}
+.post {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+    align-items: flex-start;
+}
+@media screen and (min-width: 1500px) {
+    .post {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+    }
+        .post .post-text {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+    .post .post-pic {
+        width: 30%;
+    }
+    .titlebox {
+        display: flex;
+        flex-direction: row;
+    }
+    .titlebox h2 {
+        width: 33%;
+    }
+}
+.edit {
+    border-radius: 10px;
+    width: auto;
+    background-color: rgb(235, 235, 235);
+}

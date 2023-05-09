@@ -1,20 +1,8 @@
 <?php include_once "php/head.php" ?>
+<link rel="stylesheet" href="css/index.css" >
+</head>
 
 <body>
-
-    <style>
-        .pad {
-            padding-left: 5%;
-            padding-right: 5%;
-        }
-
-        @media screen and (min-width: 800px) {
-            .pad {
-                padding-left: 20%;
-                padding-right: 20%;
-            }
-        }
-    </style>
 
     <?php include_once "php/nav.php" ?>
 

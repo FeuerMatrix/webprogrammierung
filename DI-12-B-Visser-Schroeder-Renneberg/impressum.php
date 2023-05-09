@@ -1,13 +1,9 @@
 <?php include_once "php/head.php" ?>
+</head>
 
 <body>
 
     <?php include_once "php/nav.php" ?>
-    <style>
-        h2{
-            padding-left:20px;
-        }
-    </style>
 
     <main>
 
