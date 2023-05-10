@@ -1,4 +1,5 @@
 <?php include_once "php/head.php" ?>
+</head>
 
 <body>
 
@@ -49,6 +50,7 @@
         </p>
 
     </main>
+    
     <?php include_once "php/footer.php" ?>
 </body>
 

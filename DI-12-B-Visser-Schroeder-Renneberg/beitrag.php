@@ -1,45 +1,55 @@
 <?php include_once "php/head.php" ?>
+<link rel="stylesheet" href="css/beitrag.css" >
+</head>
 
 <body>
 
     <?php include_once "php/nav.php" ?>
 
     <main>
-
-        <h1>Eintrag</h1>
-        <h2>Titel</h2>
-        <h4>Author</h4>
-        <h4>Datum</h4>
-        <p>ORT</p>
-        <p>Beispieltext </p>
-        <img src="images/guestbook.png" alt="Gästebuch">
-        <input type="submit" value="Bearbeiten">
-       
+        
+        <div class = post>
+            <div class="post-text">
+                <h1 class = left>Eintrag</h1>
+                <div class = titlebox>
+                    <h2>Titel</h2>
+                    <h2>Author</h2>
+                    <h2>Datum</h2>
+                </div>
+                <p class = center>Ort (OpenStreetMap API)</p>
+                <p class = center>Beispieltext </p>
+                <input type="submit" value="Bearbeiten" class = "edit center">
+            </div>
+            <div class = post-pic>
+                <img src="images/guestbook.png" alt="Gästebuch">
+            </div>
+        </div>
 
         <h3>Kommentare</h3>
-        <input type="text" placeholder="Neues Kommentar">
-        <input type="submit" value="Erstellen">
-        <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
-        </fieldset>
-        <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
-        </fieldset>
-        <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
-        </fieldset>
-        <fieldset>
-        <p>Name</p>
-        <p>Kommentar</p>
-        <input type="submit" value="Bearbeiten">
-        </fieldset>
-
+        <form>
+            <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
+            <input type="text" id="neuerKommentar" placeholder="Neues Kommentar" required>
+        </form>
+        <div class = commentbox>
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten" class=edit>
+        </div>
+        <div class = commentbox>
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten" class=edit>
+        </div>
+        <div class = commentbox>
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten" class=edit>
+        </div>
+        <div class = commentbox>
+            <p>Name</p>
+            <p>Kommentar</p>
+            <input type="submit" value="Bearbeiten" class=edit>
+        </div>
 
     </main>
 
