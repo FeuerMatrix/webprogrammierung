@@ -35,7 +35,6 @@ h2 , h1, p{
 input {
   width: 80%;
   padding: 15px;
-  margin: 10px 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
@@ -52,12 +51,14 @@ input[type="email"]:focus {
   background-color: #04aa6d;
   opacity: 0.8;
   border-radius: 15px;
+  margin: 10px;
 }
 
 .cancel {
   background-color: rgb(200, 20, 20);
   opacity: 0.8;
   border-radius: 15px;
+  margin: 10px;
 }
 
 .create:hover {
@@ -71,7 +72,6 @@ input[type="email"]:focus {
 textarea {
   width: 80%;
   padding: 15px;
-  margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
@@ -96,7 +96,7 @@ label {
 .reg {
   padding: 16px;
   margin: 20px;
-  margin-top: 60px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

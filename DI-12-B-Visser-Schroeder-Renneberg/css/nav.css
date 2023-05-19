@@ -9,7 +9,7 @@ ul {
   margin: 0px;
 }
 
-div a {
+.grid-item a {
   display: block;
   color: white;
   text-align: center;
@@ -17,7 +17,7 @@ div a {
   text-decoration: none;
 }
 
-div a:hover {
+.grid-item a:hover {
   background-color: #111;
 }
 
