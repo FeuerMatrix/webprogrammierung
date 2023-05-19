@@ -11,9 +11,6 @@ main {
   flex-grow: 1;
 }
 
-li {
-  float: left;
-}
 
 li a {
   display: block;
