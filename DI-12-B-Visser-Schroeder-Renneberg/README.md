@@ -17,3 +17,7 @@ Später zu beachten:
 - Tab Reihenfolge und Tastatur Benutzung für ausgeklappte Navbar muss gut klappen
 - Error-Messages für Form-Elemente mit javaSkript aussagekräftiger machen
 - wenn ein Bild bei einem Beitrag hochgeladen wird, muss eine Beschreibung des Bildes mit andegegben werden.
+
+Verwendete Technologien:
+- WAVE für Accessability
+- Chromium Devtools für Resizing
