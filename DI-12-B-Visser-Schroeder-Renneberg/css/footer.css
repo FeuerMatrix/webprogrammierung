@@ -1,4 +1,4 @@
-footer {
+footer ul{
     list-style-type:none;
     margin: 0;
     padding: 0;
@@ -6,12 +6,13 @@ footer {
     display: flex;
     justify-content: space-around;
   }
+  
   footer li{
       width: 100%;
   }
 
   @media (max-width:500px){ 
-    footer{
+    footer ul{
       flex-direction: column;
     }
-  }
+}
