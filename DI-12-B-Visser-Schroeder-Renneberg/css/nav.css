@@ -1,75 +1,89 @@
-nav {  
-    background-color: #333;
-    width: 100%;
+nav {
+  background-color: #333;
+  width: 100%;
 }
 
-ul { 
-    list-style-type: none; 
-    padding: 0px; 
-    margin: 0px; 
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 }
 
-.nav-rechts { 
-    display: flex; 
-    justify-content: flex-end;
+.grid-item a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-.nav-mobil{
+.grid-item a:hover {
+  background-color: #111;
+}
+
+.nav-mobil {
+  display: none;
+}
+
+.grid-container {
+  display: grid;
+  width: 100%;
+}
+
+.grid-item {
+  grid-row: 1;
+}
+
+@media (max-width: 700px) {
+  .grid-container {
     display: none;
-}
+  }
 
-@media (max-width:700px){
+  .nav-mobil {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .nav-links, .nav-rechts {
-        display: none;
-    }
-    
-    .nav-mobil {
-        display: flex;
-        justify-content: space-between;
-    }
+  #nav-links-mobil {
+    display: flex;
+    box-sizing: content-box;
+    width: 50%;
+  }
 
-    #nav-links-mobil {
-        display: flex;
-        box-sizing: content-box;
-        width: 50%;
-    }
+  #nav-rechts-mobil {
+    display: flex;
+    box-sizing: content-box;
+    width: 50%;
+  }
 
-    #nav-rechts-mobil {
-        display: flex;
-        box-sizing: content-box;
-        width: 50%;
-    }
-    
-    .open { 
+  .open {
     display: block;
     position: absolute;
     background-color: #333;
     box-shadow: 2px 2px 3px #444444;
     width: 30%;
-        top: 55px;
-	}
+    top: 55px;
+  }
 
-    .nav-rechts{
-        right: 5px;
-        width: 98%;
-    }
+  .nav-rechts {
+    right: 5px;
+    width: 98%;
+  }
 
-    .nav-links{
-        left: 5px;
-        width: 98%;   
-    }
+  .nav-links {
+    left: 5px;
+    width: 98%;
+  }
 
-    ul.open li { 
-        display: block; 
-        text-align: center;
-        box-sizing: content-box;
-        width: 100%;
-        }
+  ul.open li {
+    display: block;
+    text-align: center;
+    box-sizing: content-box;
+    width: 100%;
+  }
 
-    ul.open li a { 
-        display: block;
-        border-bottom: 1px solid #ccc;         
-    }
-
+  ul.open li a {
+    display: block;
+    border-bottom: 1px solid #ccc;
+  }
 }
