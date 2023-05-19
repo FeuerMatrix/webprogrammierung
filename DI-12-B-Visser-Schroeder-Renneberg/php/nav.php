@@ -2,8 +2,8 @@
 
 <nav>
   <ul class="nav-mobil"> <!-- über java Skript für SimpleToggle-->
-    <li> <a href="#" style="font-size:15px;" class="icon" onclick="">Menu </a>
-    <li> <a href="#" style="font-size:15px;" class="icon" onclick="">&#9776;</a>
+    <li> <a href="#" class="icon" onclick="">Menu </a>
+    <li> <a href="#" class="icon" onclick="">&#9776;</a>
   </ul>
 
   <div class="grid-container">
