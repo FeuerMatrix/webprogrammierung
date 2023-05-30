@@ -1,36 +1,35 @@
 <link rel="stylesheet" href="css/registrieren.css" >
 <?php include_once "php/head.php" ?>
 </head>
-    <?php
-        
-
-        if(isset($_POST["passw"], $_POST["passw2"], $_POST["user"], $_POST["email"], $_POST["email2"])) {
-            foreach($_POST as $postKey=>$postElement) {
-                $$postKey = $_POST[$postKey];
-            }
-
-            if($email != $email2) {
-                $errorMessage = "Email-Addressen stimmen nicht überein!";
-            }
-
-            if($passw != $passw2) {
-                $errorMessage = "Passwörter stimmen nicht überein!";
-            }
-            
-            if(!isset($errorMessage)) {
-                //TODO email verification
-
-                //TODO Database query does username already exist
-
-                //TODO Database Insertion
-
-                //TODO success notification on login page
-
-                header("Location: anmeldung.php");
-                exit;
-            }
+<?php
+    if(isset($_POST["passw"], $_POST["passw2"], $_POST["user"], $_POST["email"], $_POST["email2"])) {
+        foreach($_POST as $postKey=>$postElement) {
+            $$postKey = $_POST[$postKey];
         }
-    ?>
+
+        if($email != $email2) {
+            $errorMessage = "Email-Addressen stimmen nicht überein!";
+        }
+
+        if($passw != $passw2) {
+            $errorMessage = "Passwörter stimmen nicht überein!";
+        }
+        
+        //TODO email verification
+
+        if(!isset($errorMessage)) {
+
+            //TODO Database query: does username already exist
+
+            //TODO Database Insertion
+
+            //TODO success notification on login page
+
+            header("Location: anmeldung.php?from_registration=1");
+            exit;
+        }
+    }
+?>
 <body>
 
     <?php include_once "php/nav.php" ?>
@@ -40,7 +39,7 @@
         <form method="post">
                 <div class="reg1">
                     <h1 class="col10">Registrieren</h1>
-                    <div class="bottom"><p class="col20">Fülle alle daten aus um dich zu Registrieren</p> </div>
+                    <div class="bottom"><p class="col20">Fülle alle Daten aus, um dich zu Registrieren</p> </div>
                     <label class="col11" for="user">Nutzername</label><br>
                     <input class="col21" type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
                     <label class="col12" for="email">Email</label><br>

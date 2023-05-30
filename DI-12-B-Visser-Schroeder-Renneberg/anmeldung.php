@@ -1,6 +1,8 @@
 <?php include_once "php/head.php" ?>
 </head>
+<?php
 
+?>
 <body>
 
     <?php include_once "php/nav.php" ?>
@@ -15,7 +17,10 @@
             <label for="pw">Passwort</label> <br>
             <input type="password" id="pw" name=pw placeholder="Passwort" required>
             <input type="submit" class="create" value="Anmelden">
-            <input type="button" class="cancel" value="Abbrechem">
+            <input type="button" class="cancel" value="Abbrechen">
+            <?php if(isset($_GET["from_registration"]) && $_GET["from_registration"] == 1): ?>
+                <a><?="Erfolgreich Abgemeldet"?></a>
+            <?php endif; ?>
         </div>
         </form>
         
