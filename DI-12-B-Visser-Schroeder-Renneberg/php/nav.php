@@ -21,7 +21,9 @@
       <li><a href="hauptseite.php">Beiträge</a></li>
       <li><a href="eintragneu.php">Neuer Beitrag</a></li>
       <li><a href="anmeldung.php">Anmelden</a></li>
-      <li><a href="index.php">Abmelden</a></li>
+      <li>
+        <a href="index.php">Abmelden</a>
+    </li>
       <li><a href="registrieren.php">Registrieren</a></li>
     </ul>
   </div>

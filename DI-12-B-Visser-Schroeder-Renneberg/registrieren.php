@@ -5,10 +5,18 @@
 <body>
 
     <?php include_once "php/nav.php" ?>
-
+    <?php
+    if(isset($_POST["passw"], $_POST["passw"], $_POST["passw2"], $_POST["user"], $_POST["email"], $_POST["email2"])) {
+        foreach($_POST as $postKey=>$postElement) {
+            $$postKey = $_POST[$postKey];
+        }
+        header("Location: anmeldung.php");
+        exit;
+    }
+    ?>
     <main>
 
-        <form>
+        <form method="post">
             <div class="reg1">
                 <h1 class="col10">Registrieren</h1>
                 <div class="bottom"><p class="col20">Fülle alle daten aus um dich zu Registrieren</p> </div>
