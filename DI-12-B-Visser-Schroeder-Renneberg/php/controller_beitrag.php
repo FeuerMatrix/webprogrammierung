@@ -46,17 +46,18 @@ $img =  $database->getImage($id);
 $comments = $database->getComments($id);
 
 
-function createComment($id, $name, $text) {
+function createComment($comm_id, $name, $text) {
+    global $id;
     global $database;
 ?>
     <div class=commentbox>
         <p><?php echo $name ?></p>
         <p><?php echo $text ?></p>
         <form method="post">
-            <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getAuthor($id)): ?>
+            <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getCommentAuthor($id, $comm_id)): ?>
             <input type="submit" name="Edit" value="Bearbeiten" class=edit>
             <?php endif; ?>
-            <input type="hidden" name="c_id" value=<?php echo $id ?>>
+            <input type="hidden" name="c_id" value=<?php echo $comm_id ?>>
         </form>
 
     </div>
