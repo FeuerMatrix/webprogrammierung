@@ -1,7 +1,9 @@
 <?php
-
 $id = (isset($_GET["id"]) && is_string($_GET["id"])) ? $_GET["id"] : "";
 $auth = isset($_SESSION["user"]);
+
+include_once "datenbank/DummyUserStore.php";
+$database = new DummyUserStore();
 
 if(isset($_POST["Submit"])){
     //TODO check if owner
@@ -16,30 +18,26 @@ if(isset($_POST["Edit"])){
     //TODO check if owner
     $edit = true;
     $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
+    $old = $database->getComment($id,$comm_id);
 }   
 
 if(isset($_POST["new"]) && isset($auth)){
-    if($edit){
+    if(!$edit){
     $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
-    //save to db $new $auth
-    //add id in db
+    $database->newComment($auth,$new);
     }else{
         $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
-        //update $comm_id  $new $auth
+        $database->updateComment($id,$comm_id,$new);
+        $edit=false;
     }
 }   
 
-//TODO get from DB
-$titel = "Testtitel";
-$desc = "Testdesc";
-$author = "Ich";
-$date ="1.1.1970";
-$img = "images/guestbook.png";
-$comments = array(
-    array(0, "Der","grfaghaergherreag"),
-    array(1, "Die","harhngrjrtahgrfsjhtr"),
-    array(2, "Das","htrshtgbgsfhjtrsh")
-);
+$titel = $database->getTitel($id);
+$desc =  $database->getDesc($id);
+$author = $database->getAuthor($id);
+$date =  $database->getDate($id);
+$img =  $database->getImage($id);
+$comments = $database->getComments($id);
 
 
 function createComment($id, $name, $text)

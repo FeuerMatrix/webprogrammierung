@@ -32,13 +32,15 @@
         <h3>Kommentare</h3>
         <form method="post">
             <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
-            <input type="text" id="neuerKommentar" name="new" <?php if($edit){ echo 'value="fgerr"';} ?> placeholder="Neues Kommentar" required>
+            <input type="text" id="neuerKommentar" name="new" <?php if ($edit) {
+                                                                    echo 'value='.$old;
+                                                                } ?> placeholder="Neues Kommentar" required>
         </form>
 
 
         <?php
-        foreach($comments as $comm) {
-            createComment($comm[0],$comm[1],$comm[2]);
+        foreach ($comments as $comm) {
+            createComment($comm[0], $comm[1], $comm[2]);
         }
         ?>
     </main>
