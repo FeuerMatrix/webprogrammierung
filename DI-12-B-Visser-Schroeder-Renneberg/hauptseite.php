@@ -73,23 +73,23 @@
                 }
 
                 //Foreneinträge erstellen
-                function beitragErstellen($titel, $date, $file = "images/guestbook.png", $pname = "Beispielbild") {
+                function beitragErstellen($id, $titel, $date, $file = "images/guestbook.png", $pname = "Beispielbild"){
                     if ($file == '') {
                         $file = "images/guestbook.png";
                         $pname = "Beispielbild";
                     }
-                    
-                    echo '
+                    $url = "beitrag.php?id=".$id;
+                    ?>
                         <div class="beitrag">
-                            <a class="link" href="beitrag.php"> '. $titel .' </a>
-                            <span>'. $date .'</span>
-                            <img src=" '. $file .' "  alt=" '. $pname .' ">
+                            <a class="link" href=<?php echo $url ?> > <?php echo $titel ?></a>
+                            <span> <?php echo $date ?></span>
+                            <img src=<?php echo $file ?>  alt= <?php echo $pname ?> >
                         </div>
-                    ';
+                <?php
                 }
 
                 foreach ($beitraege as $beitrag) {
-                    beitragErstellen($beitrag['titel'], $beitrag['date'], $beitrag['file']);
+                    beitragErstellen($beitrag["id"],$beitrag['titel'], $beitrag['date'], $beitrag['file']);
                 }
             ?>
    
