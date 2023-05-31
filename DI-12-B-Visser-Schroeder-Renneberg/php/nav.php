@@ -5,10 +5,6 @@
 ?>
 <nav>
   <div class="top-nav">
-    <input id="menu-toggle" type="checkbox" />
-    <label class='menu-button-container' for="menu-toggle">
-    <div class='menu-button'></div>
-    </label>
     <ul class="menu">
       <li><a href="index.php">Homepage</a></li>
       <li><a href="hauptseite.php">Beiträge</a></li>
