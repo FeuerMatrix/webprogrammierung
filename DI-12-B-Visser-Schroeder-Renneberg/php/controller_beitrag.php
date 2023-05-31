@@ -5,34 +5,38 @@ $auth = isset($_SESSION["user"]);
 include_once "datenbank/DummyUserStore.php";
 $database = new DummyUserStore();
 
-if(isset($_POST["Submit"])){
-    if($database->getAuthor($id) == $_SESSION["user"]) {
-        $_SESSION["id"]=$id;
+if (isset($_POST["Submit"])) {
+    if ($database->getAuthor($id) == $_SESSION["user"]) {
+        $_SESSION["id"] = $id;
         header("Location: eintragneu.php?from=Beitrag");
-        exit;
+    } else {
+        header("Location: beitrag.php?id=".$id."&cause=".urlencode("Du bist nicht Besitzer dieses Posts!"));
     }
-    }
+    exit;
+}
 
 $edit = false;
 
-if(isset($_POST["Edit"])){
+if (isset($_POST["Edit"])) {
     $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
-    if($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
+    if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
         $edit = true;
-        $old = $database->getComment($id,$comm_id);
+        $old = $database->getComment($id, $comm_id);
+    } else {
+        header("Location: beitrag.php?id=".$id."&cause=".urlencode("Du bist nicht Besitzer dieses Kommentars!"));
     }
-}   
+}
 
-if(isset($_POST["new"]) && isset($auth)){
-    if(!$edit){
-    $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
-    $database->newComment($auth,$new);
-    }else{
+if (isset($_POST["new"]) && isset($auth)) {
+    if (!$edit) {
         $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
-        $database->updateComment($id,$comm_id,$new);
-        $edit=false;
+        $database->newComment($auth, $new);
+    } else {
+        $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
+        $database->updateComment($id, $comm_id, $new);
+        $edit = false;
     }
-}   
+}
 
 $titel = $database->getTitel($id);
 $desc =  $database->getDesc($id);
@@ -50,7 +54,7 @@ function createComment($id, $name, $text)
         <p><?php echo $text ?></p>
         <form method="post">
             <input type="submit" name="Edit" value="Bearbeiten" class=edit>
-            <input type="hidden"  name="c_id" value=<?php echo $id ?>>
+            <input type="hidden" name="c_id" value=<?php echo $id ?>>
         </form>
 
     </div>

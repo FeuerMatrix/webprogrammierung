@@ -3,16 +3,16 @@
 include_once "datenbank/DummyUserStore.php";
 $database = new DummyUserStore();
 
-if(!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
-    header("Location: index.php?cause=".urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
+if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
+    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
     exit;
 }
-$edit=false;
+$edit = false;
 
-if( isset($_SESSION["id"]) && isset($_GET["from"])){
+if (isset($_SESSION["id"]) && isset($_GET["from"])) {
     $id = $_SESSION["id"];
-    $edit=true;
-    $titel =" gegr";
+    $edit = true;
+    $titel = " gegr";
     $desc =  " grfemglerfgj erfiujg";
     $anony = false;
 }
@@ -40,7 +40,7 @@ if (isset($_POST["Submit"])) {
         $fehlerfelder[] = "Beschreibung";
     }
     if ($ok) {
-        if (isset($_FILES["Datei"])) { 
+        if (isset($_FILES["Datei"])) {
             move_uploaded_file($_FILES["Datei"]["tmp_name"], "./images/userImages/" . $_FILES["Datei"]["name"]);
         }
 
@@ -49,9 +49,9 @@ if (isset($_POST["Submit"])) {
         } else {
             $anony = FALSE;
         }
-        $database->newPost($_SESSION["user"],$titel,$desc,$anony,"img");
-        if($edit){
-            $database->updatePost($id,$_SESSION["user"],$titel,$desc,$anony,"img");
+        $database->newPost($_SESSION["user"], $titel, $desc, $anony, "img");
+        if ($edit) {
+            $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, "img");
         }
         header("Location: Beitrag.php?from=neuerBeitrag");
         exit;

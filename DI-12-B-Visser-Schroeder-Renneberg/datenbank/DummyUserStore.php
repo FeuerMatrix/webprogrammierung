@@ -23,7 +23,7 @@
             return $username == "blockedName";
         }
         function getUser($user) {
-            return "DummyValue";
+            return "Ich";
         }
 
 
