@@ -6,6 +6,12 @@
     <?php include_once "php/nav.php" ?>
     <?php include_once "php/beitragErstellen.php" ?>
 
+    <?php
+        if(!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
+            header("Location: index.php?cause=notLoggedIn");
+            exit;
+        }
+    ?>
     <main>
 
         <form method="post" enctype="multipart/form-data">
