@@ -5,7 +5,7 @@
     <?php
         include_once "php/nav.php";
         
-        include_once "anmeldung/controller.php";
+        include_once "anmeldung/controller_anmeldung.php";
     ?>
     <main>
 

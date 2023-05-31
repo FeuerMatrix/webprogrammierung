@@ -8,7 +8,7 @@
         unset($errorMessage);
         $email = htmlentities($_POST["email"]);
         $pw = htmlentities($_POST["pw"]);
-        include_once "datenbank/UserStore.php";
+        include_once "datenbank/DummyUserStore.php";
         $database = new DummyUserStore();
 
         if(!($database->checkLoginData($email, $pw))) {
@@ -16,7 +16,7 @@
         }
 
         if(!isset($errorMessage)) {
-            $_SESSION["user"] = "DummyValue"; //TODO get the actual user from the server
+            $_SESSION["user"] = $database->getUser("");
             header("Location: index.php");
             exit;
         }
