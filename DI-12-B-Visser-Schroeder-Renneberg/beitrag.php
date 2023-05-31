@@ -20,9 +20,11 @@
                 </div>
                 <p class=center>Ort (OpenStreetMap API)</p>
                 <p class=center><?php echo $desc ?> </p>
+                <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getAuthor($id)): ?>
                 <form method="post">
                     <input type="submit" name="Submit" value="Bearbeiten" class="edit">
                 </form>
+                <?php endif; ?>
             </div>
             <div class=post-pic>
                 <img src=<?php echo $img ?> alt="Gästebuch">
@@ -30,13 +32,14 @@
         </div>
 
         <h3>Kommentare</h3>
+        <?php if(isset($_SESSION["user"])): ?>
         <form method="post">
             <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
             <input type="text" id="neuerKommentar" name="new" <?php if ($edit) {
-                                                                    echo 'value='.$old;
-                                                                } ?> placeholder="Neues Kommentar" required>
+                echo 'value='.$old;
+            } ?> placeholder="Neues Kommentar" required>
         </form>
-
+            <?php endif; ?>                                                        
 
         <?php
         foreach ($comments as $comm) {
