@@ -8,7 +8,7 @@ $database = new DummyUserStore();
 if (isset($_POST["Submit"])) {
     if ($database->getAuthor($id) == $_SESSION["user"]) {
         $_SESSION["id"] = $id;
-        header("Location: eintragneu.php?from=Beitrag");
+        header("Location: eintragneu.php?from=".$id);
     } else {
         header("Location: beitrag.php?id=".$id."&cause=".urlencode("Du bist nicht Besitzer dieses Posts!"));
     }

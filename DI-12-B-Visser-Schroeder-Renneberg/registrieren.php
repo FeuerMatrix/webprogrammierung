@@ -25,11 +25,11 @@
                     <label class="col15" for="passw2">Passwort bestätigen</label><br>
                     <input class="col25" type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
                     <input class="col16" type="submit" value="Erstellen">
-                    <input class="col26" type="button" value="Abbrechen"><br>
+                    <input class="col26" type="submit" form="form" value="Abbrechen"><br>
                 </div>
         </form>
     </main>
-
+    <form action="index.php" id="form"></form>
     <?php include_once "php/footer.php" ?>
 </body>
 
