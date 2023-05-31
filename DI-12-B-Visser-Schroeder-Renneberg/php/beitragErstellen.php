@@ -1,4 +1,21 @@
 <?php
+
+if(!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
+    header("Location: index.php?cause=notLoggedIn");
+    exit;
+}
+$edit=false;
+
+if( isset($_SESSION["id"]) && isset($_GET["from"])){
+    $id = $_SESSION["id"];
+    $edit=true;
+    $titel =" gegr";
+    $desc =  " grfemglerfgj erfiujg";
+    $anony = false;
+}
+
+
+
 $titel = (isset($_POST["fname"]) && is_string($_POST["fname"])) ? $_POST["fname"] : "";
 $desc = (isset($_POST["text_main"]) && is_string($_POST["text_main"])) ? $_POST["text_main"] : "";
 $anony = (isset($_POST["anonym"]) && is_string($_POST["anonym"])) ? $_POST["anonym"] : "";
@@ -32,6 +49,7 @@ if (isset($_POST["Submit"])) {
 
         //TODO save to DB
         //Datum ueber DB
+        //wenn $edit beitrag editieren
         header("Location: Beitrag.php?from=neuerBeitrag");
         exit;
     } else {
