@@ -57,7 +57,7 @@ function createComment($comm_id, $name, $text) {
             <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getCommentAuthor($id, $comm_id)): ?>
             <input type="submit" name="Edit" value="Bearbeiten" class=edit>
             <?php endif; ?>
-            <input type="hidden" name="c_id" value=<?php echo $comm_id ?>>
+            <input type="hidden" name="c_id" value=<?php echo $comm_id ?> >
         </form>
 
     </div>
