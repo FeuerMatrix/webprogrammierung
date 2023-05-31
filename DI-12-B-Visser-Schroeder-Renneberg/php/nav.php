@@ -25,20 +25,7 @@
 <?php
   if(isset($_GET["cause"])):
 ?>
-<a><?php
-echo urldecode($_GET["cause"]);
-  /*switch($_GET["cause"]) {
-    case "notLoggedIn":
-      echo "Fehler: Diese Seite kann nur von angemeldeten Nutzern geöffnet werden";
-      break;
-    case "loggedIn":
-      echo "Fehler: Diese Seite kann nicht von angemeldeten Nutzern geöffnet werden";
-      break;
-    case "loginSuccessful":
-      echo "Erfolgreich Angemeldet!";
-      break;
-  }*/
-?></a>
+<a><?php echo urldecode($_GET["cause"]); ?></a>
   <?php
   endif;
   ?>
