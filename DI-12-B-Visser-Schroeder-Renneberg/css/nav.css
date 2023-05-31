@@ -141,5 +141,9 @@ ul {
       background-color: #222;
     }
 
+    .menu a {
+      width: 100%;
+    }
+
   }
 
