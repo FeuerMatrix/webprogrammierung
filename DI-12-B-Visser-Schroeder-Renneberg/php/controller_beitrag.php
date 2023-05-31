@@ -6,19 +6,21 @@ include_once "datenbank/DummyUserStore.php";
 $database = new DummyUserStore();
 
 if(isset($_POST["Submit"])){
-    //TODO check if owner
-    $_SESSION["id"]=$id;
-    header("Location: eintragneu.php?from=Beitrag");
-    exit;
+    if($database->getAuthor($id) == $_SESSION["user"]) {
+        $_SESSION["id"]=$id;
+        header("Location: eintragneu.php?from=Beitrag");
+        exit;
+    }
     }
 
 $edit = false;
 
 if(isset($_POST["Edit"])){
-    //TODO check if owner
-    $edit = true;
     $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
-    $old = $database->getComment($id,$comm_id);
+    if($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
+        $edit = true;
+        $old = $database->getComment($id,$comm_id);
+    }
 }   
 
 if(isset($_POST["new"]) && isset($auth)){

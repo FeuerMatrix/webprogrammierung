@@ -4,7 +4,7 @@
 <body>
 
     <?php include_once "php/nav.php" ?>
-    <?php include_once "php/beitragErstellen.php" ?>
+    <?php include_once "php/controller_beitragErstellen.php" ?>
 
     <?php
 
