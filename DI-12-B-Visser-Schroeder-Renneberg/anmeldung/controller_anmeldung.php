@@ -1,6 +1,6 @@
 <?php
     if(isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while logged in
-        header("Location: index.php?cause=loggedIn");
+        header("Location: index.php?cause=".urlencode("Fehler: diese Seite kann nicht von eingeloggten Nutzern aufgerufen werden!"));
         exit;
     }
 

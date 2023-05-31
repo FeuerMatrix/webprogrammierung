@@ -10,7 +10,6 @@
         include_once $path."/registrieren/controller_registrieren.php";
     ?>
     <main>
-    
         <form method="post">
                 <div class="reg1">
                     <h1 class="col10">Registrieren</h1>
@@ -27,10 +26,6 @@
                     <input class="col25" type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
                     <input class="col16" type="submit" value="Erstellen">
                     <input class="col26" type="button" value="Abbrechen"><br>
-
-                    <?php if(isset($errorMessage)): ?>
-                        <a><?=$errorMessage?></a>
-                    <?php endif; ?>
                 </div>
         </form>
     </main>

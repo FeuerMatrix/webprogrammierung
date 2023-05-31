@@ -26,7 +26,8 @@
   if(isset($_GET["cause"])):
 ?>
 <a><?php
-  switch($_GET["cause"]) {
+echo urldecode($_GET["cause"]);
+  /*switch($_GET["cause"]) {
     case "notLoggedIn":
       echo "Fehler: Diese Seite kann nur von angemeldeten Nutzern geöffnet werden";
       break;
@@ -36,7 +37,7 @@
     case "loginSuccessful":
       echo "Erfolgreich Angemeldet!";
       break;
-  }
+  }*/
 ?></a>
   <?php
   endif;
