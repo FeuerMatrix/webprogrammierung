@@ -13,6 +13,7 @@
     align-items: flex-start;
 }
 .post {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
