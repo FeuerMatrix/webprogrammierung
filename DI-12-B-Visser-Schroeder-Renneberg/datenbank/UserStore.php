@@ -10,7 +10,7 @@
 
         }
         function checkLoginData($email, $pw){
-
+            return $email == "tim@test.de" && $pw == "helloworld";
         }
         function isLoggedIn($email){
             return false;
