@@ -21,7 +21,7 @@ if (isset($_POST["Submit"])) {
     }
     if ($ok) {
         if (isset($_FILES["Datei"])) { 
-            move_uploaded_file($_FILES["Datei"]["tmp_name"], "../img/" . $_FILES["Datei"]["name"]);
+            move_uploaded_file($_FILES["Datei"]["tmp_name"], "../images/userImages/" . $_FILES["Datei"]["name"]);
         }
 
         if ($anony == "Anonym") {
@@ -30,7 +30,8 @@ if (isset($_POST["Submit"])) {
             $anony = FALSE;
         }
 
-        //TODO save to db
+        //TODO save to DB
+        //Datum ueber DB
         header("Location: Beitrag.php?from=neuerBeitrag");
         exit;
     } else {
