@@ -6,17 +6,11 @@ body {
   min-height: 100vh;
 }
 
-p {
-  padding: 20px;
-}
 
 main {
   flex-grow: 1;
 }
 
-li {
-  float: left;
-}
 
 li a {
   display: block;
@@ -34,19 +28,13 @@ img {
   max-width: 100%;
 }
 
-main h1 {
-  padding: 20px;
-  margin-top: 30px;
-}
-
-h2{
+h2 , h1, p{
   padding-left:20px;
 }
 
 input {
   width: 80%;
   padding: 15px;
-  margin: 5px 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
@@ -63,12 +51,14 @@ input[type="email"]:focus {
   background-color: #04aa6d;
   opacity: 0.8;
   border-radius: 15px;
+  margin: 10px;
 }
 
 .cancel {
   background-color: rgb(200, 20, 20);
   opacity: 0.8;
   border-radius: 15px;
+  margin: 10px;
 }
 
 .create:hover {
@@ -82,7 +72,6 @@ input[type="email"]:focus {
 textarea {
   width: 80%;
   padding: 15px;
-  margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
@@ -107,7 +96,7 @@ label {
 .reg {
   padding: 16px;
   margin: 20px;
-  margin-top: 60px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,19 +108,9 @@ label {
   width: 80%;
 }
 
-@media screen and (min-width: 800px) {
+@media(min-width: 800px) {
   .reg {
-    padding: 16px;
-    margin: 20px;
-    margin-top: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    background-color: rgb(204, 204, 204);
-    flex-direction: column;
     min-width: 600px;
-    border-radius: 25px;
     width: auto;
   }
 }

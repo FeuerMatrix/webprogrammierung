@@ -1,56 +1,51 @@
 <?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/beitrag.css" >
+<link rel="stylesheet" href="css/beitrag.css">
 </head>
 
 <body>
 
+
     <?php include_once "php/nav.php" ?>
+    <?php include_once "php/controller_beitrag.php" ?>
+
+
 
     <main>
-        
-        <div class = post>
+        <div class=post>
             <div class="post-text">
-                <h1 class = left>Eintrag</h1>
-                <div class = titlebox>
-                    <h2>Titel</h2>
-                    <h2>Author</h2>
-                    <h2>Datum</h2>
+                <h1 class=left><?php echo $titel ?></h1>
+                <div class=titlebox>
+                    <h2><?php echo $author ?></h2>
+                    <h2><?php echo $date ?></h2>
                 </div>
-                <p class = center>Ort (OpenStreetMap API)</p>
-                <p class = center>Beispieltext </p>
-                <input type="submit" value="Bearbeiten" class = "edit center">
+                <p class=center>Ort (OpenStreetMap API)</p>
+                <p class=center><?php echo $desc ?> </p>
+                <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getAuthor($id)): ?>
+                <form method="post">
+                    <input type="submit" name="Submit" value="Bearbeiten" class="edit">
+                </form>
+                <?php endif; ?>
             </div>
-            <div class = post-pic>
-                <img src="images/guestbook.png" alt="Gästebuch">
+            <div class=post-pic>
+                <img src=<?php echo $img ?> alt="Gästebuch">
             </div>
         </div>
 
         <h3>Kommentare</h3>
-        <form>
+        <?php if(isset($_SESSION["user"])): ?>
+        <form method="post">
             <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
-            <input type="text" id="neuerKommentar" placeholder="Neues Kommentar" required>
+            <input type="text" id="neuerKommentar" name="new" <?php if ($edit) {
+                echo 'value='.$old;
+            } ?> placeholder="Neues Kommentar" required>
         </form>
-        <div class = commentbox>
-            <p>Name</p>
-            <p>Kommentar</p>
-            <input type="submit" value="Bearbeiten" class=edit>
-        </div>
-        <div class = commentbox>
-            <p>Name</p>
-            <p>Kommentar</p>
-            <input type="submit" value="Bearbeiten" class=edit>
-        </div>
-        <div class = commentbox>
-            <p>Name</p>
-            <p>Kommentar</p>
-            <input type="submit" value="Bearbeiten" class=edit>
-        </div>
-        <div class = commentbox>
-            <p>Name</p>
-            <p>Kommentar</p>
-            <input type="submit" value="Bearbeiten" class=edit>
-        </div>
+            <?php endif; ?>                                                        
 
+        <?php
+        foreach ($comments as $comm) {
+            createComment($comm[0], $comm[1], $comm[2]);
+        }
+        ?>
     </main>
 
     <?php include_once "php/footer.php" ?>

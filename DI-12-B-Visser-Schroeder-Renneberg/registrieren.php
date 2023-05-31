@@ -1,33 +1,35 @@
 <?php include_once "php/head.php" ?>
+<link rel="stylesheet" href="css/registrieren.css" >
 </head>
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
-
-    <main>
-
-        <form>
-            <div class="reg">
-                <h1>Registrieren</h1>
-                <p>Fülle alle daten aus um dich zu Registrieren</p>
-                <label for="user">Nutzername</label><br>
-                <input type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
-                <label for="email">Email</label><br>
-                <input type="email" id="email" name="email" placeholder="Email" required><br>
-                <label for="email2">Email bestätigen</label><br>
-                <input type="email" id="email2" name="email2" placeholder="Email bestätigen" required><br>
-                <label for="passw">Passwort</label><br>
-                <input type="password" id="passw" name="passw" placeholder="Passwort" required><br>
-                <label for="passw2">Passwort bestätigen</label><br>
-                <input type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
-                <input type="submit" class="create" value="Erstellen">
-                <input type="button" class="cancel" value="Abbrechen"><br>
-            </div>
-        </form>
+    <?php
+        include_once "php/nav.php";
         
+        include_once $path."/registrieren/controller_registrieren.php";
+    ?>
+    <main>
+        <form method="post">
+                <div class="reg1">
+                    <h1 class="col10">Registrieren</h1>
+                    <div class="bottom"><p class="col20">Fülle alle Daten aus, um dich zu Registrieren</p> </div>
+                    <label class="col11" for="user">Nutzername</label><br>
+                    <input class="col21" type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
+                    <label class="col12" for="email">Email</label><br>
+                    <input class="col22" type="email" id="email" name="email" placeholder="Email" required><br>
+                    <label class="col13" for="email2">Email bestätigen</label><br>
+                    <input class="col23" type="email" id="email2" name="email2" placeholder="Email bestätigen" required><br>
+                    <label class="col14" for="passw">Passwort</label><br>
+                    <input class="col24" type="password" id="passw" name="passw" placeholder="Passwort" required><br>
+                    <label class="col15" for="passw2">Passwort bestätigen</label><br>
+                    <input class="col25" type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
+                    <input class="col16" type="submit" value="Erstellen">
+                    <input class="col26" type="submit" form="form" value="Abbrechen"><br>
+                </div>
+        </form>
     </main>
-
+    <form action="index.php" id="form"></form>
     <?php include_once "php/footer.php" ?>
 </body>
 
