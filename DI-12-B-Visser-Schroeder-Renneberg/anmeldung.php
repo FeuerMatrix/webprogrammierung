@@ -17,7 +17,7 @@
             <label for="pw">Passwort</label> <br>
             <input type="password" id="pw" name=pw placeholder="Passwort" required>
             <input type="submit" class="create" value="Anmelden">
-            <input type="button" class="cancel" value="Abbrechen">
+            <input type="submit" form="form" class="cancel" value="Abbrechen">
 
             <?php if(isset($errorMessage)): ?> <!--Displays Messages for errors as well as successful registration, where the former has higher priority-->
                 <a><?=$errorMessage?></a>
@@ -26,7 +26,7 @@
             <?php endif; ?>
         </div>
         </form>
-        
+        <form action="index.php" id="form"></form>
     </main>
 
     <?php include_once $path."/php/footer.php" ?>
