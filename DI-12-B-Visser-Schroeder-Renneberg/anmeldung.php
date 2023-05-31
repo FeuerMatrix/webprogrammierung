@@ -3,9 +3,9 @@
 
 <body>
     <?php
-        include_once "php/nav.php";
+        include_once $path."/php/nav.php";
         
-        include_once "anmeldung/controller_anmeldung.php";
+        include_once $path."/anmeldung/controller_anmeldung.php";
     ?>
     <main>
 
@@ -29,7 +29,7 @@
         
     </main>
 
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."/php/footer.php" ?>
 </body>
 
 </html>

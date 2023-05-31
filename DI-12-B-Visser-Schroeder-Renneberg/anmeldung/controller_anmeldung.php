@@ -17,7 +17,7 @@
 
         if(!isset($errorMessage)) {
             $_SESSION["user"] = $database->getUser("");
-            header("Location: index.php");
+            header("Location: index.php?cause=loginSuccessful");
             exit;
         }
     }

@@ -7,7 +7,7 @@
     <?php
         include_once "php/nav.php";
         
-        include_once "registrieren/controller_registrieren.php";
+        include_once $path."/registrieren/controller_registrieren.php";
     ?>
     <main>
     

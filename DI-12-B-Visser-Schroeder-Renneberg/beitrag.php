@@ -4,7 +4,7 @@
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."/php/nav.php" ?>
 
     <?php
      if(isset($_POST["Submit"])){
