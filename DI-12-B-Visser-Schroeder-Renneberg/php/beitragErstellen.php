@@ -1,5 +1,8 @@
 <?php
 
+include_once "datenbank/DummyUserStore.php";
+$database = new DummyUserStore();
+
 if(!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
     header("Location: index.php?cause=notLoggedIn");
     exit;
@@ -46,10 +49,10 @@ if (isset($_POST["Submit"])) {
         } else {
             $anony = FALSE;
         }
-
-        //TODO save to DB
-        //Datum ueber DB
-        //wenn $edit beitrag editieren
+        $database->newPost($_SESSION["user"],$titel,$desc,$anony,"img");
+        if($edit){
+            $database->updatePost($id,$_SESSION["user"],$titel,$desc,$anony,"img");
+        }
         header("Location: Beitrag.php?from=neuerBeitrag");
         exit;
     } else {
