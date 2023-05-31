@@ -5,6 +5,7 @@
         function isLoggedIn($email);
         function userNameExists($username);
         function getUser($user);
+        function getBeitraege();
     }
 
     class DummyUserStore implements UserStore {
@@ -23,6 +24,18 @@
         }
         function getUser($user) {
             return "DummyValue";
+        }
+
+
+        // Beispieldaten für Foreneinträge
+        function getBeitraege(){
+            $beitraege = array(
+                array('id' => 1, 'titel' => 'Argumentation', 'date' => '05.06.1996' , 'file' => 'images/beispielbilder/argumentation.png', 'pname' => 'Argumentation' ),
+                array('id' => 2, 'titel' => 'Protest', 'date' => '08.04.1976' , 'file' => 'images/beispielbilder/protest.png', 'pname' => 'Protest'),
+                array('id' => 3, 'titel' => 'Trouble Incoming', 'date' => '08.05.1976', 'file' => 'images/beispielbilder/trouble.jpg', 'pname' => 'Trouble Schilder'),
+                array('id' => 4, 'titel' => 'Beispielbild', 'date' => '08.04.1976' , 'file' => 'images/guestbook.png', 'pname' => 'Beispielbild')
+            );
+            return $beitraege;
         }
 
 
