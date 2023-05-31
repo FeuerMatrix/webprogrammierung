@@ -6,44 +6,8 @@
 
     <?php
         include_once "php/nav.php";
-        function checkUserNameExists($user) {
-            //TODO Database query: does username already exist
-            return false; //Dummy return value
-        }
-
-        if(isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while logged in
-            header("Location: index.php?cause=loggedIn");
-            exit;
-        }
-
-        if(isset($_POST["passw"], $_POST["passw2"], $_POST["user"], $_POST["email"], $_POST["email2"])) {
-            unset($errorMessage);
-            foreach($_POST as $postKey=>$postElement) {
-                $$postKey = htmlentities($_POST[$postKey]);
-            }
-
-            if($email != $email2) {
-                $errorMessage = "Email-Addressen stimmen nicht überein!";
-            }
-
-            if($passw != $passw2) {
-                $errorMessage = "Passwörter stimmen nicht überein!";
-            }
-
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errorMessage = "Fehlerhafte Email-Addresse!";
-            }
-
-            if(checkUserNameExists($email)) {
-                $errorMessage = "Benutzername existiert bereits/Email bereits in Benutzung!";
-            }
-
-            if(!isset($errorMessage)) {
-                //TODO Database Insertion
-                header("Location: anmeldung.php?from=registration");
-                exit;
-            }
-        }
+        
+        include_once "registrieren/controller_registrieren.php";
     ?>
     <main>
     
