@@ -21,7 +21,7 @@ if (isset($_POST["Submit"])) {
     }
     if ($ok) {
         if (isset($_FILES["Datei"])) { 
-            move_uploaded_file($_FILES["Datei"]["tmp_name"], "../images/userImages/" . $_FILES["Datei"]["name"]);
+            move_uploaded_file($_FILES["Datei"]["tmp_name"], "./images/userImages/" . $_FILES["Datei"]["name"]);
         }
 
         if ($anony == "Anonym") {
