@@ -14,7 +14,7 @@
                 <label for="suche">Suche</label> <br>
                 <input type="search" name="suche" placeholder="Hier Suchbegriff eingeben" id="suche"> <br>
                 <label for="sort">Sortieren nach:</label> <br>
-                <select id="sort" name="sort" require>
+                <select id="sort" name="sort">
                     <option value="date">Datum</option>
                     <option value="titel">Alphabetisch</option>
                 </select> <br>
@@ -25,7 +25,7 @@
         <div class="flex-container">
                 <?php foreach ($beitraege as $beitrag): ?>         
                        <div class="beitrag">
-                            <a class="link" href=<?php echo "beitrag.php?id=".$beitrag["id"] ?> > <?php echo $beitrag['titel'] ?></a>
+                            <a class="link" href=<?php echo "\"beitrag.php?id=".$beitrag["id"]."\"" ?> > <?php echo $beitrag['titel'] ?></a>
                             <span> <?php echo $beitrag['date'] ?></span>
                             <img src=<?php echo $beitrag['file'] ?>  alt= <?php echo $beitrag['pname'] ?> >
                         </div>
