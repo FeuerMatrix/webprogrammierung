@@ -9,15 +9,6 @@ if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page th
 }
 $edit = false;
 
-if (isset($_SESSION["id"]) && isset($_GET["from"])) {
-    $id = $_SESSION["id"];
-    $edit = true;
-    $titel = " gegr";
-    $desc =  " grfemglerfgj erfiujg";
-    $anony = false;
-}
-
-
 
 $titel = (isset($_POST["fname"]) && is_string($_POST["fname"])) ? $_POST["fname"] : "";
 $desc = (isset($_POST["text_main"]) && is_string($_POST["text_main"])) ? $_POST["text_main"] : "";

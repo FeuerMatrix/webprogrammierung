@@ -11,6 +11,17 @@
     include_once "datenbank/DummyUserStore.php";
     $database = new DummyUserStore();
 
+
+    if(isset($_POST["Cancel"])){
+       
+    }
+
+    if(!isset($_GET["from"])){
+        $url = "hauptseite.php";
+        }else{
+            $url = "beitrag.php?id=".$_GET["from"];
+        }
+
     if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
         header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
         exit;
@@ -18,7 +29,7 @@
     $edit = false;
 
     if (isset($_SESSION["id"]) && isset($_GET["from"])) {
-        if ($_GET["from"] == "Beitrag" && (is_string($_SESSION["id"])) ? $_SESSION["id"] : "") {
+        if ((is_string($_SESSION["id"])) ? $_SESSION["id"] : "") {
             $id = $_SESSION["id"];
             unset($_SESSION["id"]);
             $edit = true;
@@ -53,10 +64,11 @@
                                                                         echo 'checked="checked"';
                                                                     } ?>><br>
                 <input type="submit" name="Submit" class="create" value="Erstellen">
-                <input type="submit" class="cancel" value="Abbrechen">
+                <input type="submit" form="form" name="Cancel" class="cancel" value="Abbrechen" >
             </div>
         </form>
 
+        <form action=<?php echo $url ?> id="form"></form>
     </main>
 
     <?php include_once "php/footer.php" ?>
