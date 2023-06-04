@@ -1,4 +1,5 @@
 <?php
+include_once "UserStore.php";
     class DummyUserStore implements UserStore {
         function store($user, $email, $pw){
 
