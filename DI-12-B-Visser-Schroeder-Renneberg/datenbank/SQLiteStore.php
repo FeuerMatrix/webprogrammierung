@@ -1,6 +1,6 @@
 <?php
 
-    $db = new SQLite3( 'beschwerdeforum.db' );
+    include_once "SQLiteStore_new"
 
     class SQLiteStore implements UserStore {
 
