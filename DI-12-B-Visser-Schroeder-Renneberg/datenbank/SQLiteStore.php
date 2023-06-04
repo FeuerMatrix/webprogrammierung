@@ -3,7 +3,9 @@
     include_once "SQLiteStore_new"
 
     class SQLiteStore implements UserStore {
-
+//pw hashen
+//rohdaten in die db dan beim auslesen  htmlsecialchars
+//Transaction (registrieren)
 
         function store($user, $email, $pw){
 
@@ -57,17 +59,16 @@
 
         }
         function newComment($auth,$new){
-
+            //Add id
         }
         function updateComment($id,$comm_id, $new){
 
         }
         function newPost($auth,$title,$desc,$anony,$image){
-
+            //add date
+            //Add id
         }
         function updatePost($id,$auth,$title,$desc,$anony,$image){
 
         }
     }
-
-?>
