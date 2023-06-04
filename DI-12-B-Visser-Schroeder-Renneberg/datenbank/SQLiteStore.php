@@ -1,7 +1,6 @@
 <?php
-
     include_once "UserStore.php";
-    include_once "SQLiteStore_new";
+    include_once "SQLiteStore_new.php";
 
     class SQLiteStore implements UserStore {
 //pw hashen
