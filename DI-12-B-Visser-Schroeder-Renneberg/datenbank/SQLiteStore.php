@@ -30,7 +30,7 @@
         function getBeitraege(){
 
         }
-
+        //Robin /--
         function getComments($id){
 
         }
@@ -52,6 +52,7 @@
         function getImage($id){
 
         }
+        //Robin --/
         function getCommentAuthor($id, $comm_id){
 
         }
