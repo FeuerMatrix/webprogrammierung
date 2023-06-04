@@ -33,7 +33,7 @@
 
     //KOMMENTAR TABELLE
     $sql = "CREATE TABLE IF NOT EXISTS kommentar (
-        id_kommenatar   INTEGER,
+        id_kommentar   INTEGER,
         id_beitrag      INTEGER,
         author          TEXT,
         kommentar       TEXT,
