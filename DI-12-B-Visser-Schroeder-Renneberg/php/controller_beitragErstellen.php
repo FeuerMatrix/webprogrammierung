@@ -1,7 +1,6 @@
 <?php
 
-include_once "datenbank/DummyUserStore.php";
-$database = new DummyUserStore();
+$database = new SQLiteStore();
 
 if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
     header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));

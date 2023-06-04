@@ -2,8 +2,7 @@
 $suche = (isset($_GET["suche"]) && is_string($_GET["suche"])) ? $_GET["suche"] : "";
 $sort = (isset($_GET["sort"]) && is_string($_GET["sort"])) ? $_GET["sort"] : "date";
 
-include_once "datenbank/DummyUserStore.php";
-$database = new DummyUserStore();
+$database = new SQLiteStore();
 $beitraege = $database->getBeitraege();
 
 

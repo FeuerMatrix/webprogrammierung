@@ -1,13 +1,5 @@
 <?php
-    interface UserStore {
-        function store($user, $email, $pw);
-        function checkLoginData($email, $pw);
-        function isLoggedIn($email);
-        function userNameExists($username);
-        function getUser($user);
-        function getBeitraege();
-    }
-
+include_once "UserStore.php";
     class DummyUserStore implements UserStore {
         function store($user, $email, $pw){
 
