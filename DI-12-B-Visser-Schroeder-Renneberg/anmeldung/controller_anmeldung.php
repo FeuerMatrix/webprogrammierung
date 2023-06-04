@@ -8,8 +8,7 @@
         unset($errorMessage);
         $email = htmlentities($_POST["email"]);
         $pw = htmlentities($_POST["pw"]);
-        include_once "datenbank/DummyUserStore.php";
-        $database = new DummyUserStore();
+        $database = new SQLiteStore();
 
         if(!($database->checkLoginData($email, $pw))) {
             $errorMessage = "Ungültiges Passwort und/oder Email";

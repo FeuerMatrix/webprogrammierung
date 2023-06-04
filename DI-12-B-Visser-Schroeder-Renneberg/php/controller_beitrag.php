@@ -2,8 +2,7 @@
 $id = (isset($_GET["id"]) && is_string($_GET["id"])) ? $_GET["id"] : "";
 $auth = isset($_SESSION["user"]);
 
-include_once "datenbank/DummyUserStore.php";
-$database = new DummyUserStore();
+$database = new SQLiteStore();
 
 if (isset($_POST["Submit"])) {
     if ($database->getAuthor($id) == $_SESSION["user"]) {
