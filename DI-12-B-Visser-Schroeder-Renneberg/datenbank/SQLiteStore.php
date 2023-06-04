@@ -1,5 +1,6 @@
 <?php
 
+    include_once "UserStore.php";
     include_once "SQLiteStore_new";
 
     class SQLiteStore implements UserStore {
