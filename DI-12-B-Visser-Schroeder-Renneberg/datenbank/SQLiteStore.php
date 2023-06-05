@@ -164,14 +164,28 @@
             try {
                 $sql = "SELECT * FROM beitrag";
                 $ergebnis = $db->query($sql);
+                $array = $ergebnis->fetchAll();
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
+                return [];
             }
 
+            $newArray = array();
 
-            // ergbenis in array überführen
+            foreach ($originalArray as $item) {
+                $newItem = array(
+                    'id' => $item['id_beitrag'],
+                    'author' => $item['author'],
+                    'anonym' => $item['ananoym'],
+                    'titel' => $item['titel'],
+                    'date' => $item['datum'],
+                    'file' => $item['bild'],
+                    'pname' => $item['beschreibung']
+                );
+                $newArray[] = $newItem;
+            }
 
-            return $array;
+            return $newArray;
         }
 
         function getComments($id){
