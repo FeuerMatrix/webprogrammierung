@@ -7,7 +7,7 @@
 //Transaction (registrieren)
         protected $db;
         public function __construct(){
-            $db = new SQLite3( 'beschwerdeforum.db' );
+            $this->db = new SQLite3( 'beschwerdeforum.db' );
 
             //Creates Tables and fills them with dummy data.
             //TODO remove dummy data
@@ -19,7 +19,7 @@
                 passwort    TEXT NOT NULL
             )";
 
-            if ( $db->exec( $sql ) ) {
+            if ( $this->db->exec( $sql ) ) {
                 echo 'Tabelle Nutzer vorhanden.<br />';
             } else {
                 echo 'Fehler beim Anlegen der Nutzer-Tabelle!<br />';
@@ -29,7 +29,7 @@
                 0 , 'tim@test.de', 'helloworld'
             )";
 
-            if ( $db->exec( $sql ) ) {
+            if ( $this->db->exec( $sql ) ) {
                 echo "Erste Nutzer-Daten sind vorhanden<br />";
         
             } else {
@@ -48,7 +48,7 @@
                 FOREIGN KEY(author) REFERENCES nutzer(nutzername)
             )";
 
-            if ( $db->exec( $sql ) ) {
+            if ( $this->db->exec( $sql ) ) {
                 echo 'Tabelle Beitrag vorhanden.<br />';
             } else {
                 echo 'Fehler beim Anlegen der Beitrags-Tabelle!<br />';
@@ -61,7 +61,7 @@
                 (4, 0, FALSE, 'Beispielbild', '08.04.1976', 'images/guestbook.png', 'Beispielbild'
             )";
 
-            if ( $db->exec( $sql ) ) {
+            if ( $this->db->exec( $sql ) ) {
                 echo "Erste Beitrags-Daten sind vorhanden<br />";
 
             } else {
@@ -79,7 +79,7 @@
                 FOREIGN KEY(author) REFERENCES nutzer(nutzername)
             )";
 
-            if ( $db->exec( $sql ) ) {
+            if ( $this->db->exec( $sql ) ) {
                 echo 'Tabelle Kommentar vorhanden.<br />';
             } else {
                 echo 'Fehler beim Anlegen der Kommentar-Tabelle!<br />';
@@ -91,7 +91,7 @@
                 (1, 3, 0,'htrshtgbgsfhjtrsh'
             )";
 
-            if ( $db->exec( $sql ) ) {
+            if ( $this->db->exec( $sql ) ) {
                 echo "Erste Kommentar-Daten sind vorhanden<br />";
 
             } else {
@@ -126,8 +126,8 @@
         function getComments($id){
             try {
                 $sql = "SELECT * FROM kommentar";
-                $ergebnis = $db->query($sql);
-                return $ergebnis
+                $ergebnis = $this->db->query($sql);
+                return $ergebnis;
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -135,9 +135,9 @@
         function getTitel($id){
             try {
                 $sql = "SELECT titel FROM beitrag WHERE id=$id";
-                $ergebnis = $db->query($sql);
+                $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
-                return $ergebnis
+                return $ergebnis;
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -145,9 +145,9 @@
         function getDesc($id){
             try {
                 $sql = "SELECT beschreibung FROM beitrag WHERE id=$id";
-                $ergebnis = $db->query($sql);
+                $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
-                return $ergebnis
+                return $ergebnis;
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -155,9 +155,9 @@
         function getAuthor($id){
             try {
                 $sql = "SELECT author FROM beitrag WHERE id=$id";
-                $ergebnis = $db->query($sql);
+                $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
-                return $ergebnis
+                return $ergebnis;
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -165,9 +165,9 @@
         function getAnonym($id){
             try {
                 $sql = "SELECT anonym FROM beitrag WHERE id=$id";
-                $ergebnis = $db->query($sql);
+                $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
-                return $ergebnis
+                return $ergebnis;
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -175,9 +175,9 @@
         function getDate($id){
             try {
                 $sql = "SELECT datum FROM beitrag WHERE id=$id";
-                $ergebnis = $db->query($sql);
+                $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
-                return $ergebnis
+                return $ergebnis;
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -185,9 +185,9 @@
         function getImage($id){
             try {
                 $sql = "SELECT bild FROM beitrag WHERE id=$id";
-                $ergebnis = $db->query($sql);
+                $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
-                return $ergebnis
+                return $ergebnis;
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
