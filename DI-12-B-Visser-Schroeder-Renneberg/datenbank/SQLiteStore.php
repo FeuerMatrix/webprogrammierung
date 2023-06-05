@@ -44,7 +44,7 @@
                 titel               TEXT NOT NULL,
                 datum               TIMESTAMP,  
                 bild                TEXT,
-                bildbeschreibung    TEXT,
+                beschreibung    TEXT,
                 FOREIGN KEY(author) REFERENCES nutzer(nutzername)
             )";
 
@@ -122,29 +122,77 @@
         function getBeitraege(){
 
         }
-        //Robin /--
-        function getComments($id){
 
+        function getComments($id){
+            try {
+                $sql = "SELECT * FROM kommentar";
+                $ergebnis = $db->query($sql);
+                return $ergebnis
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
         function getTitel($id){
-
+            try {
+                $sql = "SELECT titel FROM beitrag WHERE id=$id";
+                $ergebnis = $db->query($sql);
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
         function getDesc($id){
-
+            try {
+                $sql = "SELECT beschreibung FROM beitrag WHERE id=$id";
+                $ergebnis = $db->query($sql);
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
         function getAuthor($id){
-
+            try {
+                $sql = "SELECT author FROM beitrag WHERE id=$id";
+                $ergebnis = $db->query($sql);
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
         function getAnonym($id){
-
+            try {
+                $sql = "SELECT anonym FROM beitrag WHERE id=$id";
+                $ergebnis = $db->query($sql);
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
         function getDate($id){
-
+            try {
+                $sql = "SELECT datum FROM beitrag WHERE id=$id";
+                $ergebnis = $db->query($sql);
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
         function getImage($id){
-
+            try {
+                $sql = "SELECT bild FROM beitrag WHERE id=$id";
+                $ergebnis = $db->query($sql);
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
-        //Robin --/
+
         function getCommentAuthor($id, $comm_id){
        
         }
