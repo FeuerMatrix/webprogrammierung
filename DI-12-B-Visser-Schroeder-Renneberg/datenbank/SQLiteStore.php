@@ -146,7 +146,9 @@
         }
         //Robin --/
         function getCommentAuthor($id, $comm_id){
-       
+        //    $sql = "SELECT author FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar =".$comm_id;
+        //$author = $this->db->exec( $sql );
+        //    echo $author." hat das Kommentar geschrieben";
         }
         function getComment($id,$comm_id){
 
