@@ -104,7 +104,7 @@
         function store($user, $email, $pw){
             try {
                 $sql = "INSERT OR UPDATE nutzer (id_nutzer, email, passwort) VALUES (? , ?, ?)";
-                $stmt = $db->prepare($sql);
+                $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("iss", $user, $email, password_hash($pw));
                 $stmt->execute();
             } catch (Exception $ex) {
@@ -116,7 +116,7 @@
         function checkLoginData($email, $pw){
             try {
                 $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ? AND passwort = ?";
-                $stmt = $db->prepare($sql);
+                $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("ss", $email, password_hash($pw)); 
                 return $stmt->execute();
             } catch (Exception $ex) {
@@ -140,7 +140,7 @@
         function userNameExists($email){
             try {
                 $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ?";
-                $stmt = $db->prepare($sql);
+                $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("s", $email); 
                 return $stmt->execute();
             } catch (Exception $ex) {
@@ -152,7 +152,7 @@
         function getUser($nutzer_id){
             try {
                 $sql = "SELECT (email) FROM nutzer WHERE id_nutzer = ?";
-                $stmt = $db->prepare($sql);
+                $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("s", $nutzer_id); 
                 return $stmt->execute();
             } catch (Exception $ex) {
@@ -163,7 +163,7 @@
         function getBeitraege(){
             try {
                 $sql = "SELECT * FROM beitrag";
-                $ergebnis = $db->query($sql);
+                $ergebnis = $this->db->query($sql);
                 $array = $ergebnis->fetchAll();
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
