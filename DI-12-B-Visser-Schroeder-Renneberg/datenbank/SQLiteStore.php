@@ -25,8 +25,9 @@
                 echo 'Fehler beim Anlegen der Nutzer-Tabelle!<br />';
             }
 
+            $pw = password_hash('helloworld');
             $sql = "INSERT OR IGNORE INTO nutzer VALUES (
-                0 , 'tim@test.de', 'helloworld'
+                0 , 'tim@test.de', $pw
             )";
 
             if ( $this->db->exec( $sql ) ) {
@@ -99,28 +100,92 @@
             }
         }
 
+        // Speichert den Nutzer ein oder Updatet ihn
         function store($user, $email, $pw){
-
+            try {
+                $sql = "INSERT OR UPDATE nutzer (id_nutzer, email, passwort) VALUES (? , ?, ?)";
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param("iss", $user, $email, password_hash($pw));
+                $stmt->execute();
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
 
+        // überprüft Einlogdaten des Nutzer
         function checkLoginData($email, $pw){
-
+            try {
+                $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ? AND passwort = ?";
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param("ss", $email, password_hash($pw)); 
+                return $stmt->execute();
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
 
+        // überprüft ob der Nutzer exestiert
         function isLoggedIn($email){
-
+            try {
+                $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ?";
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param("s", $email); 
+                return $stmt->execute();
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
 
-        function userNameExists($username){
-
+        // überprüft ob der Nutzer exestiert
+        function userNameExists($email){
+            try {
+                $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ?";
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param("s", $email); 
+                return $stmt->execute();
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
 
-        function getUser($user){
-
+        // gibt die Email des Nutzers mit der übergebenen Nutzer-ID aus
+        function getUser($nutzer_id){
+            try {
+                $sql = "SELECT (email) FROM nutzer WHERE id_nutzer = ?";
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param("s", $nutzer_id); 
+                return $stmt->execute();
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
 
         function getBeitraege(){
+            try {
+                $sql = "SELECT * FROM beitrag";
+                $ergebnis = $db->query($sql);
+                $array = $ergebnis->fetchAll();
+            } catch (Exception $ex) {
+                echo "Fehler: " . $ex->getMessage();
+                return [];
+            }
 
+            $newArray = array();
+
+            foreach ($originalArray as $item) {
+                $newItem = array(
+                    'id' => $item['id_beitrag'],
+                    'author' => $item['author'],
+                    'anonym' => $item['ananoym'],
+                    'titel' => $item['titel'],
+                    'date' => $item['datum'],
+                    'file' => $item['bild'],
+                    'pname' => $item['beschreibung']
+                );
+                $newArray[] = $newItem;
+            }
+
+            return $newArray;
         }
 
         function getComments($id){
