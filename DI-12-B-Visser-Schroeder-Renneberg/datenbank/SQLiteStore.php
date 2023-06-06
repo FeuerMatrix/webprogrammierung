@@ -6,8 +6,11 @@
 //rohdaten in die db dan beim auslesen  htmlsecialchars
 //Transaction (registrieren)
         protected $db;
+        protected $hashAlg;
+
         public function __construct(){
             $db = new SQLite3( 'beschwerdeforum.db' );
+            $hashAlg = 'PASSWORD_DEFAULT';
 
             //Creates Tables and fills them with dummy data.
             //TODO remove dummy data
@@ -25,10 +28,9 @@
                 echo 'Fehler beim Anlegen der Nutzer-Tabelle!<br />';
             }
 
-            $pw = password_hash('helloworld');
-            $sql = "INSERT OR IGNORE INTO nutzer VALUES (
-                0 , 'tim@test.de', $pw
-            )";
+            $pw = password_hash("helloworld", PASSWORD_DEFAULT);
+            $sql = "INSERT OR IGNORE INTO nutzer VALUES (0 , 'tim@test.de', ?)";
+            $stmt = $this
 
             if ( $db->exec( $sql ) ) {
                 echo "Erste Nutzer-Daten sind vorhanden<br />";
@@ -105,7 +107,7 @@
             try {
                 $sql = "INSERT OR UPDATE nutzer (id_nutzer, email, passwort) VALUES (? , ?, ?)";
                 $stmt = $db->prepare($sql);
-                $stmt->bind_param("iss", $user, $email, password_hash($pw));
+                $stmt->bind_param("iss", $user, $email, password_hash($pw, $hashAlg));
                 $stmt->execute();
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -115,10 +117,14 @@
         // überprüft Einlogdaten des Nutzer
         function checkLoginData($email, $pw){
             try {
-                $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ? AND passwort = ?";
+                $sql = "SELECT passwort FROM nutzer WHERE email = ?";
                 $stmt = $db->prepare($sql);
-                $stmt->bind_param("ss", $email, password_hash($pw)); 
-                return $stmt->execute();
+                $stmt->bind_param("ss", $email); 
+                $stmt->execute();
+                $result = $db->get_result($sql);
+                $row = $result->fetch_assoc();
+                $storedPassword = $row['passwort'];
+                return password_verify($pw, $storedPassword);
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -163,8 +169,8 @@
         function getBeitraege(){
             try {
                 $sql = "SELECT * FROM beitrag";
-                $ergebnis = $db->query($sql);
-                $array = $ergebnis->fetchAll();
+                $result = $db->get_result($sql);
+                $originalArray = $result->fetchAll(PDO::FETCH_ASSOC);
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
                 return [];
@@ -227,6 +233,7 @@
                 echo "Fehler: " . $ex->getMessage();
             }
         }
+
         function getAnonym($id){
             try {
                 $sql = "SELECT anonym FROM beitrag WHERE id=$id";
