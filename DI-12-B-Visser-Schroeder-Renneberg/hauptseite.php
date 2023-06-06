@@ -25,7 +25,7 @@
         <div class="flex-container">
                 <?php foreach ($beitraege as $beitrag): ?>         
                        <div class="beitrag">
-                            <a class="link" href=<?php echo "\"beitrag.php?id=".$beitrag["id"]."\"" ?> > <?php echo $beitrag['titel'] ?></a>
+                            <a class="link" href=<?php echo "\"beitrag.php?id=".urlencode($beitrag["id"])."\"" ?> > <?php echo $beitrag['titel'] ?></a>
                             <span> <?php echo $beitrag['date'] ?></span>
                             <img src=<?php echo $beitrag['file'] ?>  alt= <?php echo $beitrag['pname'] ?> >
                         </div>
