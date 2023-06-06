@@ -23,6 +23,7 @@
                 <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getAuthor($id)): ?>
                 <form method="post">
                     <input type="submit" name="Submit" value="Bearbeiten" class="edit">
+                    <input class="delete" type="submit" name="delete" value="Löschen" class="edit">
                 </form>
                 <?php endif; ?>
             </div>

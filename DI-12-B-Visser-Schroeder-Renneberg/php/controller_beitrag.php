@@ -14,6 +14,18 @@ if (isset($_POST["Submit"])) {
     exit;
 }
 
+if (isset($_POST["delete"])) {
+    if ($database->getAuthor($id) == $_SESSION["user"]) {
+        $_SESSION["id"] = $id;
+        $database->deletePost($id);
+        header("Location: hauptseite.php?from=".$id);
+    } else {
+        header("Location: beitrag.php?id=".$id."&cause=".urlencode("Du bist nicht Besitzer dieses Posts!"));
+    }
+    exit;
+}
+
+
 $edit = false;
 
 if (isset($_POST["Edit"])) {

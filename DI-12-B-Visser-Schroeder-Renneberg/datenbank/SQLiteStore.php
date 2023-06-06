@@ -20,19 +20,16 @@
             )";
 
             if ( $this->db->exec( $sql ) ) {
-                echo 'Tabelle Nutzer vorhanden.<br />';
             } else {
                 echo 'Fehler beim Anlegen der Nutzer-Tabelle!<br />';
             }
 
-            $pw = password_hash('helloworld');
+            $pw = password_hash('helloworld',PASSWORD_DEFAULT);
             $sql = "INSERT OR IGNORE INTO nutzer VALUES (
                 0 , 'tim@test.de', $pw
             )";
 
             if ( $this->db->exec( $sql ) ) {
-                echo "Erste Nutzer-Daten sind vorhanden<br />";
-        
             } else {
                 echo 'Fehler beim anlegen der ersten Nutzerdaten!';
             }
@@ -50,7 +47,6 @@
             )";
 
             if ( $this->db->exec( $sql ) ) {
-                echo 'Tabelle Beitrag vorhanden.<br />';
             } else {
                 echo 'Fehler beim Anlegen der Beitrags-Tabelle!<br />';
             }    
@@ -63,7 +59,6 @@
             )";
 
             if ( $this->db->exec( $sql ) ) {
-                echo "Erste Beitrags-Daten sind vorhanden<br />";
 
             } else {
                 echo 'Fehler beim anlegen der ersten Beitragsdaten!';
@@ -81,7 +76,6 @@
             )";
 
             if ( $this->db->exec( $sql ) ) {
-                echo 'Tabelle Kommentar vorhanden.<br />';
             } else {
                 echo 'Fehler beim Anlegen der Kommentar-Tabelle!<br />';
             }
@@ -93,8 +87,6 @@
             )";
 
             if ( $this->db->exec( $sql ) ) {
-                echo "Erste Kommentar-Daten sind vorhanden<br />";
-
             } else {
                 echo 'Fehler beim anlegen der ersten Kommentardaten!';
             }
@@ -105,7 +97,7 @@
             try {
                 $sql = "INSERT OR UPDATE nutzer (id_nutzer, email, passwort) VALUES (? , ?, ?)";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("iss", $user, $email, password_hash($pw));
+                $stmt->bind_param("iss", $user, $email, password_hash($pw,PASSWORD_DEFAULT));
                 $stmt->execute();
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -117,7 +109,7 @@
             try {
                 $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ? AND passwort = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("ss", $email, password_hash($pw)); 
+                $stmt->bind_param("ss", $email, password_hash($pw,PASSWORD_DEFAULT)); 
                 return $stmt->execute();
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -199,7 +191,7 @@
         }
         function getTitel($id){
             try {
-                $sql = "SELECT titel FROM beitrag WHERE id=$id";
+                $sql = "SELECT titel FROM beitrag WHERE id_beitrag=$id";
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
@@ -209,7 +201,7 @@
         }
         function getDesc($id){
             try {
-                $sql = "SELECT beschreibung FROM beitrag WHERE id=$id";
+                $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=$id";
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
@@ -219,7 +211,7 @@
         }
         function getAuthor($id){
             try {
-                $sql = "SELECT author FROM beitrag WHERE id=$id";
+                $sql = "SELECT author FROM beitrag WHERE id_beitrag=$id";
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
@@ -229,7 +221,7 @@
         }
         function getAnonym($id){
             try {
-                $sql = "SELECT anonym FROM beitrag WHERE id=$id";
+                $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=$id";
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
@@ -239,7 +231,7 @@
         }
         function getDate($id){
             try {
-                $sql = "SELECT datum FROM beitrag WHERE id=$id";
+                $sql = "SELECT datum FROM beitrag WHERE id_beitrag=$id";
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
@@ -249,7 +241,7 @@
         }
         function getImage($id){
             try {
-                $sql = "SELECT bild FROM beitrag WHERE id=$id";
+                $sql = "SELECT bild FROM beitrag WHERE id_beitrag=$id";
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
@@ -275,6 +267,9 @@
             //Add id
         }
         function updatePost($id,$auth,$title,$desc,$anony,$image){
+
+        }
+        function deletePost($id){
 
         }
     }

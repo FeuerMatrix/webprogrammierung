@@ -19,5 +19,6 @@
         function updateComment($id,$comm_id, $new);
         function newPost($auth,$title,$desc,$anony,$image);
         function updatePost($id,$auth,$title,$desc,$anony,$image);
+        function deletePost($id);
     }
     ?>

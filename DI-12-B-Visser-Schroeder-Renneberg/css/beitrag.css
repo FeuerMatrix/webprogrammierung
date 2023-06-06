@@ -27,6 +27,17 @@
 .edit:hover{
     opacity: 40%;
 }
+
+.delete{
+    background-color: rgb(200, 20, 20);
+    opacity: 0.8;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.delete:hover {
+    opacity: 1;
+  }
 @media screen and (min-width: 1500px) {
     .post {
         display: flex;
