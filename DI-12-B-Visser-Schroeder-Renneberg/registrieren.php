@@ -14,8 +14,6 @@
                 <div class="reg1">
                     <h1 class="col10">Registrieren</h1>
                     <div class="bottom"><p class="col20">Fülle alle Daten aus, um dich zu Registrieren</p> </div>
-                    <label class="col11" for="user">Nutzername</label><br>
-                    <input class="col21" type="text" id="user" name="user" placeholder="Nutzername" required autofocus><br>
                     <label class="col12" for="email">Email</label><br>
                     <input class="col22" type="email" id="email" name="email" placeholder="Email" required><br>
                     <label class="col13" for="email2">Email bestätigen</label><br>
