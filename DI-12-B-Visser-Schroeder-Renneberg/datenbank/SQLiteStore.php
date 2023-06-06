@@ -2,7 +2,6 @@
     include_once "UserStore.php";
 
     class SQLiteStore implements UserStore {
-//pw hashen
 //rohdaten in die db dan beim auslesen  htmlsecialchars
 //Transaction (registrieren)
         protected $db;
@@ -25,6 +24,8 @@
             }
 
             $pw = password_hash('helloworld',PASSWORD_DEFAULT);
+            $pw = htmlentities($pw);
+            $pw = $this->db->prepare($pw);
             $sql = "INSERT OR IGNORE INTO nutzer VALUES (
                 0 , 'tim@test.de', $pw
             )";
@@ -97,7 +98,7 @@
             try {
                 $sql = "INSERT OR UPDATE nutzer (id_nutzer, email, passwort) VALUES (? , ?, ?)";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("iss", $user, $email, password_hash($pw,PASSWORD_DEFAULT));
+                $stmt->bind_param("iss", $user, $email, $this->db->prepare(password_hash($pw,PASSWORD_DEFAULT)));
                 $stmt->execute();
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -109,7 +110,7 @@
             try {
                 $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ? AND passwort = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("ss", $email, password_hash($pw,PASSWORD_DEFAULT)); 
+                $stmt->bind_param("ss", $email,$this->db->prepare(password_hash($pw,PASSWORD_DEFAULT))); 
                 return $stmt->execute();
             } catch (Exception $ex) {
                 echo "Fehler: " . $ex->getMessage();
