@@ -15,8 +15,7 @@
 
                 //NUTZER TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS nutzer (
-                    id_nutzer   INT PRIMARY KEY,
-                    email       TEXT NOT NULL,
+                    email       TEXT PRIMARY KEY,
                     passwort    TEXT NOT NULL
                 )";
 
@@ -38,13 +37,13 @@
                 //BEITRAGS TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS beitrag (
                     id_beitrag          INTEGER PRIMARY KEY,
-                    author              INT,
+                    author              TEXT,
                     anonym              BOOLEAN NOT NULL,
                     titel               TEXT NOT NULL,
                     datum               TIMESTAMP,  
                     bild                TEXT,
                     beschreibung    TEXT,
-                    FOREIGN KEY(author) REFERENCES nutzer(id_nutzer)
+                    FOREIGN KEY(author) REFERENCES nutzer(email)
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -73,7 +72,7 @@
                     kommentar       TEXT,
                     PRIMARY KEY(id_beitrag, id_kommentar),
                     FOREIGN KEY(id_beitrag) REFERENCES beitrag(id_beitrag),
-                    FOREIGN KEY(author) REFERENCES nutzer(nutzername)
+                    FOREIGN KEY(author) REFERENCES nutzer(email)
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -100,7 +99,7 @@
         // Speichert den Nutzer ein oder Updatet ihn
         function store($user, $email, $pw){
             try {
-                $sql = "INSERT OR REPLACE nutzer (id_nutzer, email, passwort) VALUES (? , ?, ?)";
+                $sql = "INSERT OR REPLACE nutzer(email, passwort) VALUES (?, ?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("iss", $user, $email,password_hash($pw,PASSWORD_DEFAULT));
                 $stmt->execute();
@@ -142,19 +141,6 @@
                 $stmt->bind_param("s", $email); 
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return !empty($result);
-            } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
-            }
-        }
-
-        // gibt die Email des Nutzers mit der übergebenen Nutzer-ID aus
-        function getUser($nutzer_id){
-            try {
-                $sql = "SELECT email FROM nutzer WHERE id_nutzer = ?";
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute([$nutzer_id]);
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                return htmlspecialchars($result['email']);
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
