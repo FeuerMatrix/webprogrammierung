@@ -162,24 +162,6 @@
             }
         }
 
-        function newBeitrag($id, $author, $anonym, $title, $date, $file, $pname){
-            try {
-                $sql = "INSERT INTO beitraege (id_beitrag, author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE author = VALUES(author), anonym = VALUES(anonym), titel = VALUES(titel), datum = VALUES(datum), bild = VALUES(bild), beschreibung = VALUES(beschreibung)";
-                $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(1, $id, PDO::PARAM_INT);
-                $stmt->bindParam(2, $author, PDO::PARAM_STR);
-                $stmt->bindParam(3, $anonym, PDO::PARAM_BOOL);
-                $stmt->bindParam(4, $title, PDO::PARAM_STR);
-                $stmt->bindParam(5, $date, PDO::PARAM_STR);
-                $stmt->bindParam(6, $file, PDO::PARAM_STR);
-                $stmt->bindParam(7, $pname, PDO::PARAM_STR);
-                $stmt->execute();
-            } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
-            }
-        }
-        
-
         function getBeitraege(){
             try {
                 $sql = "SELECT * FROM beitrag";
@@ -337,18 +319,25 @@
                 echo 'Fehler beim Ändern des Kommentars!<br />';
             }
         }
+
         function newPost($auth,$title,$desc,$anony,$image){
             $date = getDate()[0];
-            $sql = "INSERT OR IGNORE INTO beitrag VALUES
-                (".NULL.", ".$auth.", ".$anony.", ".$title.", ".$date.", ".$image.", ".$desc.")
-            ";
-
-                if ( $this->db->exec( $sql ) !== false ) {
-
-                } else {
-                    echo 'Fehler beim Erstellen des Beitrags!<br />';
-                }
+            try {
+                $sql = "INSERT INTO beitraege (id_beitrag, author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, NULL, PDO::PARAM_INT);
+                $stmt->bindParam(2, $author, PDO::PARAM_STR);
+                $stmt->bindParam(3, $anony, PDO::PARAM_BOOL);
+                $stmt->bindParam(4, $title, PDO::PARAM_STR);
+                $stmt->bindParam(5, $date, PDO::PARAM_STR);
+                $stmt->bindParam(6, $image, PDO::PARAM_STR);
+                $stmt->bindParam(7, $desc, PDO::PARAM_STR);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
+
         function updatePost($id,$title,$desc,$anony,$image){
             $sql = "UPDATE beitrag SET anonym = ".$anony.", titel = ".$title.", bild = ".$image.", beschreibung = ".$desc." WHERE id_beitrag = ".$id;
 
