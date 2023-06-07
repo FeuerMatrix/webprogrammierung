@@ -327,11 +327,13 @@
             }
         }
         function updateComment($id,$comm_id, $new){
-            $sql = "UPDATE kommentar SET kommentar = ".$new." WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
+            try {
+            $sql = "UPDATE kommentar SET kommentar = ? WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $new, PDO::PARAM_STR);
+            $stmt->execute();
 
-            if ( $this->db->exec( $sql ) !== false ) {
-
-            } else {
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Ändern des Kommentars!<br />';
             }
         }

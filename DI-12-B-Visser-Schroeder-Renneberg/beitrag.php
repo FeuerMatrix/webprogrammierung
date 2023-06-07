@@ -36,8 +36,8 @@
         <?php if(isset($_SESSION["user"])): ?>
         <form method="post">
             <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
-            <input type="text" id="neuerKommentar" name="new" <?php if ($edit) {
-                echo 'value='.$old;
+            <input type="text" id="neuerKommentar" name="new" <?php if (isset($_GET["old"])) {
+                echo 'value='.$_GET["old"];
             } ?> placeholder="Neues Kommentar" required>
         </form>
             <?php endif; ?>                                                        
