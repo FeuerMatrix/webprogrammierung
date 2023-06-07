@@ -6,6 +6,7 @@ Namen der Studierenden:
 Abgabe zu Aufgabenblatt 4<br>
 
 Hinweise:
+Das Kommentare Löschen wird nachgeholt
 Es gibt einen voreingestellten Nutzer mit folgenden Daten:<br>
 Benutzername "tim@test.de"<br>
 Passwort "helloworld"<br>
