@@ -15,10 +15,10 @@
         function getImage($id);
         function getCommentAuthor($id, $comm_id);
         function getComment($id,$comm_id);
-        function newComment($auth,$new);
+        function newComment($auth,$new,$post_id);
         function updateComment($id,$comm_id, $new);
-        function newPost($auth,$title,$desc,$anony,$image);
-        function updatePost($id,$auth,$title,$desc,$anony,$image);
+        function newPost($auth,$title,$desc,$anony,$image,$date);
+        function updatePost($id,$title,$desc,$anony,$image);
         function deletePost($id);
     }
     ?>

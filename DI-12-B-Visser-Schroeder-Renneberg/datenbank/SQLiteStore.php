@@ -44,7 +44,7 @@
                     datum               TIMESTAMP,  
                     bild                TEXT,
                     beschreibung    TEXT,
-                    FOREIGN KEY(author) REFERENCES nutzer(nutzername)
+                    FOREIGN KEY(author) REFERENCES nutzer(id_nutzer)
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -259,28 +259,76 @@
         }
 
         function getCommentAuthor($id, $comm_id){
-        //    $sql = "SELECT author FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar =".$comm_id;
-        //$author = $this->db->exec( $sql );
-        //    echo $author." hat das Kommentar geschrieben";
+            try {
+                $sql = "SELECT author FROM kommentar WHERE id_beitrag = $id AND id_kommentar = $comm_id";
+                $ergebnis = $this->db->query($sql);
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
+            
         }
         function getComment($id,$comm_id){
-
+            try {
+                $sql = "SELECT * FROM kommentar WHERE id_beitrag = $id AND id_kommentar = $comm_id";
+                $ergebnis = $this->db->query($sql);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
         }
-        function newComment($auth,$new){
+        function newComment($auth,$new,$post_id){
             //Add id
+            $sql = "INSERT OR IGNORE INTO kommentar VALUES
+                (1, $post_id, $auth,$new)
+            ";
+
+
+            if ( $this->db->exec( $sql ) !== false ) {
+
+            } else {
+                echo 'Fehler beim Erstellen des Kommentars!<br />';
+            }
         }
         function updateComment($id,$comm_id, $new){
+            $sql = "UPDATE kommentar SET kommentar = $new WHERE id_kommentar = $comm_id AND id_beitrag = $id";
 
+            if ( $this->db->exec( $sql ) !== false ) {
+
+            } else {
+                echo 'Fehler beim Ändern des Kommentars!<br />';
+            }
         }
-        function newPost($auth,$title,$desc,$anony,$image){
-            //add date
+        function newPost($auth,$title,$desc,$anony,$image,$date){
             //Add id
-        }
-        function updatePost($id,$auth,$title,$desc,$anony,$image){
+            $sql = "INSERT OR IGNORE INTO beitrag VALUES
+                (1, $auth, $anony, $title, $date, $image, $desc)
+            ";
 
+                if ( $this->db->exec( $sql ) !== false ) {
+
+                } else {
+                    echo 'Fehler beim Erstellen des Beitrags!<br />';
+                }
+        }
+        function updatePost($id,$title,$desc,$anony,$image){
+            $sql = "UPDATE beitrag SET anonym = $anony, titel = $title, bild = $image, beschreibung = $desc WHERE id_beitrag = $id";
+
+            if ( $this->db->exec( $sql ) !== false ) {
+
+            } else {
+                echo 'Fehler beim Ändern des Kommentars!<br />';
+            }
         }
         function deletePost($id){
+            $sql = "DELETE FROM beitrag WHERE id_beitrag = $id";
 
+            if ( $this->db->exec( $sql ) !== false ) {
+
+            } else {
+                echo 'Fehler beim Löschen des Beitrags!<br />';
+            }
         }
     }
 
