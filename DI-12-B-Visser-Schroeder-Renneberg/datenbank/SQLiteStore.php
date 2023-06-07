@@ -185,7 +185,7 @@
         }
         function getTitel($id){
             try {
-                $sql = "SELECT titel FROM beitrag WHERE id_beitrag=$id";
+                $sql = "SELECT titel FROM beitrag WHERE id_beitrag=".$id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -197,7 +197,7 @@
         }
         function getDesc($id){
             try {
-                $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=$id";
+                $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=".$id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -209,7 +209,7 @@
         }
         function getAuthor($id){
             try {
-                $sql = "SELECT author FROM beitrag WHERE id_beitrag=$id";
+                $sql = "SELECT author FROM beitrag WHERE id_beitrag=".$id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -221,7 +221,7 @@
         }
         function getAnonym($id){
             try {
-                $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=$id";
+                $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=".$id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -233,7 +233,7 @@
         }
         function getDate($id){
             try {
-                $sql = "SELECT datum FROM beitrag WHERE id_beitrag=$id";
+                $sql = "SELECT datum FROM beitrag WHERE id_beitrag=".$id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -245,7 +245,7 @@
         }
         function getImage($id){
             try {
-                $sql = "SELECT bild FROM beitrag WHERE id_beitrag=$id";
+                $sql = "SELECT bild FROM beitrag WHERE id_beitrag=".$id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -258,7 +258,7 @@
 
         function getCommentAuthor($id, $comm_id){
             try {
-                $sql = "SELECT author FROM kommentar WHERE id_beitrag = $id AND id_kommentar = $comm_id";
+                $sql = "SELECT author FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -271,7 +271,7 @@
         }
         function getComment($id,$comm_id){
             try {
-                $sql = "SELECT * FROM kommentar WHERE id_beitrag = $id AND id_kommentar = $comm_id";
+                $sql = "SELECT * FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
@@ -284,7 +284,7 @@
         function newComment($auth,$new,$post_id){
             //Add id
             $sql = "INSERT OR IGNORE INTO kommentar VALUES
-                (1, $post_id, $auth,$new)
+                (1, post_id, $auth,$new)
             ";
 
 
