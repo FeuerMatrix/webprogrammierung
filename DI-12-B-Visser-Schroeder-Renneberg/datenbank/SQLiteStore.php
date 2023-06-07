@@ -192,11 +192,23 @@
 
         function getComments($id){
             try {
-                $sql = "SELECT * FROM kommentar";
-                $stmnt = $this->db->query($sql);
+                $sql = "SELECT * FROM kommentar where id_beitrag=".$id;
+                $stmt = $this->db->query($sql);
+                $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                $ergebnis = "  ";
-                return $ergebnis;
+                $newArray = array();
+
+                foreach ($originalArray as $item) {
+                    $newItem = array(
+                        '0' => htmlspecialchars($item['id_kommentar']),
+                        '1' => htmlspecialchars($item['author']),
+                        '2' => htmlspecialchars($item['kommentar']),
+ 
+                    );
+                    $newArray[] = $newItem;
+                }
+
+                return $newArray;
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
