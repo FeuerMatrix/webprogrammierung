@@ -19,5 +19,6 @@
         function newPost($auth,$title,$desc,$anony,$image);
         function updatePost($id,$title,$desc,$anony,$image);
         function deletePost($id);
+        function deleteUser($email);
     }
     ?>

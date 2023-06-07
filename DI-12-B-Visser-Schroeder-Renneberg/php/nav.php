@@ -14,7 +14,7 @@
       <li>
         <form method="post">
           <input type="hidden" id="delete" name="delete" value="1">
-          <input type="submit" value="Nutzer Löschen">
+          <input type="submit" class = "navdelete" value="Nutzer Löschen">
       </form>
       </li>
       <?php else: ?>
@@ -23,12 +23,21 @@
       <?php endif; ?>
     </ul>
   </div>
-  
 </nav>
 <?php
-  if(isset($_GET["cause"])):
-?>
-<a><?php echo urldecode($_GET["cause"]); ?></a>
+    if(isset($_GET["cause"])):
+  ?>
+  <a><?php echo urldecode($_GET["cause"]); ?></a>
   <?php
-  endif;
+    endif;
+  ?>
+  <?php
+    if(isset($_POST["delete"])):
+  ?>
+  <a>Möchtest du deinen Account wirklich löschen?</a>
+  <form action="script_dropUser.php">
+    <input type="submit" class="navdelete" value="Nutzer Löschen">
+  </form>
+  <?php
+    endif;
   ?>

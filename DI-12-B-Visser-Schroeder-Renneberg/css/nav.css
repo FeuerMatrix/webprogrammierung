@@ -12,8 +12,15 @@ ul {
   margin: 0px;
 }
 
-input {
-  width: 100% !important;
+.navdelete {
+  width: 100%;
+  color: white;
+  background-color: #333;
+  font-size: 16px;
+}
+
+.navdelete:hover {
+  background-color: #111;
 }
 
 .grid-item a {
