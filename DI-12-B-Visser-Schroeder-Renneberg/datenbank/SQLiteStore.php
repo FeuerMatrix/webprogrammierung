@@ -329,7 +329,7 @@
                 $sql = "INSERT INTO beitrag (author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(1, $auth, PDO::PARAM_STR);
-                $stmt->bindParam(2, $anonym, PDO::PARAM_BOOL);
+                $stmt->bindParam(2, $anony, PDO::PARAM_BOOL);
                 $stmt->bindParam(3, $title, PDO::PARAM_STR);
                 $stmt->bindParam(4, $date, PDO::PARAM_STR);
                 $stmt->bindParam(5, $image, PDO::PARAM_STR);
