@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET["id"]) && is_string($_GET["id"])) {
+if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $id = (isset($_GET["id"]) && is_string($_GET["id"])) ? $_GET["id"] : "";
     $auth = isset($_SESSION["user"]);
 
