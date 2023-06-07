@@ -14,9 +14,6 @@ include_once "UserStore.php";
         function emailExists($username){
             return $username == "blockedName";
         }
-        function getUser($user) {
-            return "Ich";
-        }
 
 
         // Beispieldaten für Foreneinträge
@@ -72,7 +69,7 @@ include_once "UserStore.php";
             return "Oldcomment";
         }
 
-        function newComment($auth,$new){
+        function newComment($auth,$new,$post_id){
             //Add id
 
         }
@@ -85,7 +82,7 @@ include_once "UserStore.php";
             //add date
         }
 
-        function updatePost($id,$auth,$title,$desc,$anony,$image){
+        function updatePost($id,$title,$desc,$anony,$image){
             
         }
 
