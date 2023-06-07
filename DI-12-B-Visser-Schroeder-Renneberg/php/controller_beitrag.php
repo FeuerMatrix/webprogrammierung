@@ -7,7 +7,6 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 
     if (isset($_POST["Submit"])) {
         if ($database->getAuthor($id) == $_SESSION["user"]) {
-            $_SESSION["id"] = $id;
             header("Location: eintragneu.php?from=" . $id);
         } else {
             header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
@@ -17,7 +16,6 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 
     if (isset($_POST["delete"])) {
         if ($database->getAuthor($id) == $_SESSION["user"]) {
-            $_SESSION["id"] = $id;
             $database->deletePost($id);
             header("Location: hauptseite.php?from=" . $id);
         } else {
