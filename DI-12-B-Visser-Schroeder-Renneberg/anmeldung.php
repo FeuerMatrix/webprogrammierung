@@ -13,9 +13,9 @@
         <div class="reg">
         <h1>Anmelden</h1>
             <label for="email">Email</label> <br>
-            <input type="email" id="email" name="email" placeholder="Email" required autofocus> <br>
+            <input type="email" id="email" name="email" placeholder="Email" <?php if(isset($_POST["email"])):?> value=<?php echo $_POST["email"]; endif; ?> required <?php if(!isset($_POST["email"])):?>autofocus <?php endif; ?>> <br>
             <label for="pw">Passwort</label> <br>
-            <input type="password" id="pw" name=pw placeholder="Passwort" required>
+            <input type="password" id="pw" name=pw placeholder="Passwort" required <?php if(isset($_POST["email"])):?>autofocus <?php endif; ?>>
             <input type="submit" class="create" value="Anmelden">
             <input type="submit" form="form" class="cancel" value="Abbrechen">
 

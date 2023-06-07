@@ -6,17 +6,18 @@
 
     if(isset($_POST["email"], $_POST["pw"])) {
         unset($errorMessage);
-        $email = htmlentities($_POST["email"]);
-        $pw = htmlentities($_POST["pw"]);
-        include_once "datenbank/DummyUserStore.php";
-        $database = new DummyUserStore();
+        $email = $_POST["email"];
+        $pw = $_POST["pw"];
 
+
+        $database = new SQLiteStore();
+        
         if(!($database->checkLoginData($email, $pw))) {
-            $errorMessage = "Ungültiges Passwort und/oder Email";
+            $errorMessage = "Ungültige Email-Addresse oder Passwort!";
         }
 
         if(!isset($errorMessage)) {
-            $_SESSION["user"] = $database->getUser("");
+            $_SESSION["user"] = $email;
             header("Location: index.php?cause=".urlencode("Erfolgreich Angemeldet!"));
             exit;
         }

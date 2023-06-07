@@ -4,7 +4,7 @@
         exit;
     }
 
-    if(isset($_POST["passw"], $_POST["passw2"], $_POST["user"], $_POST["email"], $_POST["email2"])) {
+    if(isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"])) {
         unset($errorMessage);
         foreach($_POST as $postKey=>$postElement) {
             $$postKey = htmlentities($_POST[$postKey]);
@@ -22,19 +22,18 @@
             $errorMessage = "Fehlerhafte Email-Addresse!";
         }
 
-        include_once "datenbank/DummyUserStore.php";
-        $controller = new DummyUserStore;
+        $database = new SQLiteStore();
 
-        if($controller->userNameExists($user)) {
-            $errorMessage = "Benutzername existiert bereits/Email bereits in Benutzung!";
+        if($database->emailExists($email)) {
+            $errorMessage = "Fehler!";
         }
 
         if(!isset($errorMessage)) {
-            $controller->store($user, $email, $passw);
+            $database->store($email, $passw);
             header("Location: anmeldung.php?from=registration");
             exit;
         } else {
-            header("Location: registrieren.php?cause=".urlencode($errorMessage));
+            header("Location: registrieren.php?cause=".urlencode($errorMessage)."&email=".$email."&email2=".$email2);
             exit;
         }
     }
