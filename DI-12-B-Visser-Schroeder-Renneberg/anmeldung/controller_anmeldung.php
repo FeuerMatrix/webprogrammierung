@@ -6,10 +6,12 @@
 
     if(isset($_POST["email"], $_POST["pw"])) {
         unset($errorMessage);
-        $email = htmlentities($_POST["email"]);
-        $pw = htmlentities($_POST["pw"]);
-        $database = new SQLiteStore();
+        $email = $_POST["email"];
+        $pw = $_POST["pw"];
 
+
+        $database = new SQLiteStore();
+        
         if(!($database->checkLoginData($email, $pw))) {
             $errorMessage = "Ungültige Email-Addresse oder Passwort!";
         }
