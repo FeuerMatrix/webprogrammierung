@@ -113,12 +113,11 @@
         // Speichert den Nutzer ein oder Updatet ihn
         function store($email, $pw){
             try {
-                $sql = "INSERT INTO nutzer (email, passwort) VALUES (?, ?) ON DUPLICATE KEY UPDATE passwort = ?";
+                $sql = "INSERT OR REPLACE INTO nutzer (email, passwort) VALUES (?, ?)";
                 $stmt = $this->db->prepare($sql);
                 $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
                 $stmt->bindParam(1, $email, PDO::PARAM_STR);
                 $stmt->bindParam(2, $hashedPW, PDO::PARAM_STR);
-                $stmt->bindParam(3, $hashedPW, PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
