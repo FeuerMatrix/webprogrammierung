@@ -99,9 +99,12 @@
         // Speichert den Nutzer ein oder Updatet ihn
         function store($email, $pw){
             try {
-                $sql = "INSERT OR REPLACE nutzer(email, passwort) VALUES (?, ?)";
+                $sql = "INSERT INTO nutzer (email, passwort) VALUES (?, ?) ON DUPLICATE KEY UPDATE passwort = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bindParam("iss", $email, password_hash($pw,PASSWORD_DEFAULT));
+                $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                $stmt->bindParam(2, $hashedPW, PDO::PARAM_STR);
+                $stmt->bindParam(3, $hashedPW, PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -126,7 +129,7 @@
             try {
                 $sql = "SELECT email FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bindParam("s", $email); 
+                $stmt->bindParam(1, $email, PDO::PARAM_STR); 
                 return $stmt->execute();
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -138,13 +141,31 @@
             try {
                 $sql = "SELECT email FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bindParam("s", $email); 
+                $stmt->bindParam(1, $email, PDO::PARAM_STR); 
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return !empty($result);
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
+
+        function newBeitrag($id, $author, $anonym, $title, $date, $file, $pname){
+            try {
+                $sql = "INSERT INTO beitraege (id_beitrag, author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE author = VALUES(author), anonym = VALUES(anonym), titel = VALUES(titel), datum = VALUES(datum), bild = VALUES(bild), beschreibung = VALUES(beschreibung)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                $stmt->bindParam(2, $author, PDO::PARAM_STR);
+                $stmt->bindParam(3, $anonym, PDO::PARAM_BOOL);
+                $stmt->bindParam(4, $title, PDO::PARAM_STR);
+                $stmt->bindParam(5, $date, PDO::PARAM_STR);
+                $stmt->bindParam(6, $file, PDO::PARAM_STR);
+                $stmt->bindParam(7, $pname, PDO::PARAM_STR);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                echo "Fehler: " . $ex->getMessage();
+            }
+        }
+        
 
         function getBeitraege(){
             try {

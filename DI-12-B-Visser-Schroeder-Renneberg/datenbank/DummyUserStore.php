@@ -90,6 +90,9 @@ include_once "UserStore.php";
             
         }
 
+        function newBeitrag($id, $author, $anonym, $title, $date, $file, $pname){
+
+        }
  
 
     }
