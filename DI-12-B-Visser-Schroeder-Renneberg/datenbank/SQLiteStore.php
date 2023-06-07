@@ -77,11 +77,10 @@
 
                 //KOMMENTAR TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS kommentar (
-                    id_kommentar    INTEGER,
+                    id_kommentar    INTEGER PRIMARY KEY,
                     id_beitrag      INTEGER,
                     author          INT,
                     kommentar       TEXT,
-                    PRIMARY KEY(id_beitrag, id_kommentar),
                     FOREIGN KEY(id_beitrag) REFERENCES beitrag(id_beitrag),
                     FOREIGN KEY(author) REFERENCES nutzer(email)
                 )";
@@ -316,9 +315,9 @@
             try {
             $sql = "INSERT OR IGNORE INTO kommentar (id_beitrag,author,kommentar ) VALUES(?, ?, ?)";
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $auth, PDO::PARAM_INT);
-            $stmt->bindParam(2, $anonym, PDO::PARAM_STR);
-            $stmt->bindParam(3, $title, PDO::PARAM_STR);
+            $stmt->bindParam(1, $post_id, PDO::PARAM_INT);
+            $stmt->bindParam(2, $auth, PDO::PARAM_STR);
+            $stmt->bindParam(3, $new, PDO::PARAM_STR);
             $stmt->execute();
 
             } catch (PDOException $ex) {
