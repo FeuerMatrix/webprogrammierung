@@ -51,7 +51,7 @@
                     author              TEXT,
                     anonym              BOOLEAN NOT NULL,
                     titel               TEXT NOT NULL,
-                    datum               TIMESTAMP,  
+                    datum               TEXT,  
                     bild                TEXT,
                     beschreibung    TEXT,
                     FOREIGN KEY(author) REFERENCES nutzer(email)
