@@ -301,7 +301,7 @@
         }
         function getComment($id,$comm_id){
             try {
-                $sql = "SELECT * FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
+                $sql = "SELECT kommentar FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();

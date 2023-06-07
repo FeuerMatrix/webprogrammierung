@@ -39,15 +39,15 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         }
     }
 
-    if (isset($_POST["new"]) && isset($auth)) {
+    if (isset($_POST["new"]) && isset($_SESSION["user"])) {
+        $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
         if (!$edit) {
-            $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
-            $database->newComment($auth, $new, $id);
+            $database->newComment($_SESSION["user"], $new, $id);
         } else {
-            $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
             $database->updateComment($id, $comm_id, $new);
             $edit = false;
         }
+
     }
 
     $titel = $database->getTitel($id);

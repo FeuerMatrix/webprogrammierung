@@ -17,7 +17,7 @@
         }
 
         if(!isset($errorMessage)) {
-            $_SESSION["user"] = session_create_id();
+            $_SESSION["user"] = $email;
             header("Location: index.php?cause=".urlencode("Erfolgreich Angemeldet!"));
             exit;
         }
