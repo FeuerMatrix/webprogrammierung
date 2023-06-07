@@ -97,11 +97,11 @@
         }
 
         // Speichert den Nutzer ein oder Updatet ihn
-        function store($user, $email, $pw){
+        function store($email, $pw){
             try {
                 $sql = "INSERT OR REPLACE nutzer(email, passwort) VALUES (?, ?)";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bindParam("iss", $user, $email,password_hash($pw,PASSWORD_DEFAULT));
+                $stmt->bindParam("iss", $email, password_hash($pw,PASSWORD_DEFAULT));
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
