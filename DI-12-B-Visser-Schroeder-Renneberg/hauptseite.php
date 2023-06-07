@@ -26,7 +26,7 @@
                 <?php foreach ($beitraege as $beitrag): ?>         
                        <div class="beitrag">
                             <a class="link" href=<?php echo "\"beitrag.php?id=".urlencode($beitrag["id"])."\"" ?> > <?php echo $beitrag['titel'] ?></a>
-                            <span> <?php echo $beitrag['date'] ?></span>
+                            <span> <?php echo date("Y-m-d H:i:s",$beitrag['date']); ?></span>
                             <img src=<?php echo $beitrag['file'] ?>  alt= <?php echo $beitrag['pname'] ?> >
                         </div>
                 <?php endforeach ?>

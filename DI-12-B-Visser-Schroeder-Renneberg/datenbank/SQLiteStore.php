@@ -63,10 +63,10 @@
                 }    
 
                 $sql = "INSERT OR IGNORE INTO beitrag VALUES
-                    (1, 0, FALSE, 'Argumentation', '05.06.1996', 'images/beispielbilder/argumentation.png', 'Argumentation'),
-                    (2, 0, FALSE, 'Protest', '08.04.1976', 'images/beispielbilder/protest.png', 'Protest'),
-                    (3, 0, FALSE, 'Trouble Incoming', '08.05.1976', 'images/beispielbilder/trouble.jpg', 'Trouble_Schilder'),
-                    (4, 0, FALSE, 'Beispielbild', '08.04.1976', 'images/guestbook.png', 'Beispielbild'
+                    (1, 0, FALSE, 'Argumentation', '0686156644', 'images/beispielbilder/argumentation.png', 'Argumentation'),
+                    (2, 0, FALSE, 'Protest', '1606156644', 'images/beispielbilder/protest.png', 'Protest'),
+                    (3, 0, FALSE, 'Trouble Incoming', '1686156044', 'images/beispielbilder/trouble.jpg', 'Trouble_Schilder'),
+                    (4, 0, FALSE, 'Beispielbild', '1686106644', 'images/guestbook.png', 'Beispielbild'
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -254,6 +254,7 @@
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
+                $ergebnis = date("Y-m-d H:i:s",$ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
