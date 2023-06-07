@@ -125,7 +125,7 @@
         // überprüft ob der Nutzer exestiert
         function isLoggedIn($email){
             try {
-                $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ?";
+                $sql = "SELECT email FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("s", $email); 
                 return $stmt->execute();
@@ -154,7 +154,7 @@
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([$nutzer_id]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $result['email'];
+                return htmlspecialchars($result['email']);
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
@@ -174,13 +174,13 @@
 
             foreach ($originalArray as $item) {
                 $newItem = array(
-                    'id' => $item['id_beitrag'],
-                    'author' => $item['author'],
-                    'anonym' => $item['anonym'],
-                    'titel' => $item['titel'],
-                    'date' => $item['datum'],
-                    'file' => $item['bild'],
-                    'pname' => $item['beschreibung']
+                    'id' => htmlspecialchars($item['id_beitrag']),
+                    'author' => htmlspecialchars($item['author']),
+                    'anonym' => htmlspecialchars($item['anonym']),
+                    'titel' => htmlspecialchars($item['titel']),
+                    'date' => htmlspecialchars($item['datum']),
+                    'file' => htmlspecialchars($item['bild']),
+                    'pname' => htmlspecialchars($item['beschreibung'])
                 );
                 $newArray[] = $newItem;
             }
