@@ -60,11 +60,11 @@ if (isset($_POST["Submit"])) {
         }else{
             $file = null;
         }
-        $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
+        $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
         if ($edit) {
            $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, $file);
         }
-        header("Location: Beitrag.php?from=neuerBeitrag");
+        header("Location: Beitrag.php?id=". urlencode($id));
         exit;
     } else {
         echo "<p><b>Formular unvollst&auml;ndig</b></p>";
