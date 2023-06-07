@@ -303,8 +303,8 @@
                 echo 'Fehler beim Ändern des Kommentars!<br />';
             }
         }
-        function newPost($auth,$title,$desc,$anony,$image,$date){
-            //Add id
+        function newPost($auth,$title,$desc,$anony,$image){
+            $date = getDate()[0];
             $sql = "INSERT OR IGNORE INTO beitrag VALUES
                 (".NULL.", ".$auth.", ".$anony.", ".$title.", ".$date.", ".$image.", ".$desc.")
             ";
