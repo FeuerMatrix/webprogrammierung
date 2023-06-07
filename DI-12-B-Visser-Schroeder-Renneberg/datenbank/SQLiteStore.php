@@ -347,7 +347,6 @@
                 $stmt->bindParam(5, $image, PDO::PARAM_STR);
                 $stmt->bindParam(6, $desc, PDO::PARAM_STR);
                 $stmt->execute();
-                $this->db->exec( $sql );
 
                 return $this->db->lastInsertId();
             } catch (PDOException $ex) {
