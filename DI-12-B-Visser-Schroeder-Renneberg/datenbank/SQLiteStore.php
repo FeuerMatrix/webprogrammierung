@@ -369,7 +369,7 @@
         }
 
         function deletePost($id){
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = ".$id;
+            $sql = "DELETE FROM beitrag WHERE id_beitrag = '".$id."'";
 
             if ( $this->db->exec( $sql ) !== false ) {
 

@@ -2,7 +2,7 @@
     include_once "datenbank/SQLiteStore.php";
     session_start();
     $database = new SQLiteStore();
-    $database->deleteUser("f@f.de");
+    $database->deleteUser($_SESSION["user"]);
     session_destroy();
     header("Location: index.php");
     exit;
