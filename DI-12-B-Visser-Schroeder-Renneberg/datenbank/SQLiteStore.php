@@ -23,6 +23,7 @@
                 $pw = null;
                 $this->db = new PDO($dsn, $user, $pw);
                 $this->db->beginTransaction();
+                $this->db->exec("PRAGMA foreign_keys = ON");
                 //Creates Tables and fills them with dummy data.
                 //TODO remove dummy data
 
@@ -79,12 +80,11 @@
 
                 //KOMMENTAR TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS kommentar (
-                    id_kommentar    INTEGER PRIMARY KEY,
-                    id_beitrag      INTEGER,
-                    author          INT,
+                    id_kommentar    INTEGER,
+                    id_beitrag      INTEGER REFERENCES beitrag(id_beitrag) ON DELETE CASCADE,
+                    author          INT REFERENCES nutzer(email) ON DELETE CASCADE,
                     kommentar       TEXT,
-                    FOREIGN KEY(id_beitrag) REFERENCES beitrag(id_beitrag),
-                    FOREIGN KEY(author) REFERENCES nutzer(email)
+                    PRIMARY KEY(id_kommentar, id_beitrag)
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -315,7 +315,14 @@
         }
         function newComment($auth,$new,$post_id){
             try {
-            $sql = "INSERT OR IGNORE INTO kommentar (id_beitrag,author,kommentar ) VALUES(?, ?, ?)";
+            $sql = "SELECT MAX(id_kommentar) AS max FROM kommentar WHERE id_beitrag = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $post_id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+
+
+            $sql = "INSERT OR IGNORE INTO kommentar (id_kommentar,id_beitrag,author,kommentar ) VALUES(".($stmt->fetch(PDO::FETCH_ASSOC)['max']+1).", ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(1, $post_id, PDO::PARAM_INT);
             $stmt->bindParam(2, $auth, PDO::PARAM_STR);
@@ -323,7 +330,7 @@
             $stmt->execute();
 
             } catch (PDOException $ex) {
-                echo 'Fehler beim Erstellen des Kommentars!<br />';
+                echo $ex;
             }
         }
         function updateComment($id,$comm_id, $new){
