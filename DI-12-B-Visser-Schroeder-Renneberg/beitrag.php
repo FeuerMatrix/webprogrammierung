@@ -15,7 +15,7 @@
             <div class="post-text">
                 <h1 class=left><?php echo $titel ?></h1>
                 <div class=titlebox>
-                    <h2><?php echo $author ?></h2>
+                    <h2><?php if(!$anony){ echo $author; }?></h2>
                     <h2><?php echo $date ?></h2>
                 </div>
                 <p class=center>Ort (OpenStreetMap API)</p>

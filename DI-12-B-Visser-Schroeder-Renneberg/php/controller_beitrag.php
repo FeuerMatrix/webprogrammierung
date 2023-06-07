@@ -55,6 +55,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $date =  $database->getDate($id);
     $img =  $database->getImage($id);
     $comments = $database->getComments($id);
+    $anony = $database->getAnonym($id);
 
 
     function createComment($comm_id, $name, $text)
