@@ -10,7 +10,7 @@
                 $this->db->commit();
             } catch (Exception $e) {
                 echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
-                exit();
+                $this->db->rollBack();
             }
         }
 
