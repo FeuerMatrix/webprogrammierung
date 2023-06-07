@@ -117,7 +117,7 @@
                 $stmt = $this->db->prepare($sql);
                 $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
                 $stmt->bindParam(1, $email, PDO::PARAM_STR);
-                $stmt->bindParam(2, $hashedPW, PDO::PARAM_STR);
+                $stmt->bindParam(2, $hashedPw, PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
