@@ -380,6 +380,14 @@
         }
 
         function deletePost($id) {
+            $sql = "DELETE FROM kommentar WHERE id_beitrag = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+            } else {
+                echo 'Fehler beim Löschen des Beitrags!<br />';
+            }
+            
             $sql = "DELETE FROM beitrag WHERE id_beitrag = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(1, $id, PDO::PARAM_INT);
@@ -392,6 +400,22 @@
 
 
         function deleteUser($email) {
+            $sql = "DELETE FROM kommentar WHERE author = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $email, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+            } else {
+                echo 'Fehler beim Löschen des Nutzers!<br />';
+            }
+
+            $sql = "DELETE FROM beitrag WHERE author = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $email, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+            } else {
+                echo 'Fehler beim Löschen des Nutzers!<br />';
+            }
+
             $sql = "DELETE FROM nutzer WHERE email = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(1, $email, PDO::PARAM_STR);
