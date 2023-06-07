@@ -320,19 +320,22 @@
             }
         }
 
-        function newPost($auth,$title,$desc,$anony,$image){
-            $date = getDate()[0];
+        function newPost($auth, $title, $desc, $anony, $image){
+            $date = time();
             try {
-                $sql = "INSERT INTO beitraege (id_beitrag, author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(1, NULL, PDO::PARAM_INT);
-                $stmt->bindParam(2, $author, PDO::PARAM_STR);
-                $stmt->bindParam(3, $anony, PDO::PARAM_BOOL);
-                $stmt->bindParam(4, $title, PDO::PARAM_STR);
-                $stmt->bindParam(5, $date, PDO::PARAM_STR);
-                $stmt->bindParam(6, $image, PDO::PARAM_STR);
-                $stmt->bindParam(7, $desc, PDO::PARAM_STR);
-                $stmt->execute();
+                $sql = "INSERT INTO beitraege (author, anonym, titel, datum, bild, beschreibung) VALUES ('tim@test.de', FALSE, 'Beispielbild', '08.04.1976', 'images/guestbook.png', 'Beispielbild'
+                )";
+                
+                //$sql = "INSERT INTO beitraege (author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?)";
+                //$stmt = $this->db->prepare($sql);
+                //$stmt->bindParam(1, $auth, PDO::PARAM_STR);
+                //$stmt->bindParam(2, $anony, PDO::PARAM_BOOL);
+                //$stmt->bindParam(3, $title, PDO::PARAM_STR);
+                //$stmt->bindParam(4, $date, PDO::PARAM_STR);
+                //$stmt->bindParam(5, $image, PDO::PARAM_STR);
+                //$stmt->bindParam(6, $desc, PDO::PARAM_STR);
+                //$stmt->execute();
+                $this->db->exec( $sql );
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }

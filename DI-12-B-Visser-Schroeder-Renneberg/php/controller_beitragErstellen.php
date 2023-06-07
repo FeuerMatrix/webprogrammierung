@@ -11,9 +11,9 @@ if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page th
 $titel = (isset($_POST["fname"]) && is_string($_POST["fname"])) ? $_POST["fname"] : "";
 $desc = (isset($_POST["text_main"]) && is_string($_POST["text_main"])) ? $_POST["text_main"] : "";
 $anony = (isset($_POST["anonym"]) && is_string($_POST["anonym"])) ? $_POST["anonym"] : "";
-$titel = htmlspecialchars($titel);
-$anony = htmlspecialchars($anony);
-$desc = nl2br(htmlspecialchars($desc));
+$titel = $titel;
+$anony = $anony;
+$desc = $desc;
 
 $edit = false;
 
@@ -62,7 +62,7 @@ if (isset($_POST["Submit"])) {
         }
         $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
         if ($edit) {
-           // $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, $file);
+           $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, $file);
         }
         header("Location: Beitrag.php?from=neuerBeitrag");
         exit;
