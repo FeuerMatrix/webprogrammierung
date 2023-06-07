@@ -11,6 +11,12 @@
       <?php if(isset($_SESSION["user"])):?>
       <li><a href="eintragneu.php">Neuer Beitrag</a></li>
       <li><a href="php/script_logout.php">Abmelden</a></li>
+      <li>
+        <form method="post">
+          <input type="hidden" id="delete" name="delete" value="1">
+          <input type="submit" class = "navdelete" value="Nutzer Löschen">
+      </form>
+      </li>
       <?php else: ?>
       <li><a href="anmeldung.php">Anmelden</a></li>
       <li><a href="registrieren.php">Registrieren</a></li>
@@ -19,9 +25,19 @@
   </div>
 </nav>
 <?php
-  if(isset($_GET["cause"])):
-?>
-<a><?php echo urldecode($_GET["cause"]); ?></a>
+    if(isset($_GET["cause"])):
+  ?>
+  <a><?php echo urldecode($_GET["cause"]); ?></a>
   <?php
-  endif;
+    endif;
+  ?>
+  <?php
+    if(isset($_POST["delete"])):
+  ?>
+  <a>Möchtest du deinen Account wirklich löschen?</a>
+  <form action="script_dropUser.php">
+    <input type="submit" class="navdelete" value="Nutzer Löschen">
+  </form>
+  <?php
+    endif;
   ?>

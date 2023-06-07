@@ -377,6 +377,15 @@
                 echo 'Fehler beim Löschen des Beitrags!<br />';
             }
         }
+        function deleteUser($email){
+            $sql = "DELETE FROM nutzer WHERE email = '".$email."'";
+
+            if ( $this->db->exec( $sql ) !== false ) {
+
+            } else {
+                echo 'Fehler beim Löschen des Nutzers!<br />';
+            }
+        }
     }
 
 ?>
