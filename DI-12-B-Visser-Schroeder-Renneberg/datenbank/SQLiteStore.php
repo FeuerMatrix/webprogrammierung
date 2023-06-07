@@ -6,6 +6,8 @@
 //Transaction (registrieren)
         protected $db;
         public function __destruct(){
+            //The transmission is automatically started at connection with database and automatically commited/rolled back when this is unset or the script is ended.
+            //This makes sure you never have to care about transmissions. But, if multiple transmissions in a row are wanted, the SQLiteStore needs to be unset and reinstantiated.
             try{
                 $this->db->commit();
             } catch (Exception $e) {
@@ -369,12 +371,21 @@
         }
 
         function deletePost($id){
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = ".$id;
+            $sql = "DELETE FROM beitrag WHERE id_beitrag = '".$id."'";
 
             if ( $this->db->exec( $sql ) !== false ) {
 
             } else {
                 echo 'Fehler beim Löschen des Beitrags!<br />';
+            }
+        }
+        function deleteUser($email){
+            $sql = "DELETE FROM nutzer WHERE email = '".$email."'";
+
+            if ( $this->db->exec( $sql ) !== false ) {
+
+            } else {
+                echo 'Fehler beim Löschen des Nutzers!<br />';
             }
         }
     }
