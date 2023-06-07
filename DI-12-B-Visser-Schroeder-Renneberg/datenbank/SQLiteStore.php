@@ -91,7 +91,7 @@
                 } else {
                     echo 'Fehler beim anlegen der ersten Kommentardaten!<br />';
                 }
-             } catch ( PDOException $e ) {
+             } catch (PDOException $e ) {
                 echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
                 exit();
             }
@@ -104,7 +104,7 @@
                 $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("iss", $user, $email,password_hash($pw,PASSWORD_DEFAULT));
                 $stmt->execute();
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -112,15 +112,12 @@
         // überprüft Einlogdaten des Nutzer
         function checkLoginData($email, $pw){
             try {
-                $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ?";
+                $sql = "SELECT passwort FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql); 
-                $stmt->bind_param("s", $email); 
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
-                $storedPassword = $row['passwort'];
+                $stmt->execute([$email]);
+                $storedPassword = $stmt->fetchColumn();
                 return password_verify($pw, $storedPassword);
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -132,7 +129,7 @@
                 $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("s", $email); 
                 return $stmt->execute();
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -143,8 +140,9 @@
                 $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bind_param("s", $email); 
-                return $stmt->execute();
-            } catch (Exception $ex) {
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return !empty($result);
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -152,11 +150,12 @@
         // gibt die Email des Nutzers mit der übergebenen Nutzer-ID aus
         function getUser($nutzer_id){
             try {
-                $sql = "SELECT (email) FROM nutzer WHERE id_nutzer = ?";
+                $sql = "SELECT email FROM nutzer WHERE id_nutzer = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("s", $nutzer_id); 
-                return $stmt->execute();
-            } catch (Exception $ex) {
+                $stmt->execute([$nutzer_id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['email'];
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -166,7 +165,7 @@
                 $sql = "SELECT * FROM beitrag";
                 $stmt = $this->db->query($sql);
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
                 return [];
             }
@@ -194,7 +193,7 @@
                 $sql = "SELECT * FROM kommentar";
                 $ergebnis = $this->db->query($sql);
                 return $ergebnis;
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -204,7 +203,7 @@
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -214,7 +213,7 @@
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -224,7 +223,7 @@
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -234,7 +233,7 @@
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -244,7 +243,7 @@
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
@@ -254,7 +253,7 @@
                 $ergebnis = $this->db->query($sql);
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
-            } catch (Exception $ex) {
+            } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
             }
         }
