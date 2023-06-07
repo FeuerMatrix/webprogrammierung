@@ -63,10 +63,12 @@ if (isset($_POST["Submit"])) {
         header("Location: Beitrag.php?id=". urlencode($id));
         exit;
     } else {
-        echo "<p><b>Formular unvollst&auml;ndig</b></p>";
-        echo "<ul><li>";
-        echo implode("</li><li>", $fehlerfelder);
-        echo "</li></ul>";
+        ?>
+        <p><b>Formular unvollst&auml;ndig</b></p>
+        <ul><li>
+        </li><li> <?php echo $fehlerfelder ?>
+        </li></ul>
+        <?php
     }
 }
 
