@@ -27,17 +27,17 @@ switch ($sort) {
 }
 
 function sortiereNachTitel($a, $b) {                        // Vergleich nach Titel
-    return strcmp($a['titel'], $b['titel']);
+    return strnatcasecmp($a['titel'], $b['titel']);
 }
 
 
 function sortiereNachDatum($a, $b) {                        // Vergleich nach Datum
-    $dateA = strtotime($a['date']);                         //strtotime wandelt das Datum in einen int um
-    $dateB = strtotime($b['date']);
+    $dateA = ($a['date']);                                  //strtotime wandelt das Datum in einen int um
+    $dateB = ($b['date']);
 
     if ($dateA == $dateB) {
         return 0;
     }
-    return ($dateA < $dateB) ? 1 : -1;                      // 1 wenn true, -1 wenn false
+    return ($dateA < $dateB) ? 1 : -1;                      // -1 wenn true, 1 wenn false
 }
 ?>
