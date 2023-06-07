@@ -26,7 +26,7 @@
 
                 $pw = password_hash('helloworld',PASSWORD_DEFAULT);
                 $sql = "INSERT OR IGNORE INTO nutzer VALUES (
-                    0 , 'tim@test.de', '$pw'
+                    'tim@test.de', '$pw'
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
