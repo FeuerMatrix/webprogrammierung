@@ -284,7 +284,7 @@
         function newComment($auth,$new,$post_id){
             //Add id
             $sql = "INSERT OR IGNORE INTO kommentar VALUES
-                (1, post_id, $auth,$new)
+                (".NULL.", ".$post_id.", ".$auth.",".$new.")
             ";
 
 
@@ -295,7 +295,7 @@
             }
         }
         function updateComment($id,$comm_id, $new){
-            $sql = "UPDATE kommentar SET kommentar = $new WHERE id_kommentar = $comm_id AND id_beitrag = $id";
+            $sql = "UPDATE kommentar SET kommentar = ".$new." WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
 
             if ( $this->db->exec( $sql ) !== false ) {
 
@@ -306,7 +306,7 @@
         function newPost($auth,$title,$desc,$anony,$image,$date){
             //Add id
             $sql = "INSERT OR IGNORE INTO beitrag VALUES
-                (1, $auth, $anony, $title, $date, $image, $desc)
+                (".NULL.", ".$auth.", ".$anony.", ".$title.", ".$date.", ".$image.", ".$desc.")
             ";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -316,7 +316,7 @@
                 }
         }
         function updatePost($id,$title,$desc,$anony,$image){
-            $sql = "UPDATE beitrag SET anonym = $anony, titel = $title, bild = $image, beschreibung = $desc WHERE id_beitrag = $id";
+            $sql = "UPDATE beitrag SET anonym = ".$anony.", titel = ".$title.", bild = ".$image.", beschreibung = ".$desc." WHERE id_beitrag = ".$id;
 
             if ( $this->db->exec( $sql ) !== false ) {
 
@@ -325,7 +325,7 @@
             }
         }
         function deletePost($id){
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = $id";
+            $sql = "DELETE FROM beitrag WHERE id_beitrag = ".$id;
 
             if ( $this->db->exec( $sql ) !== false ) {
 
