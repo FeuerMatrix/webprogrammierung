@@ -78,7 +78,7 @@ include_once "UserStore.php";
 
         }
 
-        function newPost($auth,$title,$desc,$anony,$image){
+        function newPost($auth,$title,$desc,$anony,$image,$date){
             //add date
         }
 

@@ -22,15 +22,14 @@
             $errorMessage = "Fehlerhafte Email-Addresse!";
         }
 
-        include_once "datenbank/DummyUserStore.php";
-        $controller = new DummyUserStore;
+        $database = new SQLiteStore();
 
-        if($controller->emailExists($email)) {
+        if($database->emailExists($email)) {
             $errorMessage = "Fehler!";
         }
 
         if(!isset($errorMessage)) {
-            $controller->store($email, $passw);
+            $database->store($email, $passw);
             header("Location: anmeldung.php?from=registration");
             exit;
         } else {
