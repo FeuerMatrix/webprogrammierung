@@ -5,11 +5,22 @@
 //rohdaten in die db dan beim auslesen  htmlsecialchars
 //Transaction (registrieren)
         protected $db;
+        public function __destruct(){
+            try{
+                $this->db->commit();
+            } catch (Exception $e) {
+                echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
+                exit();
+            }
+        }
+
         public function __construct(){
             try{
                 $dsn = 'sqlite:sqlite-beschwerdeforum.db';
-                $this->db = new PDO($dsn);
-
+                $user = "root";
+                $pw = null;
+                $this->db = new PDO($dsn, $user, $pw);
+                $this->db->beginTransaction();
                 //Creates Tables and fills them with dummy data.
                 //TODO remove dummy data
 
@@ -90,6 +101,9 @@
                 } else {
                     echo 'Fehler beim anlegen der ersten Kommentardaten!<br />';
                 }
+                
+                $this->db->commit();
+                $this->db->beginTransaction();
              } catch (PDOException $e ) {
                 echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
                 exit();
@@ -305,7 +319,7 @@
         function newComment($auth,$new,$post_id){
             //Add id
             $sql = "INSERT OR IGNORE INTO kommentar VALUES
-                (1, post_id, $auth,$new)
+                (".NULL.", ".$post_id.", ".$auth.",".$new.")
             ";
 
 
@@ -316,7 +330,7 @@
             }
         }
         function updateComment($id,$comm_id, $new){
-            $sql = "UPDATE kommentar SET kommentar = $new WHERE id_kommentar = $comm_id AND id_beitrag = $id";
+            $sql = "UPDATE kommentar SET kommentar = ".$new." WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
 
             if ( $this->db->exec( $sql ) !== false ) {
 
@@ -324,10 +338,10 @@
                 echo 'Fehler beim Ändern des Kommentars!<br />';
             }
         }
-        function newPost($auth,$title,$desc,$anony,$image,$date){
-            //Add id
+        function newPost($auth,$title,$desc,$anony,$image){
+            $date = getDate()[0];
             $sql = "INSERT OR IGNORE INTO beitrag VALUES
-                (1, $auth, $anony, $title, $date, $image, $desc)
+                (".NULL.", ".$auth.", ".$anony.", ".$title.", ".$date.", ".$image.", ".$desc.")
             ";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -337,7 +351,7 @@
                 }
         }
         function updatePost($id,$title,$desc,$anony,$image){
-            $sql = "UPDATE beitrag SET anonym = $anony, titel = $title, bild = $image, beschreibung = $desc WHERE id_beitrag = $id";
+            $sql = "UPDATE beitrag SET anonym = ".$anony.", titel = ".$title.", bild = ".$image.", beschreibung = ".$desc." WHERE id_beitrag = ".$id;
 
             if ( $this->db->exec( $sql ) !== false ) {
 
@@ -346,7 +360,7 @@
             }
         }
         function deletePost($id){
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = $id";
+            $sql = "DELETE FROM beitrag WHERE id_beitrag = ".$id;
 
             if ( $this->db->exec( $sql ) !== false ) {
 

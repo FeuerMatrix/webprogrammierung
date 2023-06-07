@@ -30,6 +30,7 @@
 
         if(!isset($errorMessage)) {
             $database->store($email, $passw);
+            unset($database);
             header("Location: anmeldung.php?from=registration");
             exit;
         } else {

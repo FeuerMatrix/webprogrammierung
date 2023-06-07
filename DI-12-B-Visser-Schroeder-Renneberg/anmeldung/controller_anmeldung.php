@@ -11,7 +11,7 @@
         $database = new SQLiteStore();
 
         if(!($database->checkLoginData($email, $pw))) {
-            $errorMessage = "Ungültiges Passwort und/oder Email";
+            $errorMessage = "Ungültige Email-Addresse oder Passwort!";
         }
 
         if(!isset($errorMessage)) {
