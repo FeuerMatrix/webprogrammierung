@@ -89,14 +89,11 @@ include_once "UserStore.php";
             
         }
 
+        function deletePost($id){
+            
+        }
+
  
-
-
-
-
-
-
-
 
     }
 ?>
