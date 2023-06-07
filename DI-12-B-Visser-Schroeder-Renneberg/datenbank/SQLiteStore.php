@@ -5,11 +5,22 @@
 //rohdaten in die db dan beim auslesen  htmlsecialchars
 //Transaction (registrieren)
         protected $db;
+        public function __destruct(){
+            try{
+                $this->db->commit();
+            } catch (Exception $e) {
+                echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
+                exit();
+            }
+        }
+
         public function __construct(){
             try{
                 $dsn = 'sqlite:sqlite-beschwerdeforum.db';
-                $this->db = new PDO($dsn);
-
+                $user = "root";
+                $pw = null;
+                $this->db = new PDO($dsn, $user, $pw);
+                $this->db->beginTransaction();
                 //Creates Tables and fills them with dummy data.
                 //TODO remove dummy data
 
@@ -90,6 +101,9 @@
                 } else {
                     echo 'Fehler beim anlegen der ersten Kommentardaten!<br />';
                 }
+                
+                $this->db->commit();
+                $this->db->beginTransaction();
              } catch (PDOException $e ) {
                 echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
                 exit();
