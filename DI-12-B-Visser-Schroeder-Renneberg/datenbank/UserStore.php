@@ -3,7 +3,7 @@
         function store($user, $email, $pw);
         function checkLoginData($email, $pw);
         function isLoggedIn($email);
-        function userNameExists($username);
+        function emailExists($username);
         function getBeitraege();
         function getComments($id);
         function getTitel($id);

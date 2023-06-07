@@ -11,7 +11,7 @@ include_once "UserStore.php";
             return false;
         }
 
-        function userNameExists($username){
+        function emailExists($username){
             return $username == "blockedName";
         }
         function getUser($user) {

@@ -25,7 +25,7 @@
         include_once "datenbank/DummyUserStore.php";
         $controller = new DummyUserStore;
 
-        if($controller->userNameExists($user)) {
+        if($controller->emailExists($user)) {
             $errorMessage = "Benutzername existiert bereits/Email bereits in Benutzung!";
         }
 

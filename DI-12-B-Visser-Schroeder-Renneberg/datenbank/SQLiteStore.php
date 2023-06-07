@@ -101,7 +101,7 @@
             try {
                 $sql = "INSERT OR REPLACE nutzer(email, passwort) VALUES (?, ?)";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("iss", $user, $email,password_hash($pw,PASSWORD_DEFAULT));
+                $stmt->bindParam("iss", $user, $email,password_hash($pw,PASSWORD_DEFAULT));
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -126,7 +126,7 @@
             try {
                 $sql = "SELECT email FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("s", $email); 
+                $stmt->bindParam("s", $email); 
                 return $stmt->execute();
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -134,11 +134,11 @@
         }
 
         // überprüft ob der Nutzer exestiert
-        function userNameExists($email){
+        function emailExists($email){
             try {
-                $sql = "SELECT (id_nutzer) FROM nutzer WHERE email = ?";
+                $sql = "SELECT email FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bind_param("s", $email); 
+                $stmt->bindParam("s", $email); 
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return !empty($result);
             } catch (PDOException $ex) {
