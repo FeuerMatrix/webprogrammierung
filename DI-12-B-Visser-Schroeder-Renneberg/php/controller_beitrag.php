@@ -41,7 +41,7 @@ if (isset($_POST["Edit"])) {
 if (isset($_POST["new"]) && isset($auth)) {
     if (!$edit) {
         $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
-        $database->newComment($auth, $new);
+        $database->newComment($auth, $new,$id);
     } else {
         $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
         $database->updateComment($id, $comm_id, $new);
