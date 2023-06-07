@@ -40,7 +40,7 @@ if (isset($_POST["Submit"])) {
         }
         $database->newPost($_SESSION["user"], $titel, $desc, $anony,  "./images/userImages/" . $_FILES["Datei"]["name"]);
         if ($edit) {
-            $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, "img");
+            $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, "./images/userImages/" . $_FILES["Datei"]["name"]);
         }
         header("Location: Beitrag.php?from=neuerBeitrag");
         exit;
