@@ -9,7 +9,7 @@ $beitraege = $database->getBeitraege();
 // Nur Beiträge anzeigen, die den Suchbegriff im Titel enthalten
 if ($suche != "") {
     $beitraege = array_filter($beitraege, function ($beitrag) use ($suche) {
-        return strpos($beitrag['titel'], $suche) !== false;
+        return strpos(strtolower($beitrag['titel']), strtolower($suche)) !== false;
     });
 }
 
