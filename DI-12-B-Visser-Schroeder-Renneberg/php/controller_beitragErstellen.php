@@ -15,27 +15,20 @@ $titel = $titel;
 $anony = $anony;
 $desc = $desc;
 
-$edit = false;
 
-if (isset($_SESSION["id"]) && isset($_GET["from"])) {
-    if (is_string($_SESSION["id"])) {
-        $id = $_SESSION["id"];
-        unset($_SESSION["id"]);
-        $edit = true;
-
-        $titel = $database->getTitel($id);
-        $desc =  $database->getDesc($id);
-        $anony = $database->getAnonym($id);
-        if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
-            header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
-            exit;
-        }
-    }
+if (isset($_GET["from"])&&is_string($_GET["from"])) {
+        $id = $_GET["from"];
+        $titelold = $database->getTitel($id);
+        $descold =  $database->getDesc($id);
+        $anonyold = $database->getAnonym($id);
 }
 
 $ok = false;
 $fehlerfelder = array();
 if (isset($_POST["Submit"])) {
+
+
+    
     $ok = true;
     if (!isset($_POST["fname"]) || !is_string($_POST["fname"])) {
         $ok = false;
@@ -61,8 +54,9 @@ if (isset($_POST["Submit"])) {
             $file = null;
         }
         
-        if ($edit) {
-           $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, $file);
+        if (isset($_GET["from"])&&is_string($_GET["from"])) {
+           $id = $_GET["from"];
+           $database->updatePost($id, $titel, $desc, $anony, $file);
         } else {
             $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
         }
