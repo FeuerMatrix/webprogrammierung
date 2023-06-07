@@ -193,7 +193,9 @@
         function getComments($id){
             try {
                 $sql = "SELECT * FROM kommentar";
-                $ergebnis = $this->db->query($sql);
+                $stmnt = $this->db->query($sql);
+
+                $ergebnis = "  ";
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
@@ -299,15 +301,15 @@
             }
         }
         function newComment($auth,$new,$post_id){
-            //Add id
-            $sql = "INSERT OR IGNORE INTO kommentar VALUES
-                (".NULL.", ".$post_id.", ".$auth.",".$new.")
-            ";
+            try {
+            $sql = "INSERT OR IGNORE INTO kommentar (id_beitrag,author,kommentar ) VALUES(?, ?, ?)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $auth, PDO::PARAM_INT);
+            $stmt->bindParam(2, $anonym, PDO::PARAM_STR);
+            $stmt->bindParam(3, $title, PDO::PARAM_STR);
+            $stmt->execute();
 
-
-            if ( $this->db->exec( $sql ) !== false ) {
-
-            } else {
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Erstellen des Kommentars!<br />';
             }
         }
