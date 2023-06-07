@@ -11,12 +11,19 @@
       <?php if(isset($_SESSION["user"])):?>
       <li><a href="eintragneu.php">Neuer Beitrag</a></li>
       <li><a href="php/script_logout.php">Abmelden</a></li>
+      <li>
+        <form method="post">
+          <input type="hidden" id="delete" name="delete" value="1">
+          <input type="submit" value="Nutzer Löschen">
+      </form>
+      </li>
       <?php else: ?>
       <li><a href="anmeldung.php">Anmelden</a></li>
       <li><a href="registrieren.php">Registrieren</a></li>
       <?php endif; ?>
     </ul>
   </div>
+  
 </nav>
 <?php
   if(isset($_GET["cause"])):

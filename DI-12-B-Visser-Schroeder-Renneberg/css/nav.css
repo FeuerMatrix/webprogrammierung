@@ -12,6 +12,10 @@ ul {
   margin: 0px;
 }
 
+input {
+  width: 100% !important;
+}
+
 .grid-item a {
   display: block;
   color: white;
