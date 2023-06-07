@@ -186,7 +186,9 @@
         function getTitel($id){
             try {
                 $sql = "SELECT titel FROM beitrag WHERE id_beitrag=$id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -196,7 +198,9 @@
         function getDesc($id){
             try {
                 $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=$id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -206,7 +210,9 @@
         function getAuthor($id){
             try {
                 $sql = "SELECT author FROM beitrag WHERE id_beitrag=$id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -216,7 +222,9 @@
         function getAnonym($id){
             try {
                 $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=$id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -226,7 +234,9 @@
         function getDate($id){
             try {
                 $sql = "SELECT datum FROM beitrag WHERE id_beitrag=$id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -236,7 +246,9 @@
         function getImage($id){
             try {
                 $sql = "SELECT bild FROM beitrag WHERE id_beitrag=$id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -247,7 +259,9 @@
         function getCommentAuthor($id, $comm_id){
             try {
                 $sql = "SELECT author FROM kommentar WHERE id_beitrag = $id AND id_kommentar = $comm_id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -258,7 +272,10 @@
         function getComment($id,$comm_id){
             try {
                 $sql = "SELECT * FROM kommentar WHERE id_beitrag = $id AND id_kommentar = $comm_id";
-                $ergebnis = $this->db->query($sql);
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo "Fehler: " . $ex->getMessage();
