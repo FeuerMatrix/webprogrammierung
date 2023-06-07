@@ -372,24 +372,29 @@
             }
         }
 
-        function deletePost($id){
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = '".$id."'";
-
-            if ( $this->db->exec( $sql ) !== false ) {
-
+        function deletePost($id) {
+            $sql = "DELETE FROM beitrag WHERE id_beitrag = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        
+            if ($stmt->execute()) {
             } else {
                 echo 'Fehler beim Löschen des Beitrags!<br />';
             }
         }
-        function deleteUser($email){
-            $sql = "DELETE FROM nutzer WHERE email = '".$email."'";
 
-            if ( $this->db->exec( $sql ) !== false ) {
 
+        function deleteUser($email) {
+            $sql = "DELETE FROM nutzer WHERE email = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        
+            if ($stmt->execute()) {
             } else {
                 echo 'Fehler beim Löschen des Nutzers!<br />';
             }
         }
+        
     }
 
 ?>
