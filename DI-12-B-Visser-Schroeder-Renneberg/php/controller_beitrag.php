@@ -25,13 +25,11 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     }
 
 
-    $edit = false;
 
     if (isset($_POST["Edit"])) {
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
-            $edit = true;
-            $old = $database->getComment($id, $comm_id);
+            header("Location: beitrag.php?id=" . $id ."&c_id=".$comm_id. "&old=". urlencode($database->getComment($id, $comm_id)));
         } else {
             header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
@@ -39,11 +37,14 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 
     if (isset($_POST["new"]) && isset($_SESSION["user"])) {
         $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
-        if (!$edit) {
+        if (!isset($_GET["old"])) {
             $database->newComment($_SESSION["user"], $new, $id);
         } else {
+            $comm_id = $_GET["c_id"];
+            if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
             $database->updateComment($id, $comm_id, $new);
-            $edit = false;
+            header("Location: beitrag.php?id=" . $id);
+            }
         }
 
     }
@@ -54,6 +55,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $date =  $database->getDate($id);
     $img =  $database->getImage($id);
     $comments = $database->getComments($id);
+    $anony = $database->getAnonym($id);
 
 
     function createComment($comm_id, $name, $text)

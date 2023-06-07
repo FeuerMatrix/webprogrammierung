@@ -15,7 +15,7 @@
             <div class="post-text">
                 <h1 class=left><?php echo $titel ?></h1>
                 <div class=titlebox>
-                    <h2><?php echo $author ?></h2>
+                    <h2><?php if(!$anony){ echo $author; }?></h2>
                     <h2><?php echo $date ?></h2>
                 </div>
                 <p class=center>Ort (OpenStreetMap API)</p>
@@ -36,8 +36,8 @@
         <?php if(isset($_SESSION["user"])): ?>
         <form method="post">
             <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
-            <input type="text" id="neuerKommentar" name="new" <?php if ($edit) {
-                echo 'value='.$old;
+            <input type="text" id="neuerKommentar" name="new" <?php if (isset($_GET["old"])) {
+                echo 'value='.$_GET["old"];
             } ?> placeholder="Neues Kommentar" required>
         </form>
             <?php endif; ?>                                                        

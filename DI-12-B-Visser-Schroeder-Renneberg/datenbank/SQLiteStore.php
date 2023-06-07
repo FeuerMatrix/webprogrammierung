@@ -334,11 +334,13 @@
             }
         }
         function updateComment($id,$comm_id, $new){
-            $sql = "UPDATE kommentar SET kommentar = ".$new." WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
+            try {
+            $sql = "UPDATE kommentar SET kommentar = ? WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $new, PDO::PARAM_STR);
+            $stmt->execute();
 
-            if ( $this->db->exec( $sql ) !== false ) {
-
-            } else {
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Ändern des Kommentars!<br />';
             }
         }
@@ -377,24 +379,29 @@
             }
         }
 
-        function deletePost($id){
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = '".$id."'";
-
-            if ( $this->db->exec( $sql ) !== false ) {
-
+        function deletePost($id) {
+            $sql = "DELETE FROM beitrag WHERE id_beitrag = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        
+            if ($stmt->execute()) {
             } else {
                 echo 'Fehler beim Löschen des Beitrags!<br />';
             }
         }
-        function deleteUser($email){
-            $sql = "DELETE FROM nutzer WHERE email = '".$email."'";
 
-            if ( $this->db->exec( $sql ) !== false ) {
 
+        function deleteUser($email) {
+            $sql = "DELETE FROM nutzer WHERE email = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        
+            if ($stmt->execute()) {
             } else {
                 echo 'Fehler beim Löschen des Nutzers!<br />';
             }
         }
+        
     }
 
 ?>
