@@ -67,11 +67,11 @@
 
                 //KOMMENTAR TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS kommentar (
-                    id_kommentar    INTEGER,
+                    id_kommentar    INTEGER PRIMARY KEY,
                     id_beitrag      INTEGER,
                     author          INT,
                     kommentar       TEXT,
-                    PRIMARY KEY(id_beitrag, id_kommentar),
+                    PRIMARY KEY(id_beitrag),
                     FOREIGN KEY(id_beitrag) REFERENCES beitrag(id_beitrag),
                     FOREIGN KEY(author) REFERENCES nutzer(nutzername)
                 )";
