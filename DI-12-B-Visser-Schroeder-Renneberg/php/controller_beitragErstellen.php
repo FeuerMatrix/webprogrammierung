@@ -15,6 +15,23 @@ $titel = htmlspecialchars($titel);
 $anony = htmlspecialchars($anony);
 $desc = nl2br(htmlspecialchars($desc));
 
+$edit = false;
+
+if (isset($_SESSION["id"]) && isset($_GET["from"])) {
+    if (is_string($_SESSION["id"])) {
+        $id = $_SESSION["id"];
+        unset($_SESSION["id"]);
+        $edit = true;
+
+        $titel = $database->getTitel($id);
+        $desc =  $database->getDesc($id);
+        $anony = $database->getAnonym($id);
+        if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
+            header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
+            exit;
+        }
+    }
+}
 
 $ok = false;
 $fehlerfelder = array();
@@ -38,9 +55,14 @@ if (isset($_POST["Submit"])) {
         } else {
             $anony = FALSE;
         }
-        $database->newPost($_SESSION["user"], $titel, $desc, $anony,  "./images/userImages/" . $_FILES["Datei"]["name"]);
+        if(isset ($_FILES["Datei"]["name"])){
+            $file = "./images/userImages/" . $_FILES["Datei"]["name"];
+        }else{
+            $file = null;
+        }
+        $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
         if ($edit) {
-            $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, "./images/userImages/" . $_FILES["Datei"]["name"]);
+           // $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, $file);
         }
         header("Location: Beitrag.php?from=neuerBeitrag");
         exit;
@@ -62,20 +84,4 @@ if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page th
     header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
     exit;
 }
-$edit = false;
 
-if (isset($_SESSION["id"]) && isset($_GET["from"])) {
-    if (is_string($_SESSION["id"])) {
-        $id = $_SESSION["id"];
-        unset($_SESSION["id"]);
-        $edit = true;
-
-        $titel = $database->getTitel($id);
-        $desc =  $database->getDesc($id);
-        $anony = $database->getAnonym($id);
-        if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
-            header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
-            exit;
-        }
-    }
-}
