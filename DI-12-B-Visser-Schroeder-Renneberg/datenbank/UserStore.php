@@ -4,7 +4,6 @@
         function checkLoginData($email, $pw);
         function isLoggedIn($email);
         function userNameExists($username);
-        function getUser($user);
         function getBeitraege();
         function getComments($id);
         function getTitel($id);
