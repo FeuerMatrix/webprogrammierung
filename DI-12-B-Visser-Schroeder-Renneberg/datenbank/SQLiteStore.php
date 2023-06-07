@@ -353,15 +353,21 @@
             }
         }
 
-        function updatePost($id,$title,$desc,$anony,$image){
-            $sql = "UPDATE beitrag SET anonym = ".$anony.", titel = ".$title.", bild = ".$image.", beschreibung = ".$desc." WHERE id_beitrag = ".$id;
-
-            if ( $this->db->exec( $sql ) !== false ) {
-
-            } else {
-                echo 'Fehler beim Ändern des Kommentars!<br />';
+        function updatePost($id, $title, $desc, $anony, $image){
+            try {
+                $sql = "UPDATE beitrag SET anonym = ?, titel = ?, bild = ?, beschreibung = ? WHERE id_beitrag = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $anony, PDO::PARAM_BOOL);
+                $stmt->bindParam(2, $title, PDO::PARAM_STR);
+                $stmt->bindParam(3, $image, PDO::PARAM_STR);
+                $stmt->bindParam(4, $desc, PDO::PARAM_STR);
+                $stmt->bindParam(5, $id, PDO::PARAM_INT);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                echo "Fehler: " . $ex->getMessage();
             }
         }
+
         function deletePost($id){
             $sql = "DELETE FROM beitrag WHERE id_beitrag = ".$id;
 

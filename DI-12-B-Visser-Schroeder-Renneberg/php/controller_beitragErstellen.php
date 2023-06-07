@@ -60,9 +60,11 @@ if (isset($_POST["Submit"])) {
         }else{
             $file = null;
         }
-        $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
+        
         if ($edit) {
            $database->updatePost($id, $_SESSION["user"], $titel, $desc, $anony, $file);
+        } else {
+            $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
         }
         header("Location: Beitrag.php?id=". urlencode($id));
         exit;
