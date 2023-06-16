@@ -1,8 +1,8 @@
+<?php include_once "php/controller_hauptseite.php" ?>
+
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/hauptseite.css" >
 </head>
-
-<?php include_once "php/controller_hauptseite.php" ?>
 
 <body>
     <?php include_once "php/nav.php" ?>
