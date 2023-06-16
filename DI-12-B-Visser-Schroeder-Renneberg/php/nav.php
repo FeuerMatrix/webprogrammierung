@@ -11,6 +11,7 @@
       <?php if(isset($_SESSION["user"])):?>
       <li><a href="eintragneu.php">Neuer Beitrag</a></li>
       <li><a href="php/script_logout.php">Abmelden</a></li>
+      <li><a href="pwChange.php">Daten anpassen</a></li>
       <li>
         <form method="post">
           <input type="hidden" id="delete" name="delete" value="1">
