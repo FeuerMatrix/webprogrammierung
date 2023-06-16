@@ -1,8 +1,10 @@
 <?php
-if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"] != Null) {
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $id = (isset($_GET["id"]) && is_string($_GET["id"])) ? $_GET["id"] : "";
     $auth = isset($_SESSION["user"]);
 
+    include_once "datenbank/SQLiteStore.php";
     $database = new SQLiteStore();
 
     if (isset($_POST["Submit"])) {

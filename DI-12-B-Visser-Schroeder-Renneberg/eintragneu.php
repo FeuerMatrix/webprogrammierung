@@ -1,10 +1,10 @@
+<?php include_once "php/controller_beitragErstellen.php" ?>
 <?php include_once "php/head.php" ?>
 </head>
 
 <body>
 
     <?php include_once "php/nav.php" ?>
-    <?php include_once "php/controller_beitragErstellen.php" ?>
 
     <main>
 

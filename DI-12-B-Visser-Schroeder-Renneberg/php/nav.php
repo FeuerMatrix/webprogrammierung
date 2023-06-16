@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/nav.css">
 <?php
-  session_start();
+  if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   if (!isset($abs_path)) include_once "path.php"; // Emergency Handling for when a page includes neither head.php nor path.php for whatever reason
 ?>
 <nav>
