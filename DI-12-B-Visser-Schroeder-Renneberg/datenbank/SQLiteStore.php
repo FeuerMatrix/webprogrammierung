@@ -121,7 +121,7 @@
                 $stmt->bindParam(2, $hashedPw, PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim speichern des Nutzers!<br />';
             }
         }
 
@@ -134,7 +134,7 @@
                 $storedPassword = $stmt->fetchColumn();
                 return password_verify($pw, $storedPassword);
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim uberpruefen der Login daten!<br />';
             }
         }
 
@@ -146,7 +146,7 @@
                 $stmt->bindParam(1, $email, PDO::PARAM_STR); 
                 return $stmt->execute();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim pruefen ob Nutzer eingeloggt ist!<br />';
             }
         }
 
@@ -159,17 +159,17 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return !empty($result);
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim pruefen ob Email existiert!<br />';
             }
         }
 
         function getBeitraege(){
             try {
-                $sql = "SELECT * FROM beitrag";
+                $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 5";
                 $stmt = $this->db->query($sql);
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler laden der Beitraege!<br />';
                 return [];
             }
 
@@ -211,7 +211,7 @@
 
                 return $newArray;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
         function getTitel($id){
@@ -223,7 +223,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Titels!<br />';
             }
         }
         function getDesc($id){
@@ -235,7 +235,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden der Beschreibung!<br />';
             }
         }
         function getAuthor($id){
@@ -247,7 +247,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Post Authors!<br />';
             }
         }
         function getAnonym($id){
@@ -259,7 +259,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden ob der Beitrag anonym ist!<br />';
             }
         }
         function getDate($id){
@@ -272,7 +272,7 @@
                 $ergebnis = date("Y-m-d H:i:s",$ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Datums!<br />';
             }
         }
         function getImage($id){
@@ -284,7 +284,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Bildes!<br />';
             }
         }
 
@@ -297,7 +297,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Kommentar Authors!<br />';
             }
             
         }
@@ -310,7 +310,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
         function newComment($auth,$new,$post_id){
@@ -330,7 +330,7 @@
             $stmt->execute();
 
             } catch (PDOException $ex) {
-                echo $ex;
+                echo 'Fehler beim erstellen des Kommentars!<br />';
             }
         }
         function updateComment($id,$comm_id, $new){
@@ -360,7 +360,7 @@
 
                 return $this->db->lastInsertId();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim erstellen des Beitrags!<br />';
             }
         }
 
@@ -375,7 +375,7 @@
                 $stmt->bindParam(5, $id, PDO::PARAM_INT);
                 $stmt->execute();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim bearbeiten des Post!<br />';
             }
         }
 
