@@ -8,12 +8,14 @@
         public function __destruct(){
             //The transmission is automatically started at connection with database and automatically commited/rolled back when this is unset or the script is ended.
             //This makes sure you never have to care about transmissions. But, if multiple transmissions in a row are wanted, the SQLiteStore needs to be unset and reinstantiated.
+            if($this->db->inTransaction()){
             try{
                 $this->db->commit();
             } catch (Exception $e) {
-                echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
+                echo 'Commit Fehlgeschlagen';
                 $this->db->rollBack();
             }
+        }
         }
 
         public function __construct(){
@@ -104,9 +106,8 @@
                 }
                 
                 $this->db->commit();
-                $this->db->beginTransaction();
              } catch (PDOException $e ) {
-                echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
+                echo 'Fehler beim erstllen der Dummy Daten';
             }
         }
 
@@ -436,6 +437,16 @@
             }
         }
         
-    }
+        function beginTransaction(){
+            $this->db->beginTransaction();
+        } 
 
-?>
+        function endTransaction(){
+            try{
+                $this->db->commit();
+            } catch (Exception $e) {
+                echo 'Commit Fehlgeschlagen';
+                $this->db->rollBack();
+            }
+        }
+    }

@@ -17,23 +17,27 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     }
 
     if (isset($_POST["delete"])) {
+        $database->beginTransaction();
         if ($database->getAuthor($id) == $_SESSION["user"]) {
             $database->deletePost($id);
             header("Location: hauptseite.php?from=" . $id);
         } else {
             header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
         }
+        $database->endTransaction();
         exit;
     }
 
 
     if (isset($_POST["deleteComm"])) {
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
+        $database->beginTransaction();
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
             $database->deleteComm($id, $comm_id);
         } else {
             header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
+        $database->endTransaction();
     }
 
 
@@ -52,10 +56,12 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
             $database->newComment($_SESSION["user"], $new, $id);
         } else {
             $comm_id = $_GET["c_id"];
+            $database->beginTransaction();
             if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
                 $database->updateComment($id, $comm_id, $new);
                 header("Location: beitrag.php?id=" . $id);
             }
+            $database->endTransaction();
         }
     }
 

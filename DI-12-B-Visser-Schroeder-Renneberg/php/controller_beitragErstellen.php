@@ -19,10 +19,12 @@ $desc = $desc;
 
 
 if (isset($_GET["from"])&&is_string($_GET["from"])) {
+        $database->beginTransaction();
         $id = $_GET["from"];
         $titelold = $database->getTitel($id);
         $descold =  $database->getDesc($id);
         $anonyold = $database->getAnonym($id);
+        $database->endTransaction();
 }
 
 $ok = false;

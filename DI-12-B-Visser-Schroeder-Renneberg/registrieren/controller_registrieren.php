@@ -25,16 +25,18 @@
         
         include_once "datenbank/SQLiteStore.php";
         $database = new SQLiteStore();
-
+        $database->beginTransaction();
         if($database->emailExists($email)) {
             $errorMessage = "Fehler!";
         }
 
         if(!isset($errorMessage)) {
             $database->store($email, $passw);
+            $database->endTransaction();
             header("Location: anmeldung.php?from=registration");
             exit;
         } else {
+            $database->endTransaction();
             header("Location: registrieren.php?cause=".urlencode($errorMessage)."&email=".$email."&email2=".$email2);
             exit;
         }
