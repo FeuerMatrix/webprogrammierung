@@ -107,7 +107,6 @@
                 $this->db->beginTransaction();
              } catch (PDOException $e ) {
                 echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
-                exit();
             }
         }
 

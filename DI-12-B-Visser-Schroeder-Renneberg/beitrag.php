@@ -1,3 +1,4 @@
+<?php include_once "php/controller_beitrag.php" ?>
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/beitrag.css">
 </head>
@@ -6,7 +7,7 @@
 
 
     <?php include_once "php/nav.php" ?>
-    <?php include_once "php/controller_beitrag.php" ?>
+    
 
 
 

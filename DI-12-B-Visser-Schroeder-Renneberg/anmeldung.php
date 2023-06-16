@@ -1,12 +1,12 @@
-<?php include_once "php/head.php" ?>
+<?php
+    include_once "path.php";
+    include_once $path."/anmeldung/controller_anmeldung.php";
+    include_once "php/head.php";
+?>
 </head>
 
 <body>
-    <?php
-        include_once $path."/php/nav.php";
-        
-        include_once $path."/anmeldung/controller_anmeldung.php";
-    ?>
+    <?php include_once $path."/php/nav.php"; ?>
     <main>
 
     <form method="post">

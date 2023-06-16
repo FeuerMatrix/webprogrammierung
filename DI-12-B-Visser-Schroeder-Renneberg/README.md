@@ -21,4 +21,6 @@ Später zu beachten:
 
 Verwendete Technologien:
 - WAVE für Accessability
-- Chromium Devtools für Resizing
+- Chromium Devtools für Resizing<br>
+Geplante Features:<br>
+Infinity Scroll kommt später eventuell wenn wir noch Zeit/Lust haben

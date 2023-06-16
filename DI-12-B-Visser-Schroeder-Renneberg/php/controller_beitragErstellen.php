@@ -1,5 +1,7 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
+include_once "datenbank/SQLiteStore.php";
 $database = new SQLiteStore();
 
 if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in

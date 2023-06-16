@@ -1,14 +1,16 @@
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/registrieren.css" >
+
+<?php
+    include_once "path.php";
+    include_once $path."/registrieren/controller_registrieren.php";
+    include_once "php/head.php"
+    ?>
+
+<link rel="stylesheet" href="css/registrieren.css">
 </head>
 
 <body>
 
-    <?php
-        include_once "php/nav.php";
-        
-        include_once $path."/registrieren/controller_registrieren.php";
-    ?>
+    <?php include_once "php/nav.php"; ?>
     <main>
         <form method="POST">
                 <div class="reg1">
