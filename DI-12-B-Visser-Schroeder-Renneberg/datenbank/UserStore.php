@@ -20,5 +20,6 @@
         function updatePost($id,$title,$desc,$anony,$image);
         function deletePost($id);
         function deleteUser($email);
+        function deleteComm($id,$commid);
     }
     ?>

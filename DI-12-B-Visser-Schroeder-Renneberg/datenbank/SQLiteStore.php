@@ -425,6 +425,17 @@
                 echo 'Fehler beim Löschen des Nutzers!<br />';
             }
         }
+
+        function deleteComm($id,$commid){
+            $sql = "DELETE FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_STR);
+            $stmt->bindParam(2, $commid, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+            } else {
+                echo 'Fehler beim Löschen des Kommentars!<br />';
+            }
+        }
         
     }
 
