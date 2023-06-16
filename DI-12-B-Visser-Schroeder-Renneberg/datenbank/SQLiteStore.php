@@ -125,6 +125,21 @@
             }
         }
 
+        function updatePassword($email, $pw) {
+            try{
+            $sql = "UPDATE nutzer SET passwort = ? WHERE email = ?";
+            $stmt = $this->db->prepare($sql);
+            $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
+            $stmt->bindParam(1, $hashedPw, PDO::PARAM_STR);
+            $stmt->bindParam(2, $email, PDO::PARAM_STR);
+            $stmt->execute();
+
+            } catch (PDOException $ex) {
+                echo 'Fehler beim Ändern des Passwortes!<br />';
+                echo $ex;
+            }
+        }
+
         // überprüft Einlogdaten des Nutzer
         function checkLoginData($email, $pw){
             try {
@@ -155,7 +170,8 @@
             try {
                 $sql = "SELECT email FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(1, $email, PDO::PARAM_STR); 
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return !empty($result);
             } catch (PDOException $ex) {
