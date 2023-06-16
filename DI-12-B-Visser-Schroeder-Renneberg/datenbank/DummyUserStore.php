@@ -102,5 +102,9 @@ include_once "UserStore.php";
             
         }
 
+        function deleteComm($id,$commid) {
+
+        }
+
     }
 ?>
