@@ -7,7 +7,7 @@
     if(isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"])) {
         unset($errorMessage);
         foreach($_POST as $postKey=>$postElement) {
-            $$postKey = htmlentities($_POST[$postKey]);
+            $$postKey = $_POST[$postKey];
         }
 
         if($email != $email2) {
