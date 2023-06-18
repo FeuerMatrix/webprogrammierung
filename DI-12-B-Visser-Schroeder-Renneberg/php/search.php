@@ -5,9 +5,10 @@ if(isset($_GET["search"]) && isset($_GET["sort"])) {
     $suche = (is_string($_GET["search"])) ? $_GET["search"] : "";
     $sort = (is_string($_GET["sort"])) ? $_GET["sort"] : "date";
 
-
-    $baseDir = __DIR__; // gibt den Pfad zum Basedirektory aus (also bis DI-12-B-...)
+    $baseDir = dirname(__DIR__); // gibt den Pfad zum Basedirektory aus (also bis php...)
     $databasePath = $baseDir . "/datenbank/SQLiteStore.php";
+    $databasePath = str_replace('\\', '/', $databasePath);
+    include_once($databasePath);
 
     $database = new SQLiteStore();
     $beitraege = $database->getBeitraege();

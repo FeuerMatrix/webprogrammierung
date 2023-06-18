@@ -8,6 +8,8 @@ $(document).ready(function() {
     $("#suche, #sort").on("input change", function() {
         var search = $("#suche").val(); // Lese den Suchbegriff aus dem Eingabefeld
         var sort = $("#sort").val(); // Lese den Wert der Sortierungs-Option aus dem Dropdown-Menü
+        
+        $("#b").val(search + "/" + sort);
 
         // Sende Ajax-Anfrage an den Server
         $.ajax({
@@ -16,12 +18,24 @@ $(document).ready(function() {
             async: true,
             data: { search: search, sort: sort },
             dataType: "json",
+            error: function(error) {
+                $("#text_main").val(JSON.stringify(error));
+            },
             success: function(data) {
+                //$("#text_main").val(JSON.stringify(data)); 
+
+                // HTML-Code für die Ergebnisse generieren und in die Seite einfügen 
                 var container = $(".flex-container");
                 container.empty(); // Leere den Inhalt der flex-container
 
-                // erstelle neue Beitragselemente
                 $.each(data, function(index, beitrag) {
+
+                    $("#text_main").val(beitrag.id + " / ");
+                    $("#text_main").val($("#text_main").val() + beitrag.titel + " / " );
+                    $("#text_main").val($("#text_main").val() + new Date(beitrag.date*1000).toLocaleString() + " / " );
+                    $("#text_main").val($("#text_main").val() + beitrag.file + " / " );
+                    $("#text_main").val($("#text_main").val() + beitrag.pname + " / " );
+
                     var beitragDiv = $("<div>").addClass("beitrag");
                     var link = $("<a>").addClass("link").attr("href", "beitrag.php?id=" + encodeURIComponent(beitrag.id)).text(beitrag.titel);
                     var dateSpan = $("<span>").text(new Date(beitrag.date * 1000).toLocaleString());
@@ -53,6 +67,10 @@ $(document).ready(function() {
                     <option value="date">Datum</option>
                     <option value="titel">Alphabetisch</option>
                 </select> <br>
+                <label for="text_main">Text</label> <br>
+                <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder="Beschreibung hier einfügen"?> </textarea>
+
+                <input id="b" type="submit" value="Auswahl bestätigen">
             </form>
         </div>
 
