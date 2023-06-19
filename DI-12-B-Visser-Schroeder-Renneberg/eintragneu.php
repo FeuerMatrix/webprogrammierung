@@ -6,16 +6,47 @@
 
     <?php include_once "php/nav.php" ?>
 
-    <main>
+    <style>
+        .input-div {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px dotted black;
+            background-color: white;
+            position: relative;
+        }
 
-        <form method="post" enctype="multipart/form-data">
+        .file {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src)
+            }
+        };
+    </script>
+
+    <main>
+        <form method="post" enctype="multipart/form-data" runat="server">
             <div class="reg">
                 <h1><?php if (!isset($_GET["from"])) {
                         echo "Neuer Eintrag";
                     } else {
                         echo "Eintrag Editieren";
                     }
-
 
                     ?></h1>
                 <label for="fname">Titel</label> <br>
@@ -27,7 +58,11 @@
                                                                                                                                         echo $descold;
                                                                                                                                     } ?> </textarea><br>
                 <label for="Datei">Bilder auswählen</label><br>
-                <input type="file" id="Datei" name="Datei" accept="image/png, image/jpeg"><br>
+                <div class="input-div">
+                    <p>Photos hier Drag und dropen oder <strong>Browse</strong></p>
+                    <input type="file" id="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
+                </div>
+                <img id="output" />
                 <label for="anonym">Anonym</label>
                 <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if (isset($_GET["from"]) && $anonyold) {
                                                                                     echo 'checked="checked"';
@@ -37,10 +72,7 @@
             </div>
         </form>
 
-        <form action=<?php echo $url ?> id="form"></form>
-    </main>
-
-    <?php include_once "php/footer.php" ?>
+        <?php include_once "php/footer.php" ?>
 </body>
 
 </html>
