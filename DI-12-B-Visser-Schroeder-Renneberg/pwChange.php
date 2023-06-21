@@ -13,12 +13,12 @@
     <main>
         <form method="POST">
                 <div class="reg1">
-                    <h1 class="col10">Registrieren</h1>
+                    <h1 class="col10">Daten Ändern</h1>
                     <div class="bottom"><p class="col20">Wähle ein neues Passwort und bestätige mit deinem alten Passwort.</p> </div>
                     <label class="col12" for="email">Email</label><br>
                     <input class="col22" type="email" id="email" name="email" placeholder="Email" value= "<?php echo $email ?>" readonly ><br>
                     <label class="col13" for="oldPw">altes Passwort</label><br>
-                    <input class="col23" type="oldPw" id="oldPw" name="oldPw" placeholder="altes Passwort" required autofocus><br>
+                    <input class="col23" type="password" id="oldPw" name="oldPw" placeholder="altes Passwort" required autofocus><br>
                     <label class="col14" for="passw">Passwort</label><br>
                     <input class="col24" type="password" id="passw" name="passw" placeholder="Passwort" required><br>
                     <label class="col15" for="passw2">Passwort bestätigen</label><br>
