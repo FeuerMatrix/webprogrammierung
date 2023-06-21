@@ -20,6 +20,7 @@
                     <option value="date">Datum</option>
                     <option value="titel">Alphabetisch</option>
                 </select> <br>
+                <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder=""> </textarea>
             </form>
         </div>
 

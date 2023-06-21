@@ -4,6 +4,7 @@ $(document).ready(function() {
     $("#suche, #sort").on("input change", function() {
         var search = $("#suche").val(); // Lese den Suchbegriff aus dem Eingabefeld
         var sort = $("#sort").val(); // Lese den Wert der Sortierungs-Option aus dem Dropdown-Menü
+        $("#text_main").text(search);
 
         // Sende Ajax-Anfrage an den Server
         $.ajax({
@@ -12,10 +13,13 @@ $(document).ready(function() {
             async: true,
             data: { search: search, sort: sort },
             dataType: "json",
+            error: function() {
+                $("#text_main").text(error);
+            },
             success: function(data) {
                 var container = $(".flex-container");
                 container.empty(); // Leere den Inhalt der flex-container
-
+                $("#text_main").text(data);
                 // erstelle neue Beitragselemente
                 $.each(data, function(index, beitrag) {
                     var beitragDiv = $("<div>").addClass("beitrag");

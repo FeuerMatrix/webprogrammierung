@@ -11,7 +11,7 @@ if(isset($_GET["search"]) && isset($_GET["sort"])) {
     include_once($databasePath);
 
     $database = new SQLiteStore();
-    $beitraege = $database->getBeitraege();
+    $beitraege = $database->sucheBeitraege($suche);
 
 
     // Nur Beiträge anzeigen, die den Suchbegriff im Titel enthalten

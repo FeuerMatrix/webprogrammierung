@@ -212,9 +212,10 @@
         function sucheBeitraege($search){
             $search = strtolower($search);
             try {
-                $sql = "SELECT * FROM beitrag WHERE lower(titel) LIKE %?% ORDER BY datum DESC LIMIT 5";
-                $stmt = $this->db->query($sql);
-                $stmt->bindParam(1, $search, PDO::PARAM_STR);
+                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY datum DESC LIMIT 5";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
+                $stmt->execute();
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $ex) {
                 echo 'Fehler laden der Beitraege!<br />';
