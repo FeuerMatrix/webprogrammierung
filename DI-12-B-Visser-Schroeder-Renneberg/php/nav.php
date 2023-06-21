@@ -41,7 +41,7 @@
 <?php
   if(isset($_POST["delete"])):
 ?>
-<a>Möchtest du deinen Account wirklich löschen?</a>
+<a>Möchtest du deinen Account und alle deine Beiträge/Kommentare wirklich löschen?</a>
 <form action="script_dropUser.php">
   <input type="submit" class="navdelete" value="Nutzer Löschen">
 </form>
