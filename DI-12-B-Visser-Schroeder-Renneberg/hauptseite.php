@@ -40,10 +40,10 @@
     </main>
 
     <?php include_once "php/footer.php" ?>
-
+    <?php include "javascript/fetch_beitraege.php" ?>
 </body>
 
-<?php include "javascript/fetch_beitraege.php" ?>
-
 </html>
+
+
 

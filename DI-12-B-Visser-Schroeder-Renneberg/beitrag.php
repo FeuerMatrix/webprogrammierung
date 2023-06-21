@@ -32,7 +32,7 @@
             if($img!="./images/userImages/"){
              ?>
              <div id="img">
-                <h4>Clicke um zu vergrössern/ verkleinern</h4>
+                <h3>Clicke um zu vergrössern/ verkleinern</h3>
                 <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
                 </div>
                 <?php
@@ -59,8 +59,9 @@
     </main>
 
     <?php include_once "php/footer.php" ?>
+    <?php include_once "javascript/imagepopup.php" ?>
 </body>
-<?php include_once "javascript/imagepopup.php" ?>
+
 </html>
 
 

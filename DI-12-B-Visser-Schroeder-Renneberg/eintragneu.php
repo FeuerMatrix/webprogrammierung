@@ -54,7 +54,7 @@
                     <p>Photos hier Drag und dropen oder <strong>Browse</strong></p>
                     <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
                 </div>
-                <img id="output" />
+                <img id="output" alt="Anzeige für das hochgeldaene Bild"/>
                 <label for="anonym">Anonym</label>
                 <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if (isset($_GET["from"]) && $anonyold) {
                                                                                     echo 'checked="checked"';
