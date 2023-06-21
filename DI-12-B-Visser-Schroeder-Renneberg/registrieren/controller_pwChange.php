@@ -1,4 +1,6 @@
 <?php
+
+    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     if(!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
         header("Location: index.php?cause=".urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
         exit;
@@ -12,6 +14,7 @@
             $$postKey = $_POST[$postKey];
         }
 
+        include_once "datenbank/SQLiteStore.php";
         $database = new SQLiteStore();
 
         if($passw != $passw2) {
