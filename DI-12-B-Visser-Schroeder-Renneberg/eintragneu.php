@@ -12,7 +12,7 @@
     <?php include_once "javascript/load_image.php" ?>
 
     <main>
-        <form method="post" enctype="multipart/form-data" runat="server">
+        <form method="post" enctype="multipart/form-data">
             <div class="reg">
                 <h1><?php if (!isset($_GET["from"])) {
                         echo "Neuer Eintrag";
@@ -34,7 +34,7 @@
                     <p>Photos hier Drag und dropen oder <strong>Browse</strong></p>
                     <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
                 </div>
-                <img id="output" alt="Anzeige für das hochgeldaene Bild"/>
+                <img id="output" src="images/platzhalter.jpg" alt="Anzeige für das hochgeladene Bild"/>
                 <label for="anonym">Anonym</label>
                 <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if (isset($_GET["from"]) && $anonyold) {
                                                                                     echo 'checked="checked"';
