@@ -209,8 +209,9 @@
 
 
         function sucheBeitraege($search){
+            $search = strtolower($search);
             try {
-                $sql = "SELECT * FROM beitrag WHERE titel LIKE %?% ORDER BY datum DESC LIMIT 5";
+                $sql = "SELECT * FROM beitrag WHERE lower(titel) LIKE %?% ORDER BY datum DESC LIMIT 5";
                 $stmt = $this->db->query($sql);
                 $stmt->bindParam(1, $search, PDO::PARAM_STR);
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
