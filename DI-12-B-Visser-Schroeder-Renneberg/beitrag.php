@@ -10,9 +10,7 @@
     
 
 
-
     <main>
-
         <div class=post>
             <div class="post-text">
                 <h1 class=left><?php echo $titel ?></h1>
@@ -33,7 +31,10 @@
             <?php
             if($img!="./images/userImages/"){
              ?>
-                <img src=<?php echo $img ?> alt=<?php echo $img ?>>
+             <div id="img">
+                <h4>Clicke um zu vergrössern/ verkleinern</h4>
+                <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
+                </div>
                 <?php
                 }
                 ?>
@@ -61,3 +62,13 @@
 </body>
 
 </html>
+
+<script>
+document.getElementById('img').onclick = function() {
+    var element = document.getElementById("img");
+element.classList.toggle("image");
+}
+
+
+
+</script>
