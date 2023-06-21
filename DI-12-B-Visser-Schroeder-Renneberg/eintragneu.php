@@ -29,15 +29,7 @@
         }
     </style>
 
-    <script>
-        var loadFile = function(event) {
-            var output = document.getElementById('output');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src)
-            }
-        };
-    </script>
+    <?php include_once "javascript/load_image.php" ?>
 
     <main>
         <form method="post" enctype="multipart/form-data" runat="server">
