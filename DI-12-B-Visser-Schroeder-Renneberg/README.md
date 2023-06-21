@@ -6,6 +6,7 @@ Namen der Studierenden:
 Abgabe zu Aufgabenblatt 5<br>
 
 Hinweise:
+Burger Menu wird bei naechster abgabe gefixt
 Es gibt einen voreingestellten Nutzer mit folgenden Daten:<br>
 Benutzername "tim@test.de"<br>
 Passwort "helloworld"<br>
