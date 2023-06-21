@@ -60,15 +60,7 @@
 
     <?php include_once "php/footer.php" ?>
 </body>
-
+<?php include_once "javascript/imagepopup.php" ?>
 </html>
 
-<script>
-document.getElementById('img').onclick = function() {
-    var element = document.getElementById("img");
-element.classList.toggle("image");
-}
 
-
-
-</script>
