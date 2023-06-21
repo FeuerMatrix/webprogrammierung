@@ -25,20 +25,26 @@
     </ul>
   </div>
 </nav>
-<?php
+
+<noscript>
+  <?php
     if(isset($_GET["cause"])):
   ?>
   <a><?php echo urldecode($_GET["cause"]); ?></a>
   <?php
     endif;
   ?>
-  <?php
-    if(isset($_POST["delete"])):
-  ?>
-  <a>Möchtest du deinen Account wirklich löschen?</a>
-  <form action="script_dropUser.php">
-    <input type="submit" class="navdelete" value="Nutzer Löschen">
-  </form>
-  <?php
-    endif;
-  ?>
+</noscript>
+
+<?php include "javascript/error_popup.php" ?>
+
+<?php
+  if(isset($_POST["delete"])):
+?>
+<a>Möchtest du deinen Account wirklich löschen?</a>
+<form action="script_dropUser.php">
+  <input type="submit" class="navdelete" value="Nutzer Löschen">
+</form>
+<?php
+  endif;
+?>
