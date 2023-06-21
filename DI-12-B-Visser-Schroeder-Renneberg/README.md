@@ -6,6 +6,7 @@ Namen der Studierenden:
 Abgabe zu Aufgabenblatt 5<br>
 
 Hinweise:
+Die Alerts werden ueberarbeitet um sie etwas weniger stoerend zu machen
 Burger Menu wird bei naechster abgabe gefixt
 Es gibt einen voreingestellten Nutzer mit folgenden Daten:<br>
 Benutzername "tim@test.de"<br>
