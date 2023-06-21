@@ -5,6 +5,7 @@
 //rohdaten in die db dan beim auslesen  htmlsecialchars
 //Transaction (registrieren)
         protected $db;
+
         public function __destruct(){
             //The transmission is automatically started at connection with database and automatically commited/rolled back when this is unset or the script is ended.
             //This makes sure you never have to care about transmissions. But, if multiple transmissions in a row are wanted, the SQLiteStore needs to be unset and reinstantiated.
@@ -19,15 +20,15 @@
         }
 
         public function __construct(){
+            $path = __DIR__;
             try{
-                $dsn = 'sqlite:sqlite-beschwerdeforum.db';
+                $dsn = 'sqlite:'. $path .'\sqlite-beschwerdeforum.db';
                 $user = "root";
                 $pw = null;
                 $this->db = new PDO($dsn, $user, $pw);
                 $this->db->beginTransaction();
                 $this->db->exec("PRAGMA foreign_keys = ON");
-                //Creates Tables and fills them with dummy data.
-                //TODO remove dummy data
+
 
                 //NUTZER TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS nutzer (
