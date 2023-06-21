@@ -13,14 +13,6 @@ if(isset($_GET["search"]) && isset($_GET["sort"])) {
     $database = new SQLiteStore();
     $beitraege = $database->sucheBeitraege($suche);
 
-
-    // Nur Beiträge anzeigen, die den Suchbegriff im Titel enthalten
-    if ($suche != "") {
-        $beitraege = array_filter($beitraege, function ($beitrag) use ($suche) {
-            return strpos(strtolower($beitrag['titel']), strtolower($suche)) !== false;
-        });
-    }
-
     function sortiereNachTitel($a, $b) {                        // Vergleich nach Titel
         return strnatcasecmp($a['titel'], $b['titel']);
     }
