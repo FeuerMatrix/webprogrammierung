@@ -11,12 +11,10 @@ if(isset($_GET["search"]) && isset($_GET["sort"])) {
     include_once($databasePath);
 
     $database = new SQLiteStore();
-    $beitraege = $database->sucheBeitraege($suche);
 
     function sortiereNachTitel($a, $b) {                        // Vergleich nach Titel
         return strnatcasecmp($a['titel'], $b['titel']);
     }
-
 
     function sortiereNachDatum($a, $b) {                        // Vergleich nach Datum
         $dateA = ($a['date']);                                  //strtotime wandelt das Datum in einen int um
@@ -31,9 +29,11 @@ if(isset($_GET["search"]) && isset($_GET["sort"])) {
     //Sortieren der Foreneinträge
     switch ($sort) {
         case "date": 
+            $beitraege = $database->sucheBeitraege($suche);
             usort($beitraege, "sortiereNachDatum");
             break;
         case "titel":
+            $beitraege = $database->sucheBeitraegeAlphabetisch($suche);
             usort($beitraege, "sortiereNachTitel");
             break;
         default:
