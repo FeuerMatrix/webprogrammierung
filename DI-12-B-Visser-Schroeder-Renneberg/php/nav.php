@@ -25,13 +25,24 @@
     </ul>
   </div>
 </nav>
-<?php
+
+<noscript>
+  <?php
     if(isset($_GET["cause"])):
   ?>
   <a><?php echo urldecode($_GET["cause"]); ?></a>
   <?php
     endif;
   ?>
+</noscript>
+
+<script>
+const s = new URLSearchParams(location.search).get("cause");
+if (s != null) {
+alert(s);
+}
+</script>
+
   <?php
     if(isset($_POST["delete"])):
   ?>
