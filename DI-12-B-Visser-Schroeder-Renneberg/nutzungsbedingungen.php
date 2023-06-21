@@ -8,7 +8,9 @@
     <main>
 
         <h1>Nutzungsbedingungen</h1>
-
+        <p>
+            Mit Nutzung dieser Webseite erklären sie ihr Einverständnis zu den folgenden Punkten:
+        </p>
 
         <h2>Hinweise für die Nutzung des Beschwerdeforums</h2>
         <p>
@@ -28,7 +30,12 @@
 
             Bitte beachten Sie auch unsere Hinweise zum Datenschutz. <br>
         </p>
-
+        <h2>Datenlöschung</h2>
+        <p>
+            Selbst erstellte Kommentare, Beiträge sowie der Account können jederzeit von eingeloggten Nutzern gelöscht oder bearbeitet werden. Für die Löschung gilt dabei folgendes:<br>
+            Wird ein Nutzerkonto gekündigt, so werden automatisch alle erstellten Daten (Beiträge und Kommentare) gelöscht. Wird ein Beitrag gelöscht, so werden außerdem alle zugehörigen Kommentare gelöscht. Von Nutzern erstellte Kommentare können ohne Eigeneinwirkung
+            gelöscht werden, falls der Besitzer des entsprechenden Beitrags diesen löscht.
+        </p>
     </main>
 
     <?php include_once "php/footer.php" ?>

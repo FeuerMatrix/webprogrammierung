@@ -5,27 +5,30 @@
 //rohdaten in die db dan beim auslesen  htmlsecialchars
 //Transaction (registrieren)
         protected $db;
+
         public function __destruct(){
             //The transmission is automatically started at connection with database and automatically commited/rolled back when this is unset or the script is ended.
             //This makes sure you never have to care about transmissions. But, if multiple transmissions in a row are wanted, the SQLiteStore needs to be unset and reinstantiated.
+            if($this->db->inTransaction()){
             try{
                 $this->db->commit();
             } catch (Exception $e) {
-                echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
+                echo 'Commit Fehlgeschlagen';
                 $this->db->rollBack();
             }
         }
+        }
 
         public function __construct(){
+            $path = __DIR__;
             try{
-                $dsn = 'sqlite:sqlite-beschwerdeforum.db';
+                $dsn = 'sqlite:'. $path .'\sqlite-beschwerdeforum.db';
                 $user = "root";
                 $pw = null;
                 $this->db = new PDO($dsn, $user, $pw);
                 $this->db->beginTransaction();
                 $this->db->exec("PRAGMA foreign_keys = ON");
-                //Creates Tables and fills them with dummy data.
-                //TODO remove dummy data
+
 
                 //NUTZER TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS nutzer (
@@ -104,10 +107,8 @@
                 }
                 
                 $this->db->commit();
-                $this->db->beginTransaction();
              } catch (PDOException $e ) {
-                echo 'Fehler: ' . htmlspecialchars( $e->getMessage() );
-                exit();
+                echo 'Fehler beim erstllen der Dummy Daten';
             }
         }
 
@@ -121,7 +122,22 @@
                 $stmt->bindParam(2, $hashedPw, PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim speichern des Nutzers!<br />';
+            }
+        }
+
+        function updatePassword($email, $pw) {
+            try{
+            $sql = "UPDATE nutzer SET passwort = ? WHERE email = ?";
+            $stmt = $this->db->prepare($sql);
+            $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
+            $stmt->bindParam(1, $hashedPw, PDO::PARAM_STR);
+            $stmt->bindParam(2, $email, PDO::PARAM_STR);
+            $stmt->execute();
+
+            } catch (PDOException $ex) {
+                echo 'Fehler beim Ändern des Passwortes!<br />';
+                echo $ex;
             }
         }
 
@@ -134,7 +150,7 @@
                 $storedPassword = $stmt->fetchColumn();
                 return password_verify($pw, $storedPassword);
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim uberpruefen der Login daten!<br />';
             }
         }
 
@@ -146,7 +162,7 @@
                 $stmt->bindParam(1, $email, PDO::PARAM_STR); 
                 return $stmt->execute();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim pruefen ob Nutzer eingeloggt ist!<br />';
             }
         }
 
@@ -155,21 +171,85 @@
             try {
                 $sql = "SELECT email FROM nutzer WHERE email = ?";
                 $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(1, $email, PDO::PARAM_STR); 
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return !empty($result);
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim pruefen ob Email existiert!<br />';
             }
         }
 
         function getBeitraege(){
             try {
-                $sql = "SELECT * FROM beitrag";
+                $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 5";
                 $stmt = $this->db->query($sql);
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler laden der Beitraege!<br />';
+                return [];
+            }
+
+            $newArray = array();
+
+            foreach ($originalArray as $item) {
+                $newItem = array(
+                    'id' => htmlspecialchars($item['id_beitrag']),
+                    'author' => htmlspecialchars($item['author']),
+                    'anonym' => htmlspecialchars($item['anonym']),
+                    'titel' => htmlspecialchars($item['titel']),
+                    'date' => htmlspecialchars($item['datum']),
+                    'file' => htmlspecialchars($item['bild']),
+                    'pname' => htmlspecialchars($item['beschreibung'])
+                );
+                $newArray[] = $newItem;
+            }
+
+            return $newArray;
+        }
+
+
+        function sucheBeitraege($search){
+            $search = strtolower($search);
+            try {
+                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY datum DESC LIMIT 5";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
+                $stmt->execute();
+                $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $ex) {
+                echo 'Fehler laden der Beitraege!<br />';
+                return [];
+            }
+
+            $newArray = array();
+
+            foreach ($originalArray as $item) {
+                $newItem = array(
+                    'id' => htmlspecialchars($item['id_beitrag']),
+                    'author' => htmlspecialchars($item['author']),
+                    'anonym' => htmlspecialchars($item['anonym']),
+                    'titel' => htmlspecialchars($item['titel']),
+                    'date' => htmlspecialchars($item['datum']),
+                    'file' => htmlspecialchars($item['bild']),
+                    'pname' => htmlspecialchars($item['beschreibung'])
+                );
+                $newArray[] = $newItem;
+            }
+
+            return $newArray;
+        }
+
+        function sucheBeitraegeAlphabetisch($search){
+            $search = strtolower($search);
+            try {
+                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY titel ASC LIMIT 5";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
+                $stmt->execute();
+                $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $ex) {
+                echo 'Fehler laden der Beitraege!<br />';
                 return [];
             }
 
@@ -211,7 +291,7 @@
 
                 return $newArray;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
         function getTitel($id){
@@ -223,7 +303,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Titels!<br />';
             }
         }
         function getDesc($id){
@@ -235,7 +315,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden der Beschreibung!<br />';
             }
         }
         function getAuthor($id){
@@ -247,7 +327,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Post Authors!<br />';
             }
         }
         function getAnonym($id){
@@ -259,7 +339,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden ob der Beitrag anonym ist!<br />';
             }
         }
         function getDate($id){
@@ -272,7 +352,7 @@
                 $ergebnis = date("Y-m-d H:i:s",$ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Datums!<br />';
             }
         }
         function getImage($id){
@@ -284,7 +364,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Bildes!<br />';
             }
         }
 
@@ -297,7 +377,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden des Kommentar Authors!<br />';
             }
             
         }
@@ -310,7 +390,7 @@
                 $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
         function newComment($auth,$new,$post_id){
@@ -330,7 +410,7 @@
             $stmt->execute();
 
             } catch (PDOException $ex) {
-                echo $ex;
+                echo 'Fehler beim erstellen des Kommentars!<br />';
             }
         }
         function updateComment($id,$comm_id, $new){
@@ -360,7 +440,7 @@
 
                 return $this->db->lastInsertId();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim erstellen des Beitrags!<br />';
             }
         }
 
@@ -375,7 +455,7 @@
                 $stmt->bindParam(5, $id, PDO::PARAM_INT);
                 $stmt->execute();
             } catch (PDOException $ex) {
-                echo "Fehler: " . $ex->getMessage();
+                echo 'Fehler beim bearbeiten des Post!<br />';
             }
         }
 
@@ -425,7 +505,28 @@
                 echo 'Fehler beim Löschen des Nutzers!<br />';
             }
         }
-        
-    }
 
-?>
+        function deleteComm($id,$commid){
+            $sql = "DELETE FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_STR);
+            $stmt->bindParam(2, $commid, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+            } else {
+                echo 'Fehler beim Löschen des Kommentars!<br />';
+            }
+        }
+        
+        function beginTransaction(){
+            $this->db->beginTransaction();
+        } 
+
+        function endTransaction(){
+            try{
+                $this->db->commit();
+            } catch (Exception $e) {
+                echo 'Commit Fehlgeschlagen';
+                $this->db->rollBack();
+            }
+        }
+    }

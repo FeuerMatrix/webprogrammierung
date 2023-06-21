@@ -3,10 +3,11 @@ Namen der Studierenden:
 - Robin Visser
 - Tim Schröder
 - Nils Renneberg<br>
-Abgabe zu Aufgabenblatt 4<br>
+Abgabe zu Aufgabenblatt 5<br>
 
 Hinweise:
-Das Kommentare Löschen wird nachgeholt
+Die Alerts werden ueberarbeitet um sie etwas weniger stoerend zu machen<br>
+Burger Menu wird bei naechster abgabe gefixt<br>
 Es gibt einen voreingestellten Nutzer mit folgenden Daten:<br>
 Benutzername "tim@test.de"<br>
 Passwort "helloworld"<br>
@@ -16,9 +17,9 @@ sowie einige Kommentare und Beiträge, die bereits zum Start in der Website sind
 Später zu beachten:
 
 - Tab Reihenfolge und Tastatur Benutzung für ausgeklappte Navbar muss gut klappen
-- Error-Messages für Form-Elemente mit javaSkript aussagekräftiger machen
-- wenn ein Bild bei einem Beitrag hochgeladen wird, muss eine Beschreibung des Bildes mit andegegben werden.
 
 Verwendete Technologien:
 - WAVE für Accessability
-- Chromium Devtools für Resizing
+- Chromium Devtools für Resizing<br>
+Geplante Features:<br>
+Infinity Scroll kommt später eventuell wenn wir noch Zeit/Lust haben

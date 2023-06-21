@@ -16,9 +16,11 @@
         function getComment($id,$comm_id);
         function newComment($auth,$new,$post_id);
         function updateComment($id,$comm_id, $new);
+        function updatePassword($email, $pw);
         function newPost($auth,$title,$desc,$anony,$image);
         function updatePost($id,$title,$desc,$anony,$image);
         function deletePost($id);
         function deleteUser($email);
+        function deleteComm($id,$commid);
     }
     ?>

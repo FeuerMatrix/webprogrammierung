@@ -1,3 +1,4 @@
+<?php include_once "php/controller_beitrag.php" ?>
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/beitrag.css">
 </head>
@@ -6,8 +7,7 @@
 
 
     <?php include_once "php/nav.php" ?>
-    <?php include_once "php/controller_beitrag.php" ?>
-
+    
 
 
     <main>
@@ -23,12 +23,21 @@
                 <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getAuthor($id)): ?>
                 <form method="post">
                     <input type="submit" name="Submit" value="Bearbeiten" class="edit">
-                    <input class="delete" type="submit" name="delete" value="Löschen" class="edit">
+                    <input class="delete" type="submit" name="delete" value="Löschen" >
                 </form>
                 <?php endif; ?>
             </div>
             <div class=post-pic>
-                <img src=<?php echo $img ?> alt="Gästebuch">
+            <?php
+            if($img!="./images/userImages/"){
+             ?>
+             <div id="img">
+                <h3>Clicke um zu vergrössern/ verkleinern</h3>
+                <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
+                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
 
@@ -50,6 +59,9 @@
     </main>
 
     <?php include_once "php/footer.php" ?>
+    <?php include_once "javascript/imagepopup.php" ?>
 </body>
 
 </html>
+
+

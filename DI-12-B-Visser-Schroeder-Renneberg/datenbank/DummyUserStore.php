@@ -98,6 +98,13 @@ include_once "UserStore.php";
             
         }
  
+        function updatePassword($email, $pw) {
+            
+        }
+
+        function deleteComm($id,$commid) {
+
+        }
 
     }
 ?>

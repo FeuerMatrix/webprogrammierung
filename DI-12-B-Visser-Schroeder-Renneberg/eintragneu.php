@@ -1,13 +1,17 @@
+<?php include_once "php/controller_beitragErstellen.php" ?>
 <?php include_once "php/head.php" ?>
+<link rel="stylesheet" href="css/eintragneu.css">
 </head>
 
 <body>
 
     <?php include_once "php/nav.php" ?>
-    <?php include_once "php/controller_beitragErstellen.php" ?>
+
+    
+
+    <?php include_once "javascript/load_image.php" ?>
 
     <main>
-
         <form method="post" enctype="multipart/form-data">
             <div class="reg">
                 <h1><?php if (!isset($_GET["from"])) {
@@ -15,7 +19,6 @@
                     } else {
                         echo "Eintrag Editieren";
                     }
-
 
                     ?></h1>
                 <label for="fname">Titel</label> <br>
@@ -27,7 +30,11 @@
                                                                                                                                         echo $descold;
                                                                                                                                     } ?> </textarea><br>
                 <label for="Datei">Bilder auswählen</label><br>
-                <input type="file" id="Datei" name="Datei" accept="image/png, image/jpeg"><br>
+                <div class="input-div">
+                    <p>Photos hier Drag und dropen oder <strong>Browse</strong></p>
+                    <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
+                </div>
+                <img id="output" src="images/platzhalter.jpg" alt="Anzeige für das hochgeladene Bild"/>
                 <label for="anonym">Anonym</label>
                 <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if (isset($_GET["from"]) && $anonyold) {
                                                                                     echo 'checked="checked"';
@@ -36,11 +43,10 @@
                 <input type="submit" form="form" name="Cancel" class="cancel" value="Abbrechen">
             </div>
         </form>
-
+        
         <form action=<?php echo $url ?> id="form"></form>
     </main>
-
-    <?php include_once "php/footer.php" ?>
+        <?php include_once "php/footer.php" ?>
 </body>
 
 </html>

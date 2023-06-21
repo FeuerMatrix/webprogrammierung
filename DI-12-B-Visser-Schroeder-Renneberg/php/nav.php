@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/nav.css">
 <?php
-  session_start();
+  if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   if (!isset($abs_path)) include_once "path.php"; // Emergency Handling for when a page includes neither head.php nor path.php for whatever reason
 ?>
 <nav>
@@ -11,6 +11,7 @@
       <?php if(isset($_SESSION["user"])):?>
       <li><a href="eintragneu.php">Neuer Beitrag</a></li>
       <li><a href="php/script_logout.php">Abmelden</a></li>
+      <li><a href="pwChange.php">Daten anpassen</a></li>
       <li>
         <form method="post">
           <input type="hidden" id="delete" name="delete" value="1">
@@ -24,20 +25,26 @@
     </ul>
   </div>
 </nav>
-<?php
+
+<noscript>
+  <?php
     if(isset($_GET["cause"])):
   ?>
   <a><?php echo urldecode($_GET["cause"]); ?></a>
   <?php
     endif;
   ?>
-  <?php
-    if(isset($_POST["delete"])):
-  ?>
-  <a>Möchtest du deinen Account wirklich löschen?</a>
-  <form action="script_dropUser.php">
-    <input type="submit" class="navdelete" value="Nutzer Löschen">
-  </form>
-  <?php
-    endif;
-  ?>
+</noscript>
+
+<?php include "javascript/error_popup.php" ?>
+
+<?php
+  if(isset($_POST["delete"])):
+?>
+<a>Möchtest du deinen Account und alle deine Beiträge/Kommentare wirklich löschen?</a>
+<form action="script_dropUser.php">
+  <input type="submit" class="navdelete" value="Nutzer Löschen">
+</form>
+<?php
+  endif;
+?>
