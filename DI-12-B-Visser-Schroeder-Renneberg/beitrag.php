@@ -12,6 +12,7 @@
 
 
     <main>
+
         <div class=post>
             <div class="post-text">
                 <h1 class=left><?php echo $titel ?></h1>
@@ -29,7 +30,13 @@
                 <?php endif; ?>
             </div>
             <div class=post-pic>
-                <img src=<?php echo $img ?> alt="Gästebuch">
+            <?php
+            if($img!="./images/userImages/"){
+             ?>
+                <img src=<?php echo $img ?> alt=<?php echo $img ?>>
+                <?php
+                }
+                ?>
             </div>
         </div>
 
