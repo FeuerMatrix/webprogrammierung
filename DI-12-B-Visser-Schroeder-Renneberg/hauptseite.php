@@ -2,8 +2,6 @@
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/hauptseite.css">
 
-<?php include "javascript/fetch_beitraege.php" ?>
-
 </head>
 
 <body>
@@ -20,7 +18,6 @@
                     <option value="date">Datum</option>
                     <option value="titel">Alphabetisch</option>
                 </select> <br>
-                <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder=""> </textarea>
             </form>
         </div>
 
@@ -43,6 +40,10 @@
     </main>
 
     <?php include_once "php/footer.php" ?>
+
 </body>
 
+<?php include "javascript/fetch_beitraege.php" ?>
+
 </html>
+

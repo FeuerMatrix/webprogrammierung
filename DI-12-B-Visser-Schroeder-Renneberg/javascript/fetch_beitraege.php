@@ -13,13 +13,10 @@ $(document).ready(function() {
             async: true,
             data: { search: search, sort: sort },
             dataType: "json",
-            error: function() {
-                $("#text_main").text(error);
-            },
             success: function(data) {
                 var container = $(".flex-container");
                 container.empty(); // Leere den Inhalt der flex-container
-                $("#text_main").text(data);
+
                 // erstelle neue Beitragselemente
                 $.each(data, function(index, beitrag) {
                     var beitragDiv = $("<div>").addClass("beitrag");
