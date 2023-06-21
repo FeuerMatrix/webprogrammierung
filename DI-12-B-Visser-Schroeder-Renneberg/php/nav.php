@@ -36,20 +36,15 @@
   ?>
 </noscript>
 
-<script>
-const s = new URLSearchParams(location.search).get("cause");
-if (s != null) {
-alert(s);
-}
-</script>
+<?php include "javascript/error_popup.php" ?>
 
-  <?php
-    if(isset($_POST["delete"])):
-  ?>
-  <a>Möchtest du deinen Account wirklich löschen?</a>
-  <form action="script_dropUser.php">
-    <input type="submit" class="navdelete" value="Nutzer Löschen">
-  </form>
-  <?php
-    endif;
-  ?>
+<?php
+  if(isset($_POST["delete"])):
+?>
+<a>Möchtest du deinen Account wirklich löschen?</a>
+<form action="script_dropUser.php">
+  <input type="submit" class="navdelete" value="Nutzer Löschen">
+</form>
+<?php
+  endif;
+?>
