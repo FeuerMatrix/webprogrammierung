@@ -60,7 +60,7 @@
                 <label for="Datei">Bilder auswählen</label><br>
                 <div class="input-div">
                     <p>Photos hier Drag und dropen oder <strong>Browse</strong></p>
-                    <input type="file" id="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
+                    <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
                 </div>
                 <img id="output" />
                 <label for="anonym">Anonym</label>
@@ -71,7 +71,9 @@
                 <input type="submit" form="form" name="Cancel" class="cancel" value="Abbrechen">
             </div>
         </form>
-
+        
+        <form action=<?php echo $url ?> id="form"></form>
+    </main>
         <?php include_once "php/footer.php" ?>
 </body>
 
