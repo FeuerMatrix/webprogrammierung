@@ -1,33 +1,13 @@
 <?php include_once "php/controller_beitragErstellen.php" ?>
 <?php include_once "php/head.php" ?>
+<link rel="stylesheet" href="css/eintragneu.css">
 </head>
 
 <body>
 
     <?php include_once "php/nav.php" ?>
 
-    <style>
-        .input-div {
-            width: 100%;
-            height: 200px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border: 2px dotted black;
-            background-color: white;
-            position: relative;
-        }
-
-        .file {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-    </style>
+    
 
     <?php include_once "javascript/load_image.php" ?>
 
