@@ -207,6 +207,37 @@
             return $newArray;
         }
 
+
+        function sucheBeitraege($search){
+            $search = strtolower($search);
+            try {
+                $sql = "SELECT * FROM beitrag WHERE lower(titel) LIKE %?% ORDER BY datum DESC LIMIT 5";
+                $stmt = $this->db->query($sql);
+                $stmt->bindParam(1, $search, PDO::PARAM_STR);
+                $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $ex) {
+                echo 'Fehler laden der Beitraege!<br />';
+                return [];
+            }
+
+            $newArray = array();
+
+            foreach ($originalArray as $item) {
+                $newItem = array(
+                    'id' => htmlspecialchars($item['id_beitrag']),
+                    'author' => htmlspecialchars($item['author']),
+                    'anonym' => htmlspecialchars($item['anonym']),
+                    'titel' => htmlspecialchars($item['titel']),
+                    'date' => htmlspecialchars($item['datum']),
+                    'file' => htmlspecialchars($item['bild']),
+                    'pname' => htmlspecialchars($item['beschreibung'])
+                );
+                $newArray[] = $newItem;
+            }
+
+            return $newArray;
+        }
+
         function getComments($id){
             try {
                 $sql = "SELECT * FROM kommentar where id_beitrag=".$id;
