@@ -64,4 +64,20 @@
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+var marker;
+
+function onMapClick(e) {
+
+    if (marker == null) {
+        marker = L.marker(e.latlng, {
+            draggable: true
+        });
+        map.addLayer(marker);
+    }else{
+        marker.setLatLng(e.latlng);
+    }
+}
+
+map.on('click', onMapClick);
 </script>
