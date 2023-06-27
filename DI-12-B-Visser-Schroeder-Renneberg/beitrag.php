@@ -29,7 +29,7 @@
             </div>
             <div class=post-pic>
             <?php
-            if($img!="./images/userImages/"){
+            if($img!=""){
              ?>
              <div id="img">
                 <h3>Clicke um zu vergrössern/ verkleinern</h3>
