@@ -28,6 +28,11 @@
     opacity: 40%;
 }
 
+#map {
+     height: 280px;
+     width: 600px;
+ }
+
 .image{
       position: absolute;
         top: 100px;

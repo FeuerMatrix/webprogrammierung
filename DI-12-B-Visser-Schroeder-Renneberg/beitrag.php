@@ -1,13 +1,18 @@
 <?php include_once "php/controller_beitrag.php" ?>
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/beitrag.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 </head>
 
 <body>
 
 
     <?php include_once "php/nav.php" ?>
-    
 
 
     <main>
@@ -19,6 +24,7 @@
                     <h2><?php echo $date ?></h2>
                 </div>
                 <p class=center>Ort (OpenStreetMap API)</p>
+                <div id="map"></div>
                 <p class=center><?php echo $desc ?> </p>
                 <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $database->getAuthor($id)): ?>
                 <form method="post">
@@ -64,4 +70,12 @@
 
 </html>
 
+    
+<script>
+    var map = L.map('map').setView([53.146962, 8.182063], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+</script>
 
