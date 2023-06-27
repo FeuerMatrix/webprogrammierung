@@ -60,9 +60,9 @@ if (isset($_POST["Submit"])) {
         
         if (isset($_GET["from"])&&is_string($_GET["from"])) {
            $id = $_GET["from"];
-           $database->updatePost($id, $titel, $desc, $anony, $file);
+           $database->updatePost($id, $titel, $desc, $anony, $file, null , null);
         } else {
-            $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
+            $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file, null, null);
         }
         header("Location: Beitrag.php?id=". urlencode($id));
         exit;

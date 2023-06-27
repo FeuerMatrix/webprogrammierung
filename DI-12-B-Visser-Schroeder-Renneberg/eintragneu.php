@@ -68,6 +68,8 @@
 var marker;
 
 function onMapClick(e) {
+    console.log(e.latlng.lat);
+    console.log(e.latlng.lng);
 
     if (marker == null) {
         marker = L.marker(e.latlng, {
