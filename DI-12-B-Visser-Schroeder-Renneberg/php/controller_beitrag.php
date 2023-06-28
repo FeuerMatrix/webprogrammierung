@@ -72,8 +72,13 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $img =  $database->getImage($id);
     $comments = $database->getComments($id);
     $anony = $database->getAnonym($id);
-
-
+    $lat = $database->getlat($id);
+    $lng = $database->getlng($id);
+    if($lat==null){
+        $lat = "'.'";
+        $lng = "'.'";
+    }
+    
     function createComment($comm_id, $name, $text)
     {
         global $id;

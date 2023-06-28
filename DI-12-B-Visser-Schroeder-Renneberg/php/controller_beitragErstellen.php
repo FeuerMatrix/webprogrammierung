@@ -13,6 +13,8 @@ if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page th
 $titel = (isset($_POST["fname"]) && is_string($_POST["fname"])) ? $_POST["fname"] : "";
 $desc = (isset($_POST["text_main"]) && is_string($_POST["text_main"])) ? $_POST["text_main"] : "";
 $anony = (isset($_POST["anonym"]) && is_string($_POST["anonym"])) ? $_POST["anonym"] : "";
+$lat = (isset($_POST["lat"]) && is_string($_POST["lat"])) ? $_POST["lat"] : "";
+$lng = (isset($_POST["lng"]) && is_string($_POST["lng"])) ? $_POST["lng"] : "";
 $titel = $titel;
 $anony = $anony;
 $desc = $desc;
@@ -25,10 +27,18 @@ if (isset($_GET["from"])&&is_string($_GET["from"])) {
         $descold =  $database->getDesc($id);
         $anonyold = $database->getAnonym($id);
         $database->endTransaction();
+        $lat = $database->getlat($id);
+        $lng = $database->getlng($id);
+        if($lat==null){
+            $lat = "'.'";
+            $lng = "'.'";
+        }
+}else{
+    $lat = "'.'";
+    $lng = "'.'";
 }
 
 $ok = false;
-$fehlerfelder = array();
 if (isset($_POST["Submit"])) {
 
 
@@ -56,9 +66,12 @@ if (isset($_POST["Submit"])) {
         
         if (isset($_GET["from"])&&is_string($_GET["from"])) {
            $id = $_GET["from"];
-           $database->updatePost($id, $titel, $desc, $anony, $file);
+           $lat = (isset($_POST["lat"]) && is_string($_POST["lat"])) ? $_POST["lat"] : "";
+$lng = (isset($_POST["lng"]) && is_string($_POST["lng"])) ? $_POST["lng"] : "";
+           echo $lat;
+           $database->updatePost($id, $titel, $desc, $anony, $file, $lat, $lng);
         } else {
-            $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file);
+            $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file, $lat , $lng);
         }
         header("Location: Beitrag.php?id=". urlencode($id));
         exit;

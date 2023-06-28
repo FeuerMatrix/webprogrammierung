@@ -17,4 +17,9 @@
     position: absolute;
     opacity: 0;
     cursor: pointer;
-}        
+}      
+
+#map {
+    height: 280px;
+    width: 600px;
+}

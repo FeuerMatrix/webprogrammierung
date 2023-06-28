@@ -59,7 +59,9 @@
                     titel               TEXT NOT NULL,
                     datum               TEXT,  
                     bild                TEXT,
-                    beschreibung    TEXT,
+                    beschreibung        TEXT,
+                    lat                 FLOAT,
+                    lng                 FLOAT,
                     FOREIGN KEY(author) REFERENCES nutzer(email)
                 )";
 
@@ -69,11 +71,10 @@
                 }    
 
                 $sql = "INSERT OR IGNORE INTO beitrag VALUES
-                    (1, 0, FALSE, 'Argumentation', '0686156644', 'images/beispielbilder/argumentation.png', 'Argumentation'),
-                    (2, 0, FALSE, 'Protest', '1606156644', 'images/beispielbilder/protest.png', 'Protest'),
-                    (3, 0, FALSE, 'Trouble Incoming', '1686156044', 'images/beispielbilder/trouble.jpg', 'Trouble_Schilder'),
-                    (4, 0, FALSE, 'Beispielbild', '1686106644', 'images/guestbook.png', 'Beispielbild'
-                )";
+                    (1, 0, FALSE, 'Argumentation', '0686156644', 'images/beispielbilder/argumentation.png', 'Argumentation',null,null),
+                    (2, 0, FALSE, 'Protest', '1606156644', 'images/beispielbilder/protest.png', 'Protest',null,null),
+                    (3, 0, FALSE, 'Trouble Incoming', '1686156044', 'images/beispielbilder/trouble.jpg', 'Trouble_Schilder',null,null),
+                    (4, 0, FALSE, 'Beispielbild', '1686106644', 'images/guestbook.png', 'Beispielbild',null,null)";
 
                 if ( $this->db->exec( $sql ) !== false ) {
 
@@ -368,6 +369,32 @@
             }
         }
 
+        function getlat($id){
+            try {
+                $sql = "SELECT lat FROM beitrag WHERE id_beitrag=".$id;
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo 'Fehler beim laden der Koordinate!<br />';
+            }
+        }
+
+        function getlng($id){
+            try {
+                $sql = "SELECT lng FROM beitrag WHERE id_beitrag=".$id;
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo 'Fehler beim laden der Koordinate!<br />';
+            }
+        }
+
         function getCommentAuthor($id, $comm_id){
             try {
                 $sql = "SELECT author FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
@@ -425,10 +452,10 @@
             }
         }
 
-        function newPost($auth, $title, $desc, $anony, $image){
+        function newPost($auth, $title, $desc, $anony, $image, $lat, $lng){
             $date = time();
             try {
-                $sql = "INSERT INTO beitrag (author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO beitrag (author, anonym, titel, datum, bild, beschreibung, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(1, $auth, PDO::PARAM_STR);
                 $stmt->bindParam(2, $anony, PDO::PARAM_BOOL);
@@ -436,23 +463,28 @@
                 $stmt->bindParam(4, $date, PDO::PARAM_STR);
                 $stmt->bindParam(5, $image, PDO::PARAM_STR);
                 $stmt->bindParam(6, $desc, PDO::PARAM_STR);
+                $stmt->bindParam(7, $lat, PDO::PARAM_STR);
+                $stmt->bindParam(8, $lng, PDO::PARAM_STR);
                 $stmt->execute();
 
                 return $this->db->lastInsertId();
             } catch (PDOException $ex) {
-                echo 'Fehler beim erstellen des Beitrags!<br />';
+                //echo 'Fehler beim erstellen des Beitrags!<br />';
+                echo $ex->getMessage();
             }
         }
 
-        function updatePost($id, $title, $desc, $anony, $image){
+        function updatePost($id, $title, $desc, $anony, $image,$lat,$lng){
             try {
-                $sql = "UPDATE beitrag SET anonym = ?, titel = ?, bild = ?, beschreibung = ? WHERE id_beitrag = ?";
+                $sql = "UPDATE beitrag SET anonym = ?, titel = ?, bild = ?, beschreibung = ?, lat = ?, lng = ?  WHERE id_beitrag = ?";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(1, $anony, PDO::PARAM_BOOL);
                 $stmt->bindParam(2, $title, PDO::PARAM_STR);
                 $stmt->bindParam(3, $image, PDO::PARAM_STR);
                 $stmt->bindParam(4, $desc, PDO::PARAM_STR);
-                $stmt->bindParam(5, $id, PDO::PARAM_INT);
+                $stmt->bindParam(5, $lat, PDO::PARAM_STR);
+                $stmt->bindParam(6, $lng, PDO::PARAM_STR);
+                $stmt->bindParam(7, $id, PDO::PARAM_INT);
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo 'Fehler beim bearbeiten des Post!<br />';
