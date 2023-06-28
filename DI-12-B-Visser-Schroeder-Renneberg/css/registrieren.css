@@ -103,9 +103,20 @@
     grid-row: 6;
   }
 
-  .col16 {
+  .col17 {
     grid-column: 1;
     grid-row: 7;
+  }
+
+  .col27 {
+    grid-column: 2;
+    grid-row: 7;
+  }
+
+
+  .col16 {
+    grid-column: 1;
+    grid-row: 8;
     background-color: #04aa6d;
     opacity: 0.8;
     border-radius: 15px;
@@ -114,7 +125,7 @@
 
   .col26 {
     grid-column: 2;
-    grid-row: 7;
+    grid-row: 8;
     background-color: rgb(200, 20, 20);
     opacity: 0.8;
     border-radius: 15px;
