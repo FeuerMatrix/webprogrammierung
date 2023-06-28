@@ -29,13 +29,16 @@ if (isset($_GET["from"])&&is_string($_GET["from"])) {
         $database->endTransaction();
         $lat = $database->getlat($id);
         $lng = $database->getlng($id);
+        if($lat==null){
+            $lat = "'.'";
+            $lng = "'.'";
+        }
 }else{
-    $lat = "'new'";
-    $lng = "'new'";
+    $lat = "'.'";
+    $lng = "'.'";
 }
 
 $ok = false;
-$fehlerfelder = array();
 if (isset($_POST["Submit"])) {
 
 
@@ -63,6 +66,9 @@ if (isset($_POST["Submit"])) {
         
         if (isset($_GET["from"])&&is_string($_GET["from"])) {
            $id = $_GET["from"];
+           $lat = (isset($_POST["lat"]) && is_string($_POST["lat"])) ? $_POST["lat"] : "";
+$lng = (isset($_POST["lng"]) && is_string($_POST["lng"])) ? $_POST["lng"] : "";
+           echo $lat;
            $database->updatePost($id, $titel, $desc, $anony, $file, $lat, $lng);
         } else {
             $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file, $lat , $lng);

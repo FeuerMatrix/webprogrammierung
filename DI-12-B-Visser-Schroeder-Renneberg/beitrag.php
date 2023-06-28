@@ -31,13 +31,13 @@
                 <?php endif; ?>
             </div>
             <div class=post-pic>
-            <?php
-            if($img!=""){
-             ?>
-             <div id="img">
-                <h3>Clicke um zu vergrössern/ verkleinern</h3>
-                <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
-                </div>
+                <?php
+                if ($img != "") {
+                ?>
+                    <div id="img">
+                        <h3>Clicke um zu vergrössern/ verkleinern</h3>
+                        <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
+                    </div>
                 <?php
                 }
                 ?>
@@ -69,12 +69,16 @@
 
 
 <script>
-    var map = L.map('map').setView([53.146962, 8.182063], 13);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    var lat =  <?php Print($lat); ?>;
-    var lng = <?php Print($lng); ?>;
-    L.marker([lat, lng]).addTo(map);
+    var lat = <?php print($lat); ?>;
+    var lng = <?php print($lng); ?>;
+    if (lat != '.' && lng != '.') {
+        var map = L.map('map').setView([53.146962, 8.182063], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var marker = L.marker([lat, lng]).addTo(map);
+    } else {
+        document.getElementById("map").remove();
+    }
 </script>

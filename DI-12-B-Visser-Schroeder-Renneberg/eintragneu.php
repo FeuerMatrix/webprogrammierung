@@ -66,13 +66,10 @@
     var marker;
 
     function onMapClick(e) {
-        document.getElementById("lat").value=e.latlng.lat
-        document.getElementById("lng").value=e.latlng.lng
+        document.getElementById("lat").value=e.latlng.lat;
+        document.getElementById("lng").value=e.latlng.lng;
         if (marker == null) {
-            marker = L.marker(e.latlng, {
-                draggable: true
-            });
-            map.addLayer(marker);
+            addMarker(e.latlng.lat, e.latlng.lng);
         } else {
             marker.setLatLng(e.latlng);
         }
@@ -80,11 +77,32 @@
 
     map.on('click', onMapClick);
 
+    function onClick() {
+        map.removeLayer(marker);
+        marker=null;
+        document.getElementById("lat").value="";
+        document.getElementById("lng").value="";
+    }
 
-    var lat =  <?php Print($lat); ?>;
+    function addMarker(lat ,lng) {
+        marker = L.marker([lat,lng], {
+                draggable: true
+            }).addTo(map).on('click',onClick).on('dragend', dragEnd);
+    }
+
+    function dragEnd(e){
+        document.getElementById("lat").value=marker._latlng.lat;
+        document.getElementById("lng").value=marker._latlng.lng;
+    }
+
+    var lat = <?php Print($lat); ?>;
     var lng = <?php Print($lng); ?>;
 
-    if(lat!='new'&&lng!='new'){
-        L.marker([lat, lng]).addTo(map);
+
+    if(lat!='.'&&lng!='.'){
+        addMarker(lat,lng);
+        document.getElementById("lat").value=lat;
+        document.getElementById("lng").value=lng;
     }
+  
 </script>
