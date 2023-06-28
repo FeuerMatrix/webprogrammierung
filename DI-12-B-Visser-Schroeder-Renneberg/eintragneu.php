@@ -1,19 +1,15 @@
 <?php include_once "php/controller_beitragErstellen.php" ?>
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/eintragneu.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 <body>
 
     <?php include_once "php/nav.php" ?>
 
-    
+
 
     <?php include_once "javascript/load_image.php" ?>
 
@@ -41,19 +37,21 @@
                     <p>Photos hier Drag und dropen oder <strong>Browse</strong></p>
                     <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
                 </div>
-                <img id="output" src="" alt=""/>
+                <img id="output" src="" alt="" />
                 <label for="anonym">Anonym</label>
                 <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if (isset($_GET["from"]) && $anonyold) {
                                                                                     echo 'checked="checked"';
                                                                                 } ?>><br>
+                <input type="hidden" name="lat" id="lat">
+                <input type="hidden" name="lng" id="lng">
                 <input type="submit" name="Submit" class="create" value="Erstellen">
                 <input type="submit" form="form" name="Cancel" class="cancel" value="Abbrechen">
             </div>
         </form>
-        
+
         <form action=<?php echo $url ?> id="form"></form>
     </main>
-        <?php include_once "php/footer.php" ?>
+    <?php include_once "php/footer.php" ?>
 </body>
 
 </html>
@@ -61,25 +59,25 @@
 <script>
     var map = L.map('map').setView([53.146962, 8.182063], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 
-var marker;
+    var marker;
 
-function onMapClick(e) {
-    console.log(e.latlng.lat);
-    console.log(e.latlng.lng);
+    function onMapClick(e) {
+        document.getElementById("lat").value=e.latlng.lat
+        document.getElementById("lng").value=e.latlng.lng
 
-    if (marker == null) {
-        marker = L.marker(e.latlng, {
-            draggable: true
-        });
-        map.addLayer(marker);
-    }else{
-        marker.setLatLng(e.latlng);
+        if (marker == null) {
+            marker = L.marker(e.latlng, {
+                draggable: true
+            });
+            map.addLayer(marker);
+        } else {
+            marker.setLatLng(e.latlng);
+        }
     }
-}
 
-map.on('click', onMapClick);
+    map.on('click', onMapClick);
 </script>

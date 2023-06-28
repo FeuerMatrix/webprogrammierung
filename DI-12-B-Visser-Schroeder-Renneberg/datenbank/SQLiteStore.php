@@ -455,7 +455,7 @@
         function newPost($auth, $title, $desc, $anony, $image, $lat, $lng){
             $date = time();
             try {
-                $sql = "INSERT INTO beitrag (author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
+                $sql = "INSERT INTO beitrag (author, anonym, titel, datum, bild, beschreibung, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(1, $auth, PDO::PARAM_STR);
                 $stmt->bindParam(2, $anony, PDO::PARAM_BOOL);
@@ -463,13 +463,14 @@
                 $stmt->bindParam(4, $date, PDO::PARAM_STR);
                 $stmt->bindParam(5, $image, PDO::PARAM_STR);
                 $stmt->bindParam(6, $desc, PDO::PARAM_STR);
-                $stmt->bindParam(7, $lat, PDO::PARAM_INT);
-                $stmt->bindParam(8, $lng, PDO::PARAM_INT);
+                $stmt->bindParam(7, $lat, PDO::PARAM_STR);
+                $stmt->bindParam(8, $lng, PDO::PARAM_STR);
                 $stmt->execute();
 
                 return $this->db->lastInsertId();
             } catch (PDOException $ex) {
-                echo 'Fehler beim erstellen des Beitrags!<br />';
+                //echo 'Fehler beim erstellen des Beitrags!<br />';
+                echo $ex->getMessage();
             }
         }
 
