@@ -74,6 +74,7 @@
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-
-    //L.marker([$lat, $lng]).addTo(map);
+    var lat =  <?php Print($lat); ?>;
+    var lng = <?php Print($lng); ?>;
+    L.marker([lat, lng]).addTo(map);
 </script>

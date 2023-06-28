@@ -68,7 +68,6 @@
     function onMapClick(e) {
         document.getElementById("lat").value=e.latlng.lat
         document.getElementById("lng").value=e.latlng.lng
-
         if (marker == null) {
             marker = L.marker(e.latlng, {
                 draggable: true
@@ -80,4 +79,12 @@
     }
 
     map.on('click', onMapClick);
+
+
+    var lat =  <?php Print($lat); ?>;
+    var lng = <?php Print($lng); ?>;
+
+    if(lat!='new'&&lng!='new'){
+        L.marker([lat, lng]).addTo(map);
+    }
 </script>

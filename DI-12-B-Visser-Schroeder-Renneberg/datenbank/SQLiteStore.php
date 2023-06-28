@@ -482,8 +482,8 @@
                 $stmt->bindParam(2, $title, PDO::PARAM_STR);
                 $stmt->bindParam(3, $image, PDO::PARAM_STR);
                 $stmt->bindParam(4, $desc, PDO::PARAM_STR);
-                $stmt->bindParam(5, $lat, PDO::PARAM_INT);
-                $stmt->bindParam(6, $lng, PDO::PARAM_INT);
+                $stmt->bindParam(5, $lat, PDO::PARAM_STR);
+                $stmt->bindParam(6, $lng, PDO::PARAM_STR);
                 $stmt->bindParam(7, $id, PDO::PARAM_INT);
                 $stmt->execute();
             } catch (PDOException $ex) {

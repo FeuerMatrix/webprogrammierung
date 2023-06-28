@@ -74,8 +74,6 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $anony = $database->getAnonym($id);
     $lat = $database->getlat($id);
     $lng = $database->getlng($id);
-    $lat = floatval($lat);
-    $lng = floatval($lng);
     
     function createComment($comm_id, $name, $text)
     {
