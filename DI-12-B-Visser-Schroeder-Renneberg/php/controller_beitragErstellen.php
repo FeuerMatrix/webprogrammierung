@@ -38,15 +38,16 @@ if (isset($_POST["Submit"])) {
     $ok = true;
     if (!isset($_POST["fname"]) || !is_string($_POST["fname"])) {
         $ok = false;
-        $fehlerfelder[] = "Titel";
     }
     if (!isset($_POST["text_main"]) || !is_string($_POST["text_main"]) || trim($_POST["text_main"]) == "") {
         $ok = false;
-        $fehlerfelder[] = "Beschreibung";
     }
     if ($ok) {
-        if (isset($_FILES["Datei"])) {
+        if (isset($_FILES["Datei"]["name"])&&$_FILES["Datei"]["name"]!="") {
             move_uploaded_file($_FILES["Datei"]["tmp_name"], "./images/userImages/" . hash("md5", $_FILES["Datei"]["name"]));
+            $file = "./images/userImages/" . hash("md5", $_FILES["Datei"]["name"]);
+        }else{
+            $file = null;
         }
 
         if ($anony == "Anonym") {
@@ -54,11 +55,7 @@ if (isset($_POST["Submit"])) {
         } else {
             $anony = FALSE;
         }
-        if(isset ($_FILES["Datei"]["name"])){
-            $file = "./images/userImages/" . hash("md5", $_FILES["Datei"]["name"]);
-        }else{
-            $file = null;
-        }
+        
         if (isset($_GET["from"])&&is_string($_GET["from"])) {
            $id = $_GET["from"];
            $database->updatePost($id, $titel, $desc, $anony, $file, $lat , $lng);
@@ -70,9 +67,6 @@ if (isset($_POST["Submit"])) {
     } else {
         ?>
         <p><b>Formular unvollst&auml;ndig</b></p>
-        <ul><li>
-        </li><li> <?php echo $fehlerfelder ?>
-        </li></ul>
         <?php
     }
 }

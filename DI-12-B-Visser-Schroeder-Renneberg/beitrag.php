@@ -31,13 +31,13 @@
                 <?php endif; ?>
             </div>
             <div class=post-pic>
-                <?php
-                if ($img != "./images/userImages/") {
-                ?>
-                    <div id="img">
-                        <h3>Clicke um zu vergrössern/ verkleinern</h3>
-                        <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
-                    </div>
+            <?php
+            if($img!=""){
+             ?>
+             <div id="img">
+                <h3>Clicke um zu vergrössern/ verkleinern</h3>
+                <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
+                </div>
                 <?php
                 }
                 ?>

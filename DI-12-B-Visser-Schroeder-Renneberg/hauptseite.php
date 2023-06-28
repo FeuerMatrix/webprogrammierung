@@ -27,7 +27,7 @@
                     <a class="link" href=<?php echo "\"beitrag.php?id=" . urlencode($beitrag["id"]) . "\"" ?>> <?php echo $beitrag['titel'] ?></a>
                     <span> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
                     <?php
-                    if ($beitrag['file'] != "./images/userImages/") {
+                    if ($beitrag['file'] != "") {
                     ?>
                         <img src=<?php echo $beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
                     <?php
