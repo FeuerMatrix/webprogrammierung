@@ -75,5 +75,5 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    L.marker([53.146962, 8.182063]).addTo(map);
+    //L.marker([$lat, $lng]).addTo(map);
 </script>

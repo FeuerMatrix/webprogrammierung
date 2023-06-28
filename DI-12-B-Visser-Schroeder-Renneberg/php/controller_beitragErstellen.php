@@ -62,8 +62,8 @@ if (isset($_POST["Submit"])) {
         } else {
             $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file, $lat , $lng);
         }
-        //header("Location: Beitrag.php?id=". urlencode($id));
-        //exit;
+        header("Location: Beitrag.php?id=". urlencode($id));
+        exit;
     } else {
         ?>
         <p><b>Formular unvollst&auml;ndig</b></p>
