@@ -1,6 +1,7 @@
 <?php
     interface UserStore {
         function store($email, $pw);
+        function confirmUser($email);
         function checkLoginData($email, $pw);
         function isLoggedIn($email);
         function emailExists($username);
