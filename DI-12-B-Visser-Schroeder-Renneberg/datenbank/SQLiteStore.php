@@ -113,6 +113,15 @@
                 }
                 
                 $this->db->commit();
+
+                //lösche Nutzer die nicht innerhalb von 24h ihre Email bestätigen
+                $sql = "DELETE FROM nutzer WHERE created < datetime('now', '-24 hours') AND confirmed = 0";
+                
+                if ( $this->db->exec( $sql ) !== false ) {
+                } else {
+                    echo 'Fehler beim löschen von nicht bestätigten Nutzern!<br />';
+                }
+
              } catch (PDOException $e ) {
                 echo 'Fehler beim erstllen der Dummy Daten';
             }
