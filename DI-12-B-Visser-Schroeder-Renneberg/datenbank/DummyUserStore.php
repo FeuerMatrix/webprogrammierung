@@ -20,6 +20,9 @@ include_once "UserStore.php";
             return $username == "blockedName";
         }
 
+        function getUser($token){
+            
+        }
 
         // Beispieldaten für Foreneinträge
         function getBeitraege(){

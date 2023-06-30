@@ -200,6 +200,21 @@
             }
         }
 
+        // gibt den Nutzer zurück der den Token besitzt
+        function getUser($token){
+            try {
+                $sql = "SELECT email FROM nutzer WHERE token=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $token, PDO::PARAM_STR);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo 'Fehler beim finden des Nutzers!<br />';
+            }
+        }
+
         function getBeitraege(){
             try {
                 $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 5";
