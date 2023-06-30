@@ -1,11 +1,23 @@
 <?php
 
+    if(isset($_GET["token"])){
 
-if(FALSE) {
-    $confirmed = True;
-} 
-else {
-    $confirmed = False;
-}
+        include_once "datenbank/SQLiteStore.php";
+        $database = new SQLiteStore();
+        $user = $database->getUser($_GET["token"]);
+
+        if($user != "") {
+            $database->confirmUser($user);
+            $confirmed = True;
+        } 
+        else {
+            $confirmed = False;
+        }
+    }
+    else
+    {
+        $errorMessage = "Fehlerhafte URL";
+        header("Location: index.php?cause=".urlencode($errorMessage));
+    }
 
 ?>
