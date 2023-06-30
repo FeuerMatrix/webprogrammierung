@@ -25,7 +25,9 @@
                     <label class="col15" for="passw2">Passwort bestätigen</label><br>
                     <input class="col25" type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
                     <label class="col17" for="accept">Ich akzeptiere die &nbsp; <a href="nutzungsbedingungen.php">Nutzungsbedingungen</a></label>
-                    <input class="col27" type="checkbox" id="anonym" name="anonym" value="Anonym">
+                    <input class="col27" type="checkbox" id="anonym" name="anonym" value="Anonym" required>
+                    <label class="col18" for="accept">Ich akzeptiere die &nbsp; <a href="datenschutz.php">Datenschutzbedingungen</a></label>
+                    <input class="col28" type="checkbox" id="anonym" name="anonym" value="Anonym" required>
                     <input class="col16" type="submit" value="Erstellen">
                     <input class="col26" type="submit" form="form" value="Abbrechen"><br>
                 </div>
