@@ -40,7 +40,7 @@
             $database->store($email, $passw);
             $emailLog = fopen("email.txt", "w");
             $linkRegestrierung = "http://localhost/webprogrammierung/DI-12-B-Visser-Schroeder-Renneberg/confirmEmail.php?token=".$token;
-            fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nAnsonsten klicke auf folgenden Link, um die Registrierung abzuschließen: \n$linkRegestrierung");
+            fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nAnsonsten klicke innerhalb von 24h auf den folgenden Link, um die Registrierung abzuschließen: \n$linkRegestrierung");
             fclose($emailLog);
             header("Location: anmeldung.php?from=registration");
             exit;
