@@ -22,8 +22,11 @@ if (isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"]))
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errorMessage = "Fehlerhafte Email-Addresse!";
     }
-    if (!$_POST["accept"]) {
+    if (!isset($_POST["accept1"])) {
         $errorMessage = "Akzeptiere die Nutzerbedingungen";
+    }
+    if (!isset($_POST["accept2"])) {
+        $errorMessage = "Akzeptiere die Datenschutzbedingungen";
     }
 
     include_once "datenbank/SQLiteStore.php";
