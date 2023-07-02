@@ -29,6 +29,7 @@
 
 
 @media (min-width: 800px) {
+
   h1 {
     text-align: center;
   }
@@ -113,10 +114,19 @@
     grid-row: 7;
   }
 
+  .col18 {
+    grid-column: 1;
+    grid-row: 8;
+  }
+
+  .col28 {
+    grid-column: 2;
+    grid-row: 8;
+  }
 
   .col16 {
     grid-column: 1;
-    grid-row: 8;
+    grid-row: 9;
     background-color: #04aa6d;
     opacity: 0.8;
     border-radius: 15px;
@@ -125,7 +135,7 @@
 
   .col26 {
     grid-column: 2;
-    grid-row: 8;
+    grid-row: 9;
     background-color: rgb(200, 20, 20);
     opacity: 0.8;
     border-radius: 15px;
