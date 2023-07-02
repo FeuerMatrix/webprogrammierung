@@ -25,8 +25,8 @@
                     <label class="col15" for="passw2">Passwort bestätigen</label><br>
                     <input class="col25" type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
                     <label class="col17" for="accept">Ich akzeptiere die Nutzerbedinungen</label>
-                    <input class="col27" type="checkbox" id="anonym" name="anonym" value="Anonym">
-                    <input class="col16" type="submit" value="Erstellen">
+                    <input class="col27" type="checkbox" id="accept" name="accept" value="Akzeptieren">
+                    <input class="col16" type="submit" name="submit" value="Erstellen">
                     <input class="col26" type="submit" form="form" value="Abbrechen"><br>
                 </div>
         </form>
