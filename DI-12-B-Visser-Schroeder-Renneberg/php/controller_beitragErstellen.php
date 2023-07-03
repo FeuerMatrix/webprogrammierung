@@ -15,6 +15,10 @@ $desc = (isset($_POST["text_main"]) && is_string($_POST["text_main"])) ? $_POST[
 $anony = (isset($_POST["anonym"]) && is_string($_POST["anonym"])) ? $_POST["anonym"] : "";
 $lat = (isset($_POST["lat"]) && is_string($_POST["lat"])) ? $_POST["lat"] : "";
 $lng = (isset($_POST["lng"]) && is_string($_POST["lng"])) ? $_POST["lng"] : "";
+if($lat==""){
+    $lat="'.'";
+    $lng="'.'"; 
+}
 $titel = $titel;
 $anony = $anony;
 $desc = $desc;
@@ -33,11 +37,7 @@ if (isset($_GET["from"])&&is_string($_GET["from"])) {
             $lat = "'.'";
             $lng = "'.'";
         }
-}else{
-    $lat = "'.'";
-    $lng = "'.'";
 }
-
 $ok = false;
 if (isset($_POST["Submit"])) {
 
@@ -67,7 +67,7 @@ if (isset($_POST["Submit"])) {
         if (isset($_GET["from"])&&is_string($_GET["from"])) {
            $id = $_GET["from"];
            $lat = (isset($_POST["lat"]) && is_string($_POST["lat"])) ? $_POST["lat"] : "";
-$lng = (isset($_POST["lng"]) && is_string($_POST["lng"])) ? $_POST["lng"] : "";
+           $lng = (isset($_POST["lng"]) && is_string($_POST["lng"])) ? $_POST["lng"] : "";
            echo $lat;
            $database->updatePost($id, $titel, $desc, $anony, $file, $lat, $lng);
         } else {

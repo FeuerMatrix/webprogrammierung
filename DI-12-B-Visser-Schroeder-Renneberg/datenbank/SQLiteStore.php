@@ -60,8 +60,8 @@
                     datum               TEXT,  
                     bild                TEXT,
                     beschreibung        TEXT,
-                    lat                 FLOAT,
-                    lng                 FLOAT,
+                    lat                 TEXT,
+                    lng                 TEXT,
                     FOREIGN KEY(author) REFERENCES nutzer(email)
                 )";
 
@@ -375,7 +375,7 @@
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
+                $ergebnis = floatval($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden der Koordinate!<br />';
@@ -388,7 +388,7 @@
                 $stmt = $this->db->query($sql);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
+                $ergebnis = floatval($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden der Koordinate!<br />';
@@ -469,8 +469,7 @@
 
                 return $this->db->lastInsertId();
             } catch (PDOException $ex) {
-                //echo 'Fehler beim erstellen des Beitrags!<br />';
-                echo $ex->getMessage();
+                echo 'Fehler beim erstellen des Beitrags!<br />';
             }
         }
 
