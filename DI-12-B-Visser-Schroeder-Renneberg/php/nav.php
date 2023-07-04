@@ -29,16 +29,17 @@
     </ul>
   </div>
 </nav>
-
-  <div>
-    <?php
-      if(isset($_GET["cause"])):
-    ?>
+ 
+<?php
+  if(isset($_GET["cause"])):
+?>
+  <div class="errorpopup" id="errorpopup">
     <a id="errorbox"><noscript><?php echo urldecode($_GET["cause"]); ?></noscript></a>
-    <?php
-      endif;
-    ?>
   </div>
+<?php
+  endif;
+?>
+
 
 <?php include "javascript/error_popup.php" ?>
 
