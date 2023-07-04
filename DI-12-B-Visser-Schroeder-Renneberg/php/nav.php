@@ -30,15 +30,15 @@
   </div>
 </nav>
 
-<noscript>
-  <?php
-    if(isset($_GET["cause"])):
-  ?>
-  <a><?php echo urldecode($_GET["cause"]); ?></a>
-  <?php
-    endif;
-  ?>
-</noscript>
+  <div>
+    <?php
+      if(isset($_GET["cause"])):
+    ?>
+    <a id="errorbox"><noscript><?php echo urldecode($_GET["cause"]); ?></noscript></a>
+    <?php
+      endif;
+    ?>
+  </div>
 
 <?php include "javascript/error_popup.php" ?>
 
