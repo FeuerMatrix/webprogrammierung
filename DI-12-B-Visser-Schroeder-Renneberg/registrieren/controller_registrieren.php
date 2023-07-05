@@ -33,12 +33,14 @@
         $url = str_replace('\\', '/', $url);
 
         $database = new SQLiteStore();
+        $database->beginTransaction();
         $token = crypt($email, $salt);
         if($database->emailExists($email)) {
             $emailLog = fopen("email.txt", "w");
             $linkPWResset = $url."/pwReset.php?token=".$token;
             fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nDu bist aber bereits registriert. \nSolltest du dein Password vergessen haben, klicke auf folgenden Link. \n$linkPWResset");
             fclose($emailLog);
+            $database->endTransaction();
             header("Location: registrierenFertig.php");
         } else {
             if(!isset($errorMessage)) {
@@ -47,9 +49,11 @@
                 $linkRegestrierung = $url."/confirmEmail.php?token=".$token;
                 fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nAnsonsten klicke innerhalb von 24h auf den folgenden Link, um die Registrierung abzuschliessen: \n$linkRegestrierung");
                 fclose($emailLog);
+                $database->endTransaction();
                 header("Location: registrierenFertig.php");
                 exit;
             } else {
+                $database->endTransaction();
                 header("Location: registrieren.php?cause=".urlencode($errorMessage)."&email=".$email."&email2=".$email2);
                 exit;
             }

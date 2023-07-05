@@ -12,7 +12,6 @@
 
     <?php include_once "php/nav.php"; ?>
     <main>
-    
         <form method="POST">
                 <div class="reg1">
                     <h1 class="col10">Registrieren</h1>
