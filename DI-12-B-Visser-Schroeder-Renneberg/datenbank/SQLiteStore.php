@@ -1,5 +1,6 @@
 <?php
     include_once "UserStore.php";
+    include_once "salt.php";
 
     class SQLiteStore implements UserStore {
 //rohdaten in die db dan beim auslesen  htmlsecialchars
@@ -21,6 +22,7 @@
 
         public function __construct(){
             $path = __DIR__;
+            
             try{
                 $dsn = 'sqlite:'. $path .'\sqlite-beschwerdeforum.db';
                 $user = "root";
@@ -33,7 +35,10 @@
                 //NUTZER TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS nutzer (
                     email       TEXT PRIMARY KEY,
-                    passwort    TEXT NOT NULL
+                    passwort    TEXT NOT NULL,
+                    token       TEXT NOT NULL,
+                    confirmed   BOOLEAN,
+                    created     TIMESTAMP DEFAULT (DATETIME('now', 'localtime'))
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -43,7 +48,7 @@
 
                 $pw = password_hash('helloworld',PASSWORD_DEFAULT);
                 $sql = "INSERT OR IGNORE INTO nutzer VALUES (
-                    'tim@test.de', '$pw'
+                    'tim@test.de', '$pw', 'DiTROSrT0dXkk', 1, CURRENT_TIMESTAMP 
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -108,22 +113,45 @@
                 }
                 
                 $this->db->commit();
+
+                //lösche Nutzer die nicht innerhalb von 24h ihre Email bestätigen
+                $sql = "DELETE FROM nutzer WHERE created < datetime('now', '-24 hours') AND confirmed = 0";
+                
+                if ( $this->db->exec( $sql ) !== false ) {
+                } else {
+                    echo 'Fehler beim löschen von nicht bestätigten Nutzern!<br />';
+                }
+
              } catch (PDOException $e ) {
                 echo 'Fehler beim erstllen der Dummy Daten';
             }
         }
 
-        // Speichert den Nutzer ein oder Updatet ihn
+        // Speichert Regestrierungsdaten ein mit Status das noch bestätigt werden muss (confirm = false)
         function store($email, $pw){
             try {
-                $sql = "INSERT OR REPLACE INTO nutzer (email, passwort) VALUES (?, ?)";
+                global $salt;
+                $sql = "INSERT OR REPLACE INTO nutzer (email, passwort, token, confirmed ) VALUES (?, ?, ?, 0)";
                 $stmt = $this->db->prepare($sql);
                 $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
                 $stmt->bindParam(1, $email, PDO::PARAM_STR);
                 $stmt->bindParam(2, $hashedPw, PDO::PARAM_STR);
+                $stmt->bindParam(3, crypt($email, $salt), PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo 'Fehler beim speichern des Nutzers!<br />';
+            }
+        }
+
+        // Ändert den Status eines Nutzers zu Email Bestätigt
+        function confirmUser($email){
+            try {
+                $sql = "UPDATE nutzer SET confirmed = 1 WHERE email = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                echo 'Fehler beim ändern der Bestätigung der Email!<br />';
             }
         }
 
@@ -142,10 +170,10 @@
             }
         }
 
-        // überprüft Einlogdaten des Nutzer
+        // überprüft Einlogdaten des Nutzer wenn Regestrierung bereits bestätigt
         function checkLoginData($email, $pw){
             try {
-                $sql = "SELECT passwort FROM nutzer WHERE email = ?";
+                $sql = "SELECT passwort FROM nutzer WHERE email = ? AND confirmed = 1";
                 $stmt = $this->db->prepare($sql); 
                 $stmt->execute([$email]);
                 $storedPassword = $stmt->fetchColumn();
@@ -178,6 +206,21 @@
                 return !empty($result);
             } catch (PDOException $ex) {
                 echo 'Fehler beim pruefen ob Email existiert!<br />';
+            }
+        }
+
+        // gibt den Nutzer zurück der den Token besitzt
+        function getUser($token){
+            try {
+                $sql = "SELECT email FROM nutzer WHERE token=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $token, PDO::PARAM_STR);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo 'Fehler beim finden des Nutzers!<br />';
             }
         }
 

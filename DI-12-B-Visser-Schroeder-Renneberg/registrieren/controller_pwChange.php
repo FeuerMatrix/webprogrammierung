@@ -35,7 +35,7 @@
 
         if(!isset($errorMessage)) {
             $database->updatePassword($email, $passw);
-            header("Location: index.php?cause=".urlencode("Erfolgreich Passwort geändert!"));
+            header("Location: anmeldung.php?cause=".urlencode("Erfolgreich Passwort geändert!"));
             exit;
         } else {
             header("Location: pwChange.php?cause=".urlencode($errorMessage)."&email=".$email);
