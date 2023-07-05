@@ -47,6 +47,8 @@
             <br>
             Stabsstelle Datenschutz- und Informationssicherheitsmanagement<br>
             Weitere Informationen zum Datenschutz finden Sie auch auf der Webseite der Stabsstelle.<br>
+            <br>
+            Ich stimme zu, dass meine Daten beim benutzen der Website an OpenStreetMap gesendet werden.
         </p>
 
     </main>
