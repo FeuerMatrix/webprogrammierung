@@ -79,4 +79,13 @@ if (isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"]))
         }
     }
 }
+
+$email1set = isset($_GET["email"]);
+if ($email1set) {
+    $email1 = $_GET["email"];
+}
+$email2set = isset($_GET["email2"]);
+if ($email2set) {
+    $email2 = $_GET["email2"];
+}
 ?>
