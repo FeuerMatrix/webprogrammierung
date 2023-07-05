@@ -90,7 +90,7 @@
         var lat = <?php print($lat); ?>;
         var lng = <?php print($lng); ?>;
         if (lat != '.' && lng != '.') {
-            var map = L.map('map').setView([53.146962, 8.182063], 13);
+            var map = L.map('map').setView([lat, lng], 13);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
