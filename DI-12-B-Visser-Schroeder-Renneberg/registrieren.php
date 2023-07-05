@@ -17,11 +17,11 @@
                     <h1 class="col10">Registrieren</h1>
                     <div class="bottom"><p class="col20">Fülle alle Daten aus, um dich zu Registrieren</p> </div>
                     <label class="col12" for="email">Email</label><br>
-                    <input class="col22" type="email" id="email" name="email" placeholder="Email" <?php if(isset($_GET["email"])):?> value=<?php echo $_GET["email"]; endif; ?> required <?php if(!isset($_GET["email"])):?>autofocus <?php endif; ?>><br>
+                    <input class="col22" type="email" id="email" name="email" placeholder="Email" <?php if($email1set):?> value=<?php echo $email1; endif; ?> required <?php if(!$email1set):?>autofocus <?php endif; ?>><br>
                     <label class="col13" for="email2">Email bestätigen</label><br>
-                    <input class="col23" type="email" id="email2" name="email2" placeholder="Email bestätigen" <?php if(isset($_GET["email2"])):?> value=<?php echo $_GET["email2"]; endif; ?> required><br>
+                    <input class="col23" type="email" id="email2" name="email2" placeholder="Email bestätigen" <?php if($email2set):?> value=<?php echo $email2; endif; ?> required><br>
                     <label class="col14" for="passw">Passwort</label><br>
-                    <input class="col24" type="password" id="passw" name="passw" placeholder="Passwort" required <?php if(isset($_GET["email"])):?>autofocus <?php endif; ?>><br>
+                    <input class="col24" type="password" id="passw" name="passw" placeholder="Passwort" required <?php if($email1set):?>autofocus <?php endif; ?>><br>
                     <label class="col15" for="passw2">Passwort bestätigen</label><br>
                     <input class="col25" type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
                     <label class="col17" for="accept">Ich akzeptiere die &nbsp; <a href="nutzungsbedingungen.php">Nutzungsbedingungen</a></label>
