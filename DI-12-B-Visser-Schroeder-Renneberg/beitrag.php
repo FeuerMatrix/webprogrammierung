@@ -33,7 +33,7 @@
                 <?php
                 } else if($lat!="'.'"){
                     ?>
-                    <p>Akzeptiere die um die Karte zu sehen</p>
+                    <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
                     <?php
                 }
                 ?>
