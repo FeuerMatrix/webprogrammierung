@@ -55,9 +55,11 @@ if (isset($_POST["Submit"])) {
     }
     if ($ok) {
         if (isset($_FILES["Datei"]["name"])&&$_FILES["Datei"]["name"]!="") {
-            $newname = hash("md5", $_FILES["Datei"]["name"]);
+            $newname = hash_file("md5", $_FILES['Datei']['tmp_name']);
+            
+            //$newname = hash("md5", $_FILES["Datei"]["name"]);
             move_uploaded_file($_FILES["Datei"]["tmp_name"], "./images/userImages/" . $newname);
-            $file = "./images/userImages/" . $newname;
+            $file = "images/userImages/" . $newname;
         }else{
             $file = null;
         }
