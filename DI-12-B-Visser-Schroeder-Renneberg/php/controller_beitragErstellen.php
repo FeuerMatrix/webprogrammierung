@@ -1,7 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-$accept_map = isset($_SESSION["accept_map"]);
+$accept_map =  isset($_COOKIE["accept"]);
 
 include_once "datenbank/SQLiteStore.php";
 $database = new SQLiteStore();
