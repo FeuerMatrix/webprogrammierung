@@ -3,7 +3,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $id = (isset($_GET["id"]) && is_string($_GET["id"])) ? $_GET["id"] : "";
     $auth = isset($_SESSION["user"]);
-    $accept_map = isset($_SESSION["accept_map"]);
+    $accept_map = isset($_COOKIE["accept"]);
 
 
     $modifiesOld = isset($_GET["old"]);

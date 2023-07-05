@@ -6,12 +6,26 @@
 
     <?php include_once "php/nav.php" ?>
 
+    <?php
+
+    if (isset($_POST["acc"])) {
+        setcookie("accept", "set", time() + (86400 * 30), "/"); // 86400 = 1 day
+        header("Location: hauptseite.php");
+    }
+
+    if (isset($_POST["notacc"])) {
+        setcookie("accept", "", time() - 3600, "/");
+        unset($_COOKIE["accept"]);
+        header("Location: hauptseite.php");
+    }
+
+    $set = isset($_COOKIE["accept"]);
+    ?>
+
     <main>
 
+        <a href="https://www.openstreetmap.org/about">OpenStreetMap Info</a>
         <?php
-        echo $_COOKIE["accept"];
-        $set = isset($_COOKIE["accept"]);
-
         if (!$set) :
         ?>
             <form method="post">
@@ -40,16 +54,3 @@
 </body>
 
 </html>
-
-<?php
-if (isset($_POST["acc"])) {
-    echo "set";
-    setcookie("accept", "set", time() + (86400 * 30), "/"); // 86400 = 1 day
-}
-
-if (isset($_POST["notacc"])) {
-    echo "notset";
-    unset($_COOKIE["accept"]);
-    setcookie("accept", "", time() - 3600);
-}
-?>
