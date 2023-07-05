@@ -26,11 +26,17 @@
         }
         
         include_once "datenbank/SQLiteStore.php";
+
+        // Ersetze den Teil des Pfades bis zu htdocs mit http://localhost
+        $changeOn = strpos($path, 'htdocs') + 6;
+        $url = 'http://localhost'.substr($path, $changeOn);
+        $url = str_replace('\\', '/', $url);
+
         $database = new SQLiteStore();
         $token = crypt($email, $salt);
         if($database->emailExists($email)) {
             $emailLog = fopen("email.txt", "w");
-            $linkPWResset = "http://localhost/webprogrammierung/DI-12-B-Visser-Schroeder-Renneberg/pwReset.php?token=".$token;
+            $linkPWResset = $url."/pwReset.php?token=".$token;
             fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nDu bist aber bereits registriert. \nSolltest du dein Password vergessen haben, klicke auf folgenden Link. \n$linkPWResset");
             fclose($emailLog);
             header("Location: registrierenFertig.php");
@@ -38,8 +44,8 @@
             if(!isset($errorMessage)) {
                 $database->store($email, $passw);
                 $emailLog = fopen("email.txt", "w");
-                $linkRegestrierung = "http://localhost/webprogrammierung/DI-12-B-Visser-Schroeder-Renneberg/confirmEmail.php?token=".$token;
-                fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nAnsonsten klicke innerhalb von 24h auf den folgenden Link, um die Registrierung abzuschließen: \n$linkRegestrierung");
+                $linkRegestrierung = $url."/confirmEmail.php?token=".$token;
+                fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nAnsonsten klicke innerhalb von 24h auf den folgenden Link, um die Registrierung abzuschliessen: \n$linkRegestrierung");
                 fclose($emailLog);
                 header("Location: registrierenFertig.php");
                 exit;
