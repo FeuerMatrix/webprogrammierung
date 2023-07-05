@@ -4,8 +4,17 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $id = (isset($_GET["id"]) && is_string($_GET["id"])) ? $_GET["id"] : "";
     $auth = isset($_SESSION["user"]);
 
+    $modifiesOld = isset($_GET["old"]);
+    if ($modifiesOld) {
+        $oldComment = $_GET["old"];
+    }
+
     include_once "datenbank/SQLiteStore.php";
     $database = new SQLiteStore();
+
+    if($auth) {
+        $isAuthor = $_SESSION["user"] == $database->getAuthor($id);
+    }
 
     if (isset($_POST["Submit"])) {
         if ($database->getAuthor($id) == $_SESSION["user"]) {
