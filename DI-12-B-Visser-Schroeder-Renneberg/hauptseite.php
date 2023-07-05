@@ -24,10 +24,10 @@
         <div class="flex-container">
             <?php foreach ($beitraege as $beitrag) : ?>
                 <div class="beitrag">
-                    <a class="link" href=<?php echo "\"beitrag.php?id=" . urlencode($beitrag["id"]) . "\"" ?>> <?php echo $beitrag['titel'] ?></a>
+                    <a class="link" href="beitrag.php?id=<?php echo urlencode($beitrag["id"]) ?>"> <?php echo $beitrag['titel'] ?></a>
                     <span> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
                     <?php
-                    if ($beitrag['file'] != "./images/userImages/") {
+                    if ($beitrag['file'] != "") {
                     ?>
                         <img src=<?php echo $beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
                     <?php
@@ -40,7 +40,9 @@
     </main>
 
     <?php include_once "php/footer.php" ?>
-    <?php include "javascript/fetch_beitraege.php" ?>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="javascript/fetch_beitraege.js"></script>
 </body>
 
 </html>

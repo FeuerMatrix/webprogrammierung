@@ -5,6 +5,10 @@
 ?>
 <nav>
   <div class="top-nav">
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
     <ul class="menu">
       <li><a href="index.php">Homepage</a></li>
       <li><a href="hauptseite.php">Beiträge</a></li>
@@ -25,18 +29,18 @@
     </ul>
   </div>
 </nav>
+ 
+<?php
+  if(isset($_GET["cause"])):
+?>
+  <div class="errorpopup" id="errorpopup">
+    <a id="errorbox"><noscript><?php echo urldecode($_GET["cause"]); ?></noscript></a>
+  </div>
+<?php
+  endif;
+?>
 
-<noscript>
-  <?php
-    if(isset($_GET["cause"])):
-  ?>
-  <a><?php echo urldecode($_GET["cause"]); ?></a>
-  <?php
-    endif;
-  ?>
-</noscript>
-
-<?php include "javascript/error_popup.php" ?>
+<script src="javascript/error_popup.js"></script>
 
 <?php
   if(isset($_POST["delete"])):

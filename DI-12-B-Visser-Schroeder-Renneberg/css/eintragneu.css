@@ -12,9 +12,14 @@
 }
 
 .file {
-    width: 100%;
+    width: 90%;
     height: 100%;
     position: absolute;
     opacity: 0;
     cursor: pointer;
-}        
+}      
+
+#map {
+    height: 280px;
+    width: 90%;
+}

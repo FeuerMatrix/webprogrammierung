@@ -3,11 +3,10 @@ Namen der Studierenden:
 - Robin Visser
 - Tim Schröder
 - Nils Renneberg<br>
-Abgabe zu Aufgabenblatt 5<br>
+Abgabe zu Aufgabenblatt 6<br>
 
 Hinweise:
-Die Alerts werden ueberarbeitet um sie etwas weniger stoerend zu machen<br>
-Burger Menu wird bei naechster abgabe gefixt<br>
+Die Email wird in email.txt im obersten Verzeichniss gepseichert.<br>
 Es gibt einen voreingestellten Nutzer mit folgenden Daten:<br>
 Benutzername "tim@test.de"<br>
 Passwort "helloworld"<br>
@@ -21,5 +20,3 @@ Später zu beachten:
 Verwendete Technologien:
 - WAVE für Accessability
 - Chromium Devtools für Resizing<br>
-Geplante Features:<br>
-Infinity Scroll kommt später eventuell wenn wir noch Zeit/Lust haben

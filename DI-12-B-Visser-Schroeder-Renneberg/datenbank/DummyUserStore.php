@@ -4,6 +4,11 @@ include_once "UserStore.php";
         function store($email, $pw){
 
         }
+
+        function confirmUser($email){
+            
+        }
+
         function checkLoginData($email, $pw){
             return $email == "tim@test.de" && $pw == "helloworld";
         }
@@ -15,6 +20,9 @@ include_once "UserStore.php";
             return $username == "blockedName";
         }
 
+        function getUser($token){
+            
+        }
 
         // Beispieldaten für Foreneinträge
         function getBeitraege(){
@@ -78,11 +86,11 @@ include_once "UserStore.php";
 
         }
 
-        function newPost($auth,$title,$desc,$anony,$image){
+        function newPost($auth,$title,$desc,$anony,$image,$lat,$lng){
             //add date
         }
 
-        function updatePost($id,$title,$desc,$anony,$image){
+        function updatePost($id,$title,$desc,$anony,$image,$lat,$lng){
             
         }
 
@@ -103,6 +111,14 @@ include_once "UserStore.php";
         }
 
         function deleteComm($id,$commid) {
+
+        }
+
+        function getlat($id){
+
+        }
+
+        function getlng($id){
 
         }
 

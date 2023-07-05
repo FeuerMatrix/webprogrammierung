@@ -3,9 +3,20 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $id = (isset($_GET["id"]) && is_string($_GET["id"])) ? $_GET["id"] : "";
     $auth = isset($_SESSION["user"]);
+    $accept_map = isset($_COOKIE["accept"]);
+
+
+    $modifiesOld = isset($_GET["old"]);
+    if ($modifiesOld) {
+        $oldComment = $_GET["old"];
+    }
 
     include_once "datenbank/SQLiteStore.php";
     $database = new SQLiteStore();
+
+    if($auth) {
+        $isAuthor = $_SESSION["user"] == $database->getAuthor($id);
+    }
 
     if (isset($_POST["Submit"])) {
         if ($database->getAuthor($id) == $_SESSION["user"]) {
@@ -34,6 +45,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         $database->beginTransaction();
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
             $database->deleteComm($id, $comm_id);
+            header("Location: beitrag.php?id=" . $id);
         } else {
             header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
@@ -72,8 +84,13 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $img =  $database->getImage($id);
     $comments = $database->getComments($id);
     $anony = $database->getAnonym($id);
-
-
+    $lat = $database->getlat($id);
+    $lng = $database->getlng($id);
+    if($lat==null){
+        $lat = "'.'";
+        $lng = "'.'";
+    }
+    
     function createComment($comm_id, $name, $text)
     {
         global $id;

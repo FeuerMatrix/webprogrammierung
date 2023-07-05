@@ -1,5 +1,6 @@
 <?php
     include_once "UserStore.php";
+    include_once "salt.php";
 
     class SQLiteStore implements UserStore {
 //rohdaten in die db dan beim auslesen  htmlsecialchars
@@ -21,6 +22,7 @@
 
         public function __construct(){
             $path = __DIR__;
+            
             try{
                 $dsn = 'sqlite:'. $path .'\sqlite-beschwerdeforum.db';
                 $user = "root";
@@ -33,7 +35,10 @@
                 //NUTZER TABELLE
                 $sql = "CREATE TABLE IF NOT EXISTS nutzer (
                     email       TEXT PRIMARY KEY,
-                    passwort    TEXT NOT NULL
+                    passwort    TEXT NOT NULL,
+                    token       TEXT NOT NULL,
+                    confirmed   BOOLEAN,
+                    created     TIMESTAMP DEFAULT (DATETIME('now', 'localtime'))
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -43,7 +48,7 @@
 
                 $pw = password_hash('helloworld',PASSWORD_DEFAULT);
                 $sql = "INSERT OR IGNORE INTO nutzer VALUES (
-                    'tim@test.de', '$pw'
+                    'tim@test.de', '$pw', 'DiTROSrT0dXkk', 1, CURRENT_TIMESTAMP 
                 )";
 
                 if ( $this->db->exec( $sql ) !== false ) {
@@ -59,7 +64,9 @@
                     titel               TEXT NOT NULL,
                     datum               TEXT,  
                     bild                TEXT,
-                    beschreibung    TEXT,
+                    beschreibung        TEXT,
+                    lat                 TEXT,
+                    lng                 TEXT,
                     FOREIGN KEY(author) REFERENCES nutzer(email)
                 )";
 
@@ -69,11 +76,10 @@
                 }    
 
                 $sql = "INSERT OR IGNORE INTO beitrag VALUES
-                    (1, 0, FALSE, 'Argumentation', '0686156644', 'images/beispielbilder/argumentation.png', 'Argumentation'),
-                    (2, 0, FALSE, 'Protest', '1606156644', 'images/beispielbilder/protest.png', 'Protest'),
-                    (3, 0, FALSE, 'Trouble Incoming', '1686156044', 'images/beispielbilder/trouble.jpg', 'Trouble_Schilder'),
-                    (4, 0, FALSE, 'Beispielbild', '1686106644', 'images/guestbook.png', 'Beispielbild'
-                )";
+                    (1, 0, FALSE, 'Argumentation', '0686156644', 'images/beispielbilder/argumentation.png', 'Argumentation',null,null),
+                    (2, 0, FALSE, 'Protest', '1606156644', 'images/beispielbilder/protest.png', 'Protest',null,null),
+                    (3, 0, FALSE, 'Trouble Incoming', '1686156044', 'images/beispielbilder/trouble.jpg', 'Trouble_Schilder',null,null),
+                    (4, 0, FALSE, 'Beispielbild', '1686106644', 'images/guestbook.png', 'Beispielbild',null,null)";
 
                 if ( $this->db->exec( $sql ) !== false ) {
 
@@ -107,22 +113,45 @@
                 }
                 
                 $this->db->commit();
+
+                //lösche Nutzer die nicht innerhalb von 24h ihre Email bestätigen
+                $sql = "DELETE FROM nutzer WHERE created < datetime('now', '-24 hours') AND confirmed = 0";
+                
+                if ( $this->db->exec( $sql ) !== false ) {
+                } else {
+                    echo 'Fehler beim löschen von nicht bestätigten Nutzern!<br />';
+                }
+
              } catch (PDOException $e ) {
                 echo 'Fehler beim erstllen der Dummy Daten';
             }
         }
 
-        // Speichert den Nutzer ein oder Updatet ihn
+        // Speichert Regestrierungsdaten ein mit Status das noch bestätigt werden muss (confirm = false)
         function store($email, $pw){
             try {
-                $sql = "INSERT OR REPLACE INTO nutzer (email, passwort) VALUES (?, ?)";
+                global $salt;
+                $sql = "INSERT OR REPLACE INTO nutzer (email, passwort, token, confirmed ) VALUES (?, ?, ?, 0)";
                 $stmt = $this->db->prepare($sql);
                 $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
                 $stmt->bindParam(1, $email, PDO::PARAM_STR);
                 $stmt->bindParam(2, $hashedPw, PDO::PARAM_STR);
+                $stmt->bindParam(3, crypt($email, $salt), PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo 'Fehler beim speichern des Nutzers!<br />';
+            }
+        }
+
+        // Ändert den Status eines Nutzers zu Email Bestätigt
+        function confirmUser($email){
+            try {
+                $sql = "UPDATE nutzer SET confirmed = 1 WHERE email = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                echo 'Fehler beim ändern der Bestätigung der Email!<br />';
             }
         }
 
@@ -141,10 +170,10 @@
             }
         }
 
-        // überprüft Einlogdaten des Nutzer
+        // überprüft Einlogdaten des Nutzer wenn Regestrierung bereits bestätigt
         function checkLoginData($email, $pw){
             try {
-                $sql = "SELECT passwort FROM nutzer WHERE email = ?";
+                $sql = "SELECT passwort FROM nutzer WHERE email = ? AND confirmed = 1";
                 $stmt = $this->db->prepare($sql); 
                 $stmt->execute([$email]);
                 $storedPassword = $stmt->fetchColumn();
@@ -177,6 +206,21 @@
                 return !empty($result);
             } catch (PDOException $ex) {
                 echo 'Fehler beim pruefen ob Email existiert!<br />';
+            }
+        }
+
+        // gibt den Nutzer zurück der den Token besitzt
+        function getUser($token){
+            try {
+                $sql = "SELECT email FROM nutzer WHERE token=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $token, PDO::PARAM_STR);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = htmlspecialchars($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo 'Fehler beim finden des Nutzers!<br />';
             }
         }
 
@@ -368,6 +412,32 @@
             }
         }
 
+        function getlat($id){
+            try {
+                $sql = "SELECT lat FROM beitrag WHERE id_beitrag=".$id;
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = floatval($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo 'Fehler beim laden der Koordinate!<br />';
+            }
+        }
+
+        function getlng($id){
+            try {
+                $sql = "SELECT lng FROM beitrag WHERE id_beitrag=".$id;
+                $stmt = $this->db->query($sql);
+                $stmt->execute();
+                $ergebnis = $stmt->fetchColumn();
+                $ergebnis = floatval($ergebnis);
+                return $ergebnis;
+            } catch (PDOException $ex) {
+                echo 'Fehler beim laden der Koordinate!<br />';
+            }
+        }
+
         function getCommentAuthor($id, $comm_id){
             try {
                 $sql = "SELECT author FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
@@ -425,10 +495,10 @@
             }
         }
 
-        function newPost($auth, $title, $desc, $anony, $image){
+        function newPost($auth, $title, $desc, $anony, $image, $lat, $lng){
             $date = time();
             try {
-                $sql = "INSERT INTO beitrag (author, anonym, titel, datum, bild, beschreibung) VALUES (?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO beitrag (author, anonym, titel, datum, bild, beschreibung, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(1, $auth, PDO::PARAM_STR);
                 $stmt->bindParam(2, $anony, PDO::PARAM_BOOL);
@@ -436,6 +506,8 @@
                 $stmt->bindParam(4, $date, PDO::PARAM_STR);
                 $stmt->bindParam(5, $image, PDO::PARAM_STR);
                 $stmt->bindParam(6, $desc, PDO::PARAM_STR);
+                $stmt->bindParam(7, $lat, PDO::PARAM_STR);
+                $stmt->bindParam(8, $lng, PDO::PARAM_STR);
                 $stmt->execute();
 
                 return $this->db->lastInsertId();
@@ -444,15 +516,17 @@
             }
         }
 
-        function updatePost($id, $title, $desc, $anony, $image){
+        function updatePost($id, $title, $desc, $anony, $image,$lat,$lng){
             try {
-                $sql = "UPDATE beitrag SET anonym = ?, titel = ?, bild = ?, beschreibung = ? WHERE id_beitrag = ?";
+                $sql = "UPDATE beitrag SET anonym = ?, titel = ?, bild = ?, beschreibung = ?, lat = ?, lng = ?  WHERE id_beitrag = ?";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(1, $anony, PDO::PARAM_BOOL);
                 $stmt->bindParam(2, $title, PDO::PARAM_STR);
                 $stmt->bindParam(3, $image, PDO::PARAM_STR);
                 $stmt->bindParam(4, $desc, PDO::PARAM_STR);
-                $stmt->bindParam(5, $id, PDO::PARAM_INT);
+                $stmt->bindParam(5, $lat, PDO::PARAM_STR);
+                $stmt->bindParam(6, $lng, PDO::PARAM_STR);
+                $stmt->bindParam(7, $id, PDO::PARAM_INT);
                 $stmt->execute();
             } catch (PDOException $ex) {
                 echo 'Fehler beim bearbeiten des Post!<br />';

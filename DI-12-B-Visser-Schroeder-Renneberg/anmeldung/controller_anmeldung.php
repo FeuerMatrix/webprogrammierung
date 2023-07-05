@@ -1,9 +1,22 @@
 <?php
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+
+    $email1set = isset($_POST["email"]);
+    if($email1set) {
+        $email1 = $_POST["email"];
+    }
+
+    $isRedirected = isset($_GET["from"]);
+    if($isRedirected) {
+        $messageRedirect = ($_GET["from"] == "registration" ? "Registriert" : "Abgemeldet");
+    }
+
     if(isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while logged in
         header("Location: index.php?cause=".urlencode("Fehler: diese Seite kann nicht von eingeloggten Nutzern aufgerufen werden!"));
         exit;
     }
+
+    $hasError = false; //needed so that the variable still gets initialized if following if check fails
 
     if(isset($_POST["email"], $_POST["pw"])) {
         unset($errorMessage);
@@ -17,7 +30,8 @@
             $errorMessage = "Ungültige Email-Addresse oder Passwort!";
         }
 
-        if(!isset($errorMessage)) {
+        $hasError = isset($errorMessage);
+        if(!$hasError) {
             $_SESSION["user"] = $email;
             header("Location: index.php?cause=".urlencode("Erfolgreich Angemeldet!"));
             exit;
