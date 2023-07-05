@@ -24,7 +24,7 @@
         <div class="flex-container">
             <?php foreach ($beitraege as $beitrag) : ?>
                 <div class="beitrag">
-                    <a class="link" href=<?php echo "\"beitrag.php?id=" . urlencode($beitrag["id"]) . "\"" ?>> <?php echo $beitrag['titel'] ?></a>
+                    <a class="link" href="beitrag.php?id=<?php echo urlencode($beitrag["id"]) ?>"> <?php echo $beitrag['titel'] ?></a>
                     <span> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
                     <?php
                     if ($beitrag['file'] != "") {
