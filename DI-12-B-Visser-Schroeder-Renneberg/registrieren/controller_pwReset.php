@@ -16,7 +16,7 @@
                     if($user != "") {
                         $database->updatePassword($user, $_POST["passw"]);
                         $errorMessage = "Passwort erfolgreich zurückgesetzt";
-                        header("Location: index.php?cause=".urlencode($errorMessage));
+                        header("Location: anmeldung.php?cause=".urlencode($errorMessage));
                     } 
                     else {
                         $errorMessage = "Keinen Nutzer gefunden!";
