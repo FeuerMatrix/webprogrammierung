@@ -11,12 +11,14 @@
     if (isset($_POST["acc"])) {
         setcookie("accept", "set", time() + (86400 * 30), "/"); // 86400 = 1 day
         header("Location: hauptseite.php");
+        exit;
     }
 
     if (isset($_POST["notacc"])) {
         setcookie("accept", "", time() - 3600, "/");
         unset($_COOKIE["accept"]);
         header("Location: hauptseite.php");
+        exit;
     }
 
     $set = isset($_COOKIE["accept"]);
