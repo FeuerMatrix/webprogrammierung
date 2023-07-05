@@ -16,7 +16,7 @@
     <main>
         <form method="post" enctype="multipart/form-data">
             <div class="reg">
-                <h1><?php if (!isset($_GET["from"])) {
+                <h1><?php if (!$redirected) {
                         echo "Neuer Eintrag";
                     } else {
                         echo "Eintrag Editieren";
@@ -24,11 +24,11 @@
 
                     ?></h1>
                 <label for="fname">Titel</label> <br>
-                <input type="text" id="fname" name="fname" <?php if (isset($_GET["from"])) {
+                <input type="text" id="fname" name="fname" <?php if ($redirected) {
                                                                 echo "value=" . $titelold;
                                                             } ?> placeholder="Titel" required autofocus><br>
                 <label for="text_main">Text</label> <br>
-                <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder="Beschreibung hier einfügen" required> <?php if (isset($_GET["from"])) {
+                <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder="Beschreibung hier einfügen" required> <?php if ($redirected) {
                                                                                                                                         echo $descold;
                                                                                                                                     } ?> </textarea><br>
                 <div id="map"></div>
@@ -39,7 +39,7 @@
                 </div>
                 <img id="output"/>
                 <label for="anonym">Anonym</label>
-                <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if (isset($_GET["from"]) && $anonyold) {
+                <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if ($redirected && $anonyold) {
                                                                                     echo 'checked="checked"';
                                                                                 } ?>><br>
                 <input type="hidden" name="lat" id="lat">
@@ -56,53 +56,4 @@
 
 </html>
 
-<script>
-    var map = L.map('map').setView([50.987059, 10.412173], 5);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    var marker;
-
-    function onMapClick(e) {
-        document.getElementById("lat").value=e.latlng.lat;
-        document.getElementById("lng").value=e.latlng.lng;
-        if (marker == null) {
-            addMarker(e.latlng.lat, e.latlng.lng);
-        } else {
-            marker.setLatLng(e.latlng);
-        }
-    }
-
-    map.on('click', onMapClick);
-
-    function onClick() {
-        map.removeLayer(marker);
-        marker=null;
-        document.getElementById("lat").value="";
-        document.getElementById("lng").value="";
-    }
-
-    function addMarker(lat ,lng) {
-        marker = L.marker([lat,lng], {
-                draggable: true
-            }).addTo(map).on('click',onClick).on('dragend', dragEnd);
-    }
-
-    function dragEnd(e){
-        document.getElementById("lat").value=marker._latlng.lat;
-        document.getElementById("lng").value=marker._latlng.lng;
-    }
-
-    var lat = <?php Print($lat); ?>;
-    var lng = <?php Print($lng); ?>;
-
-
-    if(lat!='.'&&lng!='.'){
-        addMarker(lat,lng);
-        document.getElementById("lat").value=lat;
-        document.getElementById("lng").value=lng;
-    }
-  
-</script>
+<?php include "javascript/map_marker.php"?>
