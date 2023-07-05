@@ -23,14 +23,14 @@
     ?>
 
     <main>
-
+    <p>Um ein Karte anzuzeigen auf der ein Ort Markiert werden kann OpenStreetMaps benutzt. </p>
         <a href="https://www.openstreetmap.org/about">OpenStreetMap Info</a>
         <?php
         if (!$set) :
         ?>
             <form method="post">
                 <input type="hidden" id="acc" name="acc" value="1">
-                <input type="submit" name="accept" class="navdelete" value="Map Datenschutz zustimmen">
+                <input type="submit" name="accept" class="navdelete" value="OpenStreetMaps Datenschutz zustimmen">
             </form>
         <?php
         endif;
@@ -41,7 +41,7 @@
         ?>
             <form method="post">
                 <input type="hidden" id="notacc" name="notacc" value="1">
-                <input type="submit" name="accept" class="navdelete" value="Map Datenschutz nicht zustimmen">
+                <input type="submit" name="accept" class="navdelete" value="OpenStreetMaps Datenschutz nicht zustimmen">
             </form>
         <?php
         endif;
