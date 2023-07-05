@@ -47,10 +47,12 @@
             <br>
             Stabsstelle Datenschutz- und Informationssicherheitsmanagement<br>
             Weitere Informationen zum Datenschutz finden Sie auch auf der Webseite der Stabsstelle.<br>
-            <br>
-            Ich stimme zu, dass meine Daten beim benutzen der Website an OpenStreetMap gesendet werden.
         </p>
-
+        <h2>Datenspeicherung</h2>
+        <p>Mit Erstellung und Nutzung eines Accounts werden Nutzerbezogene Daten wie die Email-Addresse und Datum von Beitragserstellung gespeichert. Ebenfalls werden vom Nutzer bei Erstellung von Kommentaren und Beiträgen optional übergebene Daten wie Text, Bilder, und Ortsangaben gespeichert.
+        Diese Daten können vom Nutzer durch Löschung oder Editieren des entsprechenden Posts gelöscht werden.</p>
+        <h2>Cookies</h2>
+        <p>Diese Webseite benutzt zur Funktion essentielle Cookies.</p>
     </main>
     
     <?php include_once "php/footer.php" ?>
