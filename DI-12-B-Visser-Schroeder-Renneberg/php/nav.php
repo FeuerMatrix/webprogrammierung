@@ -40,8 +40,7 @@
   endif;
 ?>
 
-
-<?php include "javascript/error_popup.php" ?>
+<script src="javascript/error_popup.js"></script>
 
 <?php
   if(isset($_POST["delete"])):

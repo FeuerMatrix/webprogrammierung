@@ -40,7 +40,9 @@
     </main>
 
     <?php include_once "php/footer.php" ?>
-    <?php include "javascript/fetch_beitraege.php" ?>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="javascript/fetch_beitraege.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@
 
 
 
-    <?php include_once "javascript/load_image.php" ?>
+    <script src="javascript/load_image.js"></script>
 
     <main>
         <form method="post" enctype="multipart/form-data">

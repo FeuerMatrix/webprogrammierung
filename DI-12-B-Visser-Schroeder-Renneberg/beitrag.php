@@ -77,7 +77,7 @@
     </main>
 
     <?php include_once "php/footer.php" ?>
-    <?php include_once "javascript/imagepopup.php" ?>
+    <script src="javascript/imagepopup.js"></script>
 </body>
 
 </html>
