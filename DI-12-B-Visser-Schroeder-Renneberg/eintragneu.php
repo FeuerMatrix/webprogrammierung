@@ -34,9 +34,9 @@ if ($accept_map) {
                                                                 echo "value=" . $titelold;
                                                             } ?> placeholder="Titel" required autofocus><br>
                 <label for="text_main">Text</label> <br>
-                <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder="Beschreibung hier einfügen" required> <?php if ($redirected) {
+                <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder="Beschreibung hier einfügen" required><?php if ($redirected) {
                                                                                                                                         echo $descold;
-                                                                                                                                    } ?> </textarea><br>
+                                                                                                                                    } ?></textarea><br>
                 <?php
                 if ($accept_map) {
                 ?>

@@ -55,9 +55,8 @@ if (isset($_POST["Submit"])) {
     }
     if ($ok) {
         if (isset($_FILES["Datei"]["name"])&&$_FILES["Datei"]["name"]!="") {
-            $newname = hash_file("md5", $_FILES['Datei']['tmp_name']);
+            $newname = hash_file("md5", $_FILES['Datei']['tmp_name']); //Hashes the entire file in order to generate a unique file name. The advantage over assigning ids is that with this implementation, two copies of the same image will be stored as one even if they had different upload names.
             
-            //$newname = hash("md5", $_FILES["Datei"]["name"]);
             move_uploaded_file($_FILES["Datei"]["tmp_name"], "./images/userImages/" . $newname);
             $file = "images/userImages/" . $newname;
         }else{
