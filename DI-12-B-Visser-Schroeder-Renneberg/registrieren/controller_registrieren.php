@@ -29,20 +29,6 @@ if (isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"]))
         $errorMessage = "Akzeptiere die Datenschutzbedingungen";
     }
 
-    include_once "datenbank/SQLiteStore.php";
-    include_once $path."/datenbank/salt.php";
-
-    // Ersetze den Teil des Pfades bis zu htdocs mit http://localhost
-    $changeOn = strpos($path, 'htdocs') + 6;
-    $url = 'http://localhost'.substr($path, $changeOn);
-    $url = str_replace('\\', '/', $url);
-
-    $database = new SQLiteStore();
-    $database->beginTransaction();
-    if ($database->emailExists($email)) {
-        $errorMessage = "Fehler!";
-    }
-
     
     include_once $path."/datenbank/salt.php"; 
     include_once "datenbank/SQLiteStore.php";
