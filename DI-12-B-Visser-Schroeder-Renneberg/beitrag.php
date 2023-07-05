@@ -8,7 +8,7 @@
 
     <?php include_once "php/nav.php" ?>
     <?php
-    if ($auth) {
+    if ($accept_map) {
     ?>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -27,13 +27,13 @@
                     <h2><?php echo $date ?></h2>
                 </div>
                 <?php
-                if ($auth) {
+                if ( $accept_map) {
                 ?>
                     <div id="map"></div>
                 <?php
                 } else if($lat!="'.'"){
                     ?>
-                    <p>Melde dich an um die Karte zu sehen</p>
+                    <p>Akzeptiere die um die Karte zu sehen</p>
                     <?php
                 }
                 ?>
@@ -85,7 +85,7 @@
 
 <script>
     <?php
-    if ($auth) {
+    if ( $accept_map) {
     ?>
         var lat = <?php print($lat); ?>;
         var lng = <?php print($lng); ?>;
