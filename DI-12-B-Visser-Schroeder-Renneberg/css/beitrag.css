@@ -1,92 +1,93 @@
 .commentbox {
-    border-radius: 25px;
-    background-color: rgb(235, 235, 235);
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  border-radius: 25px;
+  background-color: rgb(235, 235, 235);
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .left {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 .center {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 .post {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(255, 255, 255);
-    border-radius: 25px;
-    align-items: flex-start;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border-radius: 25px;
+  align-items: flex-start;
 }
-.edit{
-    margin-left: 30px;
+.edit {
+  margin-left: 30px;
 }
 
-.edit:hover{
-    opacity: 40%;
+.edit:hover {
+  opacity: 40%;
 }
 
 #map {
-     height: 280px;
-     width: 600px;
-     margin-left: 20px;
- }
-
-.image{
-      position: absolute;
-        top: 100px;
-        left: 10%;
-        border: 2px solid #000000;
-        z-index: 1000;
-     height: 90%;
-     width: 80%;
-     background-color: #555555;
+  height: 280px;
+  width: 600px;
+  margin-left: 20px;
 }
 
-.im{
-    margin-left: auto;
+.image {
+  position: absolute;
+  top: 100px;
+  left: 10%;
+  border: 2px solid #000000;
+  z-index: 1000;
+  height: 90%;
+  width: 80%;
+  background-color: #555555;
+}
+
+.im {
+  margin-left: auto;
   margin-right: auto;
-   display: block;
-   height: 90%;
+  margin-bottom: 15px;
+  display: block;
+  height: 90%;
 }
 
-.delete{
-    background-color: rgb(200, 20, 20);
-    opacity: 0.8;
-    border-radius: 15px;
-    margin: 10px;
+.delete {
+  background-color: rgb(200, 20, 20);
+  opacity: 0.8;
+  border-radius: 15px;
+  margin: 10px;
 }
 
 .delete:hover {
-    opacity: 1;
-  }
+  opacity: 1;
+}
 @media screen and (min-width: 1500px) {
-    .post {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        width: 100%;
-    }
-        .post .post-text {
-        display: flex;
-        flex-direction: column;
-        width: 70%;
-    }
-    .post .post-pic {
-        width: 30%;
-    }
-    .titlebox {
-        display: flex;
-        flex-direction: row;
-    }
-    .titlebox h2 {
-        width: 33%;
-    }
+  .post {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+  }
+  .post .post-text {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+  }
+  .post .post-pic {
+    width: 30%;
+  }
+  .titlebox {
+    display: flex;
+    flex-direction: row;
+  }
+  .titlebox h2 {
+    width: 33%;
+  }
 }
 .edit {
-    border-radius: 10px;
-    width: auto;
-    background-color: rgb(235, 235, 235);
+  border-radius: 10px;
+  width: auto;
+  background-color: rgb(235, 235, 235);
 }
