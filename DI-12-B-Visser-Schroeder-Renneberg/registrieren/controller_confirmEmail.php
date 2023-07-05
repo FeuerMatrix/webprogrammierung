@@ -18,6 +18,7 @@
     {
         $errorMessage = "Fehlerhafte URL";
         header("Location: anmeldung.php?cause=".urlencode($errorMessage));
+        exit;
     }
 
 ?>

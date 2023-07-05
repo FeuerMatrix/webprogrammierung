@@ -48,6 +48,7 @@ if (isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"]))
         fclose($emailLog);
         $database->endTransaction();
         header("Location: registrierenFertig.php");
+        exit;
     } else {
         if(!isset($errorMessage)) {
             $database->store($email, $passw);

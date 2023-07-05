@@ -17,20 +17,24 @@
                         $database->updatePassword($user, $_POST["passw"]);
                         $errorMessage = "Passwort erfolgreich zurückgesetzt";
                         header("Location: anmeldung.php?cause=".urlencode($errorMessage));
+                        exit;
                     } 
                     else {
                         $errorMessage = "Keinen Nutzer gefunden!";
                         header("Location: pwReset.php?cause=".urlencode($errorMessage)."&token=".$token);
+                        exit;
                     }     
             } 
             else {
                 header("Location: pwReset.php?cause=".urlencode($errorMessage)."&token=".$_GET["token"]);
+                exit;
             }
         }
     } 
     else {
         $errorMessage = "Fehlerhafte URL";
         header("Location: index.php?cause=".urlencode($errorMessage));
+        exit;
     }
 
 ?>
