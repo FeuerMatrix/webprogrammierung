@@ -43,6 +43,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         $database->beginTransaction();
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
             $database->deleteComm($id, $comm_id);
+            header("Location: beitrag.php?id=" . $id);
         } else {
             header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
