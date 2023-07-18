@@ -19,6 +19,8 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     }
 
     if (isset($_POST["Submit"])) {
+        if (validCSRF($_POST)) header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+        
         if ($database->getAuthor($id) == $_SESSION["user"]) {
             header("Location: eintragneu.php?from=" . $id);
         } else {
@@ -28,6 +30,8 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     }
 
     if (isset($_POST["delete"])) {
+        if (validCSRF($_POST)) header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+        
         $database->beginTransaction();
         if ($database->getAuthor($id) == $_SESSION["user"]) {
             $database->deletePost($id);
