@@ -27,14 +27,15 @@
                     <h2><?php echo $date ?></h2>
                 </div>
                 <?php
-                if ( $accept_map) {
+                if ($accept_map) {
                 ?>
                     <div id="map"></div>
                 <?php
-                } else if($lat!="'.'"){
-                    ?>
+                } else if ($lat != "'.'") {
+                ?>
                     <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
-                    <?php
+                    <a class="link" href="drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
+                <?php
                 }
                 ?>
                 <p class=center><?php echo $desc ?> </p>
@@ -63,9 +64,7 @@
         <?php if ($auth) : ?>
             <form method="post">
                 <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
-                <input type="text" id="neuerKommentar" name="new" <?php if ($modifiesOld) { ?>
-                                                                        value='<?php echo $oldComment; ?>'
-                                                                    <?php } ?> placeholder="Neues Kommentar" required>
+                <input type="text" id="neuerKommentar" name="new" <?php if ($modifiesOld) { ?> value='<?php echo $oldComment; ?>' <?php } ?> placeholder="Neues Kommentar" required>
             </form>
         <?php endif; ?>
 
@@ -85,7 +84,7 @@
 
 <script>
     <?php
-    if ( $accept_map) {
+    if ($accept_map) {
     ?>
         var lat = <?php print($lat); ?>;
         var lng = <?php print($lng); ?>;

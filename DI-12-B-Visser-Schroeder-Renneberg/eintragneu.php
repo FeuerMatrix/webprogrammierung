@@ -35,8 +35,8 @@ if ($accept_map) {
                                                             } ?> placeholder="Titel" required autofocus><br>
                 <label for="text_main">Text</label> <br>
                 <textarea id="text_main" name="text_main" cols="30" rows="10" placeholder="Beschreibung hier einfügen" required><?php if ($redirected) {
-                                                                                                                                        echo $descold;
-                                                                                                                                    } ?></textarea><br>
+                                                                                                                                    echo $descold;
+                                                                                                                                } ?></textarea><br>
                 <?php
                 if ($accept_map) {
                 ?>
@@ -45,6 +45,7 @@ if ($accept_map) {
                 } else {
                 ?>
                     <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
+                    <a class="link" href="drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
                 <?php
                 }
                 ?>
