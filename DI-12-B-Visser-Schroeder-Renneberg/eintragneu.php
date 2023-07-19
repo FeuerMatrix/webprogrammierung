@@ -1,3 +1,4 @@
+<?php include_once "php/csrf.php" ?>
 <?php include_once "php/controller_beitragErstellen.php" ?>
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/eintragneu.css">
@@ -21,6 +22,7 @@ if ($accept_map) {
 
     <main>
         <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
             <div class="reg">
                 <h1><?php if (!$redirected) {
                         echo "Neuer Eintrag";

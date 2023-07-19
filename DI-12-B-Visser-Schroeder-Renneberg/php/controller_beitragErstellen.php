@@ -43,8 +43,10 @@ if (isset($_GET["from"])&&is_string($_GET["from"])) {
 }
 $ok = false;
 if (isset($_POST["Submit"])) {
-
-
+    if (!validCSRF($_POST)) {
+        header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+        exit;
+    }
     
     $ok = true;
     if (!isset($_POST["fname"]) || !is_string($_POST["fname"])) {

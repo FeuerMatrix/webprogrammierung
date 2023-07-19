@@ -1,3 +1,4 @@
+<?php include_once "php/csrf.php" ?>
 <link rel="stylesheet" href="css/nav.css">
 <?php
   if (session_status() !== PHP_SESSION_ACTIVE) session_start();
@@ -20,6 +21,7 @@
         <form method="post">
           <input type="hidden" id="delete" name="delete" value="1">
           <input type="submit" class = "navdelete" value="Nutzer Löschen">
+          <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
       </form>
       </li>
       <?php else: ?>
@@ -43,11 +45,12 @@
 <script src="javascript/error_popup.js"></script>
 
 <?php
-  if(isset($_POST["delete"])):
+  if(isset($_POST["delete"]) && validCSRF($_POST)): //validCSRF is not that necessary here since the user needs to confirm another time, but I want to prevent the user from clicking delete because they are confused how they landed here after getting cross site redirected
 ?>
 <a>Möchtest du deinen Account und alle deine Beiträge/Kommentare wirklich löschen?</a>
-<form action="script_dropUser.php">
+<form action="script_dropUser.php" method="post">
   <input type="submit" class="navdelete" value="Nutzer Löschen">
+  <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
 </form>
 <?php
   endif;

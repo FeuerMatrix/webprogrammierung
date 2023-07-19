@@ -1,3 +1,4 @@
+<?php include_once "php/csrf.php" ?>
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/index.css">
 </head>
@@ -9,12 +10,22 @@
     <?php
 
     if (isset($_POST["acc"])) {
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
+        
         setcookie("accept", "set", time() + (86400 * 30), "/"); // 86400 = 1 day
         header("Location: hauptseite.php");
         exit;
     }
 
     if (isset($_POST["notacc"])) {
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
+        
         setcookie("accept", "", time() - 3600, "/");
         unset($_COOKIE["accept"]);
         header("Location: hauptseite.php");
@@ -33,6 +44,7 @@
             <form method="post">
                 <input type="hidden" id="acc" name="acc" value="1">
                 <input type="submit" name="accept" class="navdelete" value="OpenStreetMaps Datenschutz zustimmen">
+                <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
             </form>
         <?php
         endif;
@@ -44,6 +56,7 @@
             <form method="post">
                 <input type="hidden" id="notacc" name="notacc" value="1">
                 <input type="submit" name="accept" class="navdelete" value="OpenStreetMaps Datenschutz nicht zustimmen">
+                <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
             </form>
         <?php
         endif;

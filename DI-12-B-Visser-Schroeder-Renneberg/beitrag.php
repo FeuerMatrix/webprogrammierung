@@ -1,3 +1,4 @@
+<?php include_once "php/csrf.php" ?>
 <?php include_once "php/controller_beitrag.php" ?>
 <?php include_once "php/head.php" ?>
 <link rel="stylesheet" href="css/beitrag.css">
@@ -43,6 +44,7 @@
                     <form method="post">
                         <input type="submit" name="Submit" value="Bearbeiten" class="edit">
                         <input class="delete" type="submit" name="delete" value="Löschen">
+                        <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
                     </form>
                 <?php endif; ?>
             </div>
@@ -64,7 +66,10 @@
         <?php if ($auth) : ?>
             <form method="post">
                 <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
-                <input type="text" id="neuerKommentar" name="new" <?php if ($modifiesOld) { ?> value='<?php echo $oldComment; ?>' <?php } ?> placeholder="Neues Kommentar" required>
+                <input type="text" id="neuerKommentar" name="new" <?php if ($modifiesOld) { ?>
+                                                                        value='<?php echo $oldComment; ?>'
+                                                                    <?php } ?> placeholder="Neues Kommentar" required>
+                <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
             </form>
         <?php endif; ?>
 
