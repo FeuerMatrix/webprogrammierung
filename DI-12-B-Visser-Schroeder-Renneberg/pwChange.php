@@ -1,3 +1,4 @@
+<?php include_once "php/csrf.php" ?>
 <?php include_once "path.php"; ?>
 <?php include_once $path."/registrieren/controller_pwChange.php"; ?>
 <?php include_once "php/head.php" ?>
@@ -12,6 +13,7 @@
     ?>
     <main>
         <form method="POST">
+        <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
                 <div class="reg1">
                     <h1 class="col10">Daten Ändern</h1>
                     <div class="bottom"><p class="col20">Wähle ein neues Passwort und bestätige mit deinem alten Passwort.</p> </div>

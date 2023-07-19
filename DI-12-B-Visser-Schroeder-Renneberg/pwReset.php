@@ -1,4 +1,5 @@
 <?php
+    include_once "php/csrf.php";
     include_once "path.php";
     include_once $path."/registrieren/controller_pwReset.php";
     include_once $path."/php/head.php"
@@ -13,6 +14,7 @@
 
     <main>
         <form method="POST">
+        <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
             <div class="reg1">
                 <h1 class="col10">Passwort zurücksetzten</h1>
                 <div class="bottom"><p class="col20">Gib ein neues Passwort ein und bestätige es</p> </div>

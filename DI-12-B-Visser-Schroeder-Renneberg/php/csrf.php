@@ -5,7 +5,7 @@ function generateCSRFToken(){
     }
     return $_SESSION['CSRF'];
 }
-function validCSRF($post){
+function validCSRF($post){ //in order to not need to check isset for the token every time in addition to checking validity, the entire $_POST array is given to validCSRF and both checks are handled in here
     return isset($post["token"]) && $_SESSION['CSRF'] == $post["token"];
 }
 ?>

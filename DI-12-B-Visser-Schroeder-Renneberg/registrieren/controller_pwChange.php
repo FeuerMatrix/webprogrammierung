@@ -9,6 +9,11 @@
     } 
 
     if(isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["oldPw"])) {
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
+        
         unset($errorMessage);
         foreach($_POST as $postKey=>$postElement) {
             $$postKey = $_POST[$postKey];

@@ -68,6 +68,7 @@
                 <input type="text" id="neuerKommentar" name="new" <?php if ($modifiesOld) { ?>
                                                                         value='<?php echo $oldComment; ?>'
                                                                     <?php } ?> placeholder="Neues Kommentar" required>
+                <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
             </form>
         <?php endif; ?>
 

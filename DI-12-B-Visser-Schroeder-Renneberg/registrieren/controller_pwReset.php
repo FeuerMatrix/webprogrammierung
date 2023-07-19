@@ -2,6 +2,10 @@
 
     if(isset($_GET["token"])){
         if(isset($_POST["passw"], $_POST["passw2"])){
+            if (!validCSRF($_POST)) {
+                header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+                exit;
+            }
             
             if($_POST["passw"] != $_POST["passw2"]) {
                 $errorMessage = "Passwörter stimmen nicht überein!";

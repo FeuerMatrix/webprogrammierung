@@ -19,7 +19,10 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     }
 
     if (isset($_POST["Submit"])) {
-        if (validCSRF($_POST)) header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
         
         if ($database->getAuthor($id) == $_SESSION["user"]) {
             header("Location: eintragneu.php?from=" . $id);
@@ -30,7 +33,10 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     }
 
     if (isset($_POST["delete"])) {
-        if (validCSRF($_POST)) header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
         
         $database->beginTransaction();
         if ($database->getAuthor($id) == $_SESSION["user"]) {
@@ -45,6 +51,10 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 
 
     if (isset($_POST["deleteComm"])) {
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
         $database->beginTransaction();
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
@@ -58,6 +68,10 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 
 
     if (isset($_POST["Edit"])) {
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
             header("Location: beitrag.php?id=" . $id . "&c_id=" . $comm_id . "&old=" . urlencode($database->getComment($id, $comm_id)));
@@ -67,6 +81,10 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     }
 
     if (isset($_POST["new"]) && isset($_SESSION["user"])) {
+        if (!validCSRF($_POST)) {
+            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            exit;
+        }
         $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
         if (!isset($_GET["old"])) {
             $database->newComment($_SESSION["user"], $new, $id);
@@ -107,6 +125,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
                 <?php if (isset($_SESSION["user"]) && $_SESSION["user"] == $database->getCommentAuthor($id, $comm_id)) : ?>
                     <input type="submit" name="Edit" value="Bearbeiten" class=edit>
                     <input type="submit" name="deleteComm" value="Löschen" class="delete">
+                    <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
                 <?php endif; ?>
                 <input type="hidden" name="c_id" value=<?php echo $comm_id ?>>
             </form>
