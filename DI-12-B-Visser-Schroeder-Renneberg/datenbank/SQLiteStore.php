@@ -317,8 +317,10 @@
 
         function getComments($id){
             try {
-                $sql = "SELECT * FROM kommentar where id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT * FROM kommentar where id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
+                $stmt->execute();
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 $newArray = array();
@@ -340,8 +342,9 @@
         }
         function getTitel($id){
             try {
-                $sql = "SELECT titel FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT titel FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -352,8 +355,9 @@
         }
         function getDesc($id){
             try {
-                $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -364,8 +368,9 @@
         }
         function getAuthor($id){
             try {
-                $sql = "SELECT author FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT author FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -376,8 +381,9 @@
         }
         function getAnonym($id){
             try {
-                $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -388,8 +394,9 @@
         }
         function getDate($id){
             try {
-                $sql = "SELECT datum FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT datum FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -401,8 +408,9 @@
         }
         function getImage($id){
             try {
-                $sql = "SELECT bild FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT bild FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -414,8 +422,9 @@
 
         function getlat($id){
             try {
-                $sql = "SELECT lat FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT lat FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = floatval($ergebnis);
@@ -427,8 +436,9 @@
 
         function getlng($id){
             try {
-                $sql = "SELECT lng FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT lng FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = floatval($ergebnis);
@@ -440,8 +450,10 @@
 
         function getCommentAuthor($id, $comm_id){
             try {
-                $sql = "SELECT author FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT author FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
+                $stmt->bindValue(2, $comm_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -453,8 +465,10 @@
         }
         function getComment($id,$comm_id){
             try {
-                $sql = "SELECT kommentar FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT kommentar FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
+                $stmt->bindValue(2, $comm_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -485,9 +499,11 @@
         }
         function updateComment($id,$comm_id, $new){
             try {
-            $sql = "UPDATE kommentar SET kommentar = ? WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
+            $sql = "UPDATE kommentar SET kommentar = ? WHERE id_kommentar = ? AND id_beitrag = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(1, $new, PDO::PARAM_STR);
+            $stmt->bindParam(2, $comm_id, PDO::PARAM_INT);
+            $stmt->bindParam(3, $id, PDO::PARAM_INT);
             $stmt->execute();
 
             } catch (PDOException $ex) {
