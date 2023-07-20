@@ -226,7 +226,7 @@
 
         function getBeitraege(){
             try {
-                $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 5";
+                $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 20";
                 $stmt = $this->db->query($sql);
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $ex) {
@@ -256,7 +256,7 @@
         function sucheBeitraege($search){
             $search = strtolower($search);
             try {
-                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY datum DESC LIMIT 5";
+                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY datum DESC LIMIT 20";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
                 $stmt->execute();
@@ -287,7 +287,7 @@
         function sucheBeitraegeAlphabetisch($search){
             $search = strtolower($search);
             try {
-                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY titel ASC LIMIT 5";
+                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY titel ASC LIMIT 20";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
                 $stmt->execute();
