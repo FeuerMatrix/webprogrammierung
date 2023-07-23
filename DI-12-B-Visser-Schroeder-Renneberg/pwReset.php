@@ -5,7 +5,7 @@
     include_once $path."/php/head.php"
 ?>
 
-<link rel="stylesheet" href="css/pwReset.css">
+<link rel="stylesheet" href="<?=$hpath?>css/pwReset.css">
 </head>
 
 <body>

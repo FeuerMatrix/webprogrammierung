@@ -1,6 +1,9 @@
-<?php include_once "php/csrf.php" ?>
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/index.css">
+<?php 
+    include_once "path.php";
+    include_once "php/csrf.php";
+    include_once "php/head.php";
+?>
+<link rel="stylesheet" href="<?=$hpath?>css/index.css">
 </head>
 
 <body>
@@ -36,7 +39,7 @@
     ?>
 
     <main>
-    <p>Um ein Karte anzuzeigen auf der ein Ort Markiert werden kann OpenStreetMaps benutzt. </p>
+    <p>Um ein Karte anzuzeigen, auf der ein Ort markiert werden kann, wird OpenStreetMaps benutzt. </p>
         <a href="https://www.openstreetmap.org/about">OpenStreetMap Info</a>
         <?php
         if (!$set) :

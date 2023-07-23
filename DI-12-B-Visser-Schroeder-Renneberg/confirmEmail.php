@@ -4,7 +4,7 @@
     include_once $path."/php/head.php"
 ?>
 
-<link rel="stylesheet" href="css/confirmEmail.css">
+<link rel="stylesheet" href="<?=$hpath?>css/confirmEmail.css">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         <div class="reg">
             <h1 class="col10">Email bestätigen</h1>
             <?php if($confirmed):?>
-                <p> Email wurde erfolgreich bestätigt. Hier gehts zur <a href="anmeldung.php">Anmeldung.</a> </p> 
+                <p> Email wurde erfolgreich bestätigt. Hier gehts zur <a href="<?=$hpath?>anmeldung.php">Anmeldung.</a> </p> 
             <?php else: ?>
                 <p> Der Link zur Bestätigung der Email ist leider abgelaufen. </p>
             <?php endif; ?>

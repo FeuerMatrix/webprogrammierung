@@ -1,7 +1,10 @@
-<?php include_once "php/csrf.php" ?>
-<?php include_once "php/controller_beitragErstellen.php" ?>
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/eintragneu.css">
+<?php
+    include_once "path.php";
+    include_once "php/csrf.php";
+    include_once "php/controller_beitragErstellen.php";
+    include_once "php/head.php";
+?>
+<link rel="stylesheet" href="<?=$hpath?>css/eintragneu.css">
 <?php
 if ($accept_map) {
 ?>
@@ -47,7 +50,7 @@ if ($accept_map) {
                 } else {
                 ?>
                     <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
-                    <a class="link" href="drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
+                    <a class="link" href="<?=$hpath?>drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
                 <?php
                 }
                 ?>

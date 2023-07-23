@@ -5,10 +5,8 @@ if(isset($_GET["search"]) && isset($_GET["sort"])) {
     $suche = (is_string($_GET["search"])) ? $_GET["search"] : "";
     $sort = (is_string($_GET["sort"])) ? $_GET["sort"] : "date";
 
-    $baseDir = dirname(__DIR__); // gibt den Pfad zum Basedirektory aus (also bis php...) und geht dann ein Ordner höher
-    $databasePath = $baseDir . "/datenbank/SQLiteStore.php";
-    $databasePath = str_replace('\\', '/', $databasePath); //sollte auch ohne funktionieren, hatte aber zwischendruch probleme
-    include_once($databasePath);
+    include_once("../path.php");
+    include_once($path . "/datenbank/SQLiteStore.php");
 
     $database = new SQLiteStore();
 
