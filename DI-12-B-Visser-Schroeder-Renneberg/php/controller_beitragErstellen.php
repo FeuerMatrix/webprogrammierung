@@ -13,6 +13,11 @@ if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page th
 
 $redirected = isset($_GET["from"]);
 
+if($redirected && $_SESSION["user"] != $database->getAuthor($_GET["from"])) {
+    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur vom Besitzer des Posts aufgerufen werden!"));
+    exit;
+}
+
 $titel = (isset($_POST["fname"]) && is_string($_POST["fname"])) ? $_POST["fname"] : "";
 $desc = (isset($_POST["text_main"]) && is_string($_POST["text_main"])) ? $_POST["text_main"] : "";
 $anony = (isset($_POST["anonym"]) && is_string($_POST["anonym"])) ? $_POST["anonym"] : "";
@@ -27,7 +32,7 @@ $anony = $anony;
 $desc = $desc;
 
 
-if (isset($_GET["from"])&&is_string($_GET["from"])) {
+if ($redirected&&is_string($_GET["from"])) {
         $database->beginTransaction();
         $id = $_GET["from"];
         $titelold = $database->getTitel($id);
