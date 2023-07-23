@@ -2,7 +2,7 @@
 <html lang="de">
 <?php include_once "path.php" ?> <!-- head.php is loaded first by almost every page, so only special script pages need to include path.php too.-->
 
-<?php include_once "datenbank/SQLiteStore.php" ?>
+<?php include_once $path."/datenbank/SQLiteStore.php" ?>
 
 <head>
     <meta charset="utf-8">

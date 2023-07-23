@@ -1,6 +1,7 @@
 <?php
+    include_once "path.php";
     include_once "php/csrf.php";
-    include_once "datenbank/SQLiteStore.php";
+    include_once $path."/datenbank/SQLiteStore.php";
     session_start();
     if (!validCSRF($_POST)) {
         header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
