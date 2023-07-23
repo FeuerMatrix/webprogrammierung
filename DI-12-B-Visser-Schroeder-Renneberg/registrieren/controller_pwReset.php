@@ -1,5 +1,6 @@
 <?php
 
+    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     if(isset($_GET["token"])){
         if(isset($_POST["passw"], $_POST["passw2"])){
             if (!validCSRF($_POST)) {
@@ -20,6 +21,7 @@
                     if($user != "") {
                         $database->updatePassword($user, $_POST["passw"]);
                         $errorMessage = "Passwort erfolgreich zurückgesetzt";
+                        session_destroy(); //forces user to log out
                         header("Location: anmeldung.php?cause=".urlencode($errorMessage));
                         exit;
                     } 

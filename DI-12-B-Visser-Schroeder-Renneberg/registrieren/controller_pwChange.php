@@ -40,6 +40,7 @@
 
         if(!isset($errorMessage)) {
             $database->updatePassword($email, $passw);
+            session_destroy(); //forces user to log out
             header("Location: anmeldung.php?cause=".urlencode("Erfolgreich Passwort geändert!"));
             exit;
         } else {
