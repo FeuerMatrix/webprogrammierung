@@ -1,13 +1,16 @@
-<?php include_once "php/csrf.php" ?>
-<?php include_once "php/controller_beitrag.php" ?>
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/beitrag.css">
+<?php
+    include_once "path.php";
+    include_once $path."/php/csrf.php";
+    include_once $path."/php/controller_beitrag.php";
+    include_once $path."/php/head.php";
+?>
+<link rel="stylesheet" href="<?=$hpath?>css/beitrag.css">
 
 </head>
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
     <?php
     if ($accept_map) {
     ?>
@@ -35,7 +38,7 @@
                 } else if ($lat != "'.'") {
                 ?>
                     <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
-                    <a class="link" href="drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
+                    <a class="link" href="<?=$hpath?>drittAnbieter.php"> OpenStreetMaps Datenschutz</a>
                 <?php
                 }
                 ?>
@@ -80,8 +83,8 @@
         ?>
     </main>
 
-    <?php include_once "php/footer.php" ?>
-    <script src="javascript/imagepopup.js"></script>
+    <?php include_once $path."php/footer.php" ?>
+    <script src="<?=$hpath?>javascript/imagepopup.js"></script>
 </body>
 
 </html>

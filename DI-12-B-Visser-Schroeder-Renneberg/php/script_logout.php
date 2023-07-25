@@ -1,6 +1,6 @@
 <?php
     session_start();
     session_destroy();
-    header("Location: ../anmeldung.php?from=logout");
+    header("Location: ".$hpath."anmeldung.php?from=logout");
     exit;
 ?>

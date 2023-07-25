@@ -4,7 +4,7 @@
     if(isset($_GET["token"])){
         if(isset($_POST["passw"], $_POST["passw2"])){
             if (!validCSRF($_POST)) {
-                header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+                header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
                 exit;
             }
             
@@ -14,7 +14,7 @@
 
             if(!isset($errorMessage)) {
                 
-                    include_once "datenbank/SQLiteStore.php";
+                    include_once $path."datenbank/SQLiteStore.php";
                     $database = new SQLiteStore();
                     $user = $database->getUser($_GET["token"]);
 
@@ -22,24 +22,24 @@
                         $database->updatePassword($user, $_POST["passw"]);
                         $errorMessage = "Passwort erfolgreich zurückgesetzt";
                         session_destroy(); //forces user to log out
-                        header("Location: anmeldung.php?cause=".urlencode($errorMessage));
+                        header("Location: ".$hpath."anmeldung.php?cause=".urlencode($errorMessage));
                         exit;
                     } 
                     else {
                         $errorMessage = "Keinen Nutzer gefunden!";
-                        header("Location: pwReset.php?cause=".urlencode($errorMessage)."&token=".$token);
+                        header("Location: ".$hpath."pwReset.php?cause=".urlencode($errorMessage)."&token=".$token);
                         exit;
                     }     
             } 
             else {
-                header("Location: pwReset.php?cause=".urlencode($errorMessage)."&token=".$_GET["token"]);
+                header("Location: ".$hpath."pwReset.php?cause=".urlencode($errorMessage)."&token=".$_GET["token"]);
                 exit;
             }
         }
     } 
     else {
         $errorMessage = "Fehlerhafte URL";
-        header("Location: index.php?cause=".urlencode($errorMessage));
+        header("Location: ".$hpath."index.php?cause=".urlencode($errorMessage));
         exit;
     }
 

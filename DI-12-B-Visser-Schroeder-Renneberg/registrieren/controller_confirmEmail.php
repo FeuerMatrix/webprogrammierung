@@ -2,7 +2,7 @@
 
     if(isset($_GET["token"])){
 
-        include_once "datenbank/SQLiteStore.php";
+        include_once $path."datenbank/SQLiteStore.php";
         $database = new SQLiteStore();
         $user = $database->getUser($_GET["token"]);
 
@@ -17,7 +17,7 @@
     else
     {
         $errorMessage = "Fehlerhafte URL";
-        header("Location: anmeldung.php?cause=".urlencode($errorMessage));
+        header("Location: ".$hpath."anmeldung.php?cause=".urlencode($errorMessage));
         exit;
     }
 
