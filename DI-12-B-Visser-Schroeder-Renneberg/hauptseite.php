@@ -44,7 +44,7 @@
 
     <?php include_once $path."php/footer.php" ?>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="<?=$hpath?>javascript/jquery.min.js"></script>
     <script src="<?=$hpath?>javascript/fetch_beitraege.js"></script>
 </body>
 
