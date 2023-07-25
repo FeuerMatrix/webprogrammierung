@@ -10,7 +10,7 @@
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
     <?php
     if ($accept_map) {
     ?>
@@ -83,8 +83,8 @@
         ?>
     </main>
 
-    <?php include_once "php/footer.php" ?>
-    <script src="javascript/imagepopup.js"></script>
+    <?php include_once $path."php/footer.php" ?>
+    <script src="<?=$hpath?>javascript/imagepopup.js"></script>
 </body>
 
 </html>

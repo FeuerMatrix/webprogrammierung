@@ -2,7 +2,7 @@
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
     //Anfangsbeiträge der Seite raussuchen
-    include_once "datenbank/SQLiteStore.php";
+    include_once $path."datenbank/SQLiteStore.php";
     $database = new SQLiteStore();
     $beitraege = $database->getBeitraege();
 

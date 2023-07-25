@@ -11,7 +11,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         $oldComment = $_GET["old"];
     }
 
-    include_once "datenbank/SQLiteStore.php";
+    include_once $path."datenbank/SQLiteStore.php";
     $database = new SQLiteStore();
 
     if($auth) {
@@ -20,69 +20,69 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 
     if (isset($_POST["Submit"])) {
         if (!validCSRF($_POST)) {
-            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
             exit;
         }
         
         if ($database->getAuthor($id) == $_SESSION["user"]) {
-            header("Location: eintragneu.php?from=" . $id);
+            header("Location: ".$hpath."eintragneu.php?from=" . $id);
         } else {
-            header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
+            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
         }
         exit;
     }
 
     if (isset($_POST["delete"])) {
         if (!validCSRF($_POST)) {
-            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
             exit;
         }
         
         $database->beginTransaction();
         if ($database->getAuthor($id) == $_SESSION["user"]) {
             $database->deletePost($id);
-            header("Location: hauptseite.php?from=" . $id);
+            header("Location: ".$hpath."hauptseite.php?from=" . $id);
         } else {
-            header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
+            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
         }
-        $database->endTransaction();
         exit;
     }
 
 
     if (isset($_POST["deleteComm"])) {
         if (!validCSRF($_POST)) {
-            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
             exit;
         }
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
         $database->beginTransaction();
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
             $database->deleteComm($id, $comm_id);
-            header("Location: beitrag.php?id=" . $id);
+            header("Location: ".$hpath."beitrag.php?id=" . $id);
         } else {
-            header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
+            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
-        $database->endTransaction();
+        exit;
     }
 
 
     if (isset($_POST["Edit"])) {
         if (!validCSRF($_POST)) {
-            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
             exit;
         }
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
         if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
-            header("Location: beitrag.php?id=" . $id . "&c_id=" . $comm_id . "&old=" . urlencode($database->getComment($id, $comm_id)));
+            header("Location: ".$hpath."beitrag.php?id=" . $id . "&c_id=" . $comm_id . "&old=" . urlencode($database->getComment($id, $comm_id)));
         } else {
-            header("Location: beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
+            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
+        exit;
     }
 
     if (isset($_POST["new"]) && isset($_SESSION["user"])) {
         if (!validCSRF($_POST)) {
-            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+            header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
             exit;
         }
         $new = (isset($_POST["new"]) && is_string($_POST["new"])) ? $_POST["new"] : "";
@@ -93,7 +93,8 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
             $database->beginTransaction();
             if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
                 $database->updateComment($id, $comm_id, $new);
-                header("Location: beitrag.php?id=" . $id);
+                header("Location: ".$hpath."beitrag.php?id=" . $id);
+                exit;
             }
             $database->endTransaction();
         }
@@ -117,7 +118,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     {
         global $id;
         global $database;
-?>
+        ?>
         <div class=commentbox>
             <p><?php echo $name ?></p>
             <p><?php echo $text ?></p>
@@ -134,6 +135,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 <?php
     }
 } else {
-    header("Location: hauptseite.php");
+    header("Location: ".$hpath."hauptseite.php");
+    exit;
 }
 ?>

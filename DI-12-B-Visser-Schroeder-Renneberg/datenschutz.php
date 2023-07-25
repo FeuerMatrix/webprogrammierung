@@ -3,7 +3,7 @@
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
 
     <main>
 
@@ -55,7 +55,7 @@
         <p>Diese Webseite benutzt zur Funktion essentielle Cookies.</p>
     </main>
     
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."php/footer.php" ?>
 </body>
 
 </html>

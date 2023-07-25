@@ -2,7 +2,7 @@
 <?php
     include_once "path.php";
     include_once $path."/registrieren/controller_registrieren.php";
-    include_once "php/head.php"
+    include_once $path."php/head.php"
     ?>
 
 <link rel="stylesheet" href="<?=$hpath?>css/registrieren.css">
@@ -10,7 +10,7 @@
 
 <body>
 
-    <?php include_once "php/nav.php"; ?>
+    <?php include_once $path."php/nav.php"; ?>
     <main>
         <form method="POST">
             <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
@@ -34,8 +34,8 @@
             </div>
         </form>
     </main>
-    <form action="index.php" id="form"></form>
-    <?php include_once "php/footer.php" ?>
+    <form action="<?=$hpath?>index.php" id="form"></form>
+    <?php include_once $path."php/footer.php" ?>
 </body>
 
 </html>

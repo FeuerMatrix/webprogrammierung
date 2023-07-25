@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?=$hpath?>css/nav.css">
 <?php
   if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-  if (!isset($abs_path)) include_once "path.php"; // Emergency Handling for when a page includes neither head.php nor path.php for whatever reason
+  include_once "path.php"; // Emergency Handling for when a page includes neither head.php nor path.php for whatever reason
 ?>
 <nav>
   <div class="top-nav">
@@ -42,13 +42,13 @@
   endif;
 ?>
 
-<script src="javascript/error_popup.js"></script>
+<script src="<?=$hpath?>javascript/error_popup.js"></script>
 
 <?php
   if(isset($_POST["delete"]) && validCSRF($_POST)): //validCSRF is not that necessary here since the user needs to confirm another time, but I want to prevent the user from clicking delete because they are confused how they landed here after getting cross site redirected
 ?>
 <a>Möchtest du deinen Account und alle deine Beiträge/Kommentare wirklich löschen?</a>
-<form action="script_dropUser.php" method="post">
+<form action="<?=$hpath?>script_dropUser.php" method="post">
   <input type="submit" class="navdelete" value="Nutzer Löschen">
   <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
 </form>

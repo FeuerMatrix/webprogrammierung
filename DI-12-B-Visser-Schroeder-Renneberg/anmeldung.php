@@ -26,7 +26,7 @@
             <?php endif; ?>
         </div>
         </form>
-        <form action="index.php" id="form"></form>
+        <form action="<?=$hpath?>/index.php" id="form"></form>
     </main>
 
     <?php include_once $path."/php/footer.php" ?>

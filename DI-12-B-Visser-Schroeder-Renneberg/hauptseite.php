@@ -1,11 +1,14 @@
-<?php include_once "php/controller_hauptseite.php" ?>
-<?php include_once "php/head.php" ?>
+<?php 
+    include_once "path.php";
+    include_once $path."php/controller_hauptseite.php";
+    include_once $path."php/head.php";
+?>
 <link rel="stylesheet" href="<?=$hpath?>css/hauptseite.css">
 
 </head>
 
 <body>
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
 
     <main>
         <div class="top">
@@ -39,10 +42,10 @@
 
     </main>
 
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."php/footer.php" ?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="javascript/fetch_beitraege.js"></script>
+    <script src="<?=$hpath?>javascript/fetch_beitraege.js"></script>
 </body>
 
 </html>

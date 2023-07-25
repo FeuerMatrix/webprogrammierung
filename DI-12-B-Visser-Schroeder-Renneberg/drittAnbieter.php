@@ -1,42 +1,17 @@
 <?php 
     include_once "path.php";
-    include_once "php/csrf.php";
-    include_once "php/head.php";
+    include_once $path."php/csrf.php";
+    include_once $path."controller_drittAnbieter.php";    
+    include_once $path."php/head.php";
 ?>
 <link rel="stylesheet" href="<?=$hpath?>css/index.css">
 </head>
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
 
-    <?php
-
-    if (isset($_POST["acc"])) {
-        if (!validCSRF($_POST)) {
-            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
-            exit;
-        }
-        
-        setcookie("accept", "set", time() + (86400 * 30), "/"); // 86400 = 1 day
-        header("Location: hauptseite.php");
-        exit;
-    }
-
-    if (isset($_POST["notacc"])) {
-        if (!validCSRF($_POST)) {
-            header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
-            exit;
-        }
-        
-        setcookie("accept", "", time() - 3600, "/");
-        unset($_COOKIE["accept"]);
-        header("Location: hauptseite.php");
-        exit;
-    }
-
-    $set = isset($_COOKIE["accept"]);
-    ?>
+    
 
     <main>
     <p>Um ein Karte anzuzeigen, auf der ein Ort markiert werden kann, wird OpenStreetMaps benutzt. </p>
@@ -68,7 +43,7 @@
 
     </main>
 
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."php/footer.php" ?>
 </body>
 
 </html>

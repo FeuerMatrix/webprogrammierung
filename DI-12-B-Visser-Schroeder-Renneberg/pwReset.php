@@ -1,6 +1,6 @@
 <?php
-    include_once "php/csrf.php";
     include_once "path.php";
+    include_once $path."php/csrf.php";
     include_once $path."/registrieren/controller_pwReset.php";
     include_once $path."/php/head.php"
 ?>
@@ -10,7 +10,7 @@
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
 
     <main>
         <form method="POST">
@@ -27,7 +27,7 @@
         </form>         
     </main>
     
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."php/footer.php" ?>
 </body>
 
 </html>

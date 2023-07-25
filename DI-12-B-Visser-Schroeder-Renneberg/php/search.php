@@ -6,7 +6,7 @@ if(isset($_GET["search"]) && isset($_GET["sort"])) {
     $sort = (is_string($_GET["sort"])) ? $_GET["sort"] : "date";
 
     include_once("../path.php");
-    include_once($path . "/datenbank/SQLiteStore.php");
+    include_once($path."datenbank/SQLiteStore.php");
 
     $database = new SQLiteStore();
 

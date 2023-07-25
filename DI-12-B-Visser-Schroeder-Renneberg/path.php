@@ -1,5 +1,5 @@
 <?php
-$path = __DIR__;
+$path = __DIR__ . "/";
 
 /**
  * For hrefs, $path doesn't work. The following code generates the web address used to access the file without anything after the root folder. The reason this is so complicated is because getting the whole url actually returns a file path like __DIR__ does.
