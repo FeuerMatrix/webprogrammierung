@@ -1,0 +1,17 @@
+li {
+    padding-left: 50px;
+  }
+
+h3 {
+    padding-left: 50px;
+    margin-bottom: 5px;
+}
+
+.index-link {
+    color:rgb(0, 0, 0);
+  }
+
+.index-link:hover {
+    background-color: #111;
+    color:white;
+  }
