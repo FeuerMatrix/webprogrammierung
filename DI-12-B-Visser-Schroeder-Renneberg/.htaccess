@@ -1,0 +1,16 @@
+Options -Indexes
+
+<Files salt.php>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<FilesMatch "\.(db|md|htaccess|gitkeep|gitignore)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "(Store\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
