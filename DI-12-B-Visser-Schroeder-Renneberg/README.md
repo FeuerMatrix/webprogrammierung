@@ -26,7 +26,9 @@ n/a
 
 ## Besonderheiten über die Aufgabe hinaus
 
-Übergibt der Nutzer ein Bild, das bereits im Speicher existiert, wird dieses Bild nicht noch einmal gespeichert und stattdessen wird die alte Referenz mitbenutzt.
+Übergibt der Nutzer ein Bild, das bereits im Speicher existiert, wird dieses Bild nicht noch einmal gespeichert und stattdessen wird die alte Referenz mitbenutzt (Das Bild wird erst gelöscht wenn alle Referenzen entfernt sind).
+
+Directory Traversal wurde verhindert und auf sicherheitskritische Dateien (z.B. Datenbank, salt.php) kann nicht zugegriffen werden (Wurde in der Vorlesung zwar auf einer Folie erwähnt, es wurde aber keine detaillierte Möglichkeit erwähnt, es zu verhindern. Daher zählen wir es als "über die Aufgabe hinaus").
 
 ## Weitere Anmerkungen
 
