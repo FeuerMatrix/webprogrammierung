@@ -3,8 +3,6 @@
     include_once "salt.php";
 
     class SQLiteStore implements UserStore {
-//rohdaten in die db dan beim auslesen  htmlsecialchars
-//Transaction (registrieren)
         protected $db;
 
         public function __destruct(){
@@ -155,6 +153,7 @@
             }
         }
 
+        // Überschreibt das Passwort eines Nutzers mit dem Übergebenen
         function updatePassword($email, $pw) {
             try{
             $sql = "UPDATE nutzer SET passwort = ? WHERE email = ?";
@@ -224,6 +223,7 @@
             }
         }
 
+        // gibt einen Array mit den letzten 20 erstellten Beiträgen aus
         function getBeitraege(){
             try {
                 $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 20";
@@ -253,6 +253,7 @@
         }
 
 
+        // gibt einen Array mit den letzten 20 Beiträgen aus die den Suchbegriff beinhalten aus
         function sucheBeitraege($search){
             $search = strtolower($search);
             try {
@@ -284,6 +285,7 @@
             return $newArray;
         }
 
+        // gibt einen Array mit den alphabetisch ersten 20 Beiträgen aus die den Suchbegriff beinhalten
         function sucheBeitraegeAlphabetisch($search){
             $search = strtolower($search);
             try {
@@ -315,6 +317,7 @@
             return $newArray;
         }
 
+        // gibt alle Kommentare zu einem Beitrag in einem Array aus
         function getComments($id){
             try {
                 $sql = "SELECT * FROM kommentar where id_beitrag=?";
@@ -330,7 +333,6 @@
                         '0' => htmlspecialchars($item['id_kommentar']),
                         '1' => htmlspecialchars($item['author']),
                         '2' => htmlspecialchars($item['kommentar']),
- 
                     );
                     $newArray[] = $newItem;
                 }
@@ -340,6 +342,8 @@
                 echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
+
+        // gibt des Titel eines Beitrages anhand der id zurück
         function getTitel($id){
             try {
                 $sql = "SELECT titel FROM beitrag WHERE id_beitrag=?";
@@ -353,6 +357,8 @@
                 echo 'Fehler beim laden des Titels!<br />';
             }
         }
+
+        // gibt die Beschreibung eines Beitrages anhand der id zurück
         function getDesc($id){
             try {
                 $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=?";
@@ -366,6 +372,8 @@
                 echo 'Fehler beim laden der Beschreibung!<br />';
             }
         }
+
+        // gibt den Author eines Beitrages anhand der id zurück
         function getAuthor($id){
             try {
                 $sql = "SELECT author FROM beitrag WHERE id_beitrag=?";
@@ -379,6 +387,8 @@
                 echo 'Fehler beim laden des Post Authors!<br />';
             }
         }
+
+        // gibt zurück ob ein Beitrag als anonym verfasst wurde
         function getAnonym($id){
             try {
                 $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=?";
@@ -392,6 +402,8 @@
                 echo 'Fehler beim laden ob der Beitrag anonym ist!<br />';
             }
         }
+
+        // gibt das Erstellungsdatum eines Beitrages anhand der id zurück
         function getDate($id){
             try {
                 $sql = "SELECT datum FROM beitrag WHERE id_beitrag=?";
@@ -406,6 +418,8 @@
                 echo 'Fehler beim laden des Datums!<br />';
             }
         }
+
+        // gibt den Bildpfad eines Beitrages anhand der id zurück
         function getImage($id){
             try {
                 $sql = "SELECT bild FROM beitrag WHERE id_beitrag=?";
@@ -420,6 +434,7 @@
             }
         }
 
+        // gibt die Breite des vermerkten Ortes eines Beitrages anhand der id zurück
         function getlat($id){
             try {
                 $sql = "SELECT lat FROM beitrag WHERE id_beitrag=?";
@@ -434,6 +449,7 @@
             }
         }
 
+        // gibt die Länge des vermerkten Ortes eines Beitrages anhand der id zurück
         function getlng($id){
             try {
                 $sql = "SELECT lng FROM beitrag WHERE id_beitrag=?";
@@ -448,6 +464,7 @@
             }
         }
 
+        // gibt den Author eines Kommentars anhand der id's zurück
         function getCommentAuthor($id, $comm_id){
             try {
                 $sql = "SELECT author FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
@@ -461,8 +478,9 @@
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden des Kommentar Authors!<br />';
             }
-            
         }
+
+        // gibt den Text eines Kommentars anhand der id's zurück
         function getComment($id,$comm_id){
             try {
                 $sql = "SELECT kommentar FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
@@ -477,6 +495,8 @@
                 echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
+
+        // erstellt einen neuen Kommentar
         function newComment($auth,$new,$post_id){
             try {
             $sql = "SELECT MAX(id_kommentar) AS max FROM kommentar WHERE id_beitrag = ?";
@@ -484,8 +504,6 @@
             $stmt->bindParam(1, $post_id, PDO::PARAM_INT);
             $stmt->execute();
     
-
-
             $sql = "INSERT OR IGNORE INTO kommentar (id_kommentar,id_beitrag,author,kommentar ) VALUES(".($stmt->fetch(PDO::FETCH_ASSOC)['max']+1).", ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(1, $post_id, PDO::PARAM_INT);
@@ -497,6 +515,8 @@
                 echo 'Fehler beim erstellen des Kommentars!<br />';
             }
         }
+
+        // aktuallisiert den Text eines Kommentars anhand der id's
         function updateComment($id,$comm_id, $new){
             try {
             $sql = "UPDATE kommentar SET kommentar = ? WHERE id_kommentar = ? AND id_beitrag = ?";
@@ -511,6 +531,7 @@
             }
         }
 
+        // erstellt einen neuen Beitrag
         function newPost($auth, $title, $desc, $anony, $image, $lat, $lng){
             $date = time();
             try {
@@ -532,6 +553,7 @@
             }
         }
 
+        // aktuallisiert einen Beitrag mit den neuen Werten
         function updatePost($id, $title, $desc, $anony, $image,$lat,$lng){
             try {
                 $sql = "UPDATE beitrag SET anonym = ?, titel = ?, bild = ?, beschreibung = ?, lat = ?, lng = ?  WHERE id_beitrag = ?";
@@ -549,6 +571,7 @@
             }
         }
 
+        // löscht einen Beitrag anhand der id und alle Kommentare die zu dem Beitrag gehören
         function deletePost($id) {
             $sql = "DELETE FROM kommentar WHERE id_beitrag = ?";
             $stmt = $this->db->prepare($sql);
@@ -568,7 +591,7 @@
             }
         }
 
-
+        // löscht einen Nutzer anhand der Email, sowie alle Beiträge des Nutzers und jeweils deren Kommentare
         function deleteUser($email) {
             $sql = "DELETE FROM kommentar WHERE author = ?";
             $stmt = $this->db->prepare($sql);
@@ -596,6 +619,7 @@
             }
         }
 
+        // löscht einzelne Kommentare
         function deleteComm($id,$commid){
             $sql = "DELETE FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
             $stmt = $this->db->prepare($sql);
@@ -607,10 +631,12 @@
             }
         }
         
+        // beginnt eine Transaktion
         function beginTransaction(){
             $this->db->beginTransaction();
         } 
 
+        // beendet eine Transaktion
         function endTransaction(){
             try{
                 $this->db->commit();
