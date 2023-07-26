@@ -3,18 +3,18 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $accept_map =  isset($_COOKIE["accept"]);
 
-include_once "datenbank/SQLiteStore.php";
+include_once $path."datenbank/SQLiteStore.php";
 $database = new SQLiteStore();
 
 if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
-    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
+    header("Location: ".$hpath."index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
     exit;
 }
 
 $redirected = isset($_GET["from"]);
 
 if($redirected && $_SESSION["user"] != $database->getAuthor($_GET["from"])) {
-    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur vom Besitzer des Posts aufgerufen werden!"));
+    header("Location: ".$hpath."index.php?cause=" . urlencode("Fehler: diese Seite kann nur vom Besitzer des Posts aufgerufen werden!"));
     exit;
 }
 
@@ -49,7 +49,7 @@ if ($redirected&&is_string($_GET["from"])) {
 $ok = false;
 if (isset($_POST["Submit"])) {
     if (!validCSRF($_POST)) {
-        header("Location: index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+        header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
         exit;
     }
     
@@ -85,7 +85,7 @@ if (isset($_POST["Submit"])) {
         } else {
             $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file, $lat , $lng);
         }
-        header("Location: Beitrag.php?id=". urlencode($id));
+        header("Location: ".$hpath."Beitrag.php?id=". urlencode($id));
         exit;
     } else {
         ?>
@@ -95,13 +95,13 @@ if (isset($_POST["Submit"])) {
 }
 
 if(!isset($_GET["from"])){
-    $url = "hauptseite.php";
+    $url = $hpath."hauptseite.php";
     }else{
-        $url = "beitrag.php?id=".$_GET["from"];
+        $url = $hpath."beitrag.php?id=";
     }
 
 if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
-    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
+    header("Location: ".$hpath."index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
     exit;
 }
 

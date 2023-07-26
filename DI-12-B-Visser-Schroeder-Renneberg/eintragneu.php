@@ -1,7 +1,10 @@
-<?php include_once "php/csrf.php" ?>
-<?php include_once "php/controller_beitragErstellen.php" ?>
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/eintragneu.css">
+<?php
+    include_once "path.php";
+    include_once $path."php/csrf.php";
+    include_once $path."php/controller_beitragErstellen.php";
+    include_once $path."php/head.php";
+?>
+<link rel="stylesheet" href="<?=$hpath?>css/eintragneu.css">
 <?php
 if ($accept_map) {
 ?>
@@ -14,11 +17,11 @@ if ($accept_map) {
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
 
 
 
-    <script src="javascript/load_image.js"></script>
+    <script src="<?=$hpath?>javascript/load_image.js"></script>
 
     <main>
         <form method="post" enctype="multipart/form-data">
@@ -47,7 +50,7 @@ if ($accept_map) {
                 } else {
                 ?>
                     <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
-                    <a class="link" href="drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
+                    <a class="link" href="<?=$hpath?>drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
                 <?php
                 }
                 ?>
@@ -64,17 +67,19 @@ if ($accept_map) {
                 <input type="hidden" name="lat" id="lat">
                 <input type="hidden" name="lng" id="lng">
                 <input type="submit" name="Submit" class="create" value="Erstellen">
-                <input type="submit" form="form" name="Cancel" class="cancel" value="Abbrechen">
+                <input type="submit" form="form" class="cancel" value="Abbrechen">
             </div>
         </form>
 
-        <form action=<?php echo $url ?> id="form"></form>
+        <form action=<?php echo $url ?> id="form" method="get">
+            <?php if($redirected): ?><input type="hidden" name="id" id="id" value="<?=$id?>"><?php endif;?>
+        </form>
     </main>
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."php/footer.php" ?>
 </body>
 
 </html>
 
 <?php if ($accept_map) {
-    include "javascript/map_marker.php";
+    include $path."javascript/map_marker.php";
 } ?>

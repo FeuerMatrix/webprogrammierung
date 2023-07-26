@@ -1,22 +1,44 @@
-Team DI-12-B
-Namen der Studierenden:
+
+# Webprogrammierung Team DI-12-B
+
+## Namen der Studierenden
+
 - Robin Visser
 - Tim Schröder
 - Nils Renneberg<br>
-Abgabe zu Aufgabenblatt 6<br>
 
-Hinweise:
-Die Email wird in email.txt im obersten Verzeichniss gepseichert.<br>
-Es gibt einen voreingestellten Nutzer mit folgenden Daten:<br>
-Benutzername "tim@test.de"<br>
-Passwort "helloworld"<br>
-sowie einige Kommentare und Beiträge, die bereits zum Start in der Website sind. Diese machen Tests einfacher, sind jedoch nicht endgültig löschbar (werden automatisch neu erstellt sobald die Datenbankverbindung hergestellt wird). In der Endversion werden diese entfernt werden.<br>
+## Betriebsvorraussetzungen
+Es gibt einen voreingestellten Nutzer mit folgenden Daten:
 
-<br><br><br>
+Benutzername "tim@test.de"\
+Passwort "helloworld"\
+sowie einige Kommentare und Beiträge, die bereits zum Start in der Website sind. Diese sind nicht endgültig löschbar (bzw. werden automatisch wieder erzeugt). Die Beträge und Kommentare wurden vom nicht existenten Nutzer "0" erstellt. Dieser Name ist bei der Registrierung nicht verfügbar (da nur valide Email-Syntax akzeptiert wird).
+
+## Funktionen/Sitemap
+
+## Nicht umgesetzte Teilaufgaben
+
+n/a
+
+## Bekannte Fehler
+
+n/a
+
+## Besonderheiten über die Aufgabe hinaus
+
+Übergibt der Nutzer ein Bild, das bereits im Speicher existiert, wird dieses Bild nicht noch einmal gespeichert und stattdessen wird die alte Referenz mitbenutzt.
+
+## Weitere Anmerkungen
+
+#### Verwendete Technologien
+
+- WAVE für Accessability
+- Chromium Devtools für Resizing
+
+#### Speicherstruktur
+Die Email wird in email.txt im obersten Verzeichnis gepseichert.\
+
 Später zu beachten:
 
 - Tab Reihenfolge und Tastatur Benutzung für ausgeklappte Navbar muss gut klappen
 
-Verwendete Technologien:
-- WAVE für Accessability
-- Chromium Devtools für Resizing<br>

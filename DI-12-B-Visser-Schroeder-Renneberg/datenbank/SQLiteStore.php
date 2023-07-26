@@ -6,16 +6,15 @@
         protected $db;
 
         public function __destruct(){
-            //The transmission is automatically started at connection with database and automatically commited/rolled back when this is unset or the script is ended.
-            //This makes sure you never have to care about transmissions. But, if multiple transmissions in a row are wanted, the SQLiteStore needs to be unset and reinstantiated.
+            //The transmission is automatically commited/rolled back when this is unset or the script is ended.
             if($this->db->inTransaction()){
-            try{
-                $this->db->commit();
-            } catch (Exception $e) {
-                echo 'Commit Fehlgeschlagen';
-                $this->db->rollBack();
+                try{
+                    $this->db->commit();
+                } catch (Exception $e) {
+                    echo 'Commit Fehlgeschlagen';
+                    $this->db->rollBack();
+                }
             }
-        }
         }
 
         public function __construct(){
