@@ -1,6 +1,7 @@
 <?php
     include_once "UserStore.php";
     include_once "salt.php";
+    include_once "path.php";
 
     class SQLiteStore implements UserStore {
         protected $db;
@@ -570,62 +571,124 @@
             }
         }
 
+        private function selectiveDeleteImage($img) {
+            $sql = "SELECT COUNT(id_beitrag) FROM beitrag WHERE bild = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $img, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                    $picUsage = $stmt->fetchColumn();
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    return;
+                }
+
+                if($picUsage == 1) {
+                    global $path;
+                    if(!unlink($path.$img)) {
+                        echo 'Fehler beim Löschen des Beitrags!<br />';
+                        return;
+                    }
+                }
+        }
+
         // löscht einen Beitrag anhand der id und alle Kommentare die zu dem Beitrag gehören
         function deletePost($id) {
-            $sql = "DELETE FROM kommentar WHERE id_beitrag = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $id, PDO::PARAM_INT);
-            if ($stmt->execute()) {
-            } else {
-                echo 'Fehler beim Löschen des Beitrags!<br />';
-            }
+            try{
+                $sql = "DELETE FROM kommentar WHERE id_beitrag = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    return;
+                }
+                
+                $sql = "SELECT bild FROM beitrag WHERE id_beitrag = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                    $img = $stmt->fetchColumn();
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    return;
+                }
+
+                $this->selectiveDeleteImage($img);
+
+                $sql = "DELETE FROM beitrag WHERE id_beitrag = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
             
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $id, PDO::PARAM_INT);
-        
-            if ($stmt->execute()) {
-            } else {
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    if($this->db->inTransaction()){
+                        $this->db->rollBack();
+                    }
+                }
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Löschen des Beitrags!<br />';
             }
         }
 
         // löscht einen Nutzer anhand der Email, sowie alle Beiträge des Nutzers und jeweils deren Kommentare
         function deleteUser($email) {
-            $sql = "DELETE FROM kommentar WHERE author = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $email, PDO::PARAM_STR);
-            if ($stmt->execute()) {
-            } else {
-                echo 'Fehler beim Löschen des Nutzers!<br />';
-            }
+            try{
+                $sql = "DELETE FROM kommentar WHERE author = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                    return;
+                }
 
-            $sql = "DELETE FROM beitrag WHERE author = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $email, PDO::PARAM_STR);
-            if ($stmt->execute()) {
-            } else {
-                echo 'Fehler beim Löschen des Nutzers!<br />';
-            }
+                $sql = "SELECT bild FROM beitrag WHERE author = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                    $img = $stmt->fetchColumn();
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                    return;
+                }
 
-            $sql = "DELETE FROM nutzer WHERE email = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $email, PDO::PARAM_STR);
-        
-            if ($stmt->execute()) {
-            } else {
+                $this->selectiveDeleteImage($img);
+
+                $sql = "DELETE FROM beitrag WHERE author = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                    return;
+                }
+
+                $sql = "DELETE FROM nutzer WHERE email = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+            
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                }
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Löschen des Nutzers!<br />';
             }
         }
 
         // löscht einzelne Kommentare
         function deleteComm($id,$commid){
-            $sql = "DELETE FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $id, PDO::PARAM_STR);
-            $stmt->bindParam(2, $commid, PDO::PARAM_STR);
-            if ($stmt->execute()) {
-            } else {
+            try{
+                $sql = "DELETE FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_STR);
+                $stmt->bindParam(2, $commid, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Kommentars!<br />';
+                }
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Löschen des Kommentars!<br />';
             }
         }

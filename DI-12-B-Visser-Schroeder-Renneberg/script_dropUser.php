@@ -8,6 +8,7 @@
         exit;
     }
     $database = new SQLiteStore();
+    $database->beginTransaction();
     $database->deleteUser($_SESSION["user"]);
     session_destroy();
     header("Location: ".$hpath."index.php");
