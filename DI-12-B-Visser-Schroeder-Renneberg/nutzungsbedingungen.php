@@ -52,7 +52,7 @@
         <p><strong>§ 9 Salvatorische Klausel</strong></p>
         <p>Diese Forum-Nutzungsbedingung ist als Teil unserer Webseite zu betrachten, von dem aus auf diese Seite verwiesen wird. Sind einzelne Formulierungen dieser Forum-Nutzungsbedingung nicht mehr ganz oder nicht mehr vollständig konform mit der geltenden Rechtslage, so ist davon auszugehen, dass die übrigen Regelungen der Forum-Nutzungsbedingungen bestehen bleiben.</p>
         
-        <p>Diese <a href="http://www.jurarat.de/muster-nutzungsbedingungen">Nutzungsbedingungen</a> wurden freundlicherweise von www.jurarat.de zur Verfügung 
+        <p>Diese <a href="http://www.jurarat.de/muster-nutzungsbedingungen">Nutzungsbedingungen</a> wurden freundlicherweise von www.jurarat.de zur Verfügung gestellt.</p>
 
     </main>
 
