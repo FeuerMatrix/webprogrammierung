@@ -1,7 +1,6 @@
 <?php
     include_once "UserStore.php";
     include_once "salt.php";
-    include_once "path.php";
 
     class SQLiteStore implements UserStore {
         protected $db;

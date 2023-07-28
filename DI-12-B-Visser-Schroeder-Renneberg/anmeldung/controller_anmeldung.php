@@ -23,7 +23,7 @@
         $email = $_POST["email"];
         $pw = $_POST["pw"];
 
-        include_once "datenbank/SQLiteStore.php";
+        include_once $path."/datenbank/SQLiteStore.php";
         $database = new SQLiteStore();
         
         if(!($database->checkLoginData($email, $pw))) {
