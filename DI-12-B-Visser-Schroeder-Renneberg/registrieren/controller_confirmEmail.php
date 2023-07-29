@@ -4,7 +4,7 @@
 
         include_once $path."datenbank/SQLiteStore.php";
         $database = new SQLiteStore();
-        $user = $database->getUser($_GET["token"]);
+        $user = htmlspecialchars_decode($database->getUser($_GET["token"]));
 
         if($user != "") {
             $database->confirmUser($user);

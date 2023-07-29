@@ -38,8 +38,15 @@ Directory Traversal wurde verhindert und auf sicherheitskritische Dateien (z.B. 
 - Chromium Devtools für Resizing
 
 #### Speicherstruktur
-Die Email wird in email.txt im obersten Verzeichnis gepseichert.\
 
+Die Email wird in email.txt im obersten Verzeichnis gespeichert.
+
+#### XSS und htmlspecialchars
+
+Um nicht so viele verstreute htmlspecialchars() zu haben und keine der Umwandlungen zu vergessen, wird diese Umwandlung <strong> in dem Auslesen aus der Datenbank </strong> vorgenommen. In Ausnahmesituationen konvertiert der PHP Code diese für eine einzelne Zeile mit htmlspecialchars_decode() um.
+
+
+Um die Umwandlung von 
 Später zu beachten:
 
 - Tab Reihenfolge und Tastatur Benutzung für ausgeklappte Navbar muss gut klappen

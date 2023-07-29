@@ -15,7 +15,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $database = new SQLiteStore();
 
     if($auth) {
-        $isAuthor = $_SESSION["user"] == $database->getAuthor($id);
+        $isAuthor = $_SESSION["user"] == htmlspecialchars_decode($database->getAuthor($id));
     }
 
     if (isset($_POST["Submit"])) {
@@ -24,7 +24,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
             exit;
         }
         
-        if ($database->getAuthor($id) == $_SESSION["user"]) {
+        if (htmlspecialchars_decode($database->getAuthor($id)) == $_SESSION["user"]) {
             header("Location: ".$hpath."eintragneu.php?from=" . $id);
         } else {
             header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
@@ -39,7 +39,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         }
         
         $database->beginTransaction();
-        if ($database->getAuthor($id) == $_SESSION["user"]) {
+        if (htmlspecialchars_decode($database->getAuthor($id)) == $_SESSION["user"]) {
             $database->deletePost($id);
             header("Location: ".$hpath."hauptseite.php?from=" . $id);
         } else {
@@ -56,7 +56,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         }
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
         $database->beginTransaction();
-        if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
+        if (htmlspecialchars_decode($database->getCommentAuthor($id, $comm_id)) == $_SESSION["user"]) {
             $database->deleteComm($id, $comm_id);
             header("Location: ".$hpath."beitrag.php?id=" . $id);
         } else {
@@ -72,7 +72,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
             exit;
         }
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
-        if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
+        if (htmlspecialchars_decode($database->getCommentAuthor($id, $comm_id)) == $_SESSION["user"]) {
             header("Location: ".$hpath."beitrag.php?id=" . $id . "&c_id=" . $comm_id . "&old=" . urlencode($database->getComment($id, $comm_id)));
         } else {
             header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
@@ -91,7 +91,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         } else {
             $comm_id = $_GET["c_id"];
             $database->beginTransaction();
-            if ($database->getCommentAuthor($id, $comm_id) == $_SESSION["user"]) {
+            if (htmlspecialchars_decode($database->getCommentAuthor($id, $comm_id)) == $_SESSION["user"]) {
                 $database->updateComment($id, $comm_id, $new);
                 header("Location: ".$hpath."beitrag.php?id=" . $id);
                 exit;
@@ -123,7 +123,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
             <p><?php echo $name ?></p>
             <p><?php echo $text ?></p>
             <form method="post">
-                <?php if (isset($_SESSION["user"]) && $_SESSION["user"] == $database->getCommentAuthor($id, $comm_id)) : ?>
+                <?php if (isset($_SESSION["user"]) && $_SESSION["user"] == htmlspecialchars_decode($database->getCommentAuthor($id, $comm_id))) : ?>
                     <input type="submit" name="Edit" value="Bearbeiten" class=edit>
                     <input type="submit" name="deleteComm" value="Löschen" class="delete">
                     <input type="hidden" name="token" value="<?=generateCSRFToken()?>">

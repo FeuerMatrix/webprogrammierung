@@ -1,4 +1,5 @@
 <?php
+//Interface for User Stores. Implementations must always make sure outputs are encoded with htmlspecialchars.
     interface UserStore {
         
         // Speichert Regestrierungsdaten ein mit Status das noch bestätigt werden muss (confirm = false)

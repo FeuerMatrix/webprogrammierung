@@ -395,7 +395,6 @@
                 $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden ob der Beitrag anonym ist!<br />';
@@ -410,7 +409,6 @@
                 $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
                 $ergebnis = date("Y-m-d H:i:s",$ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
@@ -426,7 +424,6 @@
                 $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden des Bildes!<br />';
