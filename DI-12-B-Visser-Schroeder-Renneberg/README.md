@@ -39,7 +39,7 @@ Directory Traversal wurde verhindert und auf sicherheitskritische Dateien (z.B. 
 
 #### Speicherstruktur
 
-Die Email wird in email.txt im obersten Verzeichnis gespeichert.
+Die Email wird in email.txt im Verzeichnis "php/registrieren" gespeichert.
 
 #### XSS und htmlspecialchars
 

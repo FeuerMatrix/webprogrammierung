@@ -1,0 +1,5 @@
+Bitte ignoriere die E-Mail, wenn du es nicht warst, 
+der sich versucht hat zu registrieren. 
+Du bist aber bereits registriert. 
+Solltest du dein Password vergessen haben, klicke auf folgenden Link. 
+http://localhost/webprogrammierung/DI-12-B-Visser-Schroeder-Renneberg/php/pwReset/pwReset.php?token=DieJgYmFxjolY
