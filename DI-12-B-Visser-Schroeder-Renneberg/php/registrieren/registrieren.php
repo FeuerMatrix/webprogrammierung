@@ -1,7 +1,7 @@
 
 <?php
-    include_once "path.php";
-    include_once $path."/registrieren/controller_registrieren.php";
+    include_once "../../path.php";
+    include_once $path."php/registrieren/controller_registrieren.php";
     include_once $path."php/head.php"
     ?>
 
@@ -25,9 +25,9 @@
                 <input class="col24" type="password" id="passw" name="passw" placeholder="Passwort" required <?php if($email1set):?>autofocus <?php endif; ?>><br>
                 <label class="col15" for="passw2">Passwort bestätigen</label><br>
                 <input class="col25" type="password" id="passw2" name="passw2" placeholder="Passwort bestätigen" required><br>
-                <label class="col17" for="accept1">Ich akzeptiere die &nbsp; <a href="<?=$hpath?>nutzungsbedingungen.php">Nutzungsbedingungen</a></label>
+                <label class="col17" for="accept1">Ich akzeptiere die &nbsp; <a href="<?=$hpath?>php/nutzungsbedingungen.php">Nutzungsbedingungen</a></label>
                 <input class="col27" type="checkbox" id="accept1" name="accept1" value="Nutzungsbedingungen" required>
-                <label class="col18" for="accept2">Ich akzeptiere die &nbsp; <a href="<?=$hpath?>datenschutz.php">Datenschutzbedingungen</a></label>
+                <label class="col18" for="accept2">Ich akzeptiere die &nbsp; <a href="<?=$hpath?>php/datenschutz.php">Datenschutzbedingungen</a></label>
                 <input class="col28" type="checkbox" id="accept2" name="accept2" value="Datenschutzbedingungen" required>
                 <input class="col16" type="submit" value="Erstellen">
                 <input class="col26" type="submit" form="form" value="Abbrechen"><br>

@@ -7,7 +7,7 @@
         }
         
         setcookie("accept", "set", time() + (86400 * 30), "/"); // 86400 = 1 day
-        header("Location: ".$hpath."hauptseite.php");
+        header("Location: ".$hpath."php/hauptseite/hauptseite.php");
         exit;
     }
 
@@ -19,7 +19,7 @@
         
         setcookie("accept", "", time() - 3600, "/");
         unset($_COOKIE["accept"]);
-        header("Location: ".$hpath."hauptseite.php");
+        header("Location: ".$hpath."php/hauptseite/hauptseite.php");
         exit;
     }
 

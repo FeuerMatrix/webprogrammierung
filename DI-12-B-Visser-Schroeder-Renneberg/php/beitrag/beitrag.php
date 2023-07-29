@@ -1,7 +1,7 @@
 <?php
-    include_once "path.php";
+    include_once "../../path.php";
     include_once $path."/php/csrf.php";
-    include_once $path."/php/controller_beitrag.php";
+    include_once $path."php/beitrag/controller_beitrag.php";
     include_once $path."/php/head.php";
 ?>
 <link rel="stylesheet" href="<?=$hpath?>css/beitrag.css">
@@ -38,7 +38,7 @@
                 } else if ($lat != "'.'") {
                 ?>
                     <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
-                    <a class="link" href="<?=$hpath?>drittAnbieter.php"> OpenStreetMaps Datenschutz</a>
+                    <a class="link" href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php"> OpenStreetMaps Datenschutz</a>
                 <?php
                 }
                 ?>
@@ -53,7 +53,7 @@
             </div>
             <div class=post-pic>
                 <?php
-                if ($img != "") {
+                if ($hasImg) {
                 ?>
                     <div id="img">
                         <h3>Clicke um zu vergrössern/ verkleinern</h3>

@@ -1,7 +1,7 @@
 <?php
-    include_once "path.php";
+    include_once "../../path.php";
     include_once $path."php/csrf.php";
-    include_once $path."/registrieren/controller_pwChange.php";
+    include_once $path."php/pwChange/controller_pwChange.php";
     include_once $path."php/head.php"
 ?>
 <link rel="stylesheet" href="<?=$hpath?>css/registrieren.css" >

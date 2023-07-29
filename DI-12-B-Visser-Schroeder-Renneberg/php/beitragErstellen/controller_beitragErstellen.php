@@ -64,7 +64,7 @@ if (isset($_POST["Submit"])) {
         if (isset($_FILES["Datei"]["name"])&&$_FILES["Datei"]["name"]!="") {
             $newname = hash_file("md5", $_FILES['Datei']['tmp_name']); //Hashes the entire file in order to generate a unique file name. The advantage over assigning ids is that with this implementation, two copies of the same image will be stored as one even if they had different upload names.
             
-            move_uploaded_file($_FILES["Datei"]["tmp_name"], "./images/userImages/" . $newname);
+            move_uploaded_file($_FILES["Datei"]["tmp_name"], "../../images/userImages/" . $newname);
             $file = "images/userImages/" . $newname;
         }else{
             $file = null;
@@ -85,7 +85,7 @@ if (isset($_POST["Submit"])) {
         } else {
             $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file, $lat , $lng);
         }
-        header("Location: ".$hpath."Beitrag.php?id=". urlencode($id));
+        header("Location: ".$hpath."php/beitrag/Beitrag.php?id=". urlencode($id));
         exit;
     } else {
         ?>
@@ -95,9 +95,9 @@ if (isset($_POST["Submit"])) {
 }
 
 if(!isset($_GET["from"])){
-    $url = $hpath."hauptseite.php";
+    $url = $hpath."php/hauptseite/hauptseite.php";
     }else{
-        $url = $hpath."beitrag.php?id=";
+        $url = $hpath."php/beitrag/beitrag.php?id=";
     }
 
 if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in

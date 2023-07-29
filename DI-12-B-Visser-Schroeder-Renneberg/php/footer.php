@@ -2,10 +2,10 @@
 
 <footer>
   <ul>
-    <li> <a href="<?=$hpath?>impressum.php">Impressum</a>
-    <li> <a href="<?=$hpath?>datenschutz.php">Datenschutz</a>
-    <li> <a href="<?=$hpath?>nutzungsbedingungen.php">Nutzungsbedingungen</a>
-    <li> <a href="<?=$hpath?>drittAnbieter.php">Drittanbieter</a>
+    <li> <a href="<?=$hpath?>php/impressum.php">Impressum</a>
+    <li> <a href="<?=$hpath?>php/datenschutz.php">Datenschutz</a>
+    <li> <a href="<?=$hpath?>php/nutzungsbedingungen.php">Nutzungsbedingungen</a>
+    <li> <a href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php">Drittanbieter</a>
   </ul>
 </footer>
 

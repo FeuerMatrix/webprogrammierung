@@ -1,7 +1,7 @@
 <?php 
-    include_once "path.php";
+    include_once "../../path.php";
     include_once $path."php/csrf.php";
-    include_once $path."controller_drittAnbieter.php";    
+    include_once $path."php/drittAnbieter/controller_drittAnbieter.php";    
     include_once $path."php/head.php";
 ?>
 <link rel="stylesheet" href="<?=$hpath?>css/index.css">
@@ -14,7 +14,7 @@
     
 
     <main>
-    <p>Um ein Karte anzuzeigen, auf der ein Ort markiert werden kann, wird OpenStreetMaps benutzt. <br> Zustimmungen zu Drittanbietern werden in Cookies gespeichert, <br> weitere Infos hierzu finden sie im <a href="<?=$hpath?>datenschutz.php">Datenschutz</a>.</p>
+    <p>Um ein Karte anzuzeigen, auf der ein Ort markiert werden kann, wird OpenStreetMaps benutzt. <br> Zustimmungen zu Drittanbietern werden in Cookies gespeichert, <br> weitere Infos hierzu finden sie im <a href="<?=$hpath?>php/datenschutz.php">Datenschutz</a>.</p>
         <a href="https://www.openstreetmap.org/about">OpenStreetMap Info</a>
         <?php
         if (!$set) :

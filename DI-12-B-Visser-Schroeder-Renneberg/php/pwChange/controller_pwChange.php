@@ -41,10 +41,10 @@
         if(!isset($errorMessage)) {
             $database->updatePassword($email, $passw);
             session_destroy(); //forces user to log out
-            header("Location: ".$hpath."anmeldung.php?cause=".urlencode("Erfolgreich Passwort geändert!"));
+            header("Location: ".$hpath."php/anmeldung/anmeldung.php?cause=".urlencode("Erfolgreich Passwort geändert!"));
             exit;
         } else {
-            header("Location: ".$hpath."pwChange.php?cause=".urlencode($errorMessage)."&email=".$email);
+            header("Location: ".$hpath."php/pwChange/pwChange.php?cause=".urlencode($errorMessage)."&email=".$email);
             exit;
         }
     }

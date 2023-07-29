@@ -1,7 +1,7 @@
 <?php
-    include_once "path.php";
+    include_once "../../path.php";
     include_once $path."php/csrf.php";
-    include_once $path."/registrieren/controller_pwReset.php";
+    include_once $path."php/pwReset/controller_pwReset.php";
     include_once $path."/php/head.php"
 ?>
 

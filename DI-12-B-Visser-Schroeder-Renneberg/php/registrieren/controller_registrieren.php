@@ -38,25 +38,25 @@ if (isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"]))
     $token = crypt($email, $salt);
     if($database->emailExists($email)) {
         $emailLog = fopen("email.txt", "w");
-        $linkPWResset = $hpath."pwReset.php?token=".$token;
+        $linkPWResset = $hpath."php/pwReset/pwReset.php?token=".$token;
         fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nDu bist aber bereits registriert. \nSolltest du dein Password vergessen haben, klicke auf folgenden Link. \n$linkPWResset");
         fclose($emailLog);
         $database->endTransaction();
-        header("Location: ".$hpath."registrierenFertig.php");
+        header("Location: ".$hpath."php/registrierenFertig.php");
         exit;
     } else {
         if(!isset($errorMessage)) {
             $database->store($email, $passw);
             $emailLog = fopen("email.txt", "w");
-            $linkRegestrierung = $hpath."confirmEmail.php?token=".$token;
+            $linkRegestrierung = $hpath."php/confirmEmail/confirmEmail.php?token=".$token;
             fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nAnsonsten klicke innerhalb von 24h auf den folgenden Link, um die Registrierung abzuschliessen: \n$linkRegestrierung");
             fclose($emailLog);
             $database->endTransaction();
-            header("Location: ".$hpath."registrierenFertig.php");
+            header("Location: ".$hpath."php/registrierenFertig.php");
             exit;
         } else {
             $database->endTransaction();
-            header("Location: ".$hpath."registrieren.php?cause=".urlencode($errorMessage)."&email=".$email."&email2=".$email2);
+            header("Location: ".$hpath."php/registrieren/registrieren.php?cause=".urlencode($errorMessage)."&email=".$email."&email2=".$email2);
             exit;
         }
     }

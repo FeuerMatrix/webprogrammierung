@@ -1,4 +1,5 @@
-<?php include_once "php/head.php" ?>
+<?php include_once "../path.php" ?>
+<?php include_once "head.php" ?>
 </head>
 
 <body>

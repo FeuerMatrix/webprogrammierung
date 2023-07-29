@@ -18,7 +18,7 @@ $(document).ready(function() {
                 // erstelle neue Beitragselemente
                 $.each(data, function(index, beitrag) {
                     var beitragDiv = $("<div>").addClass("beitrag");
-                    var link = $("<a>").addClass("link").attr("href", "beitrag.php?id=" + encodeURIComponent(beitrag.id)).text(beitrag.titel);
+                    var link = $("<a>").addClass("link").attr("href", "php/beitrag/beitrag.php?id=" + encodeURIComponent(beitrag.id)).text(beitrag.titel);
                     var dateSpan = $("<span>").text(new Date(beitrag.date * 1000).toLocaleString());
                     var img = $("<img>").attr("src", beitrag.file).attr("alt", beitrag.pname);
 

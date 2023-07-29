@@ -1,5 +1,6 @@
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/datenschutz.css">
+<?php include_once "../path.php" ?>
+<?php include_once "head.php" ?>
+<link rel="stylesheet" href="<?=$hpath?>css/datenschutz.css">
 </head>
 
 <body>

@@ -25,9 +25,9 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         }
         
         if (htmlspecialchars_decode($database->getAuthor($id)) == $_SESSION["user"]) {
-            header("Location: ".$hpath."eintragneu.php?from=" . $id);
+            header("Location: ".$hpath."php/beitragErstellen/eintragneu.php?from=" . $id);
         } else {
-            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
+            header("Location: ".$hpath."php/beitrag/beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
         }
         exit;
     }
@@ -41,9 +41,9 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         $database->beginTransaction();
         if (htmlspecialchars_decode($database->getAuthor($id)) == $_SESSION["user"]) {
             $database->deletePost($id);
-            header("Location: ".$hpath."hauptseite.php?from=" . $id);
+            header("Location: ".$hpath."php/hauptseite/hauptseite.php?from=" . $id);
         } else {
-            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
+            header("Location: ".$hpath."php/beitrag/beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Posts!"));
         }
         exit;
     }
@@ -58,9 +58,9 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         $database->beginTransaction();
         if (htmlspecialchars_decode($database->getCommentAuthor($id, $comm_id)) == $_SESSION["user"]) {
             $database->deleteComm($id, $comm_id);
-            header("Location: ".$hpath."beitrag.php?id=" . $id);
+            header("Location: ".$hpath."php/beitrag/beitrag.php?id=" . $id);
         } else {
-            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
+            header("Location: ".$hpath."php/beitrag/beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
         exit;
     }
@@ -73,9 +73,9 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
         }
         $comm_id = (isset($_POST["c_id"]) && is_string($_POST["c_id"])) ? $_POST["c_id"] : "";
         if (htmlspecialchars_decode($database->getCommentAuthor($id, $comm_id)) == $_SESSION["user"]) {
-            header("Location: ".$hpath."beitrag.php?id=" . $id . "&c_id=" . $comm_id . "&old=" . urlencode($database->getComment($id, $comm_id)));
+            header("Location: ".$hpath."php/beitrag/beitrag.php?id=" . $id . "&c_id=" . $comm_id . "&old=" . urlencode($database->getComment($id, $comm_id)));
         } else {
-            header("Location: ".$hpath."beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
+            header("Location: ".$hpath."php/beitrag/beitrag.php?id=" . $id . "&cause=" . urlencode("Du bist nicht Besitzer dieses Kommentars!"));
         }
         exit;
     }
@@ -93,7 +93,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
             $database->beginTransaction();
             if (htmlspecialchars_decode($database->getCommentAuthor($id, $comm_id)) == $_SESSION["user"]) {
                 $database->updateComment($id, $comm_id, $new);
-                header("Location: ".$hpath."beitrag.php?id=" . $id);
+                header("Location: ".$hpath."php/beitrag/beitrag.php?id=" . $id);
                 exit;
             }
             $database->endTransaction();
@@ -104,9 +104,14 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
     $desc =  $database->getDesc($id);
     $author = $database->getAuthor($id);
     $date =  $database->getDate($id);
+
     $img =  $database->getImage($id);
+    $hasImg = $img != "";
+    if($hasImg) $img = $hpath.$img;
+
     $comments = $database->getComments($id);
     $anony = $database->getAnonym($id);
+    
     $lat = $database->getlat($id);
     $lng = $database->getlng($id);
     if($lat==null){
@@ -135,7 +140,7 @@ if (isset($_GET["id"]) && is_string($_GET["id"]) && $_GET["id"]!=Null) {
 <?php
     }
 } else {
-    header("Location: ".$hpath."hauptseite.php");
+    header("Location: ".$hpath."php/hauptseite/hauptseite.php");
     exit;
 }
 ?>

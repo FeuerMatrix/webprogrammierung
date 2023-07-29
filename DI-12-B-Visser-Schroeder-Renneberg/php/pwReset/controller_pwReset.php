@@ -22,17 +22,17 @@
                         $database->updatePassword($user, $_POST["passw"]);
                         $errorMessage = "Passwort erfolgreich zurückgesetzt";
                         session_destroy(); //forces user to log out
-                        header("Location: ".$hpath."anmeldung.php?cause=".urlencode($errorMessage));
+                        header("Location: ".$hpath."php/anmeldung/anmeldung.php?cause=".urlencode($errorMessage));
                         exit;
                     } 
                     else {
                         $errorMessage = "Keinen Nutzer gefunden!";
-                        header("Location: ".$hpath."pwReset.php?cause=".urlencode($errorMessage)."&token=".$token);
+                        header("Location: ".$hpath."php/pwReset/pwReset.php?cause=".urlencode($errorMessage)."&token=".$token);
                         exit;
                     }     
             } 
             else {
-                header("Location: ".$hpath."pwReset.php?cause=".urlencode($errorMessage)."&token=".$_GET["token"]);
+                header("Location: ".$hpath."php/pwReset/pwReset.php?cause=".urlencode($errorMessage)."&token=".$_GET["token"]);
                 exit;
             }
         }

@@ -1,6 +1,6 @@
 <?php 
-    include_once "path.php";
-    include_once $path."php/controller_hauptseite.php";
+    include_once "../../path.php";
+    include_once $path."php/hauptseite/controller_hauptseite.php";
     include_once $path."php/head.php";
 ?>
 <link rel="stylesheet" href="<?=$hpath?>css/hauptseite.css">
@@ -27,12 +27,12 @@
         <div class="flex-container">
             <?php foreach ($beitraege as $beitrag) : ?>
                 <div class="beitrag">
-                    <a class="link" href="<?=$hpath?>beitrag.php?id=<?php echo urlencode($beitrag["id"]) ?>"> <?php echo $beitrag['titel'] ?></a>
+                    <a class="link" href="<?=$hpath?>php/beitrag/beitrag.php?id=<?php echo urlencode($beitrag["id"]) ?>"> <?php echo $beitrag['titel'] ?></a>
                     <span> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
                     <?php
                     if ($beitrag['file'] != "") {
                     ?>
-                        <img src=<?php echo $beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
+                        <img src=<?php echo $hpath.$beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
                     <?php
                     }
                     ?>

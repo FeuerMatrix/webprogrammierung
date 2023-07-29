@@ -1,4 +1,5 @@
-<?php include_once "php/head.php" ?>
+<?php include_once "../path.php" ?>
+<?php include_once "head.php" ?>
 </head>
 
 <body>
@@ -28,7 +29,7 @@
         <p>&nbsp;</p>
         <p><strong>§ 3 Rechte als Forum-Nutzer/Forum-Nutzerinnen</strong></p>
         <p>(1) Selbst erstellte Kommentare, Beiträge sowie der Account können jederzeit von eingeloggten Nutzern gelöscht oder bearbeitet werden. Für die Löschung gilt dabei folgendes: Wird ein Nutzerkonto gekündigt, so werden automatisch alle erstellten Daten (Beiträge und Kommentare) gelöscht. Wird ein Beitrag gelöscht, so werden außerdem alle zugehörigen Kommentare gelöscht. Von Nutzern erstellte Kommentare können ohne Eigeneinwirkung gelöscht werden, falls der Besitzer des entsprechenden Beitrags diesen löscht.</p>
-        <p>(2) Der Nutzer kann über <a href="drittAnbieter.php"> Opt-In </a> entscheiden ob  Drittanbieter Anwendungen eingebunden und genutzt werden sollen. Diese können im Nachhinein über den selben Weg wieder wiederrufen werden.</p>
+        <p>(2) Der Nutzer kann über <a href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php"> Opt-In </a> entscheiden ob  Drittanbieter Anwendungen eingebunden und genutzt werden sollen. Diese können im Nachhinein über den selben Weg wieder wiederrufen werden.</p>
         <p>&nbsp;</p>
         <p><strong>§ 4 Übertragung von Nutzungsrechten</strong></p>
         <p>Sie, als Forum-Nutzer/Forum-Nutzerin&nbsp; haben die alleinige Verantwortung des Urheberrechts i.S.d. Urhebergesetzes bei Veröffentlichung von Beiträgen und Themen im Forum zu beachten. Als Nutzer/Nutzerin räumen Sie lediglich uns mit Veröffentlichung Ihres Beitrages auf deren Homepage das Recht ein, den Beitrag dauerhaft zum Abruf bereitzustellen. Ferner hat unser Team das Recht, Ihre Themen und Beiträge zu löschen, zu bearbeiten und innerhalb seiner Homepage zu verschieben, um diese mit anderen Inhalten zu verknüpfen oder zu schließen.</p>

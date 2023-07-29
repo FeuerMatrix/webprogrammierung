@@ -1,6 +1,6 @@
 <?php
-    include_once "path.php";
-    include_once $path."/anmeldung/controller_anmeldung.php";
+    include_once "../../path.php";
+    include_once $path."php/anmeldung/controller_anmeldung.php";
     include_once $path."/php/head.php";
 ?>
 </head>
