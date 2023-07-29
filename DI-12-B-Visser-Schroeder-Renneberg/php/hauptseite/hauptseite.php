@@ -45,7 +45,7 @@
     <?php include_once $path."php/footer.php" ?>
 
     <script src="<?=$hpath?>javascript/jquery.min.js"></script>
-    <script src="<?=$hpath?>javascript/fetch_beitraege.js"></script>
+    <?php include_once $path."javascript/fetch_beitraege.php" ?>
 </body>
 
 </html>
