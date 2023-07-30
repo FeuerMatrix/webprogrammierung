@@ -1,7 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while logged in
-    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nicht von eingeloggten Nutzern aufgerufen werden!"));
+    header("Location: ".$hpath."index.php?cause=" . urlencode("Fehler: diese Seite kann nicht von eingeloggten Nutzern aufgerufen werden!"));
     exit;
 }
 
@@ -31,37 +31,32 @@ if (isset($_POST["passw"], $_POST["passw2"], $_POST["email"], $_POST["email2"]))
 
     
     include_once $path."/datenbank/salt.php"; 
-    include_once "datenbank/SQLiteStore.php";
-
-    // Ersetze den Teil des Pfades bis zu htdocs mit http://localhost
-    $changeOn = strpos($path, 'htdocs') + 6;
-    $url = 'http://localhost'.substr($path, $changeOn);
-    $url = str_replace('\\', '/', $url);
+    include_once $path."datenbank/SQLiteStore.php";
 
     $database = new SQLiteStore();
     $database->beginTransaction();
     $token = crypt($email, $salt);
     if($database->emailExists($email)) {
         $emailLog = fopen("email.txt", "w");
-        $linkPWResset = $url."/pwReset.php?token=".$token;
+        $linkPWResset = $hpath."php/pwReset/pwReset.php?token=".$token;
         fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nDu bist aber bereits registriert. \nSolltest du dein Password vergessen haben, klicke auf folgenden Link. \n$linkPWResset");
         fclose($emailLog);
         $database->endTransaction();
-        header("Location: registrierenFertig.php");
+        header("Location: ".$hpath."php/registrierenFertig.php");
         exit;
     } else {
         if(!isset($errorMessage)) {
             $database->store($email, $passw);
             $emailLog = fopen("email.txt", "w");
-            $linkRegestrierung = $url."/confirmEmail.php?token=".$token;
+            $linkRegestrierung = $hpath."php/confirmEmail/confirmEmail.php?token=".$token;
             fwrite($emailLog,  "Bitte ignoriere die E-Mail, wenn du es nicht warst, \nder sich versucht hat zu registrieren. \nAnsonsten klicke innerhalb von 24h auf den folgenden Link, um die Registrierung abzuschliessen: \n$linkRegestrierung");
             fclose($emailLog);
             $database->endTransaction();
-            header("Location: registrierenFertig.php");
+            header("Location: ".$hpath."php/registrierenFertig.php");
             exit;
         } else {
             $database->endTransaction();
-            header("Location: registrieren.php?cause=".urlencode($errorMessage)."&email=".$email."&email2=".$email2);
+            header("Location: ".$hpath."php/registrieren/registrieren.php?cause=".urlencode($errorMessage)."&email=".$email."&email2=".$email2);
             exit;
         }
     }

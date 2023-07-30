@@ -1,18 +1,20 @@
 <?php
-    include_once "path.php";
-    include_once $path."/registrieren/controller_pwReset.php";
+    include_once "../../path.php";
+    include_once $path."php/csrf.php";
+    include_once $path."php/pwReset/controller_pwReset.php";
     include_once $path."/php/head.php"
 ?>
 
-<link rel="stylesheet" href="css/pwReset.css">
+<link rel="stylesheet" href="<?=$hpath?>css/pwReset.css">
 </head>
 
 <body>
 
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
 
     <main>
         <form method="POST">
+        <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
             <div class="reg1">
                 <h1 class="col10">Passwort zurücksetzten</h1>
                 <div class="bottom"><p class="col20">Gib ein neues Passwort ein und bestätige es</p> </div>
@@ -25,7 +27,7 @@
         </form>         
     </main>
     
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."php/footer.php" ?>
 </body>
 
 </html>

@@ -9,6 +9,7 @@ body {
 
 main {
   flex-grow: 1;
+  overflow-wrap: break-word;
 }
 
 
@@ -82,7 +83,6 @@ textarea:focus {
   outline: none;
 }
 
-.center,
 label {
   display: flex;
   justify-content: center;

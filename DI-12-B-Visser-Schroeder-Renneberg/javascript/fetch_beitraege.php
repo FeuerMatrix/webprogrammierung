@@ -1,3 +1,4 @@
+<script>
 $(document).ready(function() {
     $("#suche, #sort").on("input change", function() {
         var search = $("#suche").val(); // Lese den Suchbegriff aus dem Eingabefeld
@@ -7,7 +8,7 @@ $(document).ready(function() {
         // Sende Ajax-Anfrage an den Server
         $.ajax({
             type: "GET",
-            url: "php/search.php",
+            url: "<?=$hpath?>php/search.php",
             async: true,
             data: { search: search, sort: sort },
             dataType: "json",
@@ -18,9 +19,9 @@ $(document).ready(function() {
                 // erstelle neue Beitragselemente
                 $.each(data, function(index, beitrag) {
                     var beitragDiv = $("<div>").addClass("beitrag");
-                    var link = $("<a>").addClass("link").attr("href", "beitrag.php?id=" + encodeURIComponent(beitrag.id)).text(beitrag.titel);
+                    var link = $("<a>").addClass("link").attr("href", "<?=$hpath?>php/beitrag/beitrag.php?id=" + encodeURIComponent(beitrag.id)).text(beitrag.titel);
                     var dateSpan = $("<span>").text(new Date(beitrag.date * 1000).toLocaleString());
-                    var img = $("<img>").attr("src", beitrag.file).attr("alt", beitrag.pname);
+                    var img = $("<img>").attr("src", "<?=$hpath?>" + beitrag.file).attr("alt", beitrag.pname);
 
                     beitragDiv.append(link, dateSpan, img);
                     container.append(beitragDiv);
@@ -29,3 +30,4 @@ $(document).ready(function() {
         });
     });
 });
+</script>

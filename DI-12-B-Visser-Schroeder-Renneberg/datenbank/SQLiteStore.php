@@ -3,21 +3,18 @@
     include_once "salt.php";
 
     class SQLiteStore implements UserStore {
-//rohdaten in die db dan beim auslesen  htmlsecialchars
-//Transaction (registrieren)
         protected $db;
 
         public function __destruct(){
-            //The transmission is automatically started at connection with database and automatically commited/rolled back when this is unset or the script is ended.
-            //This makes sure you never have to care about transmissions. But, if multiple transmissions in a row are wanted, the SQLiteStore needs to be unset and reinstantiated.
+            //The transmission is automatically commited/rolled back when this is unset or the script is ended.
             if($this->db->inTransaction()){
-            try{
-                $this->db->commit();
-            } catch (Exception $e) {
-                echo 'Commit Fehlgeschlagen';
-                $this->db->rollBack();
+                try{
+                    $this->db->commit();
+                } catch (Exception $e) {
+                    echo 'Commit Fehlgeschlagen';
+                    $this->db->rollBack();
+                }
             }
-        }
         }
 
         public function __construct(){
@@ -155,6 +152,7 @@
             }
         }
 
+        // Überschreibt das Passwort eines Nutzers mit dem Übergebenen
         function updatePassword($email, $pw) {
             try{
             $sql = "UPDATE nutzer SET passwort = ? WHERE email = ?";
@@ -224,9 +222,10 @@
             }
         }
 
+        // gibt einen Array mit den letzten 20 erstellten Beiträgen aus
         function getBeitraege(){
             try {
-                $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 5";
+                $sql = "SELECT * FROM beitrag ORDER BY datum DESC LIMIT 20";
                 $stmt = $this->db->query($sql);
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $ex) {
@@ -253,10 +252,11 @@
         }
 
 
+        // gibt einen Array mit den letzten 20 Beiträgen aus die den Suchbegriff beinhalten aus
         function sucheBeitraege($search){
             $search = strtolower($search);
             try {
-                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY datum DESC LIMIT 5";
+                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY datum DESC LIMIT 20";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
                 $stmt->execute();
@@ -284,10 +284,11 @@
             return $newArray;
         }
 
+        // gibt einen Array mit den alphabetisch ersten 20 Beiträgen aus die den Suchbegriff beinhalten
         function sucheBeitraegeAlphabetisch($search){
             $search = strtolower($search);
             try {
-                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY titel ASC LIMIT 5";
+                $sql = "SELECT * FROM beitrag WHERE LOWER(titel) LIKE ? ORDER BY titel ASC LIMIT 20";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
                 $stmt->execute();
@@ -315,10 +316,13 @@
             return $newArray;
         }
 
+        // gibt alle Kommentare zu einem Beitrag in einem Array aus
         function getComments($id){
             try {
-                $sql = "SELECT * FROM kommentar where id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT * FROM kommentar where id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
+                $stmt->execute();
                 $originalArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 $newArray = array();
@@ -328,7 +332,6 @@
                         '0' => htmlspecialchars($item['id_kommentar']),
                         '1' => htmlspecialchars($item['author']),
                         '2' => htmlspecialchars($item['kommentar']),
- 
                     );
                     $newArray[] = $newItem;
                 }
@@ -338,10 +341,13 @@
                 echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
+
+        // gibt des Titel eines Beitrages anhand der id zurück
         function getTitel($id){
             try {
-                $sql = "SELECT titel FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT titel FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -350,10 +356,13 @@
                 echo 'Fehler beim laden des Titels!<br />';
             }
         }
+
+        // gibt die Beschreibung eines Beitrages anhand der id zurück
         function getDesc($id){
             try {
-                $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT beschreibung FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -362,10 +371,13 @@
                 echo 'Fehler beim laden der Beschreibung!<br />';
             }
         }
+
+        // gibt den Author eines Beitrages anhand der id zurück
         function getAuthor($id){
             try {
-                $sql = "SELECT author FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT author FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -374,48 +386,56 @@
                 echo 'Fehler beim laden des Post Authors!<br />';
             }
         }
+
+        // gibt zurück ob ein Beitrag als anonym verfasst wurde
         function getAnonym($id){
             try {
-                $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT anonym FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden ob der Beitrag anonym ist!<br />';
             }
         }
+
+        // gibt das Erstellungsdatum eines Beitrages anhand der id zurück
         function getDate($id){
             try {
-                $sql = "SELECT datum FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT datum FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
                 $ergebnis = date("Y-m-d H:i:s",$ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden des Datums!<br />';
             }
         }
+
+        // gibt den Bildpfad eines Beitrages anhand der id zurück
         function getImage($id){
             try {
-                $sql = "SELECT bild FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT bild FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
-                $ergebnis = htmlspecialchars($ergebnis);
                 return $ergebnis;
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden des Bildes!<br />';
             }
         }
 
+        // gibt die Breite des vermerkten Ortes eines Beitrages anhand der id zurück
         function getlat($id){
             try {
-                $sql = "SELECT lat FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT lat FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = floatval($ergebnis);
@@ -425,10 +445,12 @@
             }
         }
 
+        // gibt die Länge des vermerkten Ortes eines Beitrages anhand der id zurück
         function getlng($id){
             try {
-                $sql = "SELECT lng FROM beitrag WHERE id_beitrag=".$id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT lng FROM beitrag WHERE id_beitrag=?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = floatval($ergebnis);
@@ -438,10 +460,13 @@
             }
         }
 
+        // gibt den Author eines Kommentars anhand der id's zurück
         function getCommentAuthor($id, $comm_id){
             try {
-                $sql = "SELECT author FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT author FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
+                $stmt->bindValue(2, $comm_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -449,12 +474,15 @@
             } catch (PDOException $ex) {
                 echo 'Fehler beim laden des Kommentar Authors!<br />';
             }
-            
         }
+
+        // gibt den Text eines Kommentars anhand der id's zurück
         function getComment($id,$comm_id){
             try {
-                $sql = "SELECT kommentar FROM kommentar WHERE id_beitrag = ".$id." AND id_kommentar = ".$comm_id;
-                $stmt = $this->db->query($sql);
+                $sql = "SELECT kommentar FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindValue(1, $id, PDO::PARAM_INT);
+                $stmt->bindValue(2, $comm_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $ergebnis = $stmt->fetchColumn();
                 $ergebnis = htmlspecialchars($ergebnis);
@@ -463,6 +491,8 @@
                 echo 'Fehler beim laden der Kommentare!<br />';
             }
         }
+
+        // erstellt einen neuen Kommentar
         function newComment($auth,$new,$post_id){
             try {
             $sql = "SELECT MAX(id_kommentar) AS max FROM kommentar WHERE id_beitrag = ?";
@@ -470,8 +500,6 @@
             $stmt->bindParam(1, $post_id, PDO::PARAM_INT);
             $stmt->execute();
     
-
-
             $sql = "INSERT OR IGNORE INTO kommentar (id_kommentar,id_beitrag,author,kommentar ) VALUES(".($stmt->fetch(PDO::FETCH_ASSOC)['max']+1).", ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(1, $post_id, PDO::PARAM_INT);
@@ -483,11 +511,15 @@
                 echo 'Fehler beim erstellen des Kommentars!<br />';
             }
         }
+
+        // aktuallisiert den Text eines Kommentars anhand der id's
         function updateComment($id,$comm_id, $new){
             try {
-            $sql = "UPDATE kommentar SET kommentar = ? WHERE id_kommentar = ".$comm_id." AND id_beitrag = ".$id;
+            $sql = "UPDATE kommentar SET kommentar = ? WHERE id_kommentar = ? AND id_beitrag = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(1, $new, PDO::PARAM_STR);
+            $stmt->bindParam(2, $comm_id, PDO::PARAM_INT);
+            $stmt->bindParam(3, $id, PDO::PARAM_INT);
             $stmt->execute();
 
             } catch (PDOException $ex) {
@@ -495,6 +527,7 @@
             }
         }
 
+        // erstellt einen neuen Beitrag
         function newPost($auth, $title, $desc, $anony, $image, $lat, $lng){
             $date = time();
             try {
@@ -516,6 +549,7 @@
             }
         }
 
+        // aktuallisiert einen Beitrag mit den neuen Werten
         function updatePost($id, $title, $desc, $anony, $image,$lat,$lng){
             try {
                 $sql = "UPDATE beitrag SET anonym = ?, titel = ?, bild = ?, beschreibung = ?, lat = ?, lng = ?  WHERE id_beitrag = ?";
@@ -533,68 +567,134 @@
             }
         }
 
+        private function selectiveDeleteImage($img) {
+            $sql = "SELECT COUNT(id_beitrag) FROM beitrag WHERE bild = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $img, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                    $picUsage = $stmt->fetchColumn();
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    return;
+                }
+
+                if($picUsage == 1) {
+                    global $path;
+                    if(!unlink($path.$img)) {
+                        echo 'Fehler beim Löschen des Beitrags!<br />';
+                        return;
+                    }
+                }
+        }
+
+        // löscht einen Beitrag anhand der id und alle Kommentare die zu dem Beitrag gehören
         function deletePost($id) {
-            $sql = "DELETE FROM kommentar WHERE id_beitrag = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $id, PDO::PARAM_INT);
-            if ($stmt->execute()) {
-            } else {
-                echo 'Fehler beim Löschen des Beitrags!<br />';
-            }
+            try{
+                $sql = "DELETE FROM kommentar WHERE id_beitrag = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    return;
+                }
+                
+                $sql = "SELECT bild FROM beitrag WHERE id_beitrag = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                    $img = $stmt->fetchColumn();
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    return;
+                }
+
+                $this->selectiveDeleteImage($img);
+
+                $sql = "DELETE FROM beitrag WHERE id_beitrag = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
             
-            $sql = "DELETE FROM beitrag WHERE id_beitrag = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $id, PDO::PARAM_INT);
-        
-            if ($stmt->execute()) {
-            } else {
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Beitrags!<br />';
+                    if($this->db->inTransaction()){
+                        $this->db->rollBack();
+                    }
+                }
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Löschen des Beitrags!<br />';
             }
         }
 
-
+        // löscht einen Nutzer anhand der Email, sowie alle Beiträge des Nutzers und jeweils deren Kommentare
         function deleteUser($email) {
-            $sql = "DELETE FROM kommentar WHERE author = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $email, PDO::PARAM_STR);
-            if ($stmt->execute()) {
-            } else {
-                echo 'Fehler beim Löschen des Nutzers!<br />';
-            }
+            try{
+                $sql = "DELETE FROM kommentar WHERE author = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                    return;
+                }
 
-            $sql = "DELETE FROM beitrag WHERE author = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $email, PDO::PARAM_STR);
-            if ($stmt->execute()) {
-            } else {
-                echo 'Fehler beim Löschen des Nutzers!<br />';
-            }
+                $sql = "SELECT bild FROM beitrag WHERE author = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                    $img = $stmt->fetchColumn();
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                    return;
+                }
 
-            $sql = "DELETE FROM nutzer WHERE email = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $email, PDO::PARAM_STR);
-        
-            if ($stmt->execute()) {
-            } else {
+                $this->selectiveDeleteImage($img);
+
+                $sql = "DELETE FROM beitrag WHERE author = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                    return;
+                }
+
+                $sql = "DELETE FROM nutzer WHERE email = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+            
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Nutzers!<br />';
+                }
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Löschen des Nutzers!<br />';
             }
         }
 
+        // löscht einzelne Kommentare
         function deleteComm($id,$commid){
-            $sql = "DELETE FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(1, $id, PDO::PARAM_STR);
-            $stmt->bindParam(2, $commid, PDO::PARAM_STR);
-            if ($stmt->execute()) {
-            } else {
+            try{
+                $sql = "DELETE FROM kommentar WHERE id_beitrag = ? AND id_kommentar = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_STR);
+                $stmt->bindParam(2, $commid, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                } else {
+                    echo 'Fehler beim Löschen des Kommentars!<br />';
+                }
+            } catch (PDOException $ex) {
                 echo 'Fehler beim Löschen des Kommentars!<br />';
             }
         }
         
+        // beginnt eine Transaktion
         function beginTransaction(){
             $this->db->beginTransaction();
         } 
 
+        // beendet eine Transaktion
         function endTransaction(){
             try{
                 $this->db->commit();

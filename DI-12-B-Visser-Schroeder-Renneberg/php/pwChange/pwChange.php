@@ -1,17 +1,21 @@
-<?php include_once "path.php"; ?>
-<?php include_once $path."/registrieren/controller_pwChange.php"; ?>
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/registrieren.css" >
+<?php
+    include_once "../../path.php";
+    include_once $path."php/csrf.php";
+    include_once $path."php/pwChange/controller_pwChange.php";
+    include_once $path."php/head.php"
+?>
+<link rel="stylesheet" href="<?=$hpath?>css/registrieren.css" >
 </head>
 
 <body>
 
     <?php
-        include_once "php/nav.php";
+        include_once $path."php/nav.php";
 
     ?>
     <main>
         <form method="POST">
+        <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
                 <div class="reg1">
                     <h1 class="col10">Daten Ändern</h1>
                     <div class="bottom"><p class="col20">Wähle ein neues Passwort und bestätige mit deinem alten Passwort.</p> </div>
@@ -28,8 +32,8 @@
                 </div>
         </form>
     </main>
-    <form action="index.php" id="form"></form>
-    <?php include_once "php/footer.php" ?>
+    <form action="<?=$hpath?>index.php" id="form"></form>
+    <?php include_once $path."php/footer.php" ?>
 </body>
 
 </html>

@@ -1,11 +1,14 @@
-<?php include_once "php/controller_hauptseite.php" ?>
-<?php include_once "php/head.php" ?>
-<link rel="stylesheet" href="css/hauptseite.css">
+<?php 
+    include_once "../../path.php";
+    include_once $path."php/hauptseite/controller_hauptseite.php";
+    include_once $path."php/head.php";
+?>
+<link rel="stylesheet" href="<?=$hpath?>css/hauptseite.css">
 
 </head>
 
 <body>
-    <?php include_once "php/nav.php" ?>
+    <?php include_once $path."php/nav.php" ?>
 
     <main>
         <div class="top">
@@ -24,12 +27,12 @@
         <div class="flex-container">
             <?php foreach ($beitraege as $beitrag) : ?>
                 <div class="beitrag">
-                    <a class="link" href="beitrag.php?id=<?php echo urlencode($beitrag["id"]) ?>"> <?php echo $beitrag['titel'] ?></a>
-                    <span> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
+                    <a class="link" href="<?=$hpath?>php/beitrag/beitrag.php?id=<?php echo urlencode($beitrag["id"]) ?>"> <?php echo $beitrag['titel'] ?></a>
+                    <span class="center"> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
                     <?php
                     if ($beitrag['file'] != "") {
                     ?>
-                        <img src=<?php echo $beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
+                        <img class="center, img" src=<?php echo $hpath.$beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
                     <?php
                     }
                     ?>
@@ -39,10 +42,10 @@
 
     </main>
 
-    <?php include_once "php/footer.php" ?>
+    <?php include_once $path."php/footer.php" ?>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="javascript/fetch_beitraege.js"></script>
+    <script src="<?=$hpath?>javascript/jquery.min.js"></script>
+    <?php include_once $path."javascript/fetch_beitraege.php" ?>
 </body>
 
 </html>

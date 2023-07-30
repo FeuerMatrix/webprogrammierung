@@ -3,15 +3,20 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $accept_map =  isset($_COOKIE["accept"]);
 
-include_once "datenbank/SQLiteStore.php";
+include_once $path."datenbank/SQLiteStore.php";
 $database = new SQLiteStore();
 
 if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
-    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
+    header("Location: ".$hpath."index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
     exit;
 }
 
 $redirected = isset($_GET["from"]);
+
+if($redirected && $_SESSION["user"] != $database->getAuthor($_GET["from"])) {
+    header("Location: ".$hpath."index.php?cause=" . urlencode("Fehler: diese Seite kann nur vom Besitzer des Posts aufgerufen werden!"));
+    exit;
+}
 
 $titel = (isset($_POST["fname"]) && is_string($_POST["fname"])) ? $_POST["fname"] : "";
 $desc = (isset($_POST["text_main"]) && is_string($_POST["text_main"])) ? $_POST["text_main"] : "";
@@ -27,7 +32,7 @@ $anony = $anony;
 $desc = $desc;
 
 
-if (isset($_GET["from"])&&is_string($_GET["from"])) {
+if ($redirected&&is_string($_GET["from"])) {
         $database->beginTransaction();
         $id = $_GET["from"];
         $titelold = $database->getTitel($id);
@@ -43,8 +48,10 @@ if (isset($_GET["from"])&&is_string($_GET["from"])) {
 }
 $ok = false;
 if (isset($_POST["Submit"])) {
-
-
+    if (!validCSRF($_POST)) {
+        header("Location: ".$hpath."index.php?id=" . $id . "&cause=" . urlencode("Sicherheitsproblem!"));
+        exit;
+    }
     
     $ok = true;
     if (!isset($_POST["fname"]) || !is_string($_POST["fname"])) {
@@ -57,7 +64,7 @@ if (isset($_POST["Submit"])) {
         if (isset($_FILES["Datei"]["name"])&&$_FILES["Datei"]["name"]!="") {
             $newname = hash_file("md5", $_FILES['Datei']['tmp_name']); //Hashes the entire file in order to generate a unique file name. The advantage over assigning ids is that with this implementation, two copies of the same image will be stored as one even if they had different upload names.
             
-            move_uploaded_file($_FILES["Datei"]["tmp_name"], "./images/userImages/" . $newname);
+            move_uploaded_file($_FILES["Datei"]["tmp_name"], "../../images/userImages/" . $newname);
             $file = "images/userImages/" . $newname;
         }else{
             $file = null;
@@ -78,7 +85,7 @@ if (isset($_POST["Submit"])) {
         } else {
             $id = $database->newPost($_SESSION["user"], $titel, $desc, $anony, $file, $lat , $lng);
         }
-        header("Location: Beitrag.php?id=". urlencode($id));
+        header("Location: ".$hpath."php/beitrag/Beitrag.php?id=". urlencode($id));
         exit;
     } else {
         ?>
@@ -88,13 +95,13 @@ if (isset($_POST["Submit"])) {
 }
 
 if(!isset($_GET["from"])){
-    $url = "hauptseite.php";
+    $url = $hpath."php/hauptseite/hauptseite.php";
     }else{
-        $url = "beitrag.php?id=".$_GET["from"];
+        $url = $hpath."php/beitrag/beitrag.php?id=";
     }
 
 if (!isset($_SESSION["user"])) { //Prevents the user from accessing this page through direct links while not logged in
-    header("Location: index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
+    header("Location: ".$hpath."index.php?cause=" . urlencode("Fehler: diese Seite kann nur von eingeloggten Nutzern aufgerufen werden!"));
     exit;
 }
 

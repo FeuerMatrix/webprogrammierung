@@ -1,7 +1,7 @@
 <?php
-    include_once "path.php";
-    include_once $path."/anmeldung/controller_anmeldung.php";
-    include_once "php/head.php";
+    include_once "../../path.php";
+    include_once $path."php/anmeldung/controller_anmeldung.php";
+    include_once $path."/php/head.php";
 ?>
 </head>
 
@@ -21,12 +21,12 @@
 
             <?php if($hasError): ?> <!--Displays Messages for errors as well as successful registration, where the former has higher priority-->
                 <a><?=$errorMessage?></a>
-            <?php elseif($isRedirected): ?> <!-- uses $_GET since get params can be directly put in with header()-->
+            <?php elseif($isRedirected): ?>
                 <a>Erfolgreich <?=$messageRedirect?>!</a>
             <?php endif; ?>
         </div>
         </form>
-        <form action="index.php" id="form"></form>
+        <form action="<?=$hpath?>/index.php" id="form"></form>
     </main>
 
     <?php include_once $path."/php/footer.php" ?>

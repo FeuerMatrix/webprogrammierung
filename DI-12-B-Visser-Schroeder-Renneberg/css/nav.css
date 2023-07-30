@@ -120,7 +120,7 @@ ul {
   transform: rotate(-405deg);
 }
   
-  @media (max-width: 810px) {
+  @media (max-width: 970px) {
     .menu-button-container {
       display: flex;
     }
@@ -142,6 +142,10 @@ ul {
       margin: 0;
       padding: 0;
       border: 0;
+    }
+
+    .navdelete {
+      background-color: #222;
     }
 
     #menu-toggle:checked ~ .menu li {

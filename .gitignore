@@ -1,4 +1,4 @@
 *.db
-DI-12-B-Visser-Schroeder-Renneberg/email.txt
+DI-12-B-Visser-Schroeder-Renneberg/php/registrieren/email.txt
 DI-12-B-Visser-Schroeder-Renneberg/images/userImages/*
 !DI-12-B-Visser-Schroeder-Renneberg/images/userImages/.gitkeep

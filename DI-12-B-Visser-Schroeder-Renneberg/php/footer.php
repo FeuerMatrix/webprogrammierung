@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="css/footer.css" >
+<link rel="stylesheet" href="<?=$hpath?>css/footer.css" >
 
 <footer>
   <ul>
-    <li> <a href="impressum.php">Impressum</a>
-    <li> <a href="datenschutz.php">Datenschutz</a>
-    <li> <a href="nutzungsbedingungen.php">Nutzungsbedingungen</a>
-    <li> <a href="drittAnbieter.php">Drittanbieter</a>
+    <li> <a href="<?=$hpath?>php/impressum.php">Impressum</a>
+    <li> <a href="<?=$hpath?>php/datenschutz.php">Datenschutz</a>
+    <li> <a href="<?=$hpath?>php/nutzungsbedingungen.php">Nutzungsbedingungen</a>
+    <li> <a href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php">Drittanbieter</a>
   </ul>
 </footer>
 

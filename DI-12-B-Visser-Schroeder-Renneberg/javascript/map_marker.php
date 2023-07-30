@@ -46,5 +46,4 @@
         document.getElementById("lat").value=lat;
         document.getElementById("lng").value=lng;
     }
-  
 </script>
