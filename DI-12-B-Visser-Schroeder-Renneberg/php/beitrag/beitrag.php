@@ -1,16 +1,16 @@
 <?php
-    include_once "../../path.php";
-    include_once $path."/php/csrf.php";
-    include_once $path."php/beitrag/controller_beitrag.php";
-    include_once $path."/php/head.php";
+include_once "../../path.php";
+include_once $path . "/php/csrf.php";
+include_once $path . "php/beitrag/controller_beitrag.php";
+include_once $path . "/php/head.php";
 ?>
-<link rel="stylesheet" href="<?=$hpath?>css/beitrag.css">
+<link rel="stylesheet" href="<?= $hpath ?>css/beitrag.css">
 
 </head>
 
 <body>
 
-    <?php include_once $path."php/nav.php" ?>
+    <?php include_once $path . "php/nav.php" ?>
     <?php
     if ($accept_map) {
     ?>
@@ -38,7 +38,7 @@
                 } else if ($lat != "'.'") {
                 ?>
                     <p>Akzeptiere die Verwendung von OpenStreetMap, um unten auf der Website um die Karte zu sehen</p>
-                    <a class="link" href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php"> OpenStreetMap Datenschutz</a>
+                    <a class="link" href="<?= $hpath ?>php/drittAnbieter/drittAnbieter.php"> OpenStreetMap Datenschutz</a>
                 <?php
                 }
                 ?>
@@ -47,7 +47,7 @@
                     <form method="post">
                         <input type="submit" name="Submit" value="Bearbeiten" class="edit">
                         <input class="delete" type="submit" name="delete" value="Löschen">
-                        <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
+                        <input type="hidden" name="token" value="<?= generateCSRFToken() ?>">
                     </form>
                 <?php endif; ?>
             </div>
@@ -56,9 +56,14 @@
                 if ($hasImg) {
                 ?>
                     <div id="img">
-                        <h3>Klicke um zu vergrößern/ verkleinern</h3>
-                        <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
+                        <h3>Klicke um zu vergrößern</h3>
+                        <img class="im" id="myImg" src=<?php echo $img ?> alt=<?php echo $img ?>>
                     </div>
+                    <div id="myModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img01" alt="">
+                    </div>
+
                 <?php
                 }
                 ?>
@@ -69,10 +74,8 @@
         <?php if ($auth) : ?>
             <form method="post">
                 <label for="neuerKommentar">Neues Kommentar (drücke Enter zum Bestätigen):</label> <br>
-                <input type="text" id="neuerKommentar" name="new" <?php if ($modifiesOld) { ?>
-                                                                        value='<?php echo $oldComment; ?>'
-                                                                    <?php } ?> placeholder="Neues Kommentar" required>
-                <input type="hidden" name="token" value="<?=generateCSRFToken()?>">
+                <input type="text" id="neuerKommentar" name="new" <?php if ($modifiesOld) { ?> value='<?php echo $oldComment; ?>' <?php } ?> placeholder="Neues Kommentar" required>
+                <input type="hidden" name="token" value="<?= generateCSRFToken() ?>">
             </form>
         <?php endif; ?>
 
@@ -83,8 +86,8 @@
         ?>
     </main>
 
-    <?php include_once $path."php/footer.php" ?>
-    <script src="<?=$hpath?>javascript/imagepopup.js"></script>
+    <?php include_once $path . "php/footer.php" ?>
+    <script src="<?= $hpath ?>javascript/imagepopup.js"></script>
 </body>
 
 </html>
