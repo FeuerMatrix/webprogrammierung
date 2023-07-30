@@ -61,7 +61,7 @@ include_once $path . "/php/head.php";
                     </div>
                     <div id="myModal" class="modal">
                         <span class="close">&times;</span>
-                        <img class="modal-content" id="img01" alt="">
+                        <img class="modal-content" id="img01" alt="" src=".">
                     </div>
 
                 <?php
@@ -88,12 +88,7 @@ include_once $path . "/php/head.php";
 
     <?php include_once $path . "php/footer.php" ?>
     <script src="<?= $hpath ?>javascript/imagepopup.js"></script>
-</body>
-
-</html>
-
-
-<script>
+    <script>
     <?php
     if ($accept_map) {
     ?>
@@ -113,3 +108,8 @@ include_once $path . "/php/head.php";
     }
     ?>
 </script>
+</body>
+
+</html>
+
+

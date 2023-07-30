@@ -9,5 +9,5 @@
     <meta name="description" content="Beschwerdeforum">
     <meta name="author" content="Robin Visser\ Tim Schröder\ Nils Renneberg">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="<?=$hpath?>css/main.css" />
+    <link rel="stylesheet" href="<?=$hpath?>css/main.css"/>
     <title>Beschwerdeforum</title>

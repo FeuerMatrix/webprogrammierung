@@ -59,7 +59,7 @@ if ($accept_map) {
                     <p>Fotos hier hineinziehen oder <strong>PC durchsuchen</strong></p>
                     <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
                 </div>
-                <img id="output" />
+                <img id="output" src="." alt="Bild"/>
                 <label for="anonym">Anonym</label>
                 <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if ($redirected && $anonyold) {
                                                                                     echo 'checked="checked"';
@@ -76,10 +76,10 @@ if ($accept_map) {
         </form>
     </main>
     <?php include_once $path."php/footer.php" ?>
+    <?php if ($accept_map) {
+    include $path."javascript/map_marker.php";
+} ?>
 </body>
 
 </html>
 
-<?php if ($accept_map) {
-    include $path."javascript/map_marker.php";
-} ?>
