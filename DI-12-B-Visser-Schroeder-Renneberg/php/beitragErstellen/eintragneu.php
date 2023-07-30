@@ -49,14 +49,14 @@ if ($accept_map) {
                 <?php
                 } else {
                 ?>
-                    <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
-                    <a class="link" href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php"> OpenStreetMaps Datenschutz </a>
+                    <p>Akzeptiere die Verwendung von OpenStreetMap, um die Position auszuwählen</p>
+                    <a class="link" href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php"> OpenStreetMap Datenschutz </a>
                 <?php
                 }
                 ?>
                 <label for="Datei">Bilder auswählen</label><br>
                 <div class="input-div">
-                    <p>Photos hier Drag und dropen oder <strong>Browse</strong></p>
+                    <p>Fotos hier hineinziehen oder <strong>PC durchsuchen</strong></p>
                     <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
                 </div>
                 <img id="output" />

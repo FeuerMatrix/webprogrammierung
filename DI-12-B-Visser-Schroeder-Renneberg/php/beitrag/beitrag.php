@@ -37,8 +37,8 @@
                 <?php
                 } else if ($lat != "'.'") {
                 ?>
-                    <p>Akzeptiere den Karten Datenschutz unten auf der Website um die Karte zu sehen</p>
-                    <a class="link" href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php"> OpenStreetMaps Datenschutz</a>
+                    <p>Akzeptiere die Verwendung von OpenStreetMap, um unten auf der Website um die Karte zu sehen</p>
+                    <a class="link" href="<?=$hpath?>php/drittAnbieter/drittAnbieter.php"> OpenStreetMap Datenschutz</a>
                 <?php
                 }
                 ?>
@@ -56,7 +56,7 @@
                 if ($hasImg) {
                 ?>
                     <div id="img">
-                        <h3>Clicke um zu vergrössern/ verkleinern</h3>
+                        <h3>Klicke um zu vergrößern/ verkleinern</h3>
                         <img class="im" src=<?php echo $img ?> alt=<?php echo $img ?>>
                     </div>
                 <?php

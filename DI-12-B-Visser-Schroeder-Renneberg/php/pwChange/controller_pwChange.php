@@ -35,7 +35,7 @@
         }
 
         if(!$database->emailExists($email)) {
-            $errorMessage = "Email-Addressen exestiert nicht!";
+            $errorMessage = "Email-Addressen existiert nicht!";
         }
 
         if(!isset($errorMessage)) {

@@ -34,13 +34,14 @@ beitrag
 Angezeigte Bilder können durch Klick vergrößert/verkleinert werden\
 Angemeldete Nutzer können Kommentare schreiben\
 Besitzer von Beiträgen und Kommentaren können diese editieren oder löschen\
-Wenn OpenStreetMaps aktiviert und ein Positionsmarker gesetzt ist, wird eine Karte mit der Position des Beitrags angezeigt
+Wenn OpenStreetMap aktiviert und ein Positionsmarker gesetzt ist, wird eine Karte mit der Position des Beitrags angezeigt
 
 beitragErstellen
 : Angemeldete Nutzer können hier einen Beitrag erstellen\
 Der Beitrag kann anonym verfasst werden\
 Ein Bild kann angefügt werden\
-Wenn OpenStreetMaps aktiviert ist, kann ein Positionsmarker gesetzt werden
+Wenn OpenStreetMap aktiviert ist, kann ein Positionsmarker gesetzt werden\
+Zudem kann man hier bereits erstellte Beiträge editieren, dort kommt man über die Seite des Beitrags hin
 
 confirmEmail
 : Hier wird angezeigt, ob die Bestätigung der Email-Addresse erfolgreich war
