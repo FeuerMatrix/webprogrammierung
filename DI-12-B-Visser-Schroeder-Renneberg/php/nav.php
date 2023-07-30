@@ -7,9 +7,11 @@
 <nav>
   <div class="top-nav">
     <input id="menu-toggle" type="checkbox" />
-    <label class='menu-button-container' for="menu-toggle">
-      <div class='menu-button'></div> .
+    <div class='menu-button-container'>
+    <label class='menu-button' for="menu-toggle">
+      
     </label>
+    </div>
     <ul class="menu">
       <li><a href="<?=$hpath?>index.php">Homepage</a></li>
       <li><a href="<?=$hpath?>php/hauptseite/hauptseite.php">Beiträge</a></li>
