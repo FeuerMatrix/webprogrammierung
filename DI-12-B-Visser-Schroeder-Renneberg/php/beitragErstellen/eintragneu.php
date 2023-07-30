@@ -8,7 +8,7 @@
 <?php
 if ($accept_map) {
 ?>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <?php
 }
@@ -59,7 +59,7 @@ if ($accept_map) {
                     <p>Fotos hier hineinziehen oder <strong>PC durchsuchen</strong></p>
                     <input type="file" id="Datei" name="Datei" class="file" accept="image/jpeg, image/png, image/jpg" onchange="loadFile(event)">
                 </div>
-                <img id="output" src="." alt="Bild"/>
+                <img id="output" src="." alt="Bild">
                 <label for="anonym">Anonym</label>
                 <input type="checkbox" id="anonym" name="anonym" value="Anonym" <?php if ($redirected && $anonyold) {
                                                                                     echo 'checked="checked"';
