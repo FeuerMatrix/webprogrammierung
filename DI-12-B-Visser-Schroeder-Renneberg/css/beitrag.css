@@ -10,7 +10,8 @@
   align-items: flex-start;
 }
 .center {
-  align-items: flex-start;
+  margin-right: 10px;
+  text-align: center;
 }
 .post {
   margin-top: 10px;
@@ -90,4 +91,8 @@
   border-radius: 10px;
   width: auto;
   background-color: rgb(235, 235, 235);
+}
+
+.post .post-text {
+  width: 100%;
 }

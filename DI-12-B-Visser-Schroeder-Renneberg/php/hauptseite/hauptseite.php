@@ -28,11 +28,11 @@
             <?php foreach ($beitraege as $beitrag) : ?>
                 <div class="beitrag">
                     <a class="link" href="<?=$hpath?>php/beitrag/beitrag.php?id=<?php echo urlencode($beitrag["id"]) ?>"> <?php echo $beitrag['titel'] ?></a>
-                    <span> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
+                    <span class="center"> <?php echo date("Y-m-d H:i:s", $beitrag['date']); ?></span>
                     <?php
                     if ($beitrag['file'] != "") {
                     ?>
-                        <img src=<?php echo $hpath.$beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
+                        <img class="center, img" src=<?php echo $hpath.$beitrag['file'] ?> alt=<?php echo $beitrag['pname'] ?>>
                     <?php
                     }
                     ?>
