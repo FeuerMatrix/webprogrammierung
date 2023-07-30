@@ -6,7 +6,7 @@
 ?>
 <nav>
   <div class="top-nav">
-    <input id="menu-toggle" type="checkbox" />
+    <input id="menu-toggle" type="checkbox">
     <div class='menu-button-container'>
     <label class='menu-button' for="menu-toggle">
       
